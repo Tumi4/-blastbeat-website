@@ -82,6 +82,8 @@
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .btn-glow::before {
@@ -99,6 +101,10 @@
 .btn-glow:hover {
   transform: translateY(-2px) scale(1.02);
   color: white;
+}
+
+.btn-glow:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .btn-glow:hover::before {
@@ -119,6 +125,8 @@
   font-weight: 600;
   transition: all 0.3s ease;
   backdrop-filter: blur(4px);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .btn-outline-glow:hover {
@@ -126,6 +134,10 @@
   color: var(--neon-cyan);
   box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
   transform: translateY(-1px);
+}
+
+.btn-outline-glow:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* ---- Glass Cards (Gen Z staple) ---- */
@@ -137,6 +149,7 @@
   border-radius: var(--radius-xl);
   padding: var(--space-6);
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .glass-card:hover {
@@ -154,6 +167,7 @@
   border-radius: var(--radius-xl);
   padding: var(--space-6);
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .glass-card-light:hover {
@@ -168,6 +182,7 @@
   background: var(--bg-card);
   border-radius: var(--radius-xl);
   padding: var(--space-6);
+  overflow: hidden;
 }
 
 .gradient-border::before {
@@ -242,9 +257,15 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* Neon glow on images in dark hero sections */
 .hero-dark img {
   border: 1px solid rgba(99, 102, 241, 0.3);
-  box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.2), 0 20px 60px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.hero-dark img:hover {
+  box-shadow: 0 0 50px rgba(99, 102, 241, 0.35), 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 /* Mesh gradient background */
@@ -271,8 +292,8 @@
 }
 
 .orb-1 {
-  width: 400px;
-  height: 400px;
+  width: min(300px, 40vw);
+  height: min(300px, 40vw);
   background: var(--electric-purple);
   top: -10%;
   right: -5%;
@@ -280,8 +301,8 @@
 }
 
 .orb-2 {
-  width: 300px;
-  height: 300px;
+  width: min(240px, 30vw);
+  height: min(240px, 30vw);
   background: var(--neon-cyan);
   bottom: -5%;
   left: 10%;
@@ -289,8 +310,8 @@
 }
 
 .orb-3 {
-  width: 250px;
-  height: 250px;
+  width: min(200px, 25vw);
+  height: min(200px, 25vw);
   background: var(--neon-pink);
   top: 40%;
   left: 50%;
@@ -371,7 +392,7 @@
 /* ---- Stacked Cards / Bento Grid ---- */
 .bento-grid {
   display: grid;
-  gap: var(--space-4);
+  gap: clamp(0.75rem, 1.5vw, 1rem);
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: minmax(180px, auto);
 }
@@ -385,27 +406,12 @@
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
+  contain: layout;
 }
 
 .bento-item:hover {
   transform: scale(1.02);
   box-shadow: 0 0 40px rgba(99, 102, 241, 0.15);
-}
-
-/* Neon glow on images in dark hero sections */
-.hero-dark img {
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  box-shadow: 0 0 30px rgba(99, 102, 241, 0.2), 0 20px 60px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-}
-
-.hero-dark img:hover {
-  box-shadow: 0 0 50px rgba(99, 102, 241, 0.35), 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-/* Neon glow tag variant */
-.neo-tag-glow {
-  box-shadow: 0 0 15px rgba(184, 255, 0, 0.3);
 }
 
 /* Glow on glass-card borders in dark sections */
@@ -550,12 +556,18 @@
   .bento-grid[style*="repeat(5"] {
     grid-template-columns: repeat(2, 1fr) !important;
   }
+
+  /* Cap orb sizes on tablet */
+  .orb-1 { width: min(280px, 35vw); height: min(280px, 35vw); }
+  .orb-2 { width: min(220px, 28vw); height: min(220px, 28vw); }
+  .orb-3 { width: min(180px, 22vw); height: min(180px, 22vw); }
 }
 
 @media (max-width: 768px) {
   /* Bento grid: collapse to 1 column, all spans become 1 */
   .bento-grid {
     grid-template-columns: 1fr;
+    gap: clamp(0.5rem, 1vw, 0.75rem);
   }
   .bento-span-2,
   .bento-span-3 { grid-column: span 1; }
@@ -592,9 +604,6 @@
     font-size: var(--text-xs);
   }
 
-  /* Glass cards in 14 roles grid: 2 columns on mobile (via grid-4 override in design-system) */
-  /* The grid-4 -> repeat(2, 1fr) in the design system handles this */
-
   /* Glow buttons: full-width on mobile to prevent overflow */
   .btn-glow,
   .btn-outline-glow {
@@ -609,9 +618,20 @@
   }
 
   /* Orbs: reduce size on mobile to prevent overflow */
-  .orb-1 { width: 250px; height: 250px; }
-  .orb-2 { width: 180px; height: 180px; }
-  .orb-3 { width: 150px; height: 150px; }
+  .orb-1 { width: 200px; height: 200px; }
+  .orb-2 { width: 160px; height: 160px; }
+  .orb-3 { width: 120px; height: 120px; }
+}
+
+@media (max-width: 480px) {
+  /* Even smaller orbs */
+  .orb-1 { width: 150px; height: 150px; }
+  .orb-2 { width: 120px; height: 120px; }
+  .orb-3 { width: 100px; height: 100px; }
+
+  .bento-grid {
+    gap: var(--space-3);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -620,4 +640,33 @@
     transition: none !important;
   }
   .reveal { opacity: 1; transform: none; }
+}
+
+/* High contrast support for Gen Z elements */
+@media (forced-colors: active) {
+  .glass-card,
+  .glass-card-light,
+  .gradient-border,
+  .bento-item {
+    border: 2px solid ButtonText;
+  }
+  .text-gradient-vivid,
+  .text-gradient-sunset,
+  .text-gradient-aurora {
+    -webkit-text-fill-color: unset;
+    background: none;
+  }
+  .neo-tag,
+  .neo-tag-pink,
+  .neo-tag-cyan {
+    border: 2px solid ButtonText;
+    box-shadow: none;
+  }
+  .btn-glow,
+  .btn-outline-glow {
+    border: 2px solid ButtonText;
+  }
+  .btn-glow::before {
+    display: none;
+  }
 }

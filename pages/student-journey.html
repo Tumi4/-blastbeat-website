@@ -256,7 +256,7 @@
   <nav class="bb-nav" role="navigation" aria-label="Main navigation">
     <div class="bb-nav-inner">
       <a href="/" class="bb-nav-logo">
-        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" width="40" height="40">
+        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" width="40" height="40" decoding="async">
         <span>BLASTBEAT</span>
       </a>
       <ul class="bb-nav-links">
@@ -295,9 +295,9 @@
 
     <!-- ===== HERO — Dark, Bold, Electric ===== -->
     <section class="hero-dark bg-mesh" style="background: linear-gradient(135deg, rgba(10,15,30,0.55), rgba(30,20,60,0.55)), url('/assets/images/hero-bg-1.jpg') center/cover no-repeat;">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="orb orb-3"></div>
+      <div class="orb orb-1" aria-hidden="true"></div>
+      <div class="orb orb-2" aria-hidden="true"></div>
+      <div class="orb orb-3" aria-hidden="true"></div>
 
       <div class="container" style="position: relative; z-index: 2;">
         <div style="max-width: 780px;">
@@ -346,7 +346,7 @@
 
     <!-- ===== PHOTO BREAK ===== -->
     <section style="position: relative; overflow: hidden;">
-      <img src="/assets/images/bb-event-03.jpg" alt="Students performing at a Blastbeat event" style="width: 100%; height: 350px; object-fit: cover; display: block;" loading="lazy">
+      <img src="/assets/images/bb-event-03.jpg" alt="Students performing at a Blastbeat event" width="1600" height="350" loading="lazy" decoding="async" style="width: 100%; height: 350px; object-fit: cover; display: block;">
       <div style="position: absolute; inset: 0; background: linear-gradient(180deg, var(--deep-navy) 0%, transparent 30%, transparent 70%, var(--deep-navy) 100%);"></div>
     </section>
 
@@ -519,7 +519,7 @@
           </div>
 
           <!-- Results -->
-          <div class="calc-grid">
+          <div class="calc-grid" aria-live="polite" aria-atomic="true">
             <div class="calc-result-card">
               <div class="calc-label">Total Revenue</div>
               <div class="calc-value" id="calc-revenue">R10,000</div>
@@ -595,7 +595,7 @@
       <div class="grid footer-grid" style="grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-10);">
         <div>
           <a href="/" class="bb-nav-logo" style="margin-bottom: var(--space-4); display: inline-flex;">
-            <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="36" height="36" style="filter: brightness(10);">
+            <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="36" height="36" loading="lazy" decoding="async" style="filter: brightness(10);">
             <span style="color: var(--text-white);">BLASTBEAT</span>
           </a>
           <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 300px;">Empowering young people through music, entrepreneurship, and climate action. 23 years. 19 countries. 360,000+ students.</p>

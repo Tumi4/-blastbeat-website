@@ -20,7 +20,7 @@
   <nav class="bb-nav" role="navigation" aria-label="Main navigation">
     <div class="bb-nav-inner">
       <a href="/" class="bb-nav-logo">
-        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" width="40" height="40">
+        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" width="40" height="40" decoding="async">
         <span>BLASTBEAT</span>
       </a>
       <ul class="bb-nav-links">
@@ -72,23 +72,23 @@
 
           <form name="school-application" method="POST" data-netlify="true" action="/thank-you.html">
             <input type="hidden" name="form-name" value="school-application">
-            <p style="display:none"><input name="bot-field"></p>
+            <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
 
             <div class="grid grid-2" style="gap: var(--space-5);">
               <div class="form-group">
                 <label class="form-label" for="school-name">School / Organisation Name *</label>
-                <input type="text" id="school-name" name="school-name" required class="form-input" placeholder="e.g. Cape Academy of Mathematics">
+                <input type="text" id="school-name" name="school-name" required aria-required="true" autocomplete="organization" class="form-input" placeholder="e.g. Cape Academy of Mathematics">
               </div>
               <div class="form-group">
                 <label class="form-label" for="contact-name">Your Name *</label>
-                <input type="text" id="contact-name" name="contact-name" required class="form-input" placeholder="Full name">
+                <input type="text" id="contact-name" name="contact-name" required aria-required="true" autocomplete="name" class="form-input" placeholder="Full name">
               </div>
             </div>
 
             <div class="grid grid-2" style="gap: var(--space-5);">
               <div class="form-group">
                 <label class="form-label" for="role">Your Role *</label>
-                <select id="role" name="role" required class="form-select">
+                <select id="role" name="role" required aria-required="true" class="form-select">
                   <option value="">Select your role</option>
                   <option value="principal">Principal</option>
                   <option value="teacher">Teacher</option>
@@ -100,18 +100,18 @@
               </div>
               <div class="form-group">
                 <label class="form-label" for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required class="form-input" placeholder="you@school.edu">
+                <input type="email" id="email" name="email" required aria-required="true" autocomplete="email" inputmode="email" class="form-input" placeholder="you@school.edu">
               </div>
             </div>
 
             <div class="grid grid-2" style="gap: var(--space-5);">
               <div class="form-group">
                 <label class="form-label" for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" required class="form-input" placeholder="+27 ...">
+                <input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel" inputmode="tel" class="form-input" placeholder="+27 ...">
               </div>
               <div class="form-group">
                 <label class="form-label" for="country">Country *</label>
-                <select id="country" name="country" required class="form-select">
+                <select id="country" name="country" required aria-required="true" autocomplete="country" class="form-select">
                   <option value="">Select country</option>
                   <option value="south-africa">South Africa</option>
                   <option value="ireland">Ireland</option>
@@ -126,7 +126,7 @@
             <div class="grid grid-2" style="gap: var(--space-5);">
               <div class="form-group">
                 <label class="form-label" for="city">City / Region *</label>
-                <input type="text" id="city" name="city" required class="form-input" placeholder="e.g. Cape Town">
+                <input type="text" id="city" name="city" required aria-required="true" autocomplete="address-level2" class="form-input" placeholder="e.g. Cape Town">
               </div>
               <div class="form-group">
                 <label class="form-label" for="students">Number of Students Interested</label>

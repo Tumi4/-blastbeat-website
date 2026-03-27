@@ -18,7 +18,7 @@
   <nav class="bb-nav" role="navigation" aria-label="Main navigation">
     <div class="bb-nav-inner">
       <a href="/" class="bb-nav-logo">
-        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" width="40" height="40">
+        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" width="40" height="40" decoding="async">
         <span>BLASTBEAT</span>
       </a>
       <ul class="bb-nav-links">
@@ -62,19 +62,19 @@
 
             <div style="display: flex; flex-direction: column; gap: var(--space-8);">
               <div>
-                <h4 style="font-size: var(--text-base); margin-bottom: var(--space-2);">General Enquiries</h4>
+                <h2 style="font-size: var(--text-base); margin-bottom: var(--space-2);">General Enquiries</h2>
                 <a href="mailto:info@blastbeat.education" style="font-size: var(--text-lg); font-weight: 500;">info@blastbeat.education</a>
               </div>
               <div>
-                <h4 style="font-size: var(--text-base); margin-bottom: var(--space-2);">School Partnerships</h4>
+                <h2 style="font-size: var(--text-base); margin-bottom: var(--space-2);">School Partnerships</h2>
                 <a href="mailto:partners@blastbeat.education" style="font-size: var(--text-lg); font-weight: 500;">partners@blastbeat.education</a>
               </div>
               <div>
-                <h4 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Sponsorship &amp; Investment</h4>
+                <h2 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Sponsorship &amp; Investment</h2>
                 <a href="mailto:robert@blastbeat.education" style="font-size: var(--text-lg); font-weight: 500;">robert@blastbeat.education</a>
               </div>
               <div>
-                <h4 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Phone</h4>
+                <h2 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Phone</h2>
                 <a href="tel:+27738048409" style="font-size: var(--text-lg); font-weight: 500;">+27 73 804 8409</a>
               </div>
             </div>
@@ -85,19 +85,19 @@
             <h3 style="margin-bottom: var(--space-6);">Send Us a Message</h3>
             <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
               <input type="hidden" name="form-name" value="contact">
-              <p style="display:none"><input name="bot-field"></p>
+              <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
 
               <div class="form-group">
                 <label class="form-label" for="name">Your Name *</label>
-                <input type="text" id="name" name="name" required class="form-input">
+                <input type="text" id="name" name="name" required aria-required="true" autocomplete="name" class="form-input">
               </div>
               <div class="form-group">
                 <label class="form-label" for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required class="form-input">
+                <input type="email" id="email" name="email" required aria-required="true" autocomplete="email" inputmode="email" class="form-input">
               </div>
               <div class="form-group">
                 <label class="form-label" for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" class="form-input">
+                <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" class="form-input">
               </div>
               <div class="form-group">
                 <label class="form-label" for="subject">Subject</label>
@@ -111,7 +111,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label" for="message">Message *</label>
-                <textarea id="message" name="message" required class="form-textarea" placeholder="How can we help?"></textarea>
+                <textarea id="message" name="message" required aria-required="true" class="form-textarea" placeholder="How can we help?"></textarea>
               </div>
               <div class="form-group">
                 <label class="form-checkbox">
