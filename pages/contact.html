@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Blastbeat Education</title>
+  <meta name="description" content="Get in touch with Blastbeat Education. Contact us about school partnerships, sponsorship, or general enquiries.">
+  <link rel="canonical" href="https://www.blastbeat.education/pages/contact.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
+  <link rel="stylesheet" href="/assets/css/gen-z.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- NAV -->
+  <nav class="bb-nav" role="navigation" aria-label="Main navigation">
+    <div class="bb-nav-inner">
+      <a href="/" class="bb-nav-logo">
+        <img src="https://lirp.cdn-website.com/b81588e9/dms3rep/multi/opt/1384083_521486874605268_1238892153_n-1920w.png" alt="Blastbeat Education logo" width="40" height="40">
+        <span>BLASTBEAT</span>
+      </a>
+      <ul class="bb-nav-links">
+        <li><a href="/pages/programme.html" class="bb-nav-link">Programme</a></li>
+        <li><a href="/pages/for-schools.html" class="bb-nav-link">For Schools</a></li>
+        <li><a href="/pages/about.html" class="bb-nav-link">About</a></li>
+        <li><a href="/pages/impact.html" class="bb-nav-link">Impact</a></li>
+        <li><a href="/pages/international.html" class="bb-nav-link">International</a></li>
+        <li><a href="/blog/" class="bb-nav-link">Blog</a></li>
+        <li><a href="/pages/partners.html" class="bb-nav-link">Partners</a></li>
+      </ul>
+      <div class="bb-nav-actions">
+        <a href="/pages/contact.html" class="bb-nav-link login-link active">Contact</a>
+        <a href="/pages/apply.html" class="btn btn-cta btn-sm">Apply Now</a>
+      </div>
+      <button class="bb-nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="bb-nav-mobile" aria-hidden="true">
+    <a href="/pages/programme.html">Programme</a>
+    <a href="/pages/for-schools.html">For Schools</a>
+    <a href="/pages/about.html">About</a>
+    <a href="/pages/impact.html">Impact</a>
+    <a href="/pages/international.html">International</a>
+    <a href="/blog/">Blog</a>
+    <a href="/pages/partners.html">Partners</a>
+    <a href="/pages/contact.html">Contact</a>
+    <a href="/pages/apply.html" class="btn btn-cta">Apply Now</a>
+  </div>
+
+  <main id="main">
+    <section class="section-lg bg-gradient-hero" style="padding-top: calc(var(--nav-height) + var(--space-12));">
+      <div class="container">
+        <div class="grid grid-2" style="gap: var(--space-12);">
+          <!-- Contact Info -->
+          <div>
+            <h1 style="margin-bottom: var(--space-4);">Get in Touch</h1>
+            <p style="font-size: var(--text-lg); margin-bottom: var(--space-8);">Have questions about Blastbeat? We'd love to hear from you.</p>
+
+            <div style="display: flex; flex-direction: column; gap: var(--space-8);">
+              <div>
+                <h4 style="font-size: var(--text-base); margin-bottom: var(--space-2);">General Enquiries</h4>
+                <a href="mailto:info@blastbeat.education" style="font-size: var(--text-lg); font-weight: 500;">info@blastbeat.education</a>
+              </div>
+              <div>
+                <h4 style="font-size: var(--text-base); margin-bottom: var(--space-2);">School Partnerships</h4>
+                <a href="mailto:partners@blastbeat.education" style="font-size: var(--text-lg); font-weight: 500;">partners@blastbeat.education</a>
+              </div>
+              <div>
+                <h4 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Sponsorship &amp; Investment</h4>
+                <a href="mailto:robert@blastbeat.education" style="font-size: var(--text-lg); font-weight: 500;">robert@blastbeat.education</a>
+              </div>
+              <div>
+                <h4 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Phone</h4>
+                <a href="tel:+27738048409" style="font-size: var(--text-lg); font-weight: 500;">+27 73 804 8409</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="bb-card" style="padding: var(--space-8);">
+            <h3 style="margin-bottom: var(--space-6);">Send Us a Message</h3>
+            <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
+              <input type="hidden" name="form-name" value="contact">
+              <p style="display:none"><input name="bot-field"></p>
+
+              <div class="form-group">
+                <label class="form-label" for="name">Your Name *</label>
+                <input type="text" id="name" name="name" required class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="subject">Subject</label>
+                <select id="subject" name="subject" class="form-select">
+                  <option value="">Select a topic</option>
+                  <option value="school-partnership">School Partnership</option>
+                  <option value="sponsorship">Sponsorship / Investment</option>
+                  <option value="media">Media / Press</option>
+                  <option value="general">General Enquiry</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="message">Message *</label>
+                <textarea id="message" name="message" required class="form-textarea" placeholder="How can we help?"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-checkbox">
+                  <input type="checkbox" name="gdpr-consent" required>
+                  <span>I consent to Blastbeat processing my data. <a href="/pages/privacy-policy.html">Privacy Policy</a> *</span>
+                </label>
+              </div>
+              <button type="submit" class="btn btn-cta" style="width: 100%;">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bb-footer">
+    <div class="container">
+      <div class="footer-bottom flex justify-between items-center flex-wrap gap-4">
+        <p style="margin: 0; color: var(--text-muted);">&copy; 2026 Climate Actions Now. UK Charity 1113530</p>
+        <div class="flex gap-6">
+          <a href="/pages/privacy-policy.html">Privacy Policy</a>
+          <a href="/pages/terms-of-use.html">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/navigation.js" defer></script>
+  <script src="/assets/js/animations.js" defer></script>
+  <script src="/assets/js/cookie-consent.js" defer></script>
+</body>
+</html>

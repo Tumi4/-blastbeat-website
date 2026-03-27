@@ -1,0 +1,5 @@
+# Blastbeat Education - Netlify Redirects
+# Old Duda paths to new paths
+/home              /               301
+/home/             /               301
+/site/*            /               301
