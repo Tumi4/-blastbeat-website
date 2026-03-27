@@ -44,8 +44,5 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Custom 404
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
+# Custom 404 — only for pages, not assets
+# Netlify automatically serves 404.html for missing pages when the file exists
