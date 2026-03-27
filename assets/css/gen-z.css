@@ -143,7 +143,7 @@
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 30px rgba(99, 102, 241, 0.15);
 }
 
 .glass-card-light {
@@ -216,6 +216,10 @@
   box-shadow: 3px 3px 0 var(--deep-navy);
 }
 
+.neo-tag-glow {
+  box-shadow: 0 0 15px rgba(184, 255, 0, 0.3);
+}
+
 /* ---- Dark Hero Sections ---- */
 .hero-dark {
   background: var(--deep-navy);
@@ -236,6 +240,11 @@
 
 .hero-dark p {
   color: rgba(255, 255, 255, 0.7);
+}
+
+.hero-dark img {
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
 }
 
 /* Mesh gradient background */
@@ -331,7 +340,7 @@
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: var(--text-2xl);
-  color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.25);
 }
 
 .ticker-item .dot {
@@ -356,6 +365,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.3));
 }
 
 /* ---- Stacked Cards / Bento Grid ---- */
@@ -379,6 +389,33 @@
 
 .bento-item:hover {
   transform: scale(1.02);
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.15);
+}
+
+/* Neon glow on images in dark hero sections */
+.hero-dark img {
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.2), 0 20px 60px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.hero-dark img:hover {
+  box-shadow: 0 0 50px rgba(99, 102, 241, 0.35), 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Neon glow tag variant */
+.neo-tag-glow {
+  box-shadow: 0 0 15px rgba(184, 255, 0, 0.3);
+}
+
+/* Glow on glass-card borders in dark sections */
+.section-dark .glass-card {
+  border-color: rgba(99, 102, 241, 0.15);
+}
+
+.section-dark .glass-card:hover {
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(99, 102, 241, 0.15);
 }
 
 .bento-span-2 { grid-column: span 2; }
