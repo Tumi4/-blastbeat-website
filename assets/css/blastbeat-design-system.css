@@ -7,10 +7,10 @@
 /* NOTE: Move this @import to a <link rel="preload"> in HTML for better performance:
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap">
+   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap">
 */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
 
 /* ---- CSS Custom Properties ---- */
 :root {
@@ -42,8 +42,8 @@
   --border-medium: #D1D5DB;
 
   /* Typography */
-  --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -240,10 +240,10 @@ p {
   left: 0;
   right: 0;
   height: var(--nav-height);
-  background: rgba(255, 255, 255, 0.97);
+  background: rgba(10, 10, 20, 0.92);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   z-index: 1000;
   transition: transform var(--transition-slow);
   will-change: transform;
@@ -270,7 +270,7 @@ p {
   font-family: var(--font-heading);
   font-weight: var(--font-extrabold);
   font-size: var(--text-xl);
-  color: var(--text-primary);
+  color: white;
   text-decoration: none;
 }
 
@@ -290,7 +290,7 @@ p {
   padding: 8px 14px;
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
-  color: var(--text-secondary);
+  color: rgba(255,255,255,0.75);
   border-radius: var(--radius-md);
   transition: all var(--transition-base);
   white-space: nowrap;
@@ -298,8 +298,8 @@ p {
 
 .bb-nav-link:hover,
 .bb-nav-link.active {
-  color: var(--primary-blue);
-  background: var(--bg-accent);
+  color: rgba(255,255,255,1);
+  background: rgba(255,255,255,0.08);
 }
 
 .bb-nav-actions {
@@ -547,7 +547,11 @@ p {
 /* ---- Stats Cards ---- */
 .stat-card {
   text-align: center;
-  padding: var(--space-6);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-6);
+  backdrop-filter: blur(10px);
   contain: layout;
 }
 
@@ -566,6 +570,18 @@ p {
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.counter-number {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: var(--space-2);
 }
 
 /* ---- Badges ---- */
@@ -1100,17 +1116,50 @@ p {
     padding: 0 24px;
   }
 
-  .hero { min-height: auto; padding-top: calc(var(--nav-height) + var(--space-12)); padding-bottom: var(--space-12); }
-  .hero h1 { font-size: clamp(1.5rem, 4vw + 0.5rem, 2.25rem); }
-  .hero-dark { min-height: auto; padding-top: calc(var(--nav-height) + var(--space-12)); padding-bottom: var(--space-12); }
+  /* ---- Hero ---- */
+  .hero {
+    min-height: auto;
+    padding-top: calc(var(--nav-height) + var(--space-8));
+    padding-bottom: var(--space-8);
+  }
+  .hero h1 {
+    font-size: clamp(1.5rem, 4vw + 0.5rem, 2.25rem);
+  }
+  .hero-dark {
+    min-height: auto;
+    padding-top: calc(var(--nav-height) + var(--space-8));
+    padding-bottom: var(--space-8);
+  }
 
+  /* Force hero h1 inline font-sizes down */
+  .hero-dark h1,
+  .hero-dark .text-chunky {
+    font-size: clamp(1.75rem, 6vw, 2.5rem) !important;
+  }
+
+  /* Hero paragraph text */
+  .hero-dark p {
+    font-size: var(--text-base) !important;
+  }
+
+  /* ---- Grids: stack on mobile ---- */
   .grid-2,
-  .grid-3 { grid-template-columns: 1fr; }
+  .grid-3 {
+    grid-template-columns: 1fr !important;
+  }
 
-  /* Stats and role cards look better in pairs on mobile */
-  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  /* Override inline gap on grid-2 (hero, for-schools, etc.) */
+  .grid.grid-2 {
+    gap: var(--space-6) !important;
+  }
 
-  /* Nav: hide desktop links and actions, show hamburger */
+  /* Stats and role cards: 2 columns on mobile */
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--space-3) !important;
+  }
+
+  /* ---- Nav ---- */
   .bb-nav-links,
   .bb-nav-actions .btn-secondary,
   .bb-nav-actions .login-link {
@@ -1121,7 +1170,6 @@ p {
     display: flex;
   }
 
-  /* Prevent Apply Now button in nav from overflowing */
   .bb-nav-actions .btn {
     padding: 8px 14px;
     font-size: var(--text-xs);
@@ -1129,17 +1177,22 @@ p {
     min-width: auto;
   }
 
-  /* Hero action buttons: full-width stacked */
-  .hero-actions {
+  /* ---- Hero buttons: stack ---- */
+  .hero-actions,
+  .hero-dark .flex.gap-4,
+  .hero-dark .flex.gap-6 {
     flex-direction: column;
   }
 
-  .hero-actions .btn {
+  .hero-actions .btn,
+  .hero-dark .flex.gap-4 > .btn,
+  .hero-dark .flex.gap-6 > .btn {
     width: 100%;
     text-align: center;
+    justify-content: center;
   }
 
-  /* All flex button containers: wrap and go full-width */
+  /* All flex button groups: wrap on mobile */
   .flex.gap-4,
   .flex.gap-6 {
     flex-wrap: wrap;
@@ -1152,17 +1205,72 @@ p {
     justify-content: center;
   }
 
+  /* ---- Stats ---- */
   .stat-number {
     font-size: var(--text-3xl);
   }
 
-  /* Footer grid: collapse to 1 column */
-  .footer-grid {
-    grid-template-columns: 1fr !important;
-    gap: var(--space-8);
+  /* ---- Section headings: tighten inline sizes ---- */
+  .text-chunky {
+    font-size: clamp(1.5rem, 5vw, 2.25rem) !important;
   }
 
-  /* Footer bottom: stack on mobile */
+  /* ---- Glass cards: less padding on mobile ---- */
+  .glass-card,
+  .glass-card-light {
+    padding: var(--space-4) !important;
+  }
+
+  /* ---- Role cards: smaller emoji, tighter layout ---- */
+  .glass-card .emoji-xl,
+  .section-dark .glass-card .emoji-xl {
+    font-size: 2rem;
+    margin-bottom: var(--space-2);
+  }
+
+  /* ---- Bento items: reduce min-height on mobile ---- */
+  .bento-item {
+    min-height: 220px !important;
+  }
+
+  /* ---- Profit split: scale down percentages ---- */
+  .bento-item .text-gradient-vivid,
+  .bento-item .text-gradient-sunset {
+    font-size: var(--text-4xl) !important;
+  }
+
+  /* Flex profit split layout: stack vertically on narrow screens */
+  .bento-item .flex.justify-center.gap-8 {
+    gap: var(--space-6) !important;
+  }
+
+  /* ---- Counter numbers ---- */
+  .counter-number {
+    font-size: var(--text-3xl) !important;
+  }
+
+  /* ---- Neo tags ---- */
+  .neo-tag {
+    font-size: 0.65rem;
+    padding: 5px 12px;
+  }
+
+  /* ---- Pill cloud: allow wrapping ---- */
+  .pill-cloud {
+    gap: var(--space-2);
+  }
+
+  .pill {
+    font-size: var(--text-xs);
+    padding: 6px 14px;
+  }
+
+  /* ---- Footer grid: collapse to 1 column (override inline style) ---- */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-8) !important;
+  }
+
   .footer-bottom {
     flex-direction: column;
     text-align: center;
@@ -1174,12 +1282,11 @@ p {
     flex-wrap: wrap;
   }
 
-  /* Form grid-2 inside forms: stack to 1 column */
+  /* ---- Forms ---- */
   form .grid-2 {
     grid-template-columns: 1fr;
   }
 
-  /* Newsletter inline form: stack */
   form.flex {
     flex-direction: column;
   }
@@ -1188,19 +1295,69 @@ p {
     width: 100%;
   }
 
-  /* Images in grid-2 sections: ensure order (text first, image second) */
+  /* ---- Images: stack properly ---- */
   .grid-2 > .reveal:last-child img {
     margin-top: var(--space-4);
   }
 
-  /* Bottom padding on main to account for FAB badge */
+  /* ---- FAB badge: ensure no overlap with cookie banner ---- */
   main {
     padding-bottom: var(--space-16);
   }
 
-  /* Prevent any horizontal overflow */
+  .fab-badge {
+    bottom: var(--space-4);
+    right: var(--space-4);
+  }
+
+  .fab-badge a {
+    padding: 10px 18px;
+    font-size: var(--text-xs);
+  }
+
+  /* ---- Prevent horizontal overflow ---- */
   body {
     overflow-x: hidden;
+  }
+
+  /* ---- Ticker: prevent overflow ---- */
+  .ticker-wrap {
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
+  .ticker-item {
+    font-size: var(--text-lg);
+    padding: 0 var(--space-4);
+  }
+
+  /* ---- Inline max-width overrides ---- */
+  .container [style*="max-width"] {
+    max-width: 100% !important;
+  }
+
+  /* ---- Inline font-size overrides for section headings ---- */
+  h2[style*="font-size"] {
+    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+  }
+
+  /* ---- Example calculation: scale down ---- */
+  .bento-item [style*="font-size: var(--text-4xl)"] {
+    font-size: var(--text-2xl) !important;
+  }
+
+  .bento-item [style*="font-size: var(--text-6xl)"] {
+    font-size: var(--text-3xl) !important;
+  }
+
+  /* ---- Country/social proof pills ---- */
+  .flex.justify-center.gap-8.flex-wrap {
+    gap: var(--space-3) !important;
+  }
+
+  .pill-filled {
+    font-size: var(--text-sm) !important;
+    padding: 8px 16px;
   }
 }
 
@@ -1211,6 +1368,16 @@ p {
   }
   .container-wide {
     padding: 0 20px;
+  }
+
+  /* Competition / timeline grid: stack to 1 column on small tablets */
+  .grid-4 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Timeline glass cards: full width */
+  .glass-card {
+    min-height: auto !important;
   }
 }
 
@@ -1223,22 +1390,104 @@ p {
     padding: 0 16px;
   }
 
-  .hero h1 { font-size: clamp(1.375rem, 3vw + 0.5rem, 1.75rem); }
-
-  /* grid-4 stays at 2 columns but reduce gap */
-  .grid-4 {
-    gap: var(--space-3);
+  /* Hero */
+  .hero h1 {
+    font-size: clamp(1.375rem, 3vw + 0.5rem, 1.75rem);
   }
 
-  /* Stat numbers: smaller on tiny screens */
+  .hero-dark h1,
+  .hero-dark .text-chunky {
+    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+  }
+
+  /* Grid-4: single column on small phones */
+  .grid-4 {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-3) !important;
+  }
+
+  /* Stat numbers */
   .stat-number,
   .counter-number {
-    font-size: var(--text-2xl);
+    font-size: var(--text-2xl) !important;
   }
 
-  /* Buttons: allow full width */
+  /* Buttons: full width */
   .btn {
     min-width: auto;
+    padding: 10px 20px;
+    font-size: var(--text-sm);
+  }
+
+  .btn-lg {
+    padding: 12px 24px !important;
+    font-size: var(--text-base) !important;
+    min-width: auto !important;
+  }
+
+  /* Section headings */
+  h2[style*="font-size"] {
+    font-size: clamp(1.25rem, 5vw, 1.75rem) !important;
+  }
+
+  .text-chunky {
+    font-size: clamp(1.25rem, 5vw, 1.75rem) !important;
+  }
+
+  /* Section padding: tighter */
+  .section {
+    padding: clamp(2rem, 5vw, 3rem) 0;
+  }
+
+  .section-lg {
+    padding: clamp(2.5rem, 6vw, 4rem) 0;
+  }
+
+  /* Profit split: stack vertically */
+  .bento-item .flex.justify-center {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: var(--space-4) !important;
+  }
+
+  /* Hide the vertical divider in profit split on mobile */
+  .bento-item .flex.justify-center > div[style*="width: 2px"] {
+    display: none !important;
+  }
+
+  /* Example calculation flex: stack */
+  .bento-item [style*="display: flex"][style*="flex-wrap: wrap"] {
+    justify-content: center !important;
+    gap: var(--space-3) !important;
+  }
+
+  /* Neo tags: even smaller */
+  .neo-tag {
+    font-size: 0.6rem;
+    padding: 4px 10px;
+  }
+
+  /* Emoji: smaller on tiny screens */
+  .emoji-xl {
+    font-size: 2rem;
+  }
+
+  /* Bento items */
+  .bento-item {
+    min-height: 180px !important;
+    padding: var(--space-4) !important;
+  }
+
+  /* Glass cards in timeline: reduce padding */
+  .glass-card {
+    padding: var(--space-4) !important;
+  }
+
+  /* FAB badge: compact */
+  .fab-badge a {
+    padding: 8px 14px;
+    font-size: 0.7rem;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
   }
 }
 
