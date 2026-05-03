@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" aria-label="Youth creating video content">
+  <style>
+    .sketch { stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    .sketch-fill { stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; fill: currentColor; fill-opacity: 0.08; }
+  </style>
+  <!-- Phone/camera screen -->
+  <rect class="sketch-fill" stroke-width="2" x="32" y="30" width="46" height="66" rx="6"/>
+  <!-- Screen content area -->
+  <rect class="sketch" stroke-width="1.5" x="36" y="36" width="38" height="44" rx="3"/>
+  <!-- Record button -->
+  <circle class="sketch-fill" stroke-width="1.8" cx="55" cy="88" r="5"/>
+  <!-- Creator head -->
+  <circle class="sketch-fill" stroke-width="2" cx="82" cy="38" r="9"/>
+  <!-- Creator body -->
+  <path class="sketch" stroke-width="2.2" d="M74 48 Q70 56 70 66 Q74 68 82 68 Q90 68 94 66 Q94 56 90 48 Z"/>
+  <!-- Creator arm holding phone up -->
+  <path class="sketch" stroke-width="2" d="M70 54 Q60 50 50 48"/>
+  <!-- "Live" badge on screen -->
+  <rect class="sketch-fill" stroke-width="1.4" x="37" y="37" width="16" height="7" rx="3"/>
+  <!-- Red dot for live -->
+  <circle class="sketch" stroke-width="1.5" cx="41" cy="41" r="2.5" fill="currentColor" fill-opacity="0.6"/>
+  <!-- Play symbol on screen -->
+  <path class="sketch-fill" stroke-width="1.5" d="M50 52 L50 62 L60 57 Z"/>
+  <!-- Stars/sparkles -->
+  <path class="sketch" stroke-width="1.5" d="M100 28 L101.5 32 L106 32 L102.5 34.5 L104 38 L100 35.5 L96 38 L97.5 34.5 L94 32 L98.5 32 Z"/>
+  <!-- Wifi/signal waves -->
+  <path class="sketch" stroke-width="1.5" d="M16 30 Q20 24 26 28"/>
+  <path class="sketch" stroke-width="1.5" d="M12 26 Q20 16 30 22"/>
+  <circle class="sketch" stroke-width="1.8" cx="22" cy="32" r="2.5"/>
+</svg>

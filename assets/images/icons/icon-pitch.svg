@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" aria-label="Youth presenting and pitching ideas">
+  <style>
+    .sketch { stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    .sketch-fill { stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; fill: currentColor; fill-opacity: 0.08; }
+  </style>
+  <!-- Presentation board/whiteboard -->
+  <rect class="sketch-fill" stroke-width="2" x="14" y="18" width="72" height="52" rx="4"/>
+  <!-- Board stand -->
+  <line class="sketch" stroke-width="2" x1="50" y1="70" x2="44" y2="88"/>
+  <line class="sketch" stroke-width="2" x1="50" y1="70" x2="56" y2="88"/>
+  <line class="sketch" stroke-width="1.6" x1="40" y1="88" x2="60" y2="88"/>
+  <!-- Chart on board -->
+  <path class="sketch" stroke-width="1.8" d="M24 58 L24 28"/>
+  <path class="sketch" stroke-width="1.8" d="M24 58 L76 58"/>
+  <!-- Bar chart bars -->
+  <rect class="sketch-fill" stroke-width="1.6" x="30" y="44" width="8" height="14"/>
+  <rect class="sketch-fill" stroke-width="1.6" x="43" y="38" width="8" height="20"/>
+  <rect class="sketch-fill" stroke-width="1.6" x="56" y="30" width="8" height="28"/>
+  <rect class="sketch-fill" stroke-width="1.6" x="69" y="34" width="8" height="24"/>
+  <!-- Trend line -->
+  <path class="sketch" stroke-width="1.8" d="M30 52 L44 44 L58 34 L72 36"/>
+  <!-- Arrow tip -->
+  <path class="sketch" stroke-width="1.8" d="M68 30 L74 36 L78 28"/>
+  <!-- Presenter body -->
+  <circle class="sketch-fill" stroke-width="2" cx="96" cy="52" r="9"/>
+  <!-- Torso -->
+  <path class="sketch" stroke-width="2.2" d="M88 62 Q84 72 84 82 Q88 84 96 84 Q104 84 108 82 Q108 72 104 62 Z"/>
+  <!-- Arm pointing at board -->
+  <path class="sketch" stroke-width="2" d="M88 64 Q82 60 76 56 Q74 54 72 52"/>
+  <!-- Pointer/pen at board -->
+  <line class="sketch" stroke-width="1.8" x1="72" y1="52" x2="68" y2="56"/>
+  <!-- Audience hint — two small heads -->
+  <circle class="sketch-fill" stroke-width="1.8" cx="18" cy="96" r="6"/>
+  <circle class="sketch-fill" stroke-width="1.8" cx="36" cy="96" r="6"/>
+  <!-- Speech bubble -->
+  <path class="sketch-fill" stroke-width="1.6" d="M88 30 Q88 20 98 20 Q108 20 108 30 Q108 38 100 40 L96 44 L94 40 Q88 40 88 30 Z"/>
+  <!-- Exclamation in bubble -->
+  <line class="sketch" stroke-width="1.8" x1="98" y1="24" x2="98" y2="34"/>
+  <circle class="sketch" stroke-width="1.6" cx="98" cy="37" r="1.5"/>
+</svg>

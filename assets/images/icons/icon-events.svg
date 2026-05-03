@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" aria-label="Youth managing event operations">
+  <style>
+    .sketch { stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    .sketch-fill { stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; fill: currentColor; fill-opacity: 0.08; }
+  </style>
+  <!-- Clipboard -->
+  <rect class="sketch-fill" stroke-width="2" x="32" y="26" width="52" height="66" rx="4"/>
+  <!-- Clipboard clip at top -->
+  <rect class="sketch-fill" stroke-width="1.8" x="48" y="20" width="20" height="12" rx="4"/>
+  <rect class="sketch" stroke-width="1.4" x="52" y="24" width="12" height="6" rx="2"/>
+  <!-- Checklist items -->
+  <rect class="sketch-fill" stroke-width="1.5" x="40" y="42" width="8" height="8" rx="2"/>
+  <path class="sketch" stroke-width="2" d="M41 46 L43 49 L48 43"/>
+  <line class="sketch" stroke-width="1.6" x1="52" y1="46" x2="74" y2="46"/>
+  <rect class="sketch-fill" stroke-width="1.5" x="40" y="54" width="8" height="8" rx="2"/>
+  <path class="sketch" stroke-width="2" d="M41 58 L43 61 L48 55"/>
+  <line class="sketch" stroke-width="1.6" x1="52" y1="58" x2="74" y2="58"/>
+  <rect class="sketch" stroke-width="1.5" x="40" y="66" width="8" height="8" rx="2"/>
+  <line class="sketch" stroke-width="1.6" x1="52" y1="70" x2="70" y2="70"/>
+  <rect class="sketch" stroke-width="1.5" x="40" y="78" width="8" height="8" rx="2"/>
+  <line class="sketch" stroke-width="1.6" x1="52" y1="82" x2="68" y2="82"/>
+  <!-- Person holding clipboard -->
+  <circle class="sketch-fill" stroke-width="2" cx="94" cy="44" r="9"/>
+  <!-- Body -->
+  <path class="sketch" stroke-width="2.2" d="M86 54 Q82 64 82 78 Q86 80 94 80 Q102 80 106 78 Q106 64 102 54 Z"/>
+  <!-- Arms around clipboard -->
+  <path class="sketch" stroke-width="2" d="M86 58 Q78 58 72 62 Q60 70 52 74"/>
+  <path class="sketch" stroke-width="2" d="M102 58 Q106 62 106 70"/>
+  <!-- Walkie-talkie / headset hint -->
+  <path class="sketch" stroke-width="1.8" d="M102 44 Q108 40 110 34 Q112 28 110 26"/>
+  <rect class="sketch-fill" stroke-width="1.5" x="104" y="38" width="10" height="8" rx="3"/>
+  <!-- Star burst / event energy -->
+  <path class="sketch" stroke-width="1.5" d="M16 36 L18 40 L22 40 L19 43 L20 47 L16 45 L12 47 L13 43 L10 40 L14 40 Z"/>
+  <!-- Confetti dots -->
+  <circle class="sketch" stroke-width="1.5" cx="22" cy="24" r="2"/>
+  <circle class="sketch" stroke-width="1.5" cx="14" cy="56" r="2"/>
+  <circle class="sketch" stroke-width="1.5" cx="110" cy="56" r="2"/>
+  <rect class="sketch" stroke-width="1.3" x="108" y="20" width="4" height="4" rx="1" transform="rotate(20 110 22)"/>
+</svg>

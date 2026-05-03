@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" aria-label="Youth counting money and managing finances">
+  <style>
+    .sketch { stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    .sketch-fill { stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; fill: currentColor; fill-opacity: 0.08; }
+  </style>
+  <!-- Desk surface -->
+  <path class="sketch" stroke-width="2" d="M14 86 H106 Q108 86 108 88 L108 96 Q108 98 106 98 H14 Q12 98 12 96 L12 88 Q12 86 14 86 Z"/>
+  <!-- Desk leg left -->
+  <rect class="sketch" stroke-width="2" x="20" y="98" width="8" height="14" rx="2"/>
+  <!-- Desk leg right -->
+  <rect class="sketch" stroke-width="2" x="92" y="98" width="8" height="14" rx="2"/>
+  <!-- Cash/notes stack on desk -->
+  <rect class="sketch-fill" stroke-width="1.8" x="28" y="74" width="28" height="14" rx="3"/>
+  <rect class="sketch" stroke-width="1.4" x="30" y="76" width="24" height="10" rx="2"/>
+  <line class="sketch" stroke-width="1.3" x1="42" y1="78" x2="42" y2="84"/>
+  <path class="sketch" stroke-width="1.3" d="M38 80 Q40 79 42 80 Q44 81 46 80"/>
+  <!-- Coin stack -->
+  <ellipse class="sketch-fill" stroke-width="1.8" cx="80" cy="82" rx="12" ry="4"/>
+  <ellipse class="sketch" stroke-width="1.6" cx="80" cy="78" rx="12" ry="4"/>
+  <ellipse class="sketch" stroke-width="1.6" cx="80" cy="74" rx="12" ry="4"/>
+  <line class="sketch" stroke-width="1.5" x1="68" y1="82" x2="68" y2="74"/>
+  <line class="sketch" stroke-width="1.5" x1="92" y1="82" x2="92" y2="74"/>
+  <!-- Person sitting -->
+  <circle class="sketch-fill" stroke-width="2" cx="58" cy="46" r="9"/>
+  <!-- Torso -->
+  <path class="sketch" stroke-width="2.2" d="M50 56 Q46 64 46 74 Q50 76 58 76 Q66 76 70 74 Q70 64 66 56 Z"/>
+  <!-- Left arm on desk -->
+  <path class="sketch" stroke-width="2" d="M50 62 Q42 66 34 68 Q30 70 28 74"/>
+  <!-- Right arm holding coin/bill -->
+  <path class="sketch" stroke-width="2" d="M66 60 Q72 58 76 60"/>
+  <!-- Coin in hand -->
+  <circle class="sketch-fill" stroke-width="1.8" cx="80" cy="62" r="6"/>
+  <path class="sketch" stroke-width="1.4" d="M78 62 Q80 60 82 62 Q80 64 78 62"/>
+  <!-- Bar chart on wall/behind -->
+  <rect class="sketch-fill" stroke-width="1.5" x="96" y="54" width="8" height="20" rx="1"/>
+  <rect class="sketch-fill" stroke-width="1.5" x="106" y="44" width="8" height="30" rx="1"/>
+  <!-- Up arrow chart -->
+  <path class="sketch" stroke-width="1.8" d="M96 74 Q100 68 106 62 Q108 60 110 58"/>
+  <path class="sketch" stroke-width="1.8" d="M106 52 L112 58 L100 60"/>
+</svg>

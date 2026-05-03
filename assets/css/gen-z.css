@@ -748,7 +748,7 @@
   font-family: var(--font-heading);
   font-size: var(--text-sm);
   font-weight: 700;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.85);
   white-space: nowrap;
   padding: 0 24px;
   letter-spacing: 0.12em;
@@ -1101,4 +1101,129 @@
   .phase-journey { grid-template-columns: 1fr; }
   .h-scroll-card { flex: 0 0 clamp(170px, 72vw, 220px); }
   .role-card { height: 170px; }
+}
+
+/* ---- Neon Nav Glow ---- */
+.bb-nav-link {
+  position: relative;
+  transition: color 0.25s ease, text-shadow 0.25s ease, background 0.25s ease;
+}
+.bb-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-ocean);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: blur(0.5px);
+}
+.bb-nav-link:hover {
+  color: white !important;
+  text-shadow: 0 0 14px rgba(0,245,255,0.7), 0 0 28px rgba(0,245,255,0.3);
+  background: rgba(0,245,255,0.06) !important;
+}
+.bb-nav-link:hover::after { width: 60%; }
+.bb-nav-link.active {
+  color: var(--neon-cyan) !important;
+  text-shadow: 0 0 12px rgba(0,245,255,0.5);
+  background: rgba(0,245,255,0.07) !important;
+}
+.bb-nav-link.active::after { width: 60%; }
+
+/* ---- Sponsorship Marketplace ---- */
+.school-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.school-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.school-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(99,102,241,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3), 0 0 30px rgba(99,102,241,0.1);
+}
+.school-card:hover::before { transform: scaleX(1); }
+.school-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(255,45,120,0.15);
+  color: var(--neon-pink);
+  border: 1px solid rgba(255,45,120,0.3);
+  margin-bottom: var(--space-3);
+}
+.school-card-badge.funded {
+  background: rgba(184,255,0,0.1);
+  color: var(--neon-lime);
+  border-color: rgba(184,255,0,0.3);
+}
+.school-card-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: white;
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-2);
+}
+.school-card-meta {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.5);
+  margin-bottom: var(--space-4);
+}
+.school-card-needs {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+}
+.adopt-tier-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.adopt-tier-card.featured {
+  border-color: rgba(168,85,247,0.4);
+  background: rgba(168,85,247,0.06);
+}
+.adopt-tier-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.3), 0 0 40px rgba(99,102,241,0.15);
+}
+.adopt-tier-price {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-4xl);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: var(--space-2);
 }
