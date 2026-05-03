@@ -15,6 +15,18 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap">
   <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
   <link rel="stylesheet" href="/assets/css/gen-z.css">
+  <link rel="stylesheet" href="/assets/css/mobile.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#6366F1">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@BlastbeatEdu">
+  <meta name="twitter:creator" content="@BlastbeatEdu">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","@id":"https://www.blastbeat.education/pages/for-schools.html","url":"https://www.blastbeat.education/pages/for-schools.html","name":"Blastbeat for Schools — ESE Programme Information","description":"Everything school principals and teachers need to know about bringing Blastbeat to their school. CAPS-aligned, free for founding schools.","isPartOf":{"@type":"WebSite","url":"https://www.blastbeat.education"},"audience":{"@type":"EducationalAudience","educationalRole":"teacher"}}
+  </script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -499,6 +511,19 @@
       </div>
     </section>
 
+    <!-- ===== STUDENT TOOLS ===== -->
+    <section class="section section-dark" id="student-tools" style="position: relative; overflow: hidden;" aria-labelledby="tools-heading">
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 50% 60% at 80% 40%, rgba(99,102,241,0.07) 0%, transparent 70%); pointer-events: none;" aria-hidden="true"></div>
+      <div class="container" style="position: relative; z-index: 1; max-width: 820px;">
+        <div class="text-center reveal" style="margin-bottom: 2.5rem;">
+          <span style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--neon-cyan, #00F5FF); display: block; margin-bottom: 0.75rem;">For Students</span>
+          <h2 id="tools-heading" style="font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 0.75rem;">Try the Blastbeat Tools</h2>
+          <p style="color: rgba(255,255,255,0.55); max-width: 480px; margin: 0 auto;">Spark a business idea, run your numbers, or find out which Blastbeat role fits your personality. Built for students aged 14–21.</p>
+        </div>
+        <div id="bb-student-tools" class="reveal"></div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ===== FOOTER ===== -->
@@ -572,5 +597,7 @@
   <script src="/assets/js/navigation.js" defer></script>
   <script src="/assets/js/animations.js" defer></script>
   <script src="/assets/js/cookie-consent.js" defer></script>
+  <script src="/assets/js/student-tools.js" defer></script>
+  <script src="/assets/js/beat-bot.js" defer></script>
 </body>
 </html>

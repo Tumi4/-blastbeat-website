@@ -1,0 +1,309 @@
+/* ============================================================
+   BLASTBEAT — Mobile & Responsive Optimisations
+   Fills gaps not covered by gen-z.css
+   Breakpoints: 900 / 768 / 640 / 480 / 375
+   ============================================================ */
+
+/* ---- Global overflow guard ---- */
+html { max-width: 100vw; overflow-x: hidden; }
+body { max-width: 100vw; overflow-x: hidden; }
+img, video, iframe, svg { max-width: 100%; height: auto; }
+
+/* ---- Touch targets ---- */
+button, [role="button"], a, input[type="submit"], input[type="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---- iOS input zoom fix (must be >= 16px) ---- */
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+    -webkit-appearance: none;
+  }
+  select { appearance: none; -webkit-appearance: none; }
+}
+
+/* ---- Safe area insets (notch phones) ---- */
+@supports (padding: max(0px)) {
+  .bb-nav { padding-left: max(0px, env(safe-area-inset-left)); padding-right: max(0px, env(safe-area-inset-right)); }
+  .bb-footer, .site-footer { padding-bottom: max(2rem, calc(2rem + env(safe-area-inset-bottom))); }
+  #bb-bot-trigger { bottom: max(1.5rem, calc(1.5rem + env(safe-area-inset-bottom))); right: max(1.5rem, env(safe-area-inset-right)); }
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+@media (max-width: 900px) {
+  .bb-nav-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bb-nav-logo span { font-size: 0.85rem; letter-spacing: 0.04em; }
+}
+
+@media (max-width: 768px) {
+  .bb-nav-mobile {
+    max-height: calc(100dvh - 72px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ============================================================
+   HERO SECTIONS
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero-dark, [class*="apply-hero"], [class*="contact-hero"] {
+    min-height: 70vh !important;
+    padding-top: calc(72px + 2.5rem) !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Hero button row: wrap on mobile */
+  .hero-dark .btn + .btn {
+    margin-left: 0 !important;
+    margin-top: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-dark, [class*="apply-hero"] {
+    min-height: 60vh !important;
+  }
+  /* Hero text alignment: ensure padding doesn't push content */
+  .hero-dark .container, [class*="apply-hero"] .container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+}
+
+/* ============================================================
+   GENERIC GRIDS — Override inline repeat(N) patterns
+   ============================================================ */
+@media (max-width: 900px) {
+  /* 4-col → 2-col on tablet */
+  [style*="grid-template-columns: repeat(4"],
+  [style*="grid-template-columns: 1.8fr"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 3-col → 2-col */
+  [style*="grid-template-columns: repeat(3"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  /* 5-col → 2-col */
+  [style*="grid-template-columns: repeat(5"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 580px) {
+  /* Everything → 1-col */
+  [style*="grid-template-columns: repeat(2"],
+  [style*="grid-template-columns: repeat(3"],
+  [style*="grid-template-columns: repeat(4"],
+  [style*="grid-template-columns: repeat(5"],
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns: 1.8fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Form grids */
+  .form-grid-2, .grid-2, .grid.grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Flex rows that should wrap */
+  [style*="display: flex"][style*="gap"] {
+    flex-wrap: wrap;
+  }
+}
+
+/* ============================================================
+   CARDS & GLASS PANELS
+   ============================================================ */
+@media (max-width: 480px) {
+  .glass-card, .gradient-border, .sketch-icon-card,
+  .benefit-card, .adopt-tier-card, .role-card {
+    padding: 1.25rem !important;
+  }
+  .glass-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .sketch-icon { width: 56px !important; height: 56px !important; }
+}
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+@media (max-width: 640px) {
+  .apply-form-wrap { padding: 1.5rem 1.25rem !important; }
+  .form-section-label { margin-top: 1.5rem; padding-top: 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  /* Ensure form submit buttons are fully tappable */
+  button[type="submit"] { min-height: 52px; }
+
+  /* Checkbox label */
+  .form-checkbox input[type="checkbox"] { width: 22px; height: 22px; }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+@media (max-width: 900px) {
+  .footer-grid, .site-footer .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+  .footer-brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 480px) {
+  .footer-grid, .site-footer .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  .footer-legal { flex-wrap: wrap; justify-content: center; }
+  .bb-footer .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+/* ============================================================
+   VIDEO EMBED (index.html)
+   ============================================================ */
+@media (max-width: 768px) {
+  #video-intro .container { padding: 0 1rem; }
+  #video-intro [style*="aspect-ratio"] {
+    aspect-ratio: 16 / 9 !important;
+    border-radius: 12px !important;
+  }
+}
+
+/* ============================================================
+   PHASE JOURNEY (index.html)
+   ============================================================ */
+@media (max-width: 640px) {
+  .phase-step { padding: 2rem 1.5rem !important; min-height: 260px !important; }
+  .phase-num { font-size: clamp(3rem, 10vw, 5rem) !important; }
+}
+
+/* ============================================================
+   TIMELINE (about.html)
+   ============================================================ */
+@media (max-width: 640px) {
+  .bb-timeline { padding-left: 2.5rem; }
+  .bb-timeline-year { font-size: 2rem !important; }
+  .bb-timeline-photo { height: 160px !important; }
+}
+
+/* ============================================================
+   APPLY PAGE: Steps row, spots bar, contact strip
+   ============================================================ */
+@media (max-width: 640px) {
+  .steps-row { flex-direction: column !important; gap: 2rem; }
+  .steps-row::before { display: none !important; }
+  .step-item { flex-direction: row !important; text-align: left; gap: 1.25rem; align-items: flex-start; }
+  .step-num { flex-shrink: 0; margin-bottom: 0 !important; }
+
+  .spots-bar { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .spots-track { width: 100%; }
+
+  .contact-strip { flex-direction: column; padding: 1.5rem; gap: 1.25rem; }
+  .contact-strip-item { text-align: left; }
+
+  .benefits-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ============================================================
+   CONTACT PAGE
+   ============================================================ */
+@media (max-width: 640px) {
+  .contact-info-cards { grid-template-columns: 1fr !important; }
+  .contact-quick-links { grid-template-columns: 1fr !important; }
+}
+
+/* ============================================================
+   PARTNERS PAGE
+   ============================================================ */
+@media (max-width: 640px) {
+  .school-cards-grid { grid-template-columns: 1fr !important; }
+  .adopt-tiers-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ============================================================
+   TYPOGRAPHY: minimum readable sizes
+   ============================================================ */
+@media (max-width: 480px) {
+  .counter-number { font-size: 2.5rem !important; }
+  .bb-timeline-year { font-size: 2.25rem !important; }
+  .adopt-tier-price { font-size: 2rem !important; }
+}
+
+@media (max-width: 375px) {
+  h1 { font-size: clamp(1.65rem, 8.5vw, 2.5rem) !important; }
+  h2 { font-size: clamp(1.35rem, 7vw, 2rem) !important; }
+  .text-chunky { letter-spacing: -0.02em; }
+}
+
+/* ============================================================
+   BEAT BOT — mobile positioning
+   ============================================================ */
+@media (max-width: 480px) {
+  #bb-bot-trigger {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 52px;
+    height: 52px;
+  }
+  #bb-bot-panel {
+    right: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 20px 20px 0 0 !important;
+    max-height: 80dvh !important;
+  }
+}
+
+/* ============================================================
+   STUDENT TOOLS WIDGETS
+   ============================================================ */
+@media (max-width: 640px) {
+  .bb-tool-panel { padding: 1.5rem 1.25rem !important; }
+  .bb-tool-tabs { gap: 0.5rem; }
+  .bb-tool-tab { padding: 0.5rem 1rem; font-size: 0.8rem; }
+}
+
+/* ============================================================
+   SECTION PADDING NORMALISATION
+   ============================================================ */
+@media (max-width: 768px) {
+  .section, .section-lg {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section, .section-lg {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
