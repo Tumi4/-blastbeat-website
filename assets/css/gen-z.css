@@ -954,3 +954,151 @@
   .bento-span-2 { grid-column: span 1; }
   .hero-dark { padding: calc(var(--nav-height) + 2rem) 0 3rem; }
 }
+
+/* ===================================================
+   HORIZONTAL SCROLL + PHASE JOURNEY (2026 UPDATE)
+   =================================================== */
+
+/* Horizontal scroll track */
+.h-scroll-track {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 0 var(--space-6) 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.h-scroll-track:active { cursor: grabbing; }
+.h-scroll-track::-webkit-scrollbar { height: 3px; }
+.h-scroll-track::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); }
+.h-scroll-track::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+
+.h-scroll-card {
+  flex: 0 0 clamp(200px, 22vw, 256px);
+  scroll-snap-align: start;
+}
+
+/* Role card in scroll track */
+.role-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--team-accent, var(--gradient-primary));
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+.role-card:hover {
+  border-color: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-4px);
+}
+.role-card-team {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.3);
+}
+.role-card-emoji { font-size: 1.75rem; margin-bottom: var(--space-3); }
+.role-card-title { color: white; font-weight: 700; font-family: var(--font-heading); font-size: var(--text-sm); margin-bottom: 4px; }
+.role-card-desc { color: rgba(255,255,255,0.5); font-size: 0.7rem; margin: 0; line-height: 1.4; }
+
+/* Scroll hint bar */
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: rgba(255,255,255,0.25);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: var(--space-4);
+  user-select: none;
+}
+.scroll-hint::before, .scroll-hint::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+/* Phase journey — 4-column connected strips */
+.phase-journey {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 3px solid transparent;
+  border-image: linear-gradient(90deg, #6366F1, #A855F7, #FF2D78, #FF8C42) 1;
+  position: relative;
+}
+.phase-step {
+  padding: var(--space-10) var(--space-8);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s ease;
+  cursor: default;
+}
+.phase-step:last-child { border-right: none; }
+.phase-step:hover { background: rgba(255,255,255,0.03); }
+.phase-step-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.phase-step:hover .phase-step-bg { opacity: 0.15; }
+.phase-num {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 7vw, 6.5rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.12);
+  -webkit-text-fill-color: transparent;
+  margin-bottom: auto;
+  transition: -webkit-text-stroke 0.3s ease;
+}
+.phase-step:hover .phase-num {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.35);
+}
+.phase-content { padding-top: var(--space-8); }
+.phase-title { color: white; font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-3); font-family: var(--font-heading); }
+.phase-desc { color: rgba(255,255,255,0.55); font-size: var(--text-sm); line-height: 1.7; margin: 0; }
+
+@media (max-width: 900px) {
+  .phase-journey { grid-template-columns: repeat(2, 1fr); }
+  .phase-step { min-height: 320px; padding: var(--space-8) var(--space-6); }
+  .phase-num { font-size: clamp(3rem, 8vw, 4.5rem); }
+}
+@media (max-width: 540px) {
+  .phase-journey { grid-template-columns: 1fr; }
+  .h-scroll-card { flex: 0 0 clamp(170px, 72vw, 220px); }
+  .role-card { height: 170px; }
+}

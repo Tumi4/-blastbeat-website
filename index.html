@@ -287,165 +287,139 @@
       </div>
     </section>
 
-    <!-- ===== 4 PHASES ===== -->
-    <section class="section" style="background: var(--dark-surface); padding: var(--space-20) 0;" id="phases">
-      <div class="container">
-        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-12);">
+    <!-- ===== 4 PHASES — Journey Layout ===== -->
+    <section style="background: var(--dark-surface); overflow: hidden;" id="phases">
+      <div class="container" style="padding: var(--space-20) 0 var(--space-12);">
+        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto;">
           <span class="neo-tag-cyan" style="margin-bottom: var(--space-4);">16-week programme</span>
-          <h2 class="text-chunky" style="font-size: clamp(1.75rem, 4vw, 2.75rem); margin-top: var(--space-4); color: white;">The 4 Phases</h2>
-          <p style="color: rgba(255,255,255,0.65); font-size: var(--text-lg);">A structured journey from idea to impact &mdash; in four powerful phases.</p>
+          <h2 class="text-chunky" style="font-size: clamp(1.75rem, 4vw, 2.75rem); margin-top: var(--space-4); color: white;">
+            <span class="text-gradient-vivid">Four Phases</span> to Launch
+          </h2>
+          <p style="color: rgba(255,255,255,0.65); font-size: var(--text-lg);">A structured journey from day one to National Finals.</p>
         </div>
+      </div>
 
-        <div class="grid grid-4" style="gap: var(--space-5);">
-          <!-- Phase 1 -->
-          <div class="glass-card reveal" style="padding: var(--space-8);">
-            <div style="background: linear-gradient(135deg, #6366F1, #A855F7); width: 48px; height: 48px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-weight: 800; font-size: var(--text-xl); color: white; margin-bottom: var(--space-5);">01</div>
-            <div class="neo-tag" style="margin-bottom: var(--space-4); font-size: 0.65rem;">Weeks 1&ndash;4</div>
-            <h3 style="color: white; font-size: var(--text-lg); margin-bottom: var(--space-3);">Foundation &amp; Identity</h3>
-            <p style="color: rgba(255,255,255,0.65); font-size: var(--text-sm); margin: 0;">Form your ESE. Elect your leadership. Assign all 14 roles. Build your brand identity and social media presence. Set goals and define your event concept.</p>
-          </div>
+      <!-- Phase journey strips — no container padding, full section width -->
+      <div class="phase-journey reveal">
 
-          <!-- Phase 2 -->
-          <div class="glass-card reveal reveal-delay-1" style="padding: var(--space-8);">
-            <div style="background: linear-gradient(135deg, #A855F7, #FF2D78); width: 48px; height: 48px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-weight: 800; font-size: var(--text-xl); color: white; margin-bottom: var(--space-5);">02</div>
-            <div class="neo-tag-pink" style="margin-bottom: var(--space-4); font-size: 0.65rem;">Weeks 5&ndash;8</div>
-            <h3 style="color: white; font-size: var(--text-lg); margin-bottom: var(--space-3);">Build &amp; Sell</h3>
-            <p style="color: rgba(255,255,255,0.65); font-size: var(--text-sm); margin: 0;">Launch ticket sales. Book talent. Secure venue. Build your content engine. Begin weekly Blastbeat TV episodes and grow your audience before the event.</p>
-          </div>
-
-          <!-- Phase 3 -->
-          <div class="glass-card reveal reveal-delay-2" style="padding: var(--space-8);">
-            <div style="background: linear-gradient(135deg, #FF2D78, #FF8C42); width: 48px; height: 48px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-weight: 800; font-size: var(--text-xl); color: white; margin-bottom: var(--space-5);">03</div>
-            <div class="neo-tag-cyan" style="margin-bottom: var(--space-4); font-size: 0.65rem;">Weeks 9&ndash;12</div>
-            <h3 style="color: white; font-size: var(--text-lg); margin-bottom: var(--space-3);">Event &amp; Impact</h3>
-            <p style="color: rgba(255,255,255,0.65); font-size: var(--text-sm); margin: 0;">Run your real event. Collect revenue, manage the floor, debrief your team. Film the experience for your TV episode submission and impact report.</p>
-          </div>
-
-          <!-- Phase 4 -->
-          <div class="glass-card reveal reveal-delay-3" style="padding: var(--space-8);">
-            <div style="background: linear-gradient(135deg, #F5C842, #FF8C42); width: 48px; height: 48px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-weight: 800; font-size: var(--text-xl); color: white; margin-bottom: var(--space-5);">04</div>
-            <div class="founding-badge" style="margin-bottom: var(--space-4); font-size: 0.65rem;">Weeks 13&ndash;16</div>
-            <h3 style="color: white; font-size: var(--text-lg); margin-bottom: var(--space-3);">Finance, CAP &amp; Finals</h3>
-            <p style="color: rgba(255,255,255,0.65); font-size: var(--text-sm); margin: 0;">Distribute 75% profit to your team. Allocate 25% to your Climate Action Project. Submit your TV episode. Compete at Regional and National Finals.</p>
+        <div class="phase-step">
+          <div class="phase-step-bg" style="background-image: url('/assets/images/bb-event-04.jpg');"></div>
+          <div class="phase-num">01</div>
+          <div class="phase-content">
+            <div style="margin-bottom: var(--space-4);"><span class="neo-tag" style="font-size: 0.6rem;">Weeks 1&ndash;4</span></div>
+            <h3 class="phase-title">Foundation &amp; Identity</h3>
+            <p class="phase-desc">Form your ESE. Elect leadership. Assign all 14 roles. Build brand identity and social presence.</p>
           </div>
         </div>
 
-        <div class="text-center" style="margin-top: var(--space-10);">
+        <div class="phase-step">
+          <div class="phase-step-bg" style="background-image: url('/assets/images/bb-event-05.jpg');"></div>
+          <div class="phase-num">02</div>
+          <div class="phase-content">
+            <div style="margin-bottom: var(--space-4);"><span class="neo-tag-pink" style="font-size: 0.6rem;">Weeks 5&ndash;8</span></div>
+            <h3 class="phase-title">Build &amp; Sell</h3>
+            <p class="phase-desc">Launch ticket sales. Book talent. Secure venue. Begin weekly Blastbeat TV episodes.</p>
+          </div>
+        </div>
+
+        <div class="phase-step">
+          <div class="phase-step-bg" style="background-image: url('/assets/images/bb-event-08.jpg');"></div>
+          <div class="phase-num">03</div>
+          <div class="phase-content">
+            <div style="margin-bottom: var(--space-4);"><span class="neo-tag-cyan" style="font-size: 0.6rem;">Weeks 9&ndash;12</span></div>
+            <h3 class="phase-title">Event &amp; Impact</h3>
+            <p class="phase-desc">Run your real event. Collect revenue. Film the experience for your Blastbeat TV submission.</p>
+          </div>
+        </div>
+
+        <div class="phase-step">
+          <div class="phase-step-bg" style="background-image: url('/assets/images/bb-event-10.jpg');"></div>
+          <div class="phase-num">04</div>
+          <div class="phase-content">
+            <div style="margin-bottom: var(--space-4);"><span class="founding-badge" style="font-size: 0.6rem; padding: 4px 10px;">Weeks 13&ndash;16</span></div>
+            <h3 class="phase-title">Finance, CAP &amp; Finals</h3>
+            <p class="phase-desc">Distribute profits. Fund your Climate Action Project. Submit TV episode. Compete at Finals.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container" style="padding: var(--space-10) 0 var(--space-20);">
+        <div class="text-center">
           <a href="/pages/programme.html" class="btn btn-outline-glow">Explore the Full Programme &#8594;</a>
         </div>
       </div>
     </section>
 
-    <!-- ===== 14 ROLES ===== -->
-    <section class="section section-dark" style="padding: var(--space-20) 0;" id="roles">
+    <!-- ===== 14 ROLES — Horizontal Scroll ===== -->
+    <section class="section section-dark" style="padding: var(--space-20) 0; overflow: hidden;" id="roles">
       <div class="container">
-        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-12);">
+        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-10);">
           <span class="neo-tag-cyan" style="margin-bottom: var(--space-4);">14 real business roles</span>
           <h2 class="text-chunky" style="font-size: clamp(1.75rem, 4vw, 2.75rem); margin-top: var(--space-4); color: white;">Every Student Gets a Title</h2>
-          <p style="color: rgba(255,255,255,0.65);">Your ESE mirrors a real company. Pick your role. Own it.</p>
+          <p style="color: rgba(255,255,255,0.65);">Your ESE mirrors a real company. 4 teams, 14 roles. Pick yours. Own it.</p>
         </div>
+      </div>
 
-        <!-- Business Team -->
-        <div style="margin-bottom: var(--space-8);">
-          <p class="text-uppercase-sm" style="color: rgba(255,255,255,0.4); margin-bottom: var(--space-4);">Business Team</p>
-          <div class="grid grid-4" style="gap: var(--space-4);">
-            <div class="glass-card reveal text-center">
-              <span class="emoji-xl">&#128188;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">CEO</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Leads the ESE, sets vision</p>
-            </div>
-            <div class="glass-card reveal reveal-delay-1 text-center">
-              <span class="emoji-xl">&#128176;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">CFO / Vice-CEO</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Budgets, finance, profits</p>
-            </div>
-            <div class="glass-card reveal reveal-delay-2 text-center">
-              <span class="emoji-xl">&#128200;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">Sales &amp; Marketing</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Ticket sales &amp; revenue</p>
-            </div>
-            <div class="glass-card reveal reveal-delay-3 text-center">
-              <span class="emoji-xl">&#128187;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">IT / Multimedia</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Tech, platform &amp; systems</p>
-            </div>
+      <!-- Teams legend -->
+      <div class="container" style="margin-bottom: var(--space-6);">
+        <div class="flex gap-4 flex-wrap reveal">
+          <div class="flex items-center gap-2" style="font-size: var(--text-xs); color: rgba(255,255,255,0.5); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+            <span style="width: 20px; height: 3px; background: linear-gradient(90deg, #6366F1, #A855F7); border-radius: 2px; display: inline-block;"></span> Business
+          </div>
+          <div class="flex items-center gap-2" style="font-size: var(--text-xs); color: rgba(255,255,255,0.5); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+            <span style="width: 20px; height: 3px; background: linear-gradient(90deg, #FF2D78, #FF8C42); border-radius: 2px; display: inline-block;"></span> Events
+          </div>
+          <div class="flex items-center gap-2" style="font-size: var(--text-xs); color: rgba(255,255,255,0.5); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+            <span style="width: 20px; height: 3px; background: linear-gradient(90deg, #A855F7, #00F5FF); border-radius: 2px; display: inline-block;"></span> Creative
+          </div>
+          <div class="flex items-center gap-2" style="font-size: var(--text-xs); color: rgba(255,255,255,0.5); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+            <span style="width: 20px; height: 3px; background: linear-gradient(90deg, #059669, #B8FF00); border-radius: 2px; display: inline-block;"></span> Climate/ESG
           </div>
         </div>
+      </div>
 
-        <!-- Events Team -->
-        <div style="margin-bottom: var(--space-8);">
-          <p class="text-uppercase-sm" style="color: rgba(255,255,255,0.4); margin-bottom: var(--space-4);">Events Team</p>
-          <div class="grid grid-4" style="gap: var(--space-4);">
-            <div class="glass-card reveal text-center">
-              <span class="emoji-xl">&#127914;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">Event Ops &amp; Health/Safety</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Logistics &amp; production</p>
-            </div>
-            <div class="glass-card reveal reveal-delay-1 text-center">
-              <span class="emoji-xl">&#127908;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">Talent Scout / Artist Liaison</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Artist booking &amp; relations</p>
-            </div>
-          </div>
+      <!-- Horizontal scroll track — full bleed -->
+      <div style="padding: 0 clamp(1rem, 3vw, 3rem);">
+        <div class="h-scroll-track reveal" id="roles-track">
+
+          <!-- Business: 4 roles -->
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #6366F1, #A855F7)"><span class="role-card-team">Business</span><div class="role-card-emoji">&#128188;</div><div class="role-card-title">CEO</div><p class="role-card-desc">Leads the ESE, sets vision and strategy</p></div></div>
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #6366F1, #A855F7)"><span class="role-card-team">Business</span><div class="role-card-emoji">&#128176;</div><div class="role-card-title">CFO / Vice-CEO</div><p class="role-card-desc">Budgets, finance and profit tracking</p></div></div>
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #6366F1, #A855F7)"><span class="role-card-team">Business</span><div class="role-card-emoji">&#128200;</div><div class="role-card-title">Sales &amp; Marketing</div><p class="role-card-desc">Ticket sales and revenue growth</p></div></div>
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #6366F1, #A855F7)"><span class="role-card-team">Business</span><div class="role-card-emoji">&#128187;</div><div class="role-card-title">IT / Multimedia</div><p class="role-card-desc">Tech, platform and systems</p></div></div>
+
+          <!-- Divider -->
+          <div style="flex: 0 0 1px; height: 190px; background: rgba(255,255,255,0.08); align-self: center; margin: 0 var(--space-2);"></div>
+
+          <!-- Events: 2 roles -->
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #FF2D78, #FF8C42)"><span class="role-card-team">Events</span><div class="role-card-emoji">&#127914;</div><div class="role-card-title">Event Ops &amp; H&amp;S</div><p class="role-card-desc">Logistics and production</p></div></div>
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #FF2D78, #FF8C42)"><span class="role-card-team">Events</span><div class="role-card-emoji">&#127908;</div><div class="role-card-title">Talent Scout</div><p class="role-card-desc">Artist booking and relations</p></div></div>
+
+          <!-- Divider -->
+          <div style="flex: 0 0 1px; height: 190px; background: rgba(255,255,255,0.08); align-self: center; margin: 0 var(--space-2);"></div>
+
+          <!-- Creative: 5 roles -->
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #A855F7, #00F5FF)"><span class="role-card-team">Creative</span><div class="role-card-emoji">&#127916;</div><div class="role-card-title">Content Creator Manager</div><p class="role-card-desc">Leads content strategy</p></div></div>
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #A855F7, #00F5FF)"><span class="role-card-team">Creative</span><div class="role-card-emoji">&#127912;</div><div class="role-card-title">Videographers</div><p class="role-card-desc">Film, edit, post</p></div></div>
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #A855F7, #00F5FF)"><span class="role-card-team">Creative</span><div class="role-card-emoji">&#128240;</div><div class="role-card-title">Journalist / Writer</div><p class="role-card-desc">Stories, press, blog</p></div></div>
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #A855F7, #00F5FF)"><span class="role-card-team">Creative</span><div class="role-card-emoji">&#127775;</div><div class="role-card-title">Art &amp; Design</div><p class="role-card-desc">Posters, identity, merch</p></div></div>
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #A855F7, #00F5FF)"><span class="role-card-team">Creative</span><div class="role-card-emoji">&#128241;</div><div class="role-card-title">Social Media</div><p class="role-card-desc">Content calendar, engagement</p></div></div>
+
+          <!-- Divider -->
+          <div style="flex: 0 0 1px; height: 190px; background: rgba(255,255,255,0.08); align-self: center; margin: 0 var(--space-2);"></div>
+
+          <!-- Climate/ESG: 3 roles -->
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #059669, #B8FF00)"><span class="role-card-team">Climate</span><div class="role-card-emoji">&#127807;</div><div class="role-card-title">Ecology / ESG</div><p class="role-card-desc">Climate projects, 25% fund</p></div></div>
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #059669, #B8FF00)"><span class="role-card-team">Climate</span><div class="role-card-emoji">&#129309;</div><div class="role-card-title">Community Outreach</div><p class="role-card-desc">Partnerships and community</p></div></div>
+          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #059669, #B8FF00)"><span class="role-card-team">Climate</span><div class="role-card-emoji">&#128227;</div><div class="role-card-title">PR &amp; Comms</div><p class="role-card-desc">Media and public image</p></div></div>
+
         </div>
+        <div class="scroll-hint reveal">Drag or swipe to explore all 14 roles</div>
+      </div>
 
-        <!-- Creative Team -->
-        <div style="margin-bottom: var(--space-8);">
-          <p class="text-uppercase-sm" style="color: rgba(255,255,255,0.4); margin-bottom: var(--space-4);">Creative Team</p>
-          <div class="grid grid-4" style="gap: var(--space-4);">
-            <div class="glass-card reveal text-center">
-              <span class="emoji-xl">&#127916;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">Content Creator Manager</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Leads content strategy</p>
-            </div>
-            <div class="glass-card reveal reveal-delay-1 text-center">
-              <span class="emoji-xl">&#127912;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">Content Creators / Videographers</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Film, edit, post</p>
-            </div>
-            <div class="glass-card reveal reveal-delay-2 text-center">
-              <span class="emoji-xl">&#128240;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">Journalist / Writer</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Stories, press, blog</p>
-            </div>
-            <div class="glass-card reveal reveal-delay-3 text-center">
-              <span class="emoji-xl">&#127775;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">Art &amp; Design</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Posters, identity, merch</p>
-            </div>
-          </div>
-          <div class="grid grid-4" style="gap: var(--space-4); margin-top: var(--space-4);">
-            <div class="glass-card reveal text-center">
-              <span class="emoji-xl">&#128241;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">Social Media</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Content calendar, engagement</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Climate / ESG Team -->
-        <div>
-          <p class="text-uppercase-sm" style="color: rgba(255,255,255,0.4); margin-bottom: var(--space-4);">Climate / ESG Team</p>
-          <div class="grid grid-4" style="gap: var(--space-4);">
-            <div class="glass-card reveal text-center">
-              <span class="emoji-xl">&#127807;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">Ecology / ESG</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Climate projects, 25% fund</p>
-            </div>
-            <div class="glass-card reveal reveal-delay-1 text-center">
-              <span class="emoji-xl">&#129309;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">Community Outreach</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Partnerships &amp; community</p>
-            </div>
-            <div class="glass-card reveal reveal-delay-2 text-center">
-              <span class="emoji-xl">&#128227;</span>
-              <div style="font-weight: 700; color: white; margin-bottom: 4px; font-family: var(--font-heading);">PR &amp; Comms</div>
-              <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin: 0;">Media &amp; public image</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-center" style="margin-top: var(--space-12);">
+      <div class="container" style="padding-top: var(--space-10);">
+        <div class="text-center">
           <a href="/pages/programme.html#roles" class="btn btn-glow">Explore the Full Programme</a>
         </div>
       </div>

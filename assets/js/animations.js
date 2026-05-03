@@ -73,3 +73,25 @@
     });
   }
 })();
+
+// Drag-to-scroll for horizontal role tracks
+document.querySelectorAll('.h-scroll-track').forEach(track => {
+  let isDown = false, startX = 0, scrollLeft = 0;
+  track.addEventListener('mousedown', e => {
+    isDown = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+    track.style.scrollSnapType = 'none';
+  });
+  track.addEventListener('mouseleave', () => { isDown = false; });
+  track.addEventListener('mouseup', () => {
+    isDown = false;
+    track.style.scrollSnapType = 'x mandatory';
+  });
+  track.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.2;
+  });
+});
