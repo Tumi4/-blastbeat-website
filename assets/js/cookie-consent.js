@@ -23,9 +23,9 @@
     '</div>';
 
   banner.style.cssText =
-    'position:fixed;bottom:1.5rem;left:1.5rem;right:1.5rem;' +
+    'position:fixed;bottom:1rem;left:1rem;right:1rem;' +
     'background:#1A1A2E;border:1px solid rgba(255,255,255,0.1);' +
-    'border-radius:16px;padding:1rem 1.5rem;z-index:9999;' +
+    'border-radius:16px;padding:1rem 1.25rem;z-index:9999;' +
     'box-shadow:0 20px 60px rgba(0,0,0,0.4);' +
     'transform:translateY(120%);transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);' +
     'max-width:720px;margin:0 auto;backdrop-filter:blur(20px);';
