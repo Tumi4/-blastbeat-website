@@ -7,11 +7,12 @@
   <meta name="description" content="Bring Blastbeat to your school. A complete curriculum-aligned programme where students run real businesses, keep 75% of profits, and fund climate action. Free pilot available.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="For Schools | Blastbeat Education Programme">
-  <meta property="og:description" content="Join 360,000+ students across 19 countries who've built real businesses through music and sports.">
-  <meta property="og:image" content="https://blastbeat-education.netlify.app/assets/images/students-collaborating.jpeg">
+  <meta property="og:description" content="Join 360,000+ students across 19 countries who've built real businesses through music, sports, and climate action.">
+  <meta property="og:image" content="https://blastbeat-education.netlify.app/assets/images/logo-blastbeat.png">
   <link rel="canonical" href="https://www.blastbeat.education/pages/for-schools.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap">
   <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
   <link rel="stylesheet" href="/assets/css/gen-z.css">
 </head>
@@ -22,7 +23,7 @@
   <nav class="bb-nav" role="navigation" aria-label="Main navigation">
     <div class="bb-nav-inner">
       <a href="/" class="bb-nav-logo">
-        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" width="40" height="40" decoding="async">
+        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" width="40" height="40" decoding="async" style="filter: brightness(10);">
         <span>BLASTBEAT</span>
       </a>
       <ul class="bb-nav-links">
@@ -36,7 +37,7 @@
       </ul>
       <div class="bb-nav-actions">
         <a href="/pages/contact.html" class="bb-nav-link login-link">Contact</a>
-        <a href="/pages/apply.html" class="btn btn-cta btn-sm">Apply Now</a>
+        <a href="/pages/apply.html" class="btn btn-glow btn-sm">Apply Now</a>
       </div>
       <button class="bb-nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -52,152 +53,214 @@
     <a href="/blog/">Blog</a>
     <a href="/pages/partners.html">Partners</a>
     <a href="/pages/contact.html">Contact</a>
-    <a href="/pages/apply.html" class="btn btn-cta">Apply Now</a>
+    <a href="/pages/apply.html" class="btn btn-glow">Apply Now</a>
   </div>
 
   <main id="main">
-    <!-- Hero -->
-    <section class="hero bg-gradient-hero" style="min-height: 70vh; background: linear-gradient(135deg, rgba(30,64,175,0.55), rgba(99,102,241,0.5)), url('/assets/images/bb-event-06.jpg') center/cover no-repeat;">
-      <div class="hero-shapes" aria-hidden="true">
-        <div class="hero-shape hero-shape-1"></div>
-        <div class="hero-shape hero-shape-2"></div>
-      </div>
-      <div class="container">
+
+    <!-- ===== HERO — Dark Mesh ===== -->
+    <section class="hero-dark bg-mesh" style="min-height: 80vh; padding: calc(var(--nav-height) + 4rem) 0 5rem;">
+      <div class="orb orb-1" aria-hidden="true"></div>
+      <div class="orb orb-2" aria-hidden="true"></div>
+      <div class="orb orb-3" aria-hidden="true"></div>
+
+      <div class="container" style="position: relative; z-index: 2;">
         <div class="grid grid-2 items-center" style="gap: var(--space-12);">
-          <div class="hero-content">
-            <span class="badge badge-blue" style="margin-bottom: var(--space-4);">For Schools &amp; Administrators</span>
-            <h1 style="font-size: var(--text-5xl);">Bring Blastbeat<br>to Your School</h1>
-            <p>Join 360,000+ students across 19 countries who've built real businesses through music, sports, and climate action.</p>
-            <div class="hero-actions">
-              <a href="/pages/apply.html" class="btn btn-cta btn-lg pulse-cta">Apply for Pilot (FREE)</a>
-              <a href="#how-it-works" class="btn btn-secondary btn-lg">See How It Works</a>
+
+          <!-- LEFT: Copy -->
+          <div class="reveal">
+            <div class="neo-tag" style="margin-bottom: var(--space-6);">
+              <span>&#127891;</span> For Schools &amp; Administrators
+            </div>
+            <h1 class="text-chunky" style="font-size: clamp(2.25rem, 5vw, 3.75rem); margin-bottom: var(--space-6); color: white; line-height: 1.08;">
+              Bring Blastbeat<br>
+              <span class="text-gradient-vivid">to Your School</span>
+            </h1>
+            <p style="font-size: var(--text-xl); max-width: 540px; margin-bottom: var(--space-10); color: rgba(255,255,255,0.75); line-height: 1.6;">
+              Join 360,000+ students across 19 countries who&rsquo;ve built real businesses through music, sports, and climate action.
+              No simulations &mdash; real events, real revenue, real impact.
+            </p>
+            <div class="flex gap-4 flex-wrap">
+              <a href="/pages/apply.html" class="btn btn-glow btn-lg">&#9889; Apply for Your School</a>
+              <a href="#how-it-works" class="btn btn-outline-glow btn-lg">How It Works &#8595;</a>
             </div>
           </div>
-          <div style="display: flex; justify-content: center;">
-            <img src="/assets/images/students-collaborating.jpeg" alt="Students collaborating on their Blastbeat ESE project" style="border-radius: var(--radius-xl); box-shadow: var(--shadow-xl);" width="560" height="400" loading="eager" fetchpriority="high" decoding="async">
+
+          <!-- RIGHT: Image + badge -->
+          <div class="reveal reveal-delay-2" style="position: relative;">
+            <img src="/assets/images/students-collaborating.jpeg"
+                 alt="Students collaborating on their Blastbeat ESE project"
+                 style="border-radius: var(--radius-2xl); box-shadow: 0 0 40px rgba(99,102,241,0.25), 0 24px 60px rgba(0,0,0,0.5); width: 100%; opacity: 0.92;"
+                 width="600" height="400" loading="eager" fetchpriority="high" decoding="async">
+            <div style="position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); z-index: 10;">
+              <div class="founding-badge" style="white-space: nowrap; box-shadow: 0 8px 30px rgba(245,200,66,0.3); font-size: var(--text-sm); padding: 10px 20px;">
+                &#11088; Founding Schools 2026 &mdash; 25% Off
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- Stats -->
-    <section class="section-sm bg-white">
+    <!-- ===== STATS BAR ===== -->
+    <section class="section" style="background: var(--deep-navy); padding: var(--space-16) 0;">
       <div class="container">
-        <div class="grid grid-4 text-center">
-          <div class="stat-card">
-            <div class="stat-number">360K+</div>
-            <div class="stat-label">Students Impacted</div>
+        <div class="grid grid-4 text-center" style="gap: var(--space-4);">
+          <div class="reveal stat-card">
+            <div class="counter-number" data-count="360000" data-suffix="+">360K+</div>
+            <div class="stat-label" style="color: rgba(255,255,255,0.6);">Students Impacted</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-number">23</div>
-            <div class="stat-label">Years Track Record</div>
+          <div class="reveal reveal-delay-1 stat-card">
+            <div class="counter-number" data-count="23">23</div>
+            <div class="stat-label" style="color: rgba(255,255,255,0.6);">Years Track Record</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-number">14</div>
-            <div class="stat-label">Student Roles per ESE</div>
+          <div class="reveal reveal-delay-2 stat-card">
+            <div class="counter-number" data-count="14">14</div>
+            <div class="stat-label" style="color: rgba(255,255,255,0.6);">Roles Per ESE</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-number">76%</div>
-            <div class="stat-label">Student Conversion Rate</div>
+          <div class="reveal reveal-delay-3 stat-card">
+            <div class="counter-number" data-count="76" data-suffix="%">76%</div>
+            <div class="stat-label" style="color: rgba(255,255,255,0.6);">Student Conversion Rate</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- How It Works -->
-    <section id="how-it-works" class="section">
+    <!-- ===== HOW IT WORKS ===== -->
+    <section id="how-it-works" class="section section-dark" style="padding: var(--space-20) 0;">
       <div class="container">
-        <div class="text-center" style="max-width: 700px; margin: 0 auto var(--space-12);">
-          <span class="badge badge-purple" style="margin-bottom: var(--space-4);">Implementation</span>
-          <h2>How It Works for Your School</h2>
-          <p style="font-size: var(--text-lg);">Three simple steps to bring real-world entrepreneurship into your classrooms.</p>
+        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-12);">
+          <span class="neo-tag-cyan" style="margin-bottom: var(--space-4);">implementation</span>
+          <h2 class="text-chunky" style="font-size: clamp(1.75rem, 4vw, 2.75rem); margin-top: var(--space-4); color: white;">Three Steps to Launch</h2>
+          <p style="font-size: var(--text-lg); color: rgba(255,255,255,0.65);">From initial conversation to students running real events &mdash; we handle the complexity.</p>
         </div>
 
-        <div class="grid grid-3">
-          <div class="bb-card text-center" style="padding: var(--space-8);">
-            <div style="width: 56px; height: 56px; background: var(--bg-accent); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: var(--text-2xl); font-weight: 700; color: var(--primary-blue);">1</div>
-            <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-3);">Initial Consultation</h3>
-            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-3);">2&#8211;3 weeks before term</p>
-            <p style="font-size: var(--text-sm);">Schedule a no-obligation call. We'll assess your school's needs and plan the programme rollout together.</p>
+        <div class="grid grid-3" style="gap: var(--space-6);">
+          <div class="glass-card reveal text-center" style="padding: var(--space-8);">
+            <div style="width: 56px; height: 56px; background: var(--gradient-primary); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-5); font-family: var(--font-heading); font-weight: 800; font-size: var(--text-xl); color: white;">1</div>
+            <div class="neo-tag" style="margin-bottom: var(--space-4); font-size: 0.65rem;">2&ndash;3 weeks before term</div>
+            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Initial Consultation</h3>
+            <p style="color: rgba(255,255,255,0.65); font-size: var(--text-sm); line-height: 1.7; margin: 0;">Schedule a no-obligation call. We&rsquo;ll assess your school&rsquo;s needs and plan the programme rollout together. No pressure, no jargon.</p>
           </div>
-          <div class="bb-card text-center" style="padding: var(--space-8);">
-            <div style="width: 56px; height: 56px; background: var(--bg-accent); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: var(--text-2xl); font-weight: 700; color: var(--primary-blue);">2</div>
-            <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-3);">Teacher Training</h3>
-            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-3);">1&#8211;2 weeks before launch</p>
-            <p style="font-size: var(--text-sm);">Online and in-person training sessions for your staff. Full certification and ongoing support provided.</p>
+          <div class="glass-card reveal reveal-delay-1 text-center" style="padding: var(--space-8);">
+            <div style="width: 56px; height: 56px; background: var(--gradient-sunset); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-5); font-family: var(--font-heading); font-weight: 800; font-size: var(--text-xl); color: white;">2</div>
+            <div class="neo-tag-pink" style="margin-bottom: var(--space-4); font-size: 0.65rem;">1&ndash;2 weeks before launch</div>
+            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Teacher Training</h3>
+            <p style="color: rgba(255,255,255,0.65); font-size: var(--text-sm); line-height: 1.7; margin: 0;">Two dedicated training sessions (online or in-person) covering the platform, curriculum, and facilitation techniques. Full certification provided.</p>
           </div>
-          <div class="bb-card text-center" style="padding: var(--space-8);">
-            <div style="width: 56px; height: 56px; background: var(--bg-accent); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: var(--text-2xl); font-weight: 700; color: var(--primary-blue);">3</div>
-            <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-3);">Programme Launch</h3>
-            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-3);">Beginning of term</p>
-            <p style="font-size: var(--text-sm);">Students form ESEs and begin their journey. Our platform handles team management, progress tracking, and competition entry.</p>
+          <div class="glass-card reveal reveal-delay-2 text-center" style="padding: var(--space-8);">
+            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #059669, #10B981); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-5); font-family: var(--font-heading); font-weight: 800; font-size: var(--text-xl); color: white;">3</div>
+            <div class="neo-tag-cyan" style="margin-bottom: var(--space-4); font-size: 0.65rem;">Beginning of term</div>
+            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Programme Launch</h3>
+            <p style="color: rgba(255,255,255,0.65); font-size: var(--text-sm); line-height: 1.7; margin: 0;">Students form ESEs and begin. The platform handles team management, task delivery, progress tracking, and competition entry automatically.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Full-Year Model -->
-    <section class="section bg-light">
+    <!-- ===== FULL-YEAR MODEL ===== -->
+    <section class="section" style="background: var(--dark-surface); padding: var(--space-20) 0;">
       <div class="container">
-        <div class="text-center" style="max-width: 700px; margin: 0 auto var(--space-12);">
-          <h2>The Full-Year Programme Model</h2>
-          <p style="font-size: var(--text-lg);">Two phases that give students the complete entrepreneurship experience.</p>
+        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-12);">
+          <span class="neo-tag-pink" style="margin-bottom: var(--space-4);">the academic year</span>
+          <h2 class="text-chunky" style="font-size: clamp(1.75rem, 4vw, 2.75rem); margin-top: var(--space-4); color: white;">Two Phases, One Year</h2>
+          <p style="font-size: var(--text-lg); color: rgba(255,255,255,0.65);">Students experience both the business and the impact &mdash; in sequence, by design.</p>
         </div>
 
-        <div class="grid grid-2" style="gap: var(--space-8);">
-          <div class="bb-card" style="border-left: 4px solid var(--primary-blue); padding: var(--space-8); background: linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(255,255,255,0.95)), url('/assets/images/bb-event-01.jpg') center/cover no-repeat;">
-            <span class="badge badge-blue" style="margin-bottom: var(--space-4);">Terms 1 &amp; 2</span>
-            <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-4);">Events Business Phase</h3>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: var(--space-3);">
-              <li class="flex items-center gap-4"><span style="color: var(--primary-blue);">&#9654;</span> MACC &amp; FootBeat ESEs operate</li>
-              <li class="flex items-center gap-4"><span style="color: var(--primary-blue);">&#9654;</span> Students run real events with real audiences</li>
-              <li class="flex items-center gap-4"><span style="color: var(--primary-blue);">&#9654;</span> Generate actual revenue from ticket sales</li>
-              <li class="flex items-center gap-4"><span style="color: var(--primary-blue);">&#9654;</span> 75% profit distributed to student teams</li>
-              <li class="flex items-center gap-4"><span style="color: var(--primary-blue);">&#9654;</span> 25% pooled into climate action fund</li>
-            </ul>
+        <div class="grid grid-2" style="gap: var(--space-6);">
+          <div class="bento-item reveal" style="background: linear-gradient(155deg, rgba(30,64,175,0.75) 0%, rgba(99,102,241,0.65) 100%), url('/assets/images/bb-event-01.jpg') center/cover no-repeat; color: white; min-height: 320px; padding: var(--space-10);">
+            <div>
+              <div class="neo-tag-cyan" style="margin-bottom: var(--space-5); display: inline-block; font-size: 0.65rem;">Terms 1 &amp; 2</div>
+              <h3 style="color: white; font-size: var(--text-2xl); margin-bottom: var(--space-4);">Events Business Phase</h3>
+              <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-3);">
+                <li class="flex items-center gap-3" style="color: rgba(255,255,255,0.85); font-size: var(--text-sm);"><span style="color: var(--neon-cyan);">&#9654;</span> MACC &amp; FootBeat ESEs operate</li>
+                <li class="flex items-center gap-3" style="color: rgba(255,255,255,0.85); font-size: var(--text-sm);"><span style="color: var(--neon-cyan);">&#9654;</span> Real events with real audiences</li>
+                <li class="flex items-center gap-3" style="color: rgba(255,255,255,0.85); font-size: var(--text-sm);"><span style="color: var(--neon-cyan);">&#9654;</span> Revenue from actual ticket sales</li>
+                <li class="flex items-center gap-3" style="color: rgba(255,255,255,0.85); font-size: var(--text-sm);"><span style="color: var(--neon-cyan);">&#9654;</span> 75% profit distributed to student teams</li>
+                <li class="flex items-center gap-3" style="color: rgba(255,255,255,0.85); font-size: var(--text-sm);"><span style="color: var(--neon-cyan);">&#9654;</span> 25% pooled into climate action fund</li>
+              </ul>
+            </div>
           </div>
-          <div class="bb-card" style="border-left: 4px solid var(--success-green); padding: var(--space-8); background: linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(255,255,255,0.95)), url('/assets/images/bb-activity-01.jpeg') center/cover no-repeat;">
-            <span class="badge badge-green" style="margin-bottom: var(--space-4);">Terms 3 &amp; 4</span>
-            <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-4);">Climate Action Phase</h3>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: var(--space-3);">
-              <li class="flex items-center gap-4"><span style="color: var(--success-green);">&#9654;</span> CAN (Climate Actions Now) ESE activates</li>
-              <li class="flex items-center gap-4"><span style="color: var(--success-green);">&#9654;</span> Uses pooled 25% from events phase</li>
-              <li class="flex items-center gap-4"><span style="color: var(--success-green);">&#9654;</span> Students design &amp; execute climate projects</li>
-              <li class="flex items-center gap-4"><span style="color: var(--success-green);">&#9654;</span> Measurable environmental impact</li>
-              <li class="flex items-center gap-4"><span style="color: var(--success-green);">&#9654;</span> Impact reporting &amp; community showcase</li>
-            </ul>
+          <div class="bento-item reveal reveal-delay-1" style="background: linear-gradient(155deg, rgba(5,150,105,0.75) 0%, rgba(16,185,129,0.65) 100%), url('/assets/images/bb-activity-01.jpeg') center/cover no-repeat; color: white; min-height: 320px; padding: var(--space-10);">
+            <div>
+              <div class="neo-tag" style="margin-bottom: var(--space-5); display: inline-block; font-size: 0.65rem; background: var(--neon-lime);">Terms 3 &amp; 4</div>
+              <h3 style="color: white; font-size: var(--text-2xl); margin-bottom: var(--space-4);">Climate Action Phase</h3>
+              <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-3);">
+                <li class="flex items-center gap-3" style="color: rgba(255,255,255,0.85); font-size: var(--text-sm);"><span style="color: var(--neon-lime);">&#9654;</span> CAN (Climate Actions Now) ESE activates</li>
+                <li class="flex items-center gap-3" style="color: rgba(255,255,255,0.85); font-size: var(--text-sm);"><span style="color: var(--neon-lime);">&#9654;</span> Uses pooled 25% from events phase</li>
+                <li class="flex items-center gap-3" style="color: rgba(255,255,255,0.85); font-size: var(--text-sm);"><span style="color: var(--neon-lime);">&#9654;</span> Students design &amp; run climate projects</li>
+                <li class="flex items-center gap-3" style="color: rgba(255,255,255,0.85); font-size: var(--text-sm);"><span style="color: var(--neon-lime);">&#9654;</span> Measurable environmental impact</li>
+                <li class="flex items-center gap-3" style="color: rgba(255,255,255,0.85); font-size: var(--text-sm);"><span style="color: var(--neon-lime);">&#9654;</span> Impact reporting &amp; community showcase</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Curriculum Alignment -->
-    <section class="section">
+    <!-- ===== CURRICULUM ALIGNMENT ===== -->
+    <section class="section section-dark" style="padding: var(--space-20) 0;">
       <div class="container text-center">
-        <span class="badge badge-blue" style="margin-bottom: var(--space-4);">Curriculum Aligned</span>
-        <h2 style="margin-bottom: var(--space-4);">Aligns With Your Curriculum</h2>
-        <p style="font-size: var(--text-lg); max-width: 600px; margin: 0 auto var(--space-10);">Blastbeat integrates with national education frameworks worldwide.</p>
-
-        <div class="flex justify-center gap-4 flex-wrap">
-          <span class="badge badge-blue" style="font-size: var(--text-sm); padding: 8px 20px;">Irish Junior Cycle Key Skills</span>
-          <span class="badge badge-blue" style="font-size: var(--text-sm); padding: 8px 20px;">Irish Leaving Certificate</span>
-          <span class="badge badge-purple" style="font-size: var(--text-sm); padding: 8px 20px;">South African CAPS Framework</span>
-          <span class="badge badge-green" style="font-size: var(--text-sm); padding: 8px 20px;">UN SDG 4 &#8211; Quality Education</span>
-          <span class="badge badge-green" style="font-size: var(--text-sm); padding: 8px 20px;">UN SDG 8 &#8211; Decent Work</span>
-          <span class="badge badge-green" style="font-size: var(--text-sm); padding: 8px 20px;">UN SDG 9 &#8211; Innovation</span>
-          <span class="badge badge-green" style="font-size: var(--text-sm); padding: 8px 20px;">UN SDG 13 &#8211; Climate Action</span>
-          <span class="badge badge-green" style="font-size: var(--text-sm); padding: 8px 20px;">UN SDG 17 &#8211; Partnerships</span>
+        <div class="reveal" style="max-width: 700px; margin: 0 auto var(--space-10);">
+          <span class="neo-tag" style="margin-bottom: var(--space-4);">curriculum aligned</span>
+          <h2 class="text-chunky" style="font-size: clamp(1.75rem, 4vw, 2.75rem); margin-top: var(--space-4); color: white;">Fits Your Framework</h2>
+          <p style="font-size: var(--text-lg); max-width: 600px; margin: var(--space-4) auto 0; color: rgba(255,255,255,0.65);">Blastbeat integrates with national education frameworks and UN Sustainable Development Goals worldwide.</p>
+        </div>
+        <div class="reveal flex justify-center flex-wrap" style="gap: var(--space-3);">
+          <span class="pill" style="background: rgba(99,102,241,0.15); color: rgba(255,255,255,0.8); border-color: rgba(99,102,241,0.35);">Irish Junior Cycle Key Skills</span>
+          <span class="pill" style="background: rgba(99,102,241,0.15); color: rgba(255,255,255,0.8); border-color: rgba(99,102,241,0.35);">Irish Leaving Certificate</span>
+          <span class="pill" style="background: rgba(168,85,247,0.15); color: rgba(255,255,255,0.8); border-color: rgba(168,85,247,0.35);">South African CAPS</span>
+          <span class="pill" style="background: rgba(5,150,105,0.15); color: rgba(255,255,255,0.8); border-color: rgba(5,150,105,0.35);">UN SDG 4 &mdash; Quality Education</span>
+          <span class="pill" style="background: rgba(5,150,105,0.15); color: rgba(255,255,255,0.8); border-color: rgba(5,150,105,0.35);">UN SDG 8 &mdash; Decent Work</span>
+          <span class="pill" style="background: rgba(5,150,105,0.15); color: rgba(255,255,255,0.8); border-color: rgba(5,150,105,0.35);">UN SDG 9 &mdash; Innovation</span>
+          <span class="pill" style="background: rgba(5,150,105,0.15); color: rgba(255,255,255,0.8); border-color: rgba(5,150,105,0.35);">UN SDG 13 &mdash; Climate Action</span>
+          <span class="pill" style="background: rgba(5,150,105,0.15); color: rgba(255,255,255,0.8); border-color: rgba(5,150,105,0.35);">UN SDG 17 &mdash; Partnerships</span>
         </div>
       </div>
     </section>
 
-    <!-- Pricing -->
+    <!-- ===== WHY SCHOOLS CHOOSE BLASTBEAT ===== -->
+    <section class="section" style="background: var(--deep-navy); padding: var(--space-20) 0;">
+      <div class="container">
+        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-12);">
+          <span class="neo-tag-pink" style="margin-bottom: var(--space-4);">why schools choose blastbeat</span>
+          <h2 class="text-chunky" style="font-size: clamp(1.75rem, 4vw, 2.75rem); margin-top: var(--space-4); color: white;">Built Different. Proven Everywhere.</h2>
+          <p style="color: rgba(255,255,255,0.65); font-size: var(--text-lg);">We&rsquo;re not a simulation kit. We&rsquo;re a full business operating system for schools.</p>
+        </div>
+
+        <div class="grid grid-4" style="gap: var(--space-5);">
+          <div class="glass-card reveal text-center" style="padding: var(--space-8);">
+            <div style="font-size: 2.5rem; margin-bottom: var(--space-4);">&#128218;</div>
+            <h3 style="color: white; font-size: var(--text-lg); margin-bottom: var(--space-3);">Curriculum Integration</h3>
+            <p style="color: rgba(255,255,255,0.65); font-size: var(--text-sm); margin: 0;">Aligns with national frameworks and UN SDGs. Counted as taught time in most jurisdictions.</p>
+          </div>
+          <div class="glass-card reveal reveal-delay-1 text-center" style="padding: var(--space-8);">
+            <div style="font-size: 2.5rem; margin-bottom: var(--space-4);">&#127891;</div>
+            <h3 style="color: white; font-size: var(--text-lg); margin-bottom: var(--space-3);">Teacher Training</h3>
+            <p style="color: rgba(255,255,255,0.65); font-size: var(--text-sm); margin: 0;">Full certification, two training sessions, and ongoing support. Teachers love it because students take ownership.</p>
+          </div>
+          <div class="glass-card reveal reveal-delay-2 text-center" style="padding: var(--space-8);">
+            <div style="font-size: 2.5rem; margin-bottom: var(--space-4);">&#128202;</div>
+            <h3 style="color: white; font-size: var(--text-lg); margin-bottom: var(--space-3);">Measurable Outcomes</h3>
+            <p style="color: rgba(255,255,255,0.65); font-size: var(--text-sm); margin: 0;">Track student growth across 5 outcome themes. Funder-ready impact reports included.</p>
+          </div>
+          <div class="glass-card reveal reveal-delay-3 text-center" style="padding: var(--space-8);">
+            <div style="font-size: 2.5rem; margin-bottom: var(--space-4);">&#127942;</div>
+            <h3 style="color: white; font-size: var(--text-lg); margin-bottom: var(--space-3);">National Recognition</h3>
+            <p style="color: rgba(255,255,255,0.65); font-size: var(--text-sm); margin: 0;">Regional Heats and National Finals give schools real prestige. Blastbeat TV builds your school&rsquo;s brand.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRICING ===== -->
     <section class="section section-dark" id="pricing" style="background: var(--deep-navy); padding: var(--space-20) 0; position: relative; overflow: hidden;">
       <div class="orb" style="width: 500px; height: 500px; background: rgba(245,200,66,0.07); top: -20%; right: -10%;" aria-hidden="true"></div>
       <div class="orb" style="width: 350px; height: 350px; background: rgba(99,102,241,0.08); bottom: -10%; left: -5%;" aria-hidden="true"></div>
 
       <div class="container" style="position: relative; z-index: 2;">
-        <div class="text-center" style="max-width: 720px; margin: 0 auto var(--space-12);">
+        <div class="text-center reveal" style="max-width: 720px; margin: 0 auto var(--space-12);">
           <span class="neo-tag" style="margin-bottom: var(--space-4);">3 ways to bring Blastbeat to your school</span>
           <h2 class="text-chunky" style="font-size: clamp(1.75rem, 4vw, 2.75rem); margin-top: var(--space-4); color: white;">Partnership &amp; Pricing</h2>
           <p style="color: rgba(255,255,255,0.65); font-size: var(--text-lg);">No school should be priced out of real-world entrepreneurship education. Three routes in.</p>
@@ -206,7 +269,7 @@
         <!-- Access Route Cards -->
         <div class="grid grid-3" style="gap: var(--space-6); margin-bottom: var(--space-12);">
           <!-- Direct -->
-          <div class="glass-card" style="padding: var(--space-8);">
+          <div class="glass-card reveal" style="padding: var(--space-8);">
             <div style="margin-bottom: var(--space-5);">
               <span class="neo-tag" style="font-size: 0.65rem;">Direct</span>
             </div>
@@ -221,7 +284,7 @@
           </div>
 
           <!-- Crowdfund -->
-          <div class="glass-card" style="padding: var(--space-8); border-color: rgba(255,45,120,0.3);">
+          <div class="glass-card reveal reveal-delay-1" style="padding: var(--space-8); border-color: rgba(255,45,120,0.3);">
             <div style="margin-bottom: var(--space-5);">
               <span class="neo-tag-pink" style="font-size: 0.65rem;">Crowdfund</span>
             </div>
@@ -236,7 +299,7 @@
           </div>
 
           <!-- Sponsor-Funded -->
-          <div class="glass-card" style="padding: var(--space-8); border-color: rgba(0,245,255,0.2);">
+          <div class="glass-card reveal reveal-delay-2" style="padding: var(--space-8); border-color: rgba(0,245,255,0.2);">
             <div style="margin-bottom: var(--space-5);">
               <span class="neo-tag-cyan" style="font-size: 0.65rem;">Sponsor-Funded</span>
             </div>
@@ -252,7 +315,7 @@
         </div>
 
         <!-- Founding Schools Rate -->
-        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,200,66,0.2); border-radius: var(--radius-2xl); padding: var(--space-10); margin-bottom: var(--space-12);">
+        <div class="reveal" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(245,200,66,0.2); border-radius: var(--radius-2xl); padding: var(--space-10); margin-bottom: var(--space-12);">
           <div style="display: flex; align-items: flex-start; gap: var(--space-10); flex-wrap: wrap;">
             <div style="flex: 1; min-width: 280px;">
               <div style="margin-bottom: var(--space-5);">
@@ -310,7 +373,7 @@
         </div>
 
         <!-- What's Included -->
-        <div class="text-center">
+        <div class="reveal text-center">
           <p class="text-uppercase-sm" style="color: rgba(255,255,255,0.4); margin-bottom: var(--space-6);">What&rsquo;s included in every licence</p>
           <div class="flex justify-center flex-wrap" style="gap: var(--space-3); margin-bottom: var(--space-10);">
             <span class="pill" style="background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.1); font-size: var(--text-xs);">&#10003; Platform Access</span>
@@ -329,56 +392,23 @@
       </div>
     </section>
 
-    <!-- Why Schools Choose Blastbeat -->
-    <section class="section">
-      <div class="container">
-        <div class="text-center" style="max-width: 700px; margin: 0 auto var(--space-12);">
-          <h2>Why Schools Choose Blastbeat</h2>
-        </div>
-
-        <div class="grid grid-4">
-          <div class="bb-card text-center">
-            <div style="font-size: 2rem; margin-bottom: var(--space-3);">&#128218;</div>
-            <h3 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Curriculum Integration</h3>
-            <p style="font-size: var(--text-sm);">Aligns with national frameworks and UN SDGs</p>
-          </div>
-          <div class="bb-card text-center">
-            <div style="font-size: 2rem; margin-bottom: var(--space-3);">&#127891;</div>
-            <h3 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Teacher Training</h3>
-            <p style="font-size: var(--text-sm);">Full certification and ongoing professional development</p>
-          </div>
-          <div class="bb-card text-center">
-            <div style="font-size: 2rem; margin-bottom: var(--space-3);">&#128202;</div>
-            <h3 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Measurable Outcomes</h3>
-            <p style="font-size: var(--text-sm);">Track student progress, financial results, and impact</p>
-          </div>
-          <div class="bb-card text-center">
-            <div style="font-size: 2rem; margin-bottom: var(--space-3);">&#127942;</div>
-            <h3 style="font-size: var(--text-base); margin-bottom: var(--space-2);">School Recognition</h3>
-            <p style="font-size: var(--text-sm);">National competition and showcase opportunities</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Platform & Technology -->
-    <section class="section section-dark" style="position: relative; overflow: hidden;">
+    <!-- ===== PLATFORM & TECHNOLOGY ===== -->
+    <section class="section section-dark" style="position: relative; overflow: hidden; padding: var(--space-20) 0;">
       <div class="orb" style="width: 500px; height: 500px; background: var(--electric-purple); top: -20%; right: -10%; opacity: 0.12;" aria-hidden="true"></div>
       <div class="orb" style="width: 350px; height: 350px; background: var(--neon-cyan); bottom: -15%; left: -8%; opacity: 0.1;" aria-hidden="true"></div>
 
       <div class="container" style="position: relative; z-index: 2;">
         <div class="text-center reveal" style="max-width: 740px; margin: 0 auto var(--space-12);">
           <span class="neo-tag-cyan" style="margin-bottom: var(--space-4);">&#128640; the platform</span>
-          <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4);">Technology Built for Schools</h2>
-          <p style="font-size: var(--text-lg); color: rgba(255,255,255,0.7);">Every Blastbeat school gets access to a purpose-built digital platform that runs the whole programme — from student onboarding to impact reporting.</p>
+          <h2 class="text-chunky" style="font-size: clamp(1.75rem, 4vw, 2.75rem); margin-top: var(--space-4); color: white;">Technology Built for Schools</h2>
+          <p style="font-size: var(--text-lg); color: rgba(255,255,255,0.7);">Every Blastbeat school gets access to a purpose-built digital platform that runs the whole programme &mdash; from student onboarding to impact reporting.</p>
         </div>
 
         <div class="grid grid-3" style="gap: var(--space-6); margin-bottom: var(--space-6);">
-          <!-- Teacher Dashboard -->
           <div class="glass-card reveal" style="padding: var(--space-8);">
             <span style="font-size: 2.5rem; display: block; margin-bottom: var(--space-4);">&#128101;</span>
             <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Teacher Dashboard</h3>
-            <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin-bottom: var(--space-4);">Live student registration list, role assignments, and team overview. The platform auto-calculates the current programme week and phase — no manual tracking needed.</p>
+            <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin-bottom: var(--space-4);">Live student registration list, role assignments, and team overview. The platform auto-calculates the current programme week and phase &mdash; no manual tracking needed.</p>
             <div class="pill-cloud">
               <span class="pill" style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2); font-size: var(--text-xs);">Live progress</span>
               <span class="pill" style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2); font-size: var(--text-xs);">Role assignment</span>
@@ -386,11 +416,10 @@
             </div>
           </div>
 
-          <!-- AI Mentor -->
           <div class="glass-card reveal reveal-delay-1" style="padding: var(--space-8); border-color: rgba(139,92,246,0.4);">
             <span style="font-size: 2.5rem; display: block; margin-bottom: var(--space-4);">&#129302;</span>
             <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Built-In AI Mentor</h3>
-            <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin-bottom: var(--space-4);">Every student has a personal AI mentor embedded in the platform. They can ask it anything — what their role involves, how to complete a task, ideas for their event. No external tools needed.</p>
+            <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin-bottom: var(--space-4);">Every student has a personal AI mentor embedded in the platform. They can ask it anything &mdash; what their role involves, how to complete a task, ideas for their event. No external tools needed.</p>
             <div class="pill-cloud">
               <span class="pill" style="background: rgba(139,92,246,0.2); color: rgba(255,255,255,0.8); border-color: rgba(139,92,246,0.4); font-size: var(--text-xs);">Per-student AI chat</span>
               <span class="pill" style="background: rgba(139,92,246,0.2); color: rgba(255,255,255,0.8); border-color: rgba(139,92,246,0.4); font-size: var(--text-xs);">Role guidance</span>
@@ -398,11 +427,10 @@
             </div>
           </div>
 
-          <!-- Mobile-first -->
           <div class="glass-card reveal reveal-delay-2" style="padding: var(--space-8);">
             <span style="font-size: 2.5rem; display: block; margin-bottom: var(--space-4);">&#128241;</span>
             <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Mobile-First</h3>
-            <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin-bottom: var(--space-4);">Designed for students who live on their phones. The full platform — student dashboard, tasks, team chat, and teacher controls — works flawlessly on mobile and tablet.</p>
+            <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin-bottom: var(--space-4);">Designed for students who live on their phones. The full platform &mdash; student dashboard, tasks, team chat, and teacher controls &mdash; works flawlessly on mobile and tablet.</p>
             <div class="pill-cloud">
               <span class="pill" style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2); font-size: var(--text-xs);">Fully responsive</span>
               <span class="pill" style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2); font-size: var(--text-xs);">No app download</span>
@@ -411,11 +439,10 @@
         </div>
 
         <div class="grid grid-3" style="gap: var(--space-6);">
-          <!-- Privacy -->
           <div class="glass-card reveal" style="padding: var(--space-8); border-color: rgba(5,150,105,0.4);">
             <span style="font-size: 2.5rem; display: block; margin-bottom: var(--space-4);">&#128274;</span>
             <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Privacy-First Design</h3>
-            <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin-bottom: var(--space-4);">Built to EU GDPR standards from the ground up. No personal data is collected for students under 18 — students use anonymous nicknames and access codes. Guardian consent is built into the onboarding flow.</p>
+            <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin-bottom: var(--space-4);">Built to EU GDPR standards from the ground up. No personal data is collected for students under 18 &mdash; students use anonymous nicknames and access codes. Guardian consent is built into the onboarding flow.</p>
             <div class="pill-cloud">
               <span class="pill" style="background: rgba(5,150,105,0.2); color: rgba(255,255,255,0.8); border-color: rgba(5,150,105,0.4); font-size: var(--text-xs);">GDPR compliant</span>
               <span class="pill" style="background: rgba(5,150,105,0.2); color: rgba(255,255,255,0.8); border-color: rgba(5,150,105,0.4); font-size: var(--text-xs);">Guardian consent</span>
@@ -423,11 +450,10 @@
             </div>
           </div>
 
-          <!-- Impact Assessment -->
           <div class="glass-card reveal reveal-delay-1" style="padding: var(--space-8);">
             <span style="font-size: 2.5rem; display: block; margin-bottom: var(--space-4);">&#128202;</span>
             <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Impact Measurement</h3>
-            <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin-bottom: var(--space-4);">Pre and post assessments (IA1 &amp; IA2) track student growth across five themes: self-perception, teamwork, skills, financial awareness, and climate action. Anonymised CSV export available for funding and impact reporting.</p>
+            <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin-bottom: var(--space-4);">Pre and post assessments (IA1 &amp; IA2) track student growth across five themes: self-perception, teamwork, skills, financial awareness, and climate action. Anonymised CSV export for funder reporting.</p>
             <div class="pill-cloud">
               <span class="pill" style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2); font-size: var(--text-xs);">Pre &amp; post data</span>
               <span class="pill" style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2); font-size: var(--text-xs);">5 outcome themes</span>
@@ -435,7 +461,6 @@
             </div>
           </div>
 
-          <!-- Admin Portal -->
           <div class="glass-card reveal reveal-delay-2" style="padding: var(--space-8);">
             <span style="font-size: 2.5rem; display: block; margin-bottom: var(--space-4);">&#128081;</span>
             <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Admin &amp; Oversight</h3>
@@ -449,31 +474,100 @@
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="section bg-gradient-blue" style="background: linear-gradient(135deg, rgba(30,64,175,0.55), rgba(99,102,241,0.55)), url('/assets/images/bb-students-group.jpg') center/cover no-repeat;">
-      <div class="container text-center">
-        <h2 style="color: var(--text-white); margin-bottom: var(--space-4);">Ready to Transform Your School?</h2>
-        <p style="color: rgba(255,255,255,0.8); font-size: var(--text-lg); max-width: 560px; margin: 0 auto var(--space-8);">Join the free pilot programme or request a presentation for your school leadership team.</p>
-        <div class="flex justify-center gap-4 flex-wrap">
-          <a href="/pages/apply.html" class="btn btn-white btn-lg">Apply Now</a>
-          <a href="mailto:partners@blastbeat.education" class="btn btn-lg" style="background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5);">Request Presentation</a>
+    <!-- ===== BIG CTA ===== -->
+    <section class="section" style="background: var(--dark-surface); padding: var(--space-24) 0; position: relative; overflow: hidden;">
+      <div class="orb" style="width: 500px; height: 500px; background: rgba(99,102,241,0.15); top: -20%; left: -5%;" aria-hidden="true"></div>
+      <div class="orb" style="width: 400px; height: 400px; background: rgba(255,45,120,0.12); bottom: -15%; right: -5%;" aria-hidden="true"></div>
+
+      <div class="container text-center" style="position: relative; z-index: 2;">
+        <div class="reveal" style="max-width: 680px; margin: 0 auto;">
+          <div style="margin-bottom: var(--space-6);">
+            <span class="founding-badge" style="margin-right: var(--space-3);">&#11088; Founding Cohort 2026</span>
+          </div>
+          <h2 class="text-chunky" style="font-size: clamp(2rem, 5vw, 3.5rem); color: white; margin-bottom: var(--space-6);">
+            Ready to Transform<br>
+            <span class="text-gradient-vivid">Your School?</span>
+          </h2>
+          <p style="font-size: var(--text-xl); color: rgba(255,255,255,0.7); max-width: 520px; margin: 0 auto var(--space-10);">
+            Apply now or book a presentation for your leadership team. Founding schools get 25% off and are named in all programme materials.
+          </p>
+          <div class="flex justify-center gap-4 flex-wrap">
+            <a href="/pages/apply.html" class="btn btn-glow btn-lg" style="min-width: 220px;">&#9889; Apply Now</a>
+            <a href="mailto:partners@blastbeat.education" class="btn btn-outline-glow btn-lg">Request Presentation</a>
+          </div>
         </div>
       </div>
     </section>
+
   </main>
 
-  <!-- Footer -->
-  <footer class="bb-footer">
+  <!-- ===== FOOTER ===== -->
+  <footer class="bb-footer" style="background: var(--deep-navy);">
     <div class="container">
+      <div class="grid footer-grid" style="grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-10);">
+        <div>
+          <a href="/" class="bb-nav-logo" style="margin-bottom: var(--space-4); display: inline-flex;">
+            <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="36" height="36" loading="lazy" decoding="async" style="filter: brightness(10);">
+            <span style="color: white;">BLASTBEAT</span>
+          </a>
+          <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 300px; color: rgba(255,255,255,0.5);">Empowering young people through music, entrepreneurship, and climate action. 23 years. 19 countries. 360,000+ students.</p>
+          <p style="font-size: var(--text-xs); margin-top: var(--space-4); color: rgba(255,255,255,0.35);">Climate Actions Now<br>UK Registered Charity No. 1113530</p>
+          <div class="footer-social" style="margin-top: var(--space-6);">
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Instagram">ig</a>
+            <a href="#" aria-label="X / Twitter">X</a>
+            <a href="#" aria-label="YouTube">YT</a>
+          </div>
+        </div>
+        <div>
+          <h5>Programme</h5>
+          <ul class="footer-links">
+            <li><a href="/pages/programme.html">What is Blastbeat?</a></li>
+            <li><a href="/pages/programme.html#macc">MACC Challenge</a></li>
+            <li><a href="/pages/programme.html#footbeat">FootBeat Sports</a></li>
+            <li><a href="/pages/for-schools.html">For Schools</a></li>
+            <li><a href="/pages/programme.html#roles">ESE Roles</a></li>
+            <li><a href="/#blastbeat-tv">Blastbeat TV</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>About Us</h5>
+          <ul class="footer-links">
+            <li><a href="/pages/about.html">Our Story</a></li>
+            <li><a href="/pages/impact.html">Impact</a></li>
+            <li><a href="/pages/international.html">International</a></li>
+            <li><a href="/pages/partners.html">Partners</a></li>
+            <li><a href="/blog/">News &amp; Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Get Involved</h5>
+          <ul class="footer-links">
+            <li><a href="/pages/apply.html">Apply for Your School</a></li>
+            <li><a href="/pages/partners.html">Corporate Partnership</a></li>
+            <li><a href="/pages/contact.html">Contact Us</a></li>
+          </ul>
+          <div style="margin-top: var(--space-6);">
+            <p style="font-size: var(--text-xs); color: rgba(255,255,255,0.4); margin-bottom: var(--space-2);">General enquiries</p>
+            <a href="mailto:info@blastbeat.education" style="font-size: var(--text-sm); color: rgba(255,255,255,0.7);">info@blastbeat.education</a>
+          </div>
+        </div>
+      </div>
       <div class="footer-bottom flex justify-between items-center flex-wrap gap-4">
-        <p style="margin: 0; color: var(--text-muted);">&copy; 2026 Climate Actions Now. UK Charity 1113530</p>
+        <p style="margin: 0; color: rgba(255,255,255,0.35);">&copy; 2026 Climate Actions Now. All rights reserved. UK Charity 1113530</p>
         <div class="flex gap-6">
           <a href="/pages/privacy-policy.html">Privacy Policy</a>
           <a href="/pages/terms-of-use.html">Terms of Use</a>
+          <a href="/pages/accessibility.html">Accessibility</a>
         </div>
       </div>
     </div>
   </footer>
+
+  <!-- Floating Apply Badge -->
+  <div class="fab-badge">
+    <a href="/pages/apply.html">&#9889; Apply Now</a>
+  </div>
 
   <script src="/assets/js/navigation.js" defer></script>
   <script src="/assets/js/animations.js" defer></script>
