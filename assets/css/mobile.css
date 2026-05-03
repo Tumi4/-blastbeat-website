@@ -307,3 +307,23 @@ button, [role="button"], a, input[type="submit"], input[type="button"] {
     padding-right: 1rem;
   }
 }
+
+/* ============================================================
+   PATH LANDING PAGE RESPONSIVE — MACC / FootBeat / CAN
+   ============================================================ */
+@media (max-width: 900px) {
+  .responsive-split { grid-template-columns: 1fr !important; }
+  .responsive-3col { grid-template-columns: 1fr 1fr !important; }
+  .responsive-4col { grid-template-columns: 1fr 1fr !important; }
+  .bento-macc { grid-template-columns: 1fr !important; }
+  .bento-tall { grid-row: auto !important; }
+  .event-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 580px) {
+  .responsive-3col { grid-template-columns: 1fr !important; }
+  .event-grid { grid-template-columns: 1fr !important; }
+  .responsive-4col { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 480px) {
+  .responsive-4col { grid-template-columns: 1fr !important; }
+}

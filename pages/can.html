@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAN — Climate Actions Now | Blastbeat Education</title>
+  <meta name="description" content="25% of every Blastbeat profit funds a student-designed climate project. CAN — Climate Actions Now — is the social enterprise thread running through every Blastbeat vertical.">
+  <meta property="og:title" content="CAN — Climate Actions Now | Blastbeat">
+  <meta property="og:description" content="Turn enterprise profit into real climate action. Students design and fund their own climate projects through Blastbeat CAN.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://www.blastbeat.education/pages/can.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
+  <link rel="stylesheet" href="/assets/css/gen-z.css">
+  <link rel="stylesheet" href="/assets/css/mobile.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#059669">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@BlastbeatEdu">
+  <style>
+    :root {
+      --can-green: #059669;
+      --can-lime: #84CC16;
+      --can-teal: #0D9488;
+      --can-dark: #021A0E;
+    }
+
+    .can-hero {
+      min-height: 100vh;
+      background: var(--can-dark);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: calc(var(--nav-height,80px) + 4rem) 0 5rem;
+    }
+    .can-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('/assets/images/bb-activity-02.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.12;
+    }
+    .can-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2,26,14,0.96) 0%, rgba(5,150,105,0.12) 60%, rgba(2,26,14,0.9) 100%);
+    }
+
+    /* Particle dots background */
+    .can-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .can-particles::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(circle, rgba(5,150,105,0.3) 1px, transparent 1px),
+        radial-gradient(circle, rgba(132,204,22,0.2) 1px, transparent 1px);
+      background-size: 40px 40px, 80px 80px;
+      background-position: 0 0, 20px 20px;
+      animation: particle-drift 20s linear infinite;
+    }
+    @keyframes particle-drift {
+      from { transform: translate(0, 0); }
+      to { transform: translate(40px, 40px); }
+    }
+
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.12s ease, box-shadow 0.3s ease;
+      will-change: transform;
+      cursor: pointer;
+    }
+
+    /* Impact project cards */
+    .project-card {
+      background: rgba(5,150,105,0.05);
+      border: 1px solid rgba(5,150,105,0.15);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--can-green), var(--can-lime));
+    }
+    .project-card:hover {
+      background: rgba(5,150,105,0.1);
+      border-color: rgba(5,150,105,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(5,150,105,0.15);
+    }
+
+    .project-icon {
+      width: 60px; height: 60px;
+      border-radius: 16px;
+      background: rgba(5,150,105,0.12);
+      border: 1px solid rgba(5,150,105,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Profit split donut visual — CSS only */
+    .donut-container {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 0 auto;
+    }
+    .donut-svg { transform: rotate(-90deg); }
+    .donut-label {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    /* SDG pills */
+    .sdg-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(5,150,105,0.1);
+      border: 1px solid rgba(5,150,105,0.2);
+      color: #34D399;
+      margin: 0.2rem;
+    }
+
+    .stats-strip {
+      display: flex;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(5,150,105,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .stat-item {
+      flex: 1;
+      padding: 1.5rem;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-item:last-child { border-right: none; }
+    @media (max-width: 640px) {
+      .stats-strip { flex-wrap: wrap; }
+      .stat-item { flex: 0 0 50%; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    }
+    .can-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #059669, #84CC16);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .can-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <nav class="bb-nav" role="navigation" aria-label="Main navigation">
+    <div class="bb-nav-inner">
+      <a href="/" class="bb-nav-logo">
+        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education" width="40" height="40" decoding="async">
+        <span>BLASTBEAT</span>
+      </a>
+      <ul class="bb-nav-links">
+        <li><a href="/pages/programme.html" class="bb-nav-link active">Programme</a></li>
+        <li><a href="/pages/for-schools.html" class="bb-nav-link">For Schools</a></li>
+        <li><a href="/pages/about.html" class="bb-nav-link">About</a></li>
+        <li><a href="/pages/impact.html" class="bb-nav-link">Impact</a></li>
+        <li><a href="/pages/international.html" class="bb-nav-link">International</a></li>
+        <li><a href="/blog/" class="bb-nav-link">Blog</a></li>
+        <li><a href="/pages/media.html" class="bb-nav-link">Press</a></li>
+        <li><a href="/pages/partners.html" class="bb-nav-link">Partners</a></li>
+      </ul>
+      <div class="bb-nav-actions">
+        <a href="/pages/contact.html" class="bb-nav-link login-link">Contact</a>
+        <a href="/pages/apply.html" class="btn btn-glow btn-sm">Apply Now</a>
+      </div>
+      <button class="bb-nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="bb-nav-mobile" aria-hidden="true">
+    <a href="/pages/programme.html">Programme</a>
+    <a href="/pages/for-schools.html">For Schools</a>
+    <a href="/pages/about.html">About</a>
+    <a href="/pages/impact.html">Impact</a>
+    <a href="/pages/international.html">International</a>
+    <a href="/blog/">Blog</a>
+    <a href="/pages/media.html">Press</a>
+    <a href="/pages/partners.html">Partners</a>
+    <a href="/pages/contact.html">Contact</a>
+    <a href="/pages/apply.html" class="btn btn-glow">Apply Now</a>
+  </div>
+
+  <main id="main">
+
+    <!-- ═══════════════════ HERO ═══════════════════ -->
+    <section class="can-hero">
+      <div class="can-hero-bg" aria-hidden="true"></div>
+      <div class="can-particles" aria-hidden="true"></div>
+      <div class="can-hero-overlay" aria-hidden="true"></div>
+      <div class="orb" style="width:500px;height:500px;background:#059669;top:-20%;right:-10%;opacity:0.08;" aria-hidden="true"></div>
+      <div class="orb" style="width:350px;height:350px;background:#84CC16;bottom:-10%;left:-5%;opacity:0.07;" aria-hidden="true"></div>
+
+      <div class="container" style="position:relative;z-index:2;">
+        <div style="max-width:780px;">
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;">
+            <span style="background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.3);color:#34D399;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;">Terms 1, 3 &amp; 4</span>
+            <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);">Climate Actions Now</span>
+          </div>
+          <h1 class="text-chunky" style="font-size:clamp(2.5rem,6vw,4.5rem);color:white;margin-bottom:1.5rem;line-height:1.05;">
+            Turn Profit<br>Into <span style="color:#34D399;">Planet.</span>
+          </h1>
+          <p style="font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.7);max-width:580px;line-height:1.75;margin-bottom:2rem;">
+            CAN is not a separate programme — it's the purpose that runs through all of Blastbeat. 25% of every rand your ESE earns funds a real, student-designed climate or social project.
+          </p>
+          <p style="font-size:0.95rem;color:rgba(255,255,255,0.5);max-width:500px;line-height:1.7;margin-bottom:2.5rem;">
+            Students don't just learn about climate action — they fund it. The project is theirs. The impact is measurable. The experience changes how they see business forever.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+            <a href="/pages/apply.html" class="btn btn-lg" style="background:linear-gradient(135deg,#059669,#84CC16);color:white;font-weight:700;padding:0.875rem 2rem;border-radius:999px;text-decoration:none;">Apply for Your School</a>
+            <a href="/pages/programme.html" class="btn btn-outline-glow btn-lg">See Full Programme</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ STATS ═══════════════════ -->
+    <section style="background:var(--can-dark);border-top:1px solid rgba(5,150,105,0.1);padding:2.5rem 0;">
+      <div class="container">
+        <div class="stats-strip">
+          <div class="stat-item">
+            <div class="can-num">25%</div>
+            <div class="can-label">Of All Profits</div>
+          </div>
+          <div class="stat-item">
+            <div class="can-num">360K+</div>
+            <div class="can-label">Students Impacted</div>
+          </div>
+          <div class="stat-item">
+            <div class="can-num">19</div>
+            <div class="can-label">Countries</div>
+          </div>
+          <div class="stat-item">
+            <div class="can-num">UN SDGs</div>
+            <div class="can-label">Aligned Goals</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ WHAT IS CAN ═══════════════════ -->
+    <section class="section section-dark" id="what-is-can" style="background:var(--can-dark);">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;" class="responsive-split">
+          <div class="reveal">
+            <span style="background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.2);color:#34D399;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;display:inline-block;margin-bottom:1.25rem;">The CAN Model</span>
+            <h2 class="text-chunky" style="font-size:clamp(1.8rem,4vw,2.75rem);color:white;margin-bottom:1.25rem;line-height:1.1;">Enterprise With a <span style="color:#34D399;">Higher Purpose</span></h2>
+            <p style="color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:1.25rem;font-size:0.95rem;">Most business education teaches students to maximise profit. Blastbeat teaches them to deploy it. The 25% climate split means every ESE runs a social enterprise — not just a commercial one.</p>
+            <p style="color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:1.75rem;font-size:0.95rem;">Students choose their own Climate Action Project at the start of the programme. By the end, they've funded it themselves — through the work they did, the events they ran, and the revenue they generated.</p>
+            <div style="padding:1.25rem 1.5rem;background:rgba(5,150,105,0.06);border:1px solid rgba(5,150,105,0.15);border-radius:12px;">
+              <p style="color:rgba(255,255,255,0.8);font-style:italic;font-size:0.95rem;line-height:1.7;margin:0;">"For the first time in my life, I understood that business doesn't have to be separate from caring about the world. We ran a real company and we made a real difference."</p>
+              <p style="color:rgba(255,255,255,0.4);font-size:0.78rem;margin:0.75rem 0 0;">— Blastbeat student, Cape Town, 2025</p>
+            </div>
+          </div>
+          <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:2rem;">
+            <!-- Donut chart CSS -->
+            <div class="donut-container">
+              <svg class="donut-svg" width="220" height="220" viewBox="0 0 220 220" aria-label="Profit split: 75% team, 25% climate">
+                <circle cx="110" cy="110" r="80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="28"/>
+                <!-- 75% team — indigo -->
+                <circle cx="110" cy="110" r="80" fill="none" stroke="#6366F1" stroke-width="28"
+                  stroke-dasharray="376.99 502.65" stroke-dashoffset="0" opacity="0.8"/>
+                <!-- 25% climate — green -->
+                <circle cx="110" cy="110" r="80" fill="none" stroke="#059669" stroke-width="28"
+                  stroke-dasharray="125.66 502.65" stroke-dashoffset="-376.99" opacity="0.9"/>
+              </svg>
+              <div class="donut-label">
+                <div style="font-size:1.6rem;font-weight:800;color:white;font-family:'Space Grotesk',sans-serif;line-height:1;">75/25</div>
+                <div style="font-size:0.65rem;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;">Profit Split</div>
+              </div>
+            </div>
+            <div style="width:100%;display:flex;flex-direction:column;gap:0.6rem;">
+              <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:rgba(99,102,241,0.08);border-radius:8px;">
+                <div style="width:12px;height:12px;border-radius:3px;background:#6366F1;flex-shrink:0;"></div>
+                <div style="flex:1;font-size:0.85rem;color:rgba(255,255,255,0.75);">75% → ESE Team (distributed by role)</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:rgba(5,150,105,0.08);border-radius:8px;">
+                <div style="width:12px;height:12px;border-radius:3px;background:#059669;flex-shrink:0;"></div>
+                <div style="flex:1;font-size:0.85rem;color:rgba(255,255,255,0.75);">25% → Student-designed Climate Project</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ PROJECT TYPES ═══════════════════ -->
+    <section class="section section-dark" style="background:rgba(2,26,14,0.6);" id="projects">
+      <div class="container">
+        <div class="text-center reveal" style="max-width:640px;margin:0 auto 3rem;">
+          <span style="background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.2);color:#34D399;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;display:inline-block;margin-bottom:1.25rem;">Student-Designed</span>
+          <h2 class="text-chunky" style="font-size:clamp(1.8rem,4vw,2.5rem);margin-top:1rem;color:white;">Real <span style="color:#34D399;">Climate Projects</span> Students Have Run</h2>
+          <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;margin-top:0.75rem;line-height:1.7;">Every project is student-chosen, student-funded, and student-delivered. These are real examples from Blastbeat ESE teams around the world.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;" class="responsive-3col">
+          <div class="project-card tilt-card" data-tilt>
+            <div class="project-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <circle cx="14" cy="14" r="8" stroke="#059669" stroke-width="2"/>
+                <path d="M14 6 C14 6 10 10 10 14 C10 18 14 22 14 22 C14 22 18 18 18 14 C18 10 14 6 14 6Z" fill="rgba(5,150,105,0.3)" stroke="#059669" stroke-width="1.5"/>
+                <path d="M6 14 L22 14" stroke="#059669" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 style="color:white;font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">School Garden &amp; Food Security</h3>
+            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">ESE teams in Cape Town funded raised garden beds, seeds, and irrigation to provide fresh produce for their school's feeding scheme.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+              <span class="sdg-pill">SDG 2</span><span class="sdg-pill">SDG 15</span>
+            </div>
+          </div>
+          <div class="project-card tilt-card" data-tilt>
+            <div class="project-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <path d="M14 4 L14 24 M6 12 L14 4 L22 12" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="5" y="16" width="18" height="8" rx="2" fill="rgba(5,150,105,0.2)" stroke="#059669" stroke-width="1.5"/>
+                <path d="M9 16 L9 8" stroke="rgba(5,150,105,0.5)" stroke-width="1" stroke-dasharray="2 1"/>
+                <path d="M19 16 L19 8" stroke="rgba(5,150,105,0.5)" stroke-width="1" stroke-dasharray="2 1"/>
+              </svg>
+            </div>
+            <h3 style="color:white;font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Solar Charging Stations</h3>
+            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">Students in Johannesburg installed solar-powered USB charging points around their school, funded entirely by their ESE profits.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+              <span class="sdg-pill">SDG 7</span><span class="sdg-pill">SDG 13</span>
+            </div>
+          </div>
+          <div class="project-card tilt-card" data-tilt>
+            <div class="project-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <path d="M6 22 C6 22 8 14 14 10 C20 6 22 6 22 6 C22 6 22 8 18 14 C14 20 6 22 6 22Z" fill="rgba(5,150,105,0.2)" stroke="#059669" stroke-width="2"/>
+                <circle cx="14" cy="14" r="3" fill="#059669"/>
+              </svg>
+            </div>
+            <h3 style="color:white;font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Tree Planting Campaign</h3>
+            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">Teams in Ireland and the UK funded tree planting partnerships with local councils, with each tree tracked and reported in the annual impact report.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+              <span class="sdg-pill">SDG 13</span><span class="sdg-pill">SDG 15</span>
+            </div>
+          </div>
+          <div class="project-card tilt-card" data-tilt>
+            <div class="project-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <circle cx="14" cy="10" r="5" stroke="#059669" stroke-width="2"/>
+                <path d="M4 24 C4 19 24 19 24 24" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
+                <path d="M20 8 L26 6 M20 11 L26 11" stroke="rgba(5,150,105,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 style="color:white;font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Youth Climate Education</h3>
+            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">Students created and delivered climate action workshops to younger learners, funded from their ESE — training the next generation of climate entrepreneurs.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+              <span class="sdg-pill">SDG 4</span><span class="sdg-pill">SDG 13</span>
+            </div>
+          </div>
+          <div class="project-card tilt-card" data-tilt>
+            <div class="project-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <path d="M4 8 L14 4 L24 8 L24 20 L14 24 L4 20 Z" fill="rgba(5,150,105,0.1)" stroke="#059669" stroke-width="2"/>
+                <path d="M4 8 L14 12 L24 8" stroke="#059669" stroke-width="1.5"/>
+                <path d="M14 12 L14 24" stroke="#059669" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3 style="color:white;font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Waste Reduction Programme</h3>
+            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">Students funded recycling infrastructure, sorting stations, and a composting system for their school community — with measured monthly impact reporting.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+              <span class="sdg-pill">SDG 12</span><span class="sdg-pill">SDG 11</span>
+            </div>
+          </div>
+          <div class="project-card tilt-card" data-tilt>
+            <div class="project-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <rect x="4" y="16" width="20" height="8" rx="2" fill="rgba(5,150,105,0.1)" stroke="#059669" stroke-width="2"/>
+                <path d="M10 16 L10 10 L14 6 L18 10 L18 16" stroke="#059669" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M4 24 L24 24" stroke="rgba(5,150,105,0.3)" stroke-width="1"/>
+              </svg>
+            </div>
+            <h3 style="color:white;font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Community Urban Farming</h3>
+            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">South African students funded rooftop container gardens to supply fresh vegetables to local community kitchens, creating a sustainable cycle from concert profits to food security.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+              <span class="sdg-pill">SDG 1</span><span class="sdg-pill">SDG 2</span><span class="sdg-pill">SDG 11</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ HOW CAN WORKS ═══════════════════ -->
+    <section style="background:var(--can-dark);padding:5rem 0;" id="how-it-works">
+      <div class="container">
+        <div class="text-center reveal" style="max-width:600px;margin:0 auto 3rem;">
+          <h2 class="text-chunky" style="font-size:clamp(1.8rem,4vw,2.5rem);color:white;">How CAN <span style="color:#34D399;">Actually Works</span></h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;position:relative;" class="responsive-4col reveal">
+          <!-- Connecting line -->
+          <div style="position:absolute;top:2rem;left:12.5%;right:12.5%;height:2px;background:linear-gradient(90deg,rgba(5,150,105,0.5),rgba(132,204,22,0.5));z-index:0;" aria-hidden="true"></div>
+          <div style="background:rgba(5,150,105,0.06);border:1px solid rgba(5,150,105,0.15);border-radius:16px;padding:1.5rem;text-align:center;position:relative;z-index:1;">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(5,150,105,0.15);border:2px solid #059669;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:'Space Grotesk',sans-serif;font-weight:800;color:#34D399;font-size:1.1rem;">1</div>
+            <h3 style="color:white;font-size:0.95rem;font-weight:700;margin-bottom:0.5rem;">Choose Project</h3>
+            <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;line-height:1.6;">Team votes on a climate or social project they want to fund by the end of the programme.</p>
+          </div>
+          <div style="background:rgba(5,150,105,0.06);border:1px solid rgba(5,150,105,0.15);border-radius:16px;padding:1.5rem;text-align:center;position:relative;z-index:1;">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(5,150,105,0.15);border:2px solid #059669;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:'Space Grotesk',sans-serif;font-weight:800;color:#34D399;font-size:1.1rem;">2</div>
+            <h3 style="color:white;font-size:0.95rem;font-weight:700;margin-bottom:0.5rem;">Run ESE</h3>
+            <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;line-height:1.6;">The team runs their MACC or FootBeat enterprise throughout the term, generating real revenue.</p>
+          </div>
+          <div style="background:rgba(5,150,105,0.06);border:1px solid rgba(5,150,105,0.15);border-radius:16px;padding:1.5rem;text-align:center;position:relative;z-index:1;">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(5,150,105,0.15);border:2px solid #059669;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:'Space Grotesk',sans-serif;font-weight:800;color:#34D399;font-size:1.1rem;">3</div>
+            <h3 style="color:white;font-size:0.95rem;font-weight:700;margin-bottom:0.5rem;">Split Profits</h3>
+            <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;line-height:1.6;">At the end, net profit is split: 75% to the team, 25% directly to the Climate Action Project fund.</p>
+          </div>
+          <div style="background:rgba(132,204,22,0.06);border:1px solid rgba(132,204,22,0.2);border-radius:16px;padding:1.5rem;text-align:center;position:relative;z-index:1;">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(132,204,22,0.15);border:2px solid #84CC16;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:'Space Grotesk',sans-serif;font-weight:800;color:#84CC16;font-size:1.1rem;">4</div>
+            <h3 style="color:white;font-size:0.95rem;font-weight:700;margin-bottom:0.5rem;">Deliver Impact</h3>
+            <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;line-height:1.6;">Students execute the project and document the measurable impact in their annual impact report and Blastbeat TV episode.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ SDG ALIGNMENT ═══════════════════ -->
+    <section style="background:rgba(2,26,14,0.7);border-top:1px solid rgba(5,150,105,0.1);padding:4rem 0;">
+      <div class="container">
+        <div class="text-center reveal" style="margin-bottom:2.5rem;">
+          <h2 class="text-chunky" style="font-size:clamp(1.5rem,3vw,2rem);color:white;margin-bottom:0.75rem;">Aligned With the <span style="color:#34D399;">UN SDGs</span></h2>
+          <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;">CAN projects are mapped to the UN Sustainable Development Goals. Students learn how business intersects with global challenges.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;" class="reveal">
+          <span class="sdg-pill">🌍 SDG 1 — No Poverty</span>
+          <span class="sdg-pill">🌾 SDG 2 — Zero Hunger</span>
+          <span class="sdg-pill">🎓 SDG 4 — Quality Education</span>
+          <span class="sdg-pill">⚡ SDG 7 — Clean Energy</span>
+          <span class="sdg-pill">💼 SDG 8 — Decent Work</span>
+          <span class="sdg-pill">🏙️ SDG 11 — Sustainable Cities</span>
+          <span class="sdg-pill">♻️ SDG 12 — Responsible Production</span>
+          <span class="sdg-pill">🌡️ SDG 13 — Climate Action</span>
+          <span class="sdg-pill">🌊 SDG 14 — Life Below Water</span>
+          <span class="sdg-pill">🌳 SDG 15 — Life on Land</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ CTA ═══════════════════ -->
+    <section style="background:var(--can-dark);padding:6rem 0;text-align:center;position:relative;overflow:hidden;">
+      <div class="can-particles" aria-hidden="true"></div>
+      <div class="orb" style="width:600px;height:600px;background:#059669;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.07;" aria-hidden="true"></div>
+      <div class="container" style="position:relative;z-index:2;">
+        <div class="reveal" style="max-width:600px;margin:0 auto;">
+          <h2 class="text-chunky" style="font-size:clamp(2rem,5vw,3rem);color:white;margin-bottom:1rem;">Profit That <span style="color:#34D399;">Matters.</span></h2>
+          <p style="color:rgba(255,255,255,0.6);font-size:1.05rem;line-height:1.7;margin-bottom:2.5rem;">Apply for Blastbeat and your students will leave with more than business skills. They'll leave with something they built — and something they changed.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+            <a href="/pages/apply.html" class="btn btn-lg" style="background:linear-gradient(135deg,#059669,#84CC16);color:white;font-weight:700;padding:0.875rem 2rem;border-radius:999px;text-decoration:none;">Apply for Your School</a>
+            <a href="/pages/macc.html" class="btn btn-outline-glow btn-lg">Explore MACC →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bb-footer" style="background:var(--deep-navy);">
+    <div class="container">
+      <div class="grid footer-grid" style="grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--space-10);">
+        <div>
+          <a href="/" class="bb-nav-logo" style="margin-bottom:var(--space-4);display:inline-flex;">
+            <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="36" height="36" loading="lazy">
+            <span style="color:white;">BLASTBEAT</span>
+          </a>
+          <p style="font-size:var(--text-sm);line-height:1.7;max-width:300px;color:rgba(255,255,255,0.5);">Enterprise Skills Education for youth aged 14–21. 23 years. 19 countries. 360,000+ students.</p>
+        </div>
+        <div>
+          <h5>Programme</h5>
+          <ul class="footer-links">
+            <li><a href="/pages/programme.html">What is Blastbeat?</a></li>
+            <li><a href="/pages/macc.html">MACC</a></li>
+            <li><a href="/pages/footbeat.html">FootBeat</a></li>
+            <li><a href="/pages/can.html">CAN</a></li>
+            <li><a href="/pages/for-schools.html">For Schools</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>About Us</h5>
+          <ul class="footer-links">
+            <li><a href="/pages/about.html">Our Story</a></li>
+            <li><a href="/pages/impact.html">Impact</a></li>
+            <li><a href="/pages/international.html">International</a></li>
+            <li><a href="/pages/partners.html">Partners</a></li>
+            <li><a href="/blog/">News &amp; Blog</a></li>
+            <li><a href="/pages/media.html">Press Room</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Get Involved</h5>
+          <ul class="footer-links">
+            <li><a href="/pages/apply.html">Apply for Your School</a></li>
+            <li><a href="/pages/partners.html">Corporate Partnership</a></li>
+            <li><a href="/pages/contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom flex justify-between items-center flex-wrap gap-4">
+        <p style="margin:0;color:rgba(255,255,255,0.35);">&copy; 2026 Climate Actions Now. All rights reserved. UK Charity 1113530</p>
+        <div class="flex gap-6">
+          <a href="/pages/privacy-policy.html">Privacy Policy</a>
+          <a href="/pages/terms-of-use.html">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('[data-tilt]').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        el.style.transition = 'transform 0.1s ease, box-shadow 0.3s ease';
+      });
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = `perspective(900px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateZ(6px)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transition = 'transform 0.5s ease, box-shadow 0.3s ease';
+        el.style.transform = '';
+      });
+    });
+  </script>
+  <script src="/assets/js/navigation.js" defer></script>
+  <script src="/assets/js/animations.js" defer></script>
+  <script src="/assets/js/beat-bot.js" defer></script>
+</body>
+</html>

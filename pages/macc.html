@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MACC — Music & Arts Climate Challenge | Blastbeat Education</title>
+  <meta name="description" content="Run a real music business. Book artists, sell tickets, produce live shows, and keep the profits. The original Blastbeat vertical — 23 years of student-run concerts.">
+  <meta property="og:title" content="MACC — Music & Arts Climate Challenge | Blastbeat">
+  <meta property="og:description" content="Students run real music and arts enterprises — concerts, talent shows, open mics. Keep the profits. Fund your climate project.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://www.blastbeat.education/pages/macc.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
+  <link rel="stylesheet" href="/assets/css/gen-z.css">
+  <link rel="stylesheet" href="/assets/css/mobile.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#6366F1">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@BlastbeatEdu">
+  <style>
+    /* ── MACC page styles ── */
+    :root { --macc-primary: #6366F1; --macc-accent: #A855F7; --macc-hot: #FF2D78; }
+
+    /* Hero */
+    .macc-hero {
+      min-height: 100vh;
+      background: var(--deep-navy);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: calc(var(--nav-height,80px) + 4rem) 0 5rem;
+    }
+    .macc-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('/assets/images/bb-event-01.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      opacity: 0.18;
+    }
+    .macc-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(15,15,26,0.92) 0%, rgba(99,102,241,0.15) 50%, rgba(15,15,26,0.85) 100%);
+    }
+
+    /* Tilt cards */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.12s ease, box-shadow 0.3s ease;
+      will-change: transform;
+      cursor: pointer;
+    }
+    .tilt-card:hover { box-shadow: 0 30px 80px rgba(99,102,241,0.3); }
+
+    /* Event types */
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) { .event-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 580px) { .event-grid { grid-template-columns: 1fr; } }
+
+    .event-card {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 3/4;
+      min-height: 300px;
+    }
+    .event-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .event-card:hover img { transform: scale(1.06); }
+    .event-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,20,0.95) 0%, rgba(10,10,20,0.4) 55%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+    }
+    .event-card-tag {
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(99,102,241,0.25);
+      border: 1px solid rgba(99,102,241,0.4);
+      color: #818CF8;
+      width: fit-content;
+      margin-bottom: 0.5rem;
+    }
+    .event-card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+    }
+    .event-card-desc {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+
+    /* Roles strip */
+    .roles-scroll {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 0.5rem 0 1.5rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .roles-scroll::-webkit-scrollbar { display: none; }
+    .role-pill {
+      flex-shrink: 0;
+      padding: 0.75rem 1.25rem;
+      border-radius: 999px;
+      background: rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.2);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.8);
+      white-space: nowrap;
+      transition: all 0.25s ease;
+    }
+    .role-pill:hover {
+      background: rgba(99,102,241,0.2);
+      border-color: rgba(99,102,241,0.5);
+      color: white;
+    }
+    .role-pill-icon { margin-right: 0.4rem; }
+
+    /* Revenue breakdown */
+    .rev-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 1.75rem;
+      text-align: center;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .rev-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99,102,241,0.3);
+    }
+    .rev-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .rev-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* Immersive music visualiser — pure CSS */
+    .music-vis {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 60px;
+    }
+    .vis-bar {
+      width: 6px;
+      background: var(--gradient-primary);
+      border-radius: 3px;
+      animation: vis-bounce 0.8s ease-in-out infinite alternate;
+    }
+    .vis-bar:nth-child(1) { height: 20%; animation-delay: 0s; }
+    .vis-bar:nth-child(2) { height: 65%; animation-delay: 0.1s; }
+    .vis-bar:nth-child(3) { height: 90%; animation-delay: 0.05s; }
+    .vis-bar:nth-child(4) { height: 45%; animation-delay: 0.15s; }
+    .vis-bar:nth-child(5) { height: 80%; animation-delay: 0.2s; }
+    .vis-bar:nth-child(6) { height: 35%; animation-delay: 0.08s; }
+    .vis-bar:nth-child(7) { height: 70%; animation-delay: 0.18s; }
+    .vis-bar:nth-child(8) { height: 55%; animation-delay: 0.12s; }
+    @keyframes vis-bounce {
+      from { transform: scaleY(0.3); opacity: 0.5; }
+      to { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* Feature bento grid */
+    .bento-macc {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1.25rem;
+    }
+    @media (max-width: 768px) { .bento-macc { grid-template-columns: 1fr; } }
+    .bento-tall { grid-row: span 2; }
+
+    /* Stats row */
+    .stats-strip {
+      display: flex;
+      gap: 0;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .stat-item {
+      flex: 1;
+      padding: 1.5rem;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-item:last-child { border-right: none; }
+    @media (max-width: 640px) {
+      .stats-strip { flex-wrap: wrap; }
+      .stat-item { flex: 0 0 50%; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <nav class="bb-nav" role="navigation" aria-label="Main navigation">
+    <div class="bb-nav-inner">
+      <a href="/" class="bb-nav-logo">
+        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education" width="40" height="40" decoding="async">
+        <span>BLASTBEAT</span>
+      </a>
+      <ul class="bb-nav-links">
+        <li><a href="/pages/programme.html" class="bb-nav-link active">Programme</a></li>
+        <li><a href="/pages/for-schools.html" class="bb-nav-link">For Schools</a></li>
+        <li><a href="/pages/about.html" class="bb-nav-link">About</a></li>
+        <li><a href="/pages/impact.html" class="bb-nav-link">Impact</a></li>
+        <li><a href="/pages/international.html" class="bb-nav-link">International</a></li>
+        <li><a href="/blog/" class="bb-nav-link">Blog</a></li>
+        <li><a href="/pages/media.html" class="bb-nav-link">Press</a></li>
+        <li><a href="/pages/partners.html" class="bb-nav-link">Partners</a></li>
+      </ul>
+      <div class="bb-nav-actions">
+        <a href="/pages/contact.html" class="bb-nav-link login-link">Contact</a>
+        <a href="/pages/apply.html" class="btn btn-glow btn-sm">Apply Now</a>
+      </div>
+      <button class="bb-nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="bb-nav-mobile" aria-hidden="true">
+    <a href="/pages/programme.html">Programme</a>
+    <a href="/pages/for-schools.html">For Schools</a>
+    <a href="/pages/about.html">About</a>
+    <a href="/pages/impact.html">Impact</a>
+    <a href="/pages/international.html">International</a>
+    <a href="/blog/">Blog</a>
+    <a href="/pages/media.html">Press</a>
+    <a href="/pages/partners.html">Partners</a>
+    <a href="/pages/contact.html">Contact</a>
+    <a href="/pages/apply.html" class="btn btn-glow">Apply Now</a>
+  </div>
+
+  <main id="main">
+
+    <!-- ═══════════════════ HERO ═══════════════════ -->
+    <section class="macc-hero">
+      <div class="macc-hero-bg" aria-hidden="true"></div>
+      <div class="macc-hero-overlay" aria-hidden="true"></div>
+      <div class="orb" style="width:500px;height:500px;background:#6366F1;top:-20%;left:-15%;opacity:0.12;" aria-hidden="true"></div>
+      <div class="orb" style="width:350px;height:350px;background:#FF2D78;bottom:-10%;right:-10%;opacity:0.1;" aria-hidden="true"></div>
+
+      <div class="container" style="position:relative;z-index:2;">
+        <div style="max-width:800px;">
+          <div class="music-vis" style="margin-bottom:1.5rem;" aria-hidden="true">
+            <div class="vis-bar"></div><div class="vis-bar"></div><div class="vis-bar"></div>
+            <div class="vis-bar"></div><div class="vis-bar"></div><div class="vis-bar"></div>
+            <div class="vis-bar"></div><div class="vis-bar"></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;">
+            <span class="neo-tag" style="font-size:0.7rem;">Terms 1 &amp; 2</span>
+            <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);">Music &amp; Arts Climate Challenge</span>
+          </div>
+          <h1 class="text-chunky" style="font-size:clamp(2.5rem,6vw,4.5rem);color:white;margin-bottom:1.5rem;line-height:1.05;">
+            Make Music.<br><span class="text-gradient-vivid">Make Money.</span><br>Make a Difference.
+          </h1>
+          <p style="font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.7);max-width:580px;line-height:1.7;margin-bottom:2.5rem;">
+            In MACC, your team becomes a real music and arts enterprise. Book the talent. Sell the tickets. Run the show. Keep the profits — and fund a climate project that matters.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+            <a href="/pages/apply.html" class="btn btn-glow btn-lg">Apply for Your School</a>
+            <a href="/pages/programme.html" class="btn btn-outline-glow btn-lg">See Full Programme</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ STATS ═══════════════════ -->
+    <section style="background:var(--dark-surface);padding:2.5rem 0;">
+      <div class="container">
+        <div class="stats-strip">
+          <div class="stat-item">
+            <div class="rev-num" style="font-size:1.8rem;">850+</div>
+            <div class="rev-label">Student Concerts</div>
+          </div>
+          <div class="stat-item">
+            <div class="rev-num" style="font-size:1.8rem;">23yrs</div>
+            <div class="rev-label">Proven Model</div>
+          </div>
+          <div class="stat-item">
+            <div class="rev-num" style="font-size:1.8rem;">R0</div>
+            <div class="rev-label">Cost to Schools</div>
+          </div>
+          <div class="stat-item">
+            <div class="rev-num" style="font-size:1.8rem;">100%</div>
+            <div class="rev-label">Real Revenue</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ WHAT THEY DO ═══════════════════ -->
+    <section class="section section-dark" id="what-they-do">
+      <div class="container">
+        <div class="text-center reveal" style="max-width:680px;margin:0 auto 3.5rem;">
+          <span class="neo-tag-cyan" style="margin-bottom:1rem;">The Events</span>
+          <h2 class="text-chunky" style="font-size:clamp(1.8rem,4vw,2.75rem);margin-top:1rem;">Five Types of Show. <span class="text-gradient-vivid">One Goal.</span></h2>
+          <p style="color:rgba(255,255,255,0.6);font-size:1rem;line-height:1.7;">Students choose their event format — and run the entire business around it. Every event is student-produced, student-marketed, and student-managed.</p>
+        </div>
+
+        <div class="event-grid">
+          <!-- Concert -->
+          <div class="event-card tilt-card" data-tilt>
+            <img src="/assets/images/bb-event-04.jpg" alt="Students running a live concert event" loading="lazy">
+            <div class="event-card-overlay">
+              <div class="event-card-tag">Headline Event</div>
+              <div class="event-card-title">Live Concert</div>
+              <div class="event-card-desc">Headline acts, supporting slots, full production. Students book talent, negotiate contracts, and manage the night.</div>
+            </div>
+          </div>
+          <!-- Talent Show -->
+          <div class="event-card tilt-card" data-tilt>
+            <img src="/assets/images/bb-event-07.jpg" alt="Students at a talent show" loading="lazy">
+            <div class="event-card-overlay">
+              <div class="event-card-tag">Competition</div>
+              <div class="event-card-title">Talent Show</div>
+              <div class="event-card-desc">School-wide auditions, judging panels, prize money. Students run the entire casting and show process.</div>
+            </div>
+          </div>
+          <!-- Open Mic -->
+          <div class="event-card tilt-card" data-tilt>
+            <img src="/assets/images/bb-event-08.jpg" alt="Students at an open mic night" loading="lazy">
+            <div class="event-card-overlay">
+              <div class="event-card-tag">Weekly Income</div>
+              <div class="event-card-title">Open Mic Night</div>
+              <div class="event-card-desc">Regular revenue stream. Students manage the sign-up, sound, promotion, and door takings week after week.</div>
+            </div>
+          </div>
+          <!-- Creative Showcase -->
+          <div class="event-card tilt-card" data-tilt>
+            <img src="/assets/images/bb-event-09.jpg" alt="Creative showcase event" loading="lazy">
+            <div class="event-card-overlay">
+              <div class="event-card-tag">Arts &amp; Culture</div>
+              <div class="event-card-title">Creative Showcase</div>
+              <div class="event-card-desc">Visual art, dance, spoken word, film. Students curate and produce a ticketed arts evening.</div>
+            </div>
+          </div>
+          <!-- Battle of the Bands -->
+          <div class="event-card tilt-card" data-tilt>
+            <img src="/assets/images/bb-event-10.jpg" alt="Battle of the bands" loading="lazy">
+            <div class="event-card-overlay">
+              <div class="event-card-tag">Fan Favourite</div>
+              <div class="event-card-title">Battle of the Bands</div>
+              <div class="event-card-desc">The classic Blastbeat format. Live bands, audience vote, prize pot. The event that started it all in 2003.</div>
+            </div>
+          </div>
+          <!-- Blastbeat TV -->
+          <div class="event-card" style="background:linear-gradient(135deg,rgba(99,102,241,0.15),rgba(255,45,120,0.15));border:1px solid rgba(99,102,241,0.2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;min-height:280px;">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" style="margin-bottom:1.25rem;" aria-hidden="true">
+              <rect width="64" height="64" rx="14" fill="rgba(99,102,241,0.15)"/>
+              <rect x="10" y="18" width="44" height="30" rx="4" stroke="#6366F1" stroke-width="2"/>
+              <path d="M26 28 L42 35 L26 42 Z" fill="#A855F7"/>
+              <line x1="24" y1="52" x2="40" y2="52" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <div class="event-card-tag" style="background:rgba(168,85,247,0.2);border-color:rgba(168,85,247,0.4);color:#C084FC;margin-bottom:0.75rem;">Content Creation</div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:800;color:white;text-align:center;margin-bottom:0.5rem;">Blastbeat TV</div>
+            <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);text-align:center;line-height:1.5;">10-minute episode filmed and submitted to the national competition at the end of the programme.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ ROLES ═══════════════════ -->
+    <section class="section section-dark" style="background:var(--dark-surface);" id="roles">
+      <div class="container">
+        <div class="text-center reveal" style="max-width:600px;margin:0 auto 2.5rem;">
+          <span class="neo-tag" style="margin-bottom:1rem;">14 Business Roles</span>
+          <h2 class="text-chunky" style="font-size:clamp(1.8rem,4vw,2.5rem);margin-top:1rem;">Every Student Gets a <span class="text-gradient-vivid">Real Title</span></h2>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;line-height:1.7;">No one's just a student. In MACC, every team member holds an actual business role with real responsibilities and tasks.</p>
+        </div>
+        <div class="roles-scroll reveal">
+          <span class="role-pill"><span class="role-pill-icon">🎯</span>CEO</span>
+          <span class="role-pill"><span class="role-pill-icon">💰</span>CFO</span>
+          <span class="role-pill"><span class="role-pill-icon">📣</span>Marketing Manager</span>
+          <span class="role-pill"><span class="role-pill-icon">🎤</span>Talent Manager</span>
+          <span class="role-pill"><span class="role-pill-icon">🎫</span>Ticket Sales Manager</span>
+          <span class="role-pill"><span class="role-pill-icon">🎬</span>Production Manager</span>
+          <span class="role-pill"><span class="role-pill-icon">📱</span>Digital Manager</span>
+          <span class="role-pill"><span class="role-pill-icon">🤝</span>Sponsorship Manager</span>
+          <span class="role-pill"><span class="role-pill-icon">🎙️</span>PR Manager</span>
+          <span class="role-pill"><span class="role-pill-icon">🌍</span>Climate Action Manager</span>
+          <span class="role-pill"><span class="role-pill-icon">📋</span>Operations Manager</span>
+          <span class="role-pill"><span class="role-pill-icon">🎭</span>Events Manager</span>
+          <span class="role-pill"><span class="role-pill-icon">🖥️</span>IT/Multimedia Manager</span>
+          <span class="role-pill"><span class="role-pill-icon">🎪</span>Artist Liaison</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
+    <section class="section section-dark" id="how-it-works">
+      <div class="container">
+        <div class="text-center reveal" style="max-width:600px;margin:0 auto 3rem;">
+          <span class="neo-tag-pink" style="margin-bottom:1rem;">Terms 1 &amp; 2</span>
+          <h2 class="text-chunky" style="font-size:clamp(1.8rem,4vw,2.5rem);margin-top:1rem;">From Day One to <span class="text-gradient-vivid">Event Day</span></h2>
+        </div>
+        <div class="bento-macc">
+          <div class="glass-card tilt-card bento-tall" data-tilt style="padding:2.5rem;position:relative;overflow:hidden;">
+            <div class="orb" style="width:200px;height:200px;background:var(--electric-purple);bottom:-20%;right:-10%;opacity:0.2;" aria-hidden="true"></div>
+            <div style="position:relative;z-index:1;">
+              <div style="font-size:3.5rem;font-weight:800;color:rgba(99,102,241,0.4);-webkit-text-stroke:2px rgba(99,102,241,0.6);line-height:1;margin-bottom:1.5rem;">01</div>
+              <div class="neo-tag" style="margin-bottom:1rem;font-size:0.6rem;">Weeks 1–4</div>
+              <h3 style="color:white;font-size:1.3rem;font-weight:800;margin-bottom:1rem;">Foundation &amp; Identity</h3>
+              <ul style="color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:2.2;list-style:none;padding:0;margin:0;">
+                <li>→ Form your ESE team of 14 students</li>
+                <li>→ Elect CEO, CFO, and leadership</li>
+                <li>→ Choose your event vertical (MACC)</li>
+                <li>→ Build brand identity + social presence</li>
+                <li>→ Set your financial targets</li>
+              </ul>
+            </div>
+          </div>
+          <div class="glass-card tilt-card" data-tilt style="padding:2rem;">
+            <div style="font-size:3rem;font-weight:800;color:rgba(168,85,247,0.4);-webkit-text-stroke:2px rgba(168,85,247,0.6);line-height:1;margin-bottom:1rem;">02</div>
+            <div class="neo-tag-pink" style="margin-bottom:0.75rem;font-size:0.6rem;">Weeks 5–8</div>
+            <h3 style="color:white;font-size:1.15rem;font-weight:800;margin-bottom:0.75rem;">Build &amp; Sell</h3>
+            <p style="color:rgba(255,255,255,0.6);font-size:0.85rem;line-height:1.7;">Launch ticket sales. Book your talent. Negotiate contracts. Secure the venue. Begin filming weekly Blastbeat TV episodes.</p>
+          </div>
+          <div class="glass-card tilt-card" data-tilt style="padding:2rem;">
+            <div style="font-size:3rem;font-weight:800;color:rgba(255,45,120,0.4);-webkit-text-stroke:2px rgba(255,45,120,0.5);line-height:1;margin-bottom:1rem;">03</div>
+            <div class="neo-tag-cyan" style="margin-bottom:0.75rem;font-size:0.6rem;">Weeks 9–16</div>
+            <h3 style="color:white;font-size:1.15rem;font-weight:800;margin-bottom:0.75rem;">Run, Distribute &amp; Compete</h3>
+            <p style="color:rgba(255,255,255,0.6);font-size:0.85rem;line-height:1.7;">Execute the event. Collect revenue. Split profits 75/25. Fund your climate project. Submit TV episode. Compete at National Finals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ PROFIT SPLIT ═══════════════════ -->
+    <section style="background:var(--dark-surface);padding:5rem 0;" id="profits">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;" class="responsive-split">
+          <div class="reveal">
+            <span class="neo-tag" style="margin-bottom:1rem;font-size:0.65rem;">The Money</span>
+            <h2 class="text-chunky" style="font-size:clamp(1.8rem,4vw,2.5rem);margin:1rem 0;color:white;">What Happens to the <span class="text-gradient-vivid">Revenue?</span></h2>
+            <p style="color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:1.5rem;">Every rand, pound, or euro your team earns is 100% real. After costs, the net profit is split two ways — your team keeps the majority, and the rest goes to a student-designed climate action project.</p>
+            <div style="display:flex;flex-direction:column;gap:0.75rem;">
+              <div style="display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.15);border-radius:12px;">
+                <div style="font-size:2rem;font-weight:800;color:#818CF8;font-family:'Space Grotesk',sans-serif;min-width:52px;">75%</div>
+                <div>
+                  <div style="font-size:0.85rem;font-weight:700;color:white;">Your ESE Team</div>
+                  <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Distributed to team members based on roles and performance</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.15);border-radius:12px;">
+                <div style="font-size:2rem;font-weight:800;color:#34D399;font-family:'Space Grotesk',sans-serif;min-width:52px;">25%</div>
+                <div>
+                  <div style="font-size:0.85rem;font-weight:700;color:white;">Climate Action Project</div>
+                  <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Funds a real, student-designed environmental or social project</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="rev-card"><div class="rev-num">R8K+</div><div class="rev-label">Avg SA Team Profit</div></div>
+            <div class="rev-card"><div class="rev-num">£2K</div><div class="rev-label">Avg UK Team Profit</div></div>
+            <div class="rev-card"><div class="rev-num">200</div><div class="rev-label">Avg Tickets Sold</div></div>
+            <div class="rev-card"><div class="rev-num">1yr</div><div class="rev-label">Achievable Timeline</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ GALLERY ═══════════════════ -->
+    <section class="section section-dark" id="gallery">
+      <div class="container">
+        <div class="text-center reveal" style="margin-bottom:2.5rem;">
+          <span class="neo-tag-cyan" style="margin-bottom:1rem;">Archive</span>
+          <h2 class="text-chunky" style="font-size:clamp(1.5rem,3.5vw,2.25rem);margin-top:1rem;">23 Years of <span class="text-gradient-vivid">Student Shows</span></h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;" class="reveal">
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:4/3;">
+            <img src="/assets/images/bb-event-11.jpg" alt="Blastbeat concert" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:4/3;">
+            <img src="/assets/images/bb-event-12.jpg" alt="Blastbeat performer" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:4/3;">
+            <img src="/assets/images/bb-event-13.jpg" alt="Blastbeat students backstage" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="grid-column:span 2;border-radius:12px;overflow:hidden;aspect-ratio:16/9;">
+            <img src="/assets/images/bb-event-14.jpg" alt="Blastbeat finals" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:4/3;">
+            <img src="/assets/images/bb-activity-01.jpeg" alt="Blastbeat students" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ CTA ═══════════════════ -->
+    <section style="background:var(--deep-navy);padding:6rem 0;text-align:center;position:relative;overflow:hidden;">
+      <div class="orb" style="width:600px;height:600px;background:var(--electric-purple);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.08;" aria-hidden="true"></div>
+      <div class="container" style="position:relative;z-index:2;">
+        <div class="reveal" style="max-width:600px;margin:0 auto;">
+          <div class="music-vis" style="justify-content:center;margin-bottom:1.5rem;" aria-hidden="true">
+            <div class="vis-bar"></div><div class="vis-bar"></div><div class="vis-bar"></div>
+            <div class="vis-bar"></div><div class="vis-bar"></div><div class="vis-bar"></div>
+          </div>
+          <h2 class="text-chunky" style="font-size:clamp(2rem,5vw,3.25rem);color:white;margin-bottom:1rem;">Ready to Book Your <span class="text-gradient-vivid">First Show?</span></h2>
+          <p style="color:rgba(255,255,255,0.6);font-size:1.05rem;line-height:1.7;margin-bottom:2.5rem;">Apply now — free for the first 12 schools in South Africa. One application. Full teacher training and platform access included.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+            <a href="/pages/apply.html" class="btn btn-glow btn-lg">Apply for Your School</a>
+            <a href="/pages/footbeat.html" class="btn btn-outline-glow btn-lg">See FootBeat →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bb-footer" style="background:var(--deep-navy);">
+    <div class="container">
+      <div class="grid footer-grid" style="grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--space-10);">
+        <div>
+          <a href="/" class="bb-nav-logo" style="margin-bottom:var(--space-4);display:inline-flex;">
+            <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="36" height="36" loading="lazy">
+            <span style="color:white;">BLASTBEAT</span>
+          </a>
+          <p style="font-size:var(--text-sm);line-height:1.7;max-width:300px;color:rgba(255,255,255,0.5);">Enterprise Skills Education for youth aged 14–21. 23 years. 19 countries. 360,000+ students.</p>
+        </div>
+        <div>
+          <h5>Programme</h5>
+          <ul class="footer-links">
+            <li><a href="/pages/programme.html">What is Blastbeat?</a></li>
+            <li><a href="/pages/macc.html">MACC</a></li>
+            <li><a href="/pages/footbeat.html">FootBeat</a></li>
+            <li><a href="/pages/can.html">CAN</a></li>
+            <li><a href="/pages/for-schools.html">For Schools</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>About Us</h5>
+          <ul class="footer-links">
+            <li><a href="/pages/about.html">Our Story</a></li>
+            <li><a href="/pages/impact.html">Impact</a></li>
+            <li><a href="/pages/international.html">International</a></li>
+            <li><a href="/pages/partners.html">Partners</a></li>
+            <li><a href="/blog/">News &amp; Blog</a></li>
+            <li><a href="/pages/media.html">Press Room</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Get Involved</h5>
+          <ul class="footer-links">
+            <li><a href="/pages/apply.html">Apply for Your School</a></li>
+            <li><a href="/pages/partners.html">Corporate Partnership</a></li>
+            <li><a href="/pages/contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom flex justify-between items-center flex-wrap gap-4">
+        <p style="margin:0;color:rgba(255,255,255,0.35);">&copy; 2026 Climate Actions Now. All rights reserved. UK Charity 1113530</p>
+        <div class="flex gap-6">
+          <a href="/pages/privacy-policy.html">Privacy Policy</a>
+          <a href="/pages/terms-of-use.html">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Lightweight 3D tilt on hover */
+    document.querySelectorAll('[data-tilt]').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        el.style.transition = 'transform 0.1s ease, box-shadow 0.3s ease';
+      });
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = `perspective(900px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateZ(8px)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transition = 'transform 0.5s ease, box-shadow 0.3s ease';
+        el.style.transform = '';
+      });
+    });
+  </script>
+  <script src="/assets/js/navigation.js" defer></script>
+  <script src="/assets/js/animations.js" defer></script>
+  <script src="/assets/js/beat-bot.js" defer></script>
+</body>
+</html>

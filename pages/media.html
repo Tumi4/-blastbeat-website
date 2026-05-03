@@ -222,7 +222,7 @@
     }
     .coverage-date {
       font-size: 0.68rem;
-      color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.5);
       margin-left: auto;
     }
     .coverage-headline {
@@ -1036,6 +1036,65 @@
           </div>
           <a href="https://www.youtube.com/watch?v=m8CQBTYWz-k" target="_blank" rel="noopener" style="font-size:0.78rem;font-weight:700;color:var(--neon-cyan,#00F5FF);text-decoration:none;display:flex;align-items:center;gap:0.3rem;" aria-label="Watch on YouTube">Watch on YouTube →</a>
         </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         PHOTO GALLERY
+    ══════════════════════════════════════ -->
+    <section class="section section-dark" aria-labelledby="gallery-heading" style="padding-top:4rem;padding-bottom:4rem;">
+      <div class="container">
+        <div class="text-center reveal" style="margin-bottom:2.5rem;">
+          <span class="section-eyebrow" style="color:#FF2D78;">Photo Archive</span>
+          <h2 id="gallery-heading" class="gradient-heading">Blastbeat in Pictures</h2>
+          <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;max-width:500px;margin:0.75rem auto 0;">Events, students, performances, and programme moments from across 23 years and 19 countries.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;" class="reveal">
+          <div style="grid-column:span 2;grid-row:span 2;border-radius:12px;overflow:hidden;aspect-ratio:1;">
+            <img src="/assets/images/bb-event-01.jpg" alt="Blastbeat live event — students performing on stage" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:1;">
+            <img src="/assets/images/bb-event-02.jpg" alt="Blastbeat student entrepreneurs" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:1;">
+            <img src="/assets/images/bb-event-03.jpg" alt="Blastbeat event crowd" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:1;">
+            <img src="/assets/images/bb-activity-01.jpeg" alt="Blastbeat students activity" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:1;">
+            <img src="/assets/images/bb-event-06.jpg" alt="Blastbeat concert backstage" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:1;">
+            <img src="/assets/images/bb-event-07.jpg" alt="Blastbeat students running their ESE" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:1;">
+            <img src="/assets/images/bb-activity-02.jpg" alt="Blastbeat student activity" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="grid-column:span 2;border-radius:12px;overflow:hidden;aspect-ratio:16/9;">
+            <img src="/assets/images/bb-event-09.jpg" alt="Blastbeat national finals" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:1;">
+            <img src="/assets/images/bb-event-11.jpg" alt="Blastbeat students backstage" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:1;">
+            <img src="/assets/images/bb-event-12.jpg" alt="Blastbeat performer" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:1;">
+            <img src="/assets/images/bb-event-13.jpg" alt="Blastbeat students" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:1;">
+            <img src="/assets/images/bb-event-14.jpg" alt="Blastbeat final event" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+        </div>
+        <style>
+          @media (max-width:768px) {
+            #gallery-heading ~ * .gallery-grid,
+            [id="gallery-heading"] + * { grid-template-columns: repeat(2,1fr) !important; }
+            [style*="grid-column: span 2"] { grid-column: span 2 !important; }
+            [style*="grid-row: span 2"] { grid-row: auto !important; }
+          }
+        </style>
       </div>
     </section>
 
