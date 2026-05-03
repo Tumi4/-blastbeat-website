@@ -184,6 +184,96 @@
       text-transform: uppercase;
       color: rgba(255,255,255,0.35);
     }
+
+    /* Partner image cards — bento grid */
+    .can-partners-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .partner-card {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      min-height: 280px;
+      background-size: cover;
+      background-position: center;
+      transform-style: preserve-3d;
+      transition: transform 0.12s ease, box-shadow 0.3s ease;
+      will-change: transform;
+      cursor: pointer;
+    }
+    .partner-card-featured {
+      grid-column: span 2;
+      min-height: 360px;
+    }
+    .partner-card-last {
+      grid-column: span 2;
+    }
+    .partner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(2,26,14,0.97) 0%,
+        rgba(2,26,14,0.78) 40%,
+        rgba(2,26,14,0.2) 75%,
+        transparent 100%
+      );
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .partner-tag {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #34D399;
+      border: 1px solid rgba(52,211,153,0.3);
+      background: rgba(5,150,105,0.22);
+      padding: 3px 9px;
+      border-radius: 999px;
+      margin-bottom: 0.65rem;
+      align-self: flex-start;
+    }
+    .partner-card h3 {
+      color: white !important;
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+    .partner-card p {
+      color: rgba(255,255,255,0.65) !important;
+      font-size: 0.8rem;
+      line-height: 1.55;
+      margin-bottom: 0.7rem;
+    }
+    .partner-card-featured h3 { font-size: 1.35rem; }
+    .partner-card-featured p { font-size: 0.88rem; max-width: 500px; }
+    .partner-card:hover {
+      box-shadow: 0 20px 60px rgba(5,150,105,0.3), 0 0 0 1px rgba(52,211,153,0.2);
+    }
+    .ubuntu-card {
+      background: rgba(5,150,105,0.05);
+      border: 1px solid rgba(5,150,105,0.15);
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    @media (max-width: 900px) {
+      .can-partners-grid { grid-template-columns: 1fr 1fr; }
+      .partner-card-featured, .partner-card-last { grid-column: span 2; }
+    }
+    @media (max-width: 540px) {
+      .can-partners-grid { grid-template-columns: 1fr; }
+      .partner-card-featured, .partner-card-last { grid-column: span 1; }
+    }
   </style>
 </head>
 <body>
@@ -291,6 +381,9 @@
           <div class="reveal">
             <span style="background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.2);color:#34D399;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;display:inline-block;margin-bottom:1.25rem;">The CAN Model</span>
             <h2 class="text-chunky" style="font-size:clamp(1.8rem,4vw,2.75rem);color:white;margin-bottom:1.25rem;line-height:1.1;">Enterprise With a <span style="color:#34D399;">Higher Purpose</span></h2>
+            <div style="display:inline-flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;padding:0.75rem 1.1rem;background:rgba(5,150,105,0.07);border-left:3px solid #059669;border-radius:0 10px 10px 0;">
+              <span style="color:#34D399;font-size:0.92rem;font-weight:700;font-style:italic;line-height:1.4;">"Ubuntu: I am because we are." — The principle behind every CAN project.</span>
+            </div>
             <p style="color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:1.25rem;font-size:0.95rem;">Most business education teaches students to maximise profit. Blastbeat teaches them to deploy it. The 25% climate split means every ESE runs a social enterprise — not just a commercial one.</p>
             <p style="color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:1.75rem;font-size:0.95rem;">Students choose their own Climate Action Project at the start of the programme. By the end, they've funded it themselves — through the work they did, the events they ran, and the revenue they generated.</p>
             <div style="padding:1.25rem 1.5rem;background:rgba(5,150,105,0.06);border:1px solid rgba(5,150,105,0.15);border-radius:12px;">
@@ -330,99 +423,106 @@
       </div>
     </section>
 
-    <!-- ═══════════════════ PROJECT TYPES ═══════════════════ -->
+    <!-- ═══════════════════ CAN PARTNERS ═══════════════════ -->
     <section class="section section-dark" style="background:rgba(2,26,14,0.6);" id="projects">
       <div class="container">
-        <div class="text-center reveal" style="max-width:640px;margin:0 auto 3rem;">
-          <span style="background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.2);color:#34D399;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;display:inline-block;margin-bottom:1.25rem;">Student-Designed</span>
-          <h2 class="text-chunky" style="font-size:clamp(1.8rem,4vw,2.5rem);margin-top:1rem;color:white;">Real <span style="color:#34D399;">Climate Projects</span> Students Have Run</h2>
-          <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;margin-top:0.75rem;line-height:1.7;">Every project is student-chosen, student-funded, and student-delivered. These are real examples from Blastbeat ESE teams around the world.</p>
+        <div class="text-center reveal" style="max-width:680px;margin:0 auto 3rem;">
+          <span style="background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.2);color:#34D399;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;display:inline-block;margin-bottom:1.25rem;">CAN in Action</span>
+          <h2 class="text-chunky" style="font-size:clamp(1.8rem,4vw,2.5rem);margin-top:1rem;color:white;">Partner <span style="color:#34D399;">Programmes</span></h2>
+          <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;margin-top:0.75rem;line-height:1.7;">CAN works with organisations that share our belief in Ubuntu — joyful, community-led climate action. These are the partners bringing CAN to life.</p>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;" class="responsive-3col">
-          <div class="project-card tilt-card" data-tilt>
-            <div class="project-icon">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-                <circle cx="14" cy="14" r="8" stroke="#059669" stroke-width="2"/>
-                <path d="M14 6 C14 6 10 10 10 14 C10 18 14 22 14 22 C14 22 18 18 18 14 C18 10 14 6 14 6Z" fill="rgba(5,150,105,0.3)" stroke="#059669" stroke-width="1.5"/>
-                <path d="M6 14 L22 14" stroke="#059669" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <h3 style="color:white;font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">School Garden &amp; Food Security</h3>
-            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">ESE teams in Cape Town funded raised garden beds, seeds, and irrigation to provide fresh produce for their school's feeding scheme.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
-              <span class="sdg-pill">SDG 2</span><span class="sdg-pill">SDG 15</span>
-            </div>
-          </div>
-          <div class="project-card tilt-card" data-tilt>
-            <div class="project-icon">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-                <path d="M14 4 L14 24 M6 12 L14 4 L22 12" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <rect x="5" y="16" width="18" height="8" rx="2" fill="rgba(5,150,105,0.2)" stroke="#059669" stroke-width="1.5"/>
-                <path d="M9 16 L9 8" stroke="rgba(5,150,105,0.5)" stroke-width="1" stroke-dasharray="2 1"/>
-                <path d="M19 16 L19 8" stroke="rgba(5,150,105,0.5)" stroke-width="1" stroke-dasharray="2 1"/>
-              </svg>
-            </div>
-            <h3 style="color:white;font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Solar Charging Stations</h3>
-            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">Students in Johannesburg installed solar-powered USB charging points around their school, funded entirely by their ESE profits.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
-              <span class="sdg-pill">SDG 7</span><span class="sdg-pill">SDG 13</span>
+        <div class="can-partners-grid reveal">
+
+          <!-- BlastBeat West Coast — featured large -->
+          <div class="partner-card partner-card-featured tilt-card" data-tilt
+               style="background-image:url('https://irp.cdn-website.com/ef5fd9dc/dms3rep/multi/505439684_10023406234413237_6717053678356210410_n.jpg')">
+            <div class="partner-overlay">
+              <span class="partner-tag">West Coast Pilot · Sept 2025</span>
+              <h3>BlastBeat West Coast</h3>
+              <p>34 young people from communities with 85%+ unemployment ran their first real ESEs under the Blastbeat CAN model. Supported by the Western Cape Department of Arts &amp; Culture and 200+ partner schools across South Africa.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+                <span class="sdg-pill">SDG 8</span><span class="sdg-pill">SDG 10</span><span class="sdg-pill">SDG 13</span>
+              </div>
             </div>
           </div>
-          <div class="project-card tilt-card" data-tilt>
-            <div class="project-icon">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-                <path d="M6 22 C6 22 8 14 14 10 C20 6 22 6 22 6 C22 6 22 8 18 14 C14 20 6 22 6 22Z" fill="rgba(5,150,105,0.2)" stroke="#059669" stroke-width="2"/>
-                <circle cx="14" cy="14" r="3" fill="#059669"/>
-              </svg>
-            </div>
-            <h3 style="color:white;font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Tree Planting Campaign</h3>
-            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">Teams in Ireland and the UK funded tree planting partnerships with local councils, with each tree tracked and reported in the annual impact report.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
-              <span class="sdg-pill">SDG 13</span><span class="sdg-pill">SDG 15</span>
-            </div>
-          </div>
-          <div class="project-card tilt-card" data-tilt>
-            <div class="project-icon">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-                <circle cx="14" cy="10" r="5" stroke="#059669" stroke-width="2"/>
-                <path d="M4 24 C4 19 24 19 24 24" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
-                <path d="M20 8 L26 6 M20 11 L26 11" stroke="rgba(5,150,105,0.6)" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <h3 style="color:white;font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Youth Climate Education</h3>
-            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">Students created and delivered climate action workshops to younger learners, funded from their ESE — training the next generation of climate entrepreneurs.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
-              <span class="sdg-pill">SDG 4</span><span class="sdg-pill">SDG 13</span>
+
+          <!-- Eduponics -->
+          <div class="partner-card tilt-card" data-tilt
+               style="background-image:url('https://irp.cdn-website.com/ef5fd9dc/dms3rep/multi/WhatsApp+Image+2025-03-24+at+19.15.15_aa3e0391.jpg')">
+            <div class="partner-overlay">
+              <span class="partner-tag">Aquaponics · Education</span>
+              <h3>Eduponics</h3>
+              <p>95% less water, 2× yield. Aquaponics systems for schools via a 20-year MOU with Stellenbosch University &amp; Cape Academy.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+                <span class="sdg-pill">SDG 2</span><span class="sdg-pill">SDG 4</span><span class="sdg-pill">SDG 6</span>
+              </div>
             </div>
           </div>
-          <div class="project-card tilt-card" data-tilt>
-            <div class="project-icon">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-                <path d="M4 8 L14 4 L24 8 L24 20 L14 24 L4 20 Z" fill="rgba(5,150,105,0.1)" stroke="#059669" stroke-width="2"/>
-                <path d="M4 8 L14 12 L24 8" stroke="#059669" stroke-width="1.5"/>
-                <path d="M14 12 L14 24" stroke="#059669" stroke-width="1.5"/>
-              </svg>
-            </div>
-            <h3 style="color:white;font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Waste Reduction Programme</h3>
-            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">Students funded recycling infrastructure, sorting stations, and a composting system for their school community — with measured monthly impact reporting.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
-              <span class="sdg-pill">SDG 12</span><span class="sdg-pill">SDG 11</span>
-            </div>
-          </div>
-          <div class="project-card tilt-card" data-tilt>
-            <div class="project-icon">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-                <rect x="4" y="16" width="20" height="8" rx="2" fill="rgba(5,150,105,0.1)" stroke="#059669" stroke-width="2"/>
-                <path d="M10 16 L10 10 L14 6 L18 10 L18 16" stroke="#059669" stroke-width="1.5" stroke-linejoin="round"/>
-                <path d="M4 24 L24 24" stroke="rgba(5,150,105,0.3)" stroke-width="1"/>
-              </svg>
-            </div>
-            <h3 style="color:white;font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Community Urban Farming</h3>
-            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">South African students funded rooftop container gardens to supply fresh vegetables to local community kitchens, creating a sustainable cycle from concert profits to food security.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
-              <span class="sdg-pill">SDG 1</span><span class="sdg-pill">SDG 2</span><span class="sdg-pill">SDG 11</span>
+
+          <!-- TIA Kids -->
+          <div class="partner-card tilt-card" data-tilt
+               style="background-image:url('https://irp.cdn-website.com/ef5fd9dc/dms3rep/multi/WhatsApp+Image+2025-10-22+at+10.06.06_5f72d0d5.jpg')">
+            <div class="partner-overlay">
+              <span class="partner-tag">Early Childhood · Ubuntu</span>
+              <h3>TIA Kids</h3>
+              <p>Ubuntu-led early childhood care integrating BlastBeat Preparation. The children we nurture today are the climate leaders of tomorrow.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+                <span class="sdg-pill">SDG 3</span><span class="sdg-pill">SDG 4</span><span class="sdg-pill">SDG 10</span>
+              </div>
             </div>
           </div>
+
+          <!-- CACU -->
+          <div class="partner-card tilt-card" data-tilt
+               style="background-image:url('https://irp.cdn-website.com/ef5fd9dc/dms3rep/multi/WhatsApp+Image+2025-10-14+at+11.08.24_4f4a9a31.jpg')">
+            <div class="partner-overlay">
+              <span class="partner-tag">Arts · Culture · Ubuntu</span>
+              <h3>CACU</h3>
+              <p>Community Arts &amp; Culture Ubuntu. Youth creative expression as a vehicle for climate awareness and social transformation.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+                <span class="sdg-pill">SDG 4</span><span class="sdg-pill">SDG 11</span><span class="sdg-pill">SDG 16</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CANMusic -->
+          <div class="partner-card tilt-card" data-tilt
+               style="background-image:url('https://irp.cdn-website.com/ef5fd9dc/dms3rep/multi/ugandar.png')">
+            <div class="partner-overlay">
+              <span class="partner-tag">Music · 20M+ Views</span>
+              <h3>CANMusic</h3>
+              <p>Youth artists creating music-driven climate action — proving that culture and sustainability belong in the same sentence.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+                <span class="sdg-pill">SDG 4</span><span class="sdg-pill">SDG 13</span><span class="sdg-pill">SDG 17</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dr. Phil-afel Foundation — featured last -->
+          <div class="partner-card partner-card-last tilt-card" data-tilt
+               style="background-image:url('https://irp.cdn-website.com/ef5fd9dc/dms3rep/multi/_MG_9481-2.jpg')">
+            <div class="partner-overlay">
+              <span class="partner-tag">Valley of Plenty · Green Innovation</span>
+              <h3>Dr. Phil-afel Foundation</h3>
+              <p>Youth-led green innovation unlocking enterprise, biodiversity, and community food sovereignty in under-resourced South African communities.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+                <span class="sdg-pill">SDG 1</span><span class="sdg-pill">SDG 2</span><span class="sdg-pill">SDG 15</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ubuntu philosophy card -->
+          <div class="ubuntu-card">
+            <span class="partner-tag" style="margin-bottom:1.25rem;">Ubuntu Philosophy</span>
+            <p style="font-size:1.25rem;font-weight:800;color:white;line-height:1.3;margin-bottom:0.75rem;font-family:'Space Grotesk',sans-serif;">"I am because we are."</p>
+            <p style="color:rgba(255,255,255,0.55);font-size:0.82rem;line-height:1.65;margin-bottom:1.5rem;">CAN is not shame-based activism — it's joyful, community-powered climate action. We believe business is the most powerful engine of a better world, and we build that engine together.</p>
+            <a href="https://climate-actions-now-2.multiscreensite.com" target="_blank" rel="noopener noreferrer"
+               style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.3);color:#34D399;padding:0.6rem 1.25rem;border-radius:999px;font-size:0.82rem;font-weight:700;text-decoration:none;letter-spacing:0.04em;">
+              Visit CAN Website
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
         </div>
       </div>
     </section>
@@ -468,16 +568,16 @@
           <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;">CAN projects are mapped to the UN Sustainable Development Goals. Students learn how business intersects with global challenges.</p>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;" class="reveal">
-          <span class="sdg-pill">🌍 SDG 1 — No Poverty</span>
-          <span class="sdg-pill">🌾 SDG 2 — Zero Hunger</span>
-          <span class="sdg-pill">🎓 SDG 4 — Quality Education</span>
-          <span class="sdg-pill">⚡ SDG 7 — Clean Energy</span>
-          <span class="sdg-pill">💼 SDG 8 — Decent Work</span>
-          <span class="sdg-pill">🏙️ SDG 11 — Sustainable Cities</span>
-          <span class="sdg-pill">♻️ SDG 12 — Responsible Production</span>
-          <span class="sdg-pill">🌡️ SDG 13 — Climate Action</span>
-          <span class="sdg-pill">🌊 SDG 14 — Life Below Water</span>
-          <span class="sdg-pill">🌳 SDG 15 — Life on Land</span>
+          <span class="sdg-pill">SDG 1 — No Poverty</span>
+          <span class="sdg-pill">SDG 2 — Zero Hunger</span>
+          <span class="sdg-pill">SDG 4 — Quality Education</span>
+          <span class="sdg-pill">SDG 7 — Clean Energy</span>
+          <span class="sdg-pill">SDG 8 — Decent Work</span>
+          <span class="sdg-pill">SDG 11 — Sustainable Cities</span>
+          <span class="sdg-pill">SDG 12 — Responsible Production</span>
+          <span class="sdg-pill">SDG 13 — Climate Action</span>
+          <span class="sdg-pill">SDG 14 — Life Below Water</span>
+          <span class="sdg-pill">SDG 15 — Life on Land</span>
         </div>
       </div>
     </section>
@@ -493,6 +593,7 @@
           <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
             <a href="/pages/apply.html" class="btn btn-lg" style="background:linear-gradient(135deg,#059669,#84CC16);color:white;font-weight:700;padding:0.875rem 2rem;border-radius:999px;text-decoration:none;">Apply for Your School</a>
             <a href="/pages/macc.html" class="btn btn-outline-glow btn-lg">Explore MACC →</a>
+            <a href="https://climate-actions-now-2.multiscreensite.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline-glow btn-lg" style="border-color:rgba(5,150,105,0.4);color:#34D399;">CAN Website →</a>
           </div>
         </div>
       </div>
