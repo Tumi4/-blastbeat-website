@@ -1080,13 +1080,17 @@
   font-weight: 800;
   letter-spacing: -0.05em;
   line-height: 0.85;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.12);
+  background: linear-gradient(135deg, rgba(99,102,241,0.55) 0%, rgba(168,85,247,0.45) 50%, rgba(255,45,120,0.35) 100%);
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 28px rgba(99,102,241,0.35));
   margin-bottom: auto;
-  transition: -webkit-text-stroke 0.3s ease;
+  transition: all 0.4s ease;
 }
 .phase-step:hover .phase-num {
-  -webkit-text-stroke: 1px rgba(255,255,255,0.35);
+  background: linear-gradient(135deg, rgba(99,102,241,0.9) 0%, rgba(168,85,247,0.8) 50%, rgba(255,45,120,0.7) 100%);
+  filter: drop-shadow(0 0 40px rgba(99,102,241,0.6));
 }
 .phase-content { padding-top: var(--space-8); }
 .phase-title { color: white; font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-3); font-family: var(--font-heading); }
@@ -1101,6 +1105,97 @@
   .phase-journey { grid-template-columns: 1fr; }
   .h-scroll-card { flex: 0 0 clamp(170px, 72vw, 220px); }
   .role-card { height: 170px; }
+}
+
+/* ---- Sketch Icon Cards ---- */
+.sketch-icon-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-6);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.sketch-icon-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(99,102,241,0.35);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 30px rgba(99,102,241,0.12);
+}
+.sketch-icon {
+  width: 80px;
+  height: 80px;
+  color: var(--neon-cyan);
+  margin-bottom: var(--space-5);
+  filter: drop-shadow(0 0 8px rgba(0,245,255,0.25));
+  transition: filter 0.3s ease;
+}
+.sketch-icon-card:hover .sketch-icon {
+  filter: drop-shadow(0 0 14px rgba(0,245,255,0.5));
+}
+.sketch-icon-card h3 {
+  color: white;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-3);
+}
+.sketch-icon-card p {
+  color: rgba(255,255,255,0.6);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ---- Timeline ---- */
+.bb-timeline {
+  position: relative;
+  padding-left: var(--space-10);
+}
+.bb-timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--electric-blue), var(--electric-purple), var(--neon-pink));
+}
+.bb-timeline-item {
+  position: relative;
+  margin-bottom: var(--space-12);
+}
+.bb-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--space-10) + 12px);
+  top: 8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  box-shadow: 0 0 16px rgba(99,102,241,0.5);
+  z-index: 1;
+}
+.bb-timeline-year {
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+.bb-timeline-photo {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  margin-top: var(--space-4);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 /* ---- Neon Nav Glow ---- */

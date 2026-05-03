@@ -12,11 +12,10 @@
   <meta property="og:image" content="https://blastbeat-education.netlify.app/assets/images/logo-blastbeat.png">
   <meta property="og:site_name" content="Blastbeat Education">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="About Us | Blastbeat Education">
-  <meta name="twitter:description" content="Blastbeat has been empowering young people through music, entrepreneurship, and climate action since 2003.">
   <link rel="canonical" href="https://www.blastbeat.education/pages/about.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap">
   <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
   <link rel="stylesheet" href="/assets/css/gen-z.css">
 </head>
@@ -51,7 +50,7 @@
   <div class="bb-nav-mobile" aria-hidden="true">
     <a href="/pages/programme.html">Programme</a>
     <a href="/pages/for-schools.html">For Schools</a>
-    <a href="/pages/about.html">About</a>
+    <a href="/pages/about.html" class="active">About</a>
     <a href="/pages/impact.html">Impact</a>
     <a href="/pages/international.html">International</a>
     <a href="/blog/">Blog</a>
@@ -61,43 +60,43 @@
   </div>
 
   <main id="main">
-    <!-- ===== HERO — Dark, Bold, Electric ===== -->
-    <section class="hero-dark bg-mesh" style="background: linear-gradient(135deg, rgba(10,15,30,0.55), rgba(30,20,60,0.55)), url('/assets/images/blastbeat-banner.png') center/cover no-repeat;">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero-dark" style="position: relative; overflow: hidden; min-height: 80vh; display: flex; align-items: center; padding: calc(var(--nav-height) + 4rem) 0 4rem;">
+      <div style="position: absolute; inset: 0;">
+        <img src="/assets/images/bb-students-group.jpg" alt="" aria-hidden="true" width="1600" height="900" decoding="async" loading="eager" style="width: 100%; height: 100%; object-fit: cover; object-position: center 30%;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,10,26,0.88) 0%, rgba(26,26,46,0.75) 60%, rgba(10,10,26,0.65) 100%);"></div>
+      </div>
       <div class="orb orb-1" aria-hidden="true"></div>
       <div class="orb orb-2" aria-hidden="true"></div>
-      <div class="orb orb-3" aria-hidden="true"></div>
-
       <div class="container" style="position: relative; z-index: 2;">
-        <div style="max-width: 780px;">
-          <div class="neo-tag" style="margin-bottom: var(--space-6);">
-            est. 2003 &mdash; 23 years and counting
-          </div>
-
-          <h1 class="text-chunky" style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: var(--space-6);">
-            Music. Business. Climate Action.<br>
-            <span class="text-gradient-vivid">That's Blastbeat.</span>
+        <div style="max-width: 820px;">
+          <div class="neo-tag" style="margin-bottom: var(--space-6);">est. 2003 &mdash; 23 years and counting</div>
+          <h1 class="text-chunky" style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: var(--space-6); color: white;">
+            Music. Business.<br>
+            <span class="text-gradient-vivid">Climate Action.</span>
           </h1>
-
-          <p style="font-size: var(--text-xl); max-width: 580px; margin-bottom: var(--space-10); color: rgba(255,255,255,0.7);">
-            We believe every young person has the power to lead. Blastbeat gives them the stage.
+          <p style="font-size: var(--text-xl); max-width: 600px; margin-bottom: var(--space-6); color: rgba(255,255,255,0.78); line-height: 1.65;">
+            We believe every young person has the power to lead. Blastbeat gives them the stage &mdash; real events, real responsibility, real money, real impact. For 23 years across 19 countries.
           </p>
-
           <div class="flex gap-4 flex-wrap">
-            <a href="/pages/apply.html" class="btn btn-glow btn-lg">&#9889; Join the Movement</a>
-            <a href="#timeline" class="btn btn-outline-glow btn-lg">Our Journey &#8595;</a>
+            <a href="/pages/apply.html" class="btn btn-glow btn-lg">Join the Movement</a>
+            <a href="#timeline" class="btn btn-outline-glow btn-lg">Our Journey</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== TICKER ===== -->
-    <div class="ticker-wrap" style="background: var(--deep-navy); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+    <div class="ticker-wrap" style="background: var(--deep-navy); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
       <div class="ticker">
         <span class="ticker-item">OUR STORY <span class="dot"></span></span>
         <span class="ticker-item">23 YEARS <span class="dot"></span></span>
         <span class="ticker-item">19 COUNTRIES <span class="dot"></span></span>
         <span class="ticker-item">360K+ STUDENTS <span class="dot"></span></span>
         <span class="ticker-item">CLIMATE ACTION <span class="dot"></span></span>
+        <span class="ticker-item">REAL BUSINESS <span class="dot"></span></span>
+        <span class="ticker-item">UK CHARITY 1113530 <span class="dot"></span></span>
         <span class="ticker-item">YOUTH EMPOWERMENT <span class="dot"></span></span>
         <!-- duplicate for seamless loop -->
         <span class="ticker-item">OUR STORY <span class="dot"></span></span>
@@ -105,280 +104,372 @@
         <span class="ticker-item">19 COUNTRIES <span class="dot"></span></span>
         <span class="ticker-item">360K+ STUDENTS <span class="dot"></span></span>
         <span class="ticker-item">CLIMATE ACTION <span class="dot"></span></span>
+        <span class="ticker-item">REAL BUSINESS <span class="dot"></span></span>
+        <span class="ticker-item">UK CHARITY 1113530 <span class="dot"></span></span>
         <span class="ticker-item">YOUTH EMPOWERMENT <span class="dot"></span></span>
       </div>
     </div>
 
-    <!-- ===== VISION SECTION ===== -->
-    <section class="section bg-mesh-light">
-      <div class="container">
-        <div class="text-center reveal" style="max-width: 760px; margin: 0 auto var(--space-12);">
-          <span class="neo-tag-pink" style="margin-bottom: var(--space-4);">our vision</span>
-          <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4); margin-bottom: var(--space-6);">
-            Where Music Meets <span class="text-gradient-vivid">Movement</span>
-          </h2>
-          <p style="font-size: var(--text-lg); max-width: 640px; margin: 0 auto;">
-            At Blastbeat, we envision a world where music serves as a catalyst for change, empowering youth to become innovative leaders.
-          </p>
-        </div>
-
-        <div class="bento-grid">
-          <div class="bento-item bento-span-2 reveal" style="background: linear-gradient(135deg, #1E40AF, #6366F1); color: white; min-height: 240px;">
-            <div>
-              <span class="emoji-xl">&#127925;</span>
-              <h3 style="color: white; font-size: var(--text-2xl); margin-bottom: var(--space-2);">Music &amp; Arts</h3>
-              <p style="color: rgba(255,255,255,0.8); margin: 0;">Concerts, talent shows, and creative events that give young people a platform to express themselves and build confidence through performance.</p>
-            </div>
-          </div>
-
-          <div class="bento-item bento-span-2 reveal reveal-delay-1" style="background: linear-gradient(135deg, #7C3AED, #A855F7); color: white; min-height: 240px;">
-            <div>
-              <span class="emoji-xl">&#9917;</span>
-              <h3 style="color: white; font-size: var(--text-2xl); margin-bottom: var(--space-2);">Sports Enterprise</h3>
-              <p style="color: rgba(255,255,255,0.8); margin: 0;">Tournaments, sports days, and athletic events that combine teamwork on the field with business skills off it.</p>
-            </div>
-          </div>
-
-          <div class="bento-item bento-span-2 reveal reveal-delay-2" style="background: linear-gradient(135deg, #059669, #10B981); color: white; min-height: 240px;">
-            <div>
-              <span class="emoji-xl">&#127793;</span>
-              <h3 style="color: white; font-size: var(--text-2xl); margin-bottom: var(--space-2);">Climate Action</h3>
-              <p style="color: rgba(255,255,255,0.8); margin: 0;">25% of all ESE profits fund student-designed climate projects. Real environmental impact, driven by the next generation.</p>
-            </div>
-          </div>
-
-          <div class="bento-item bento-span-2 reveal reveal-delay-3" style="background: linear-gradient(135deg, #F97316, #FF8C42); color: white; min-height: 240px;">
-            <div>
-              <span class="emoji-xl">&#128200;</span>
-              <h3 style="color: white; font-size: var(--text-2xl); margin-bottom: var(--space-2);">Real Business Skills</h3>
-              <p style="color: rgba(255,255,255,0.8); margin: 0;">Finance, marketing, HR, legal, sales &mdash; students fill 14 real business roles and manage real money. No simulations.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== TEAM SECTION ===== -->
-    <section class="section section-dark" style="position: relative; overflow: hidden;">
-      <div class="orb" style="width: 350px; height: 350px; background: var(--electric-purple); top: -10%; right: -5%; filter: blur(100px); opacity: 0.3;"></div>
-      <div class="orb" style="width: 250px; height: 250px; background: var(--neon-cyan); bottom: -5%; left: 5%; filter: blur(100px); opacity: 0.25;"></div>
-
-      <div class="container" style="position: relative; z-index: 2;">
-        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-6);">
-          <span class="neo-tag-cyan" style="margin-bottom: var(--space-4);">the team</span>
-          <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4);">
-            The People Behind <span class="text-gradient-aurora">Blastbeat</span>
-          </h2>
-          <p>Educators, builders, and changemakers united by one belief: young people can lead.</p>
-        </div>
-
-        <div class="reveal" style="margin-bottom: var(--space-10); border-radius: var(--radius-2xl); overflow: hidden;">
-          <img src="/assets/images/bb-activity-02.jpeg" alt="The Blastbeat team working with students" width="1200" height="300" loading="lazy" decoding="async" style="width: 100%; height: 300px; object-fit: cover; display: block;">
-        </div>
-
-        <div class="grid grid-3" style="gap: var(--space-6);">
-          <!-- Robert Stephenson -->
-          <div class="glass-card reveal text-center" style="padding: var(--space-8);">
-            <div style="width: 100px; height: 100px; border-radius: 50%; background: var(--gradient-primary); margin: 0 auto var(--space-4); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: white;">RS</div>
-            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-1);">Robert Stephenson</h3>
-            <p style="color: var(--neon-lime); font-size: var(--text-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-3);">Founder &amp; Programme Director</p>
-            <p style="font-size: var(--text-sm); margin: 0;">30+ years in youth development. Robert founded Blastbeat in Ireland in 2003 with the vision that music could unlock entrepreneurial potential in every young person.</p>
-          </div>
-
-          <!-- Tumelo Thabo Ncube -->
-          <div class="glass-card reveal reveal-delay-1 text-center" style="padding: var(--space-8);">
-            <div style="width: 100px; height: 100px; border-radius: 50%; background: var(--gradient-ocean); margin: 0 auto var(--space-4); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: white;">TN</div>
-            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-1);">Tumelo Thabo Ncube</h3>
-            <p style="color: var(--neon-cyan); font-size: var(--text-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-3);">Technical Co-Founder &amp; CTO</p>
-            <p style="font-size: var(--text-sm); margin: 0;">Building the Blastbeat platform from the ground up. Tumelo leads all technology, product development, and digital infrastructure powering the programme.</p>
-          </div>
-
-          <!-- Placeholder 1 -->
-          <div class="glass-card reveal reveal-delay-2 text-center" style="padding: var(--space-8);">
-            <div style="width: 100px; height: 100px; border-radius: 50%; background: var(--gradient-sunset); margin: 0 auto var(--space-4); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: white;">&#9733;</div>
-            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-1);">Coming Soon</h3>
-            <p style="color: var(--hot-coral); font-size: var(--text-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-3);">Head of Partnerships</p>
-            <p style="font-size: var(--text-sm); margin: 0;">We're growing our team. This role will lead corporate and institutional partnerships across Africa and beyond.</p>
-          </div>
-
-          <!-- Placeholder 2 -->
-          <div class="glass-card reveal text-center" style="padding: var(--space-8);">
-            <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #B8FF00, #059669); margin: 0 auto var(--space-4); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--deep-navy);">&#9733;</div>
-            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-1);">Coming Soon</h3>
-            <p style="color: var(--neon-lime); font-size: var(--text-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-3);">Climate Programme Lead</p>
-            <p style="font-size: var(--text-sm); margin: 0;">This role will oversee the Climate Actions Now initiative, guiding student-led environmental projects across participating schools.</p>
-          </div>
-
-          <!-- Placeholder 3 -->
-          <div class="glass-card reveal reveal-delay-1 text-center" style="padding: var(--space-8);">
-            <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #FF2D78, #A855F7); margin: 0 auto var(--space-4); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: white;">&#9733;</div>
-            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-1);">Coming Soon</h3>
-            <p style="color: var(--neon-pink); font-size: var(--text-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-3);">Education &amp; Curriculum Lead</p>
-            <p style="font-size: var(--text-sm); margin: 0;">This role will align the Blastbeat programme with national curricula and manage teacher training across all partner schools.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== PHOTO BREAK ===== -->
-    <section style="position: relative; overflow: hidden;">
-      <img src="/assets/images/hero-bg-1.jpg" alt="Blastbeat students performing at an event" width="1600" height="400" loading="lazy" decoding="async" style="width: 100%; height: 400px; object-fit: cover; display: block;">
-      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, var(--deep-navy) 0%, transparent 30%, transparent 70%, var(--deep-navy) 100%);"></div>
-    </section>
-
-    <!-- ===== TIMELINE ===== -->
-    <section id="timeline" class="section section-dark" style="position: relative; overflow: hidden;">
-      <div class="orb" style="width: 300px; height: 300px; background: var(--neon-pink); top: 20%; right: -8%; filter: blur(100px); opacity: 0.2;"></div>
-
-      <div class="container" style="position: relative; z-index: 2;">
-        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-12);">
-          <span class="neo-tag" style="margin-bottom: var(--space-4);">&#128197; our journey</span>
-          <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4);">
-            23 Years of <span class="text-gradient-sunset">Youth-Led Change</span>
-          </h2>
-        </div>
-
-        <div style="max-width: 700px; margin: 0 auto;">
-          <div class="timeline" style="border-color: rgba(255,255,255,0.1);">
-
-            <div class="timeline-item reveal">
-              <div style="display: flex; align-items: baseline; gap: var(--space-3); margin-bottom: var(--space-2);">
-                <span class="counter-number" style="font-size: var(--text-3xl);">2003</span>
-                <span class="neo-tag" style="font-size: 0.65rem;">THE BEGINNING</span>
-              </div>
-              <h3 style="color: white; margin-bottom: var(--space-2);">Founded in Ireland</h3>
-              <p style="margin-bottom: var(--space-3);">Robert Stephenson launches Blastbeat in Dublin, pioneering the idea that music events can teach young people real business skills and social responsibility.</p>
-              <img src="/assets/images/bb-event-02.jpg" alt="Early Blastbeat event in Ireland" width="700" height="160" loading="lazy" decoding="async" style="width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-lg); margin-top: var(--space-2);">
-            </div>
-
-            <div class="timeline-item reveal reveal-delay-1">
-              <div style="display: flex; align-items: baseline; gap: var(--space-3); margin-bottom: var(--space-2);">
-                <span class="counter-number" style="font-size: var(--text-3xl);">2008</span>
-                <span class="neo-tag-cyan" style="font-size: 0.65rem; padding: 4px 12px;">GOING GLOBAL</span>
-              </div>
-              <h3 style="color: white; margin-bottom: var(--space-2);">Japan Operations Begin</h3>
-              <p style="margin: 0;">Blastbeat expands to Japan, proving the model works across cultures. Young people in Tokyo and beyond start running their own Event Social Enterprises.</p>
-            </div>
-
-            <div class="timeline-item reveal reveal-delay-2">
-              <div style="display: flex; align-items: baseline; gap: var(--space-3); margin-bottom: var(--space-2);">
-                <span class="counter-number" style="font-size: var(--text-3xl);">2020</span>
-                <span class="neo-tag-pink" style="font-size: 0.65rem; padding: 4px 12px;">AFRICA</span>
-              </div>
-              <h3 style="color: white; margin-bottom: var(--space-2);">South Africa Pilot</h3>
-              <p style="margin: 0;">Blastbeat launches its first pilot programme in South Africa, adapting the model for the African context and laying the groundwork for continental expansion.</p>
-            </div>
-
-            <div class="timeline-item reveal reveal-delay-3">
-              <div style="display: flex; align-items: baseline; gap: var(--space-3); margin-bottom: var(--space-2);">
-                <span class="counter-number" style="font-size: var(--text-3xl);">2025</span>
-                <span class="neo-tag" style="font-size: 0.65rem;">BREAKTHROUGH YEAR</span>
-              </div>
-              <h3 style="color: white; margin-bottom: var(--space-2);">Web Summit Selected &amp; Namibia NIPDB Partnership</h3>
-              <p style="margin: 0;">Blastbeat is selected for Web Summit 2025, gaining international recognition. A landmark partnership with the Namibia Investment Promotion and Development Board (NIPDB) opens new doors for African expansion.</p>
-            </div>
-
-            <div class="timeline-item reveal">
-              <div style="display: flex; align-items: baseline; gap: var(--space-3); margin-bottom: var(--space-2);">
-                <span class="counter-number" style="font-size: var(--text-3xl);">2026</span>
-                <span class="neo-tag-pink" style="font-size: 0.65rem; padding: 4px 12px;">NOW</span>
-              </div>
-              <h3 style="color: white; margin-bottom: var(--space-2);">App Launch &amp; National Finals Cape Town</h3>
-              <p style="margin-bottom: var(--space-3);">The Blastbeat platform goes live, enabling schools across South Africa to run the full programme digitally. The inaugural National Finals will take place in Cape Town, showcasing the best ESE teams in the country.</p>
-              <img src="/assets/images/bb-event-09.jpg" alt="Blastbeat students at a recent event" width="700" height="160" loading="lazy" decoding="async" style="width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-lg); margin-top: var(--space-2);">
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== AWARDS SECTION ===== -->
-    <section class="section bg-mesh-light">
-      <div class="container">
-        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-12);">
-          <span class="neo-tag" style="margin-bottom: var(--space-4);">&#127942; recognition</span>
-          <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4);">
-            Awards &amp; <span class="text-gradient-vivid">Recognition</span>
-          </h2>
-          <p style="font-size: var(--text-lg);">Blastbeat's impact has been recognised on the world stage.</p>
-        </div>
-
-        <div class="grid grid-2" style="max-width: 800px; margin: 0 auto; gap: var(--space-6);">
-          <div class="glass-card-light reveal text-center" style="padding: var(--space-8); border: 2px solid transparent; background-image: linear-gradient(white, white), var(--gradient-primary); background-origin: border-box; background-clip: padding-box, border-box;">
-            <div style="font-size: 3rem; margin-bottom: var(--space-4);">&#127760;</div>
-            <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-2);">Web Summit 2025</h3>
-            <p style="font-size: var(--text-sm); margin: 0;">Selected as one of the standout education and social impact startups at the world's largest technology conference in Lisbon, Portugal.</p>
-          </div>
-
-          <div class="glass-card-light reveal reveal-delay-1 text-center" style="padding: var(--space-8); border: 2px solid transparent; background-image: linear-gradient(white, white), var(--gradient-sunset); background-origin: border-box; background-clip: padding-box, border-box;">
-            <div style="font-size: 3rem; margin-bottom: var(--space-4);">&#127942;</div>
-            <h3 style="font-size: var(--text-xl); margin-bottom: var(--space-2);">Social Entrepreneurship Awards</h3>
-            <p style="font-size: var(--text-sm); margin: 0;">Recognised for pioneering the Event Social Enterprise model &mdash; a scalable approach to youth empowerment through real-world business and climate action.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== PHOTO BREAK 2 ===== -->
-    <section style="position: relative; overflow: hidden;">
-      <img src="/assets/images/hero-bg-2.jpg" alt="Blastbeat students collaborating on a climate action project" width="1600" height="350" loading="lazy" decoding="async" style="width: 100%; height: 350px; object-fit: cover; display: block;">
-      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(248,250,252,1) 0%, transparent 30%, transparent 70%, var(--deep-navy) 100%);"></div>
-    </section>
-
     <!-- ===== STATS ===== -->
-    <section class="section section-dark">
+    <section class="section" style="background: var(--deep-navy); padding: var(--space-14) 0;">
       <div class="container">
-        <div class="grid grid-4 text-center">
+        <div class="grid grid-4 text-center" style="gap: var(--space-4);">
           <div class="reveal stat-card">
-            <div class="counter-number" data-count="23" data-suffix="+">0</div>
+            <div class="counter-number" data-count="23" data-suffix="+">23+</div>
             <div class="stat-label" style="color: rgba(255,255,255,0.6);">Years Running</div>
           </div>
           <div class="reveal reveal-delay-1 stat-card">
-            <div class="counter-number" data-count="360000" data-suffix="+">0</div>
+            <div class="counter-number" data-count="360000" data-suffix="+">360K+</div>
             <div class="stat-label" style="color: rgba(255,255,255,0.6);">Students Empowered</div>
           </div>
           <div class="reveal reveal-delay-2 stat-card">
-            <div class="counter-number" data-count="19">0</div>
+            <div class="counter-number" data-count="19">19</div>
             <div class="stat-label" style="color: rgba(255,255,255,0.6);">Countries</div>
           </div>
           <div class="reveal reveal-delay-3 stat-card">
-            <div class="counter-number" data-count="14">0</div>
+            <div class="counter-number" data-count="14">14</div>
             <div class="stat-label" style="color: rgba(255,255,255,0.6);">Business Roles</div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ===== WHAT WE BELIEVE — Photo Bento ===== -->
+    <section class="section section-dark" style="position: relative; overflow: hidden;">
+      <div class="orb" style="width: 400px; height: 400px; background: rgba(99,102,241,0.12); top: -15%; right: -8%;"></div>
+
+      <div class="container" style="position: relative; z-index: 2;">
+        <div class="text-center reveal" style="max-width: 760px; margin: 0 auto var(--space-12);">
+          <span class="neo-tag-pink" style="margin-bottom: var(--space-4);">our vision</span>
+          <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4); margin-bottom: var(--space-4);">
+            Where Music Meets <span class="text-gradient-vivid">Movement</span>
+          </h2>
+          <p style="font-size: var(--text-lg); color: rgba(255,255,255,0.7); max-width: 640px; margin: 0 auto;">
+            Blastbeat is built on one belief: young people learn best by doing real things. Not simulations. Not mock businesses. A real Enterprise Social Enterprise that runs real events, earns real money, and funds real climate action.
+          </p>
+        </div>
+
+        <div class="bento-grid" style="grid-template-columns: repeat(2, 1fr);">
+          <!-- MACC — Music -->
+          <div class="bento-item reveal" style="background: linear-gradient(155deg, rgba(30,64,175,0.75) 0%, rgba(99,102,241,0.65) 100%), url('/assets/images/bb-event-01.jpg') center 30%/cover no-repeat; color: white; min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end;">
+            <div>
+              <img src="/assets/images/icons/icon-stage.svg" alt="" aria-hidden="true" width="52" height="52" style="color: white; filter: brightness(0) invert(1); margin-bottom: var(--space-3); display: block;">
+              <h3 style="color: white; font-size: var(--text-2xl); margin-bottom: var(--space-2);">Music &amp; Arts</h3>
+              <p style="color: rgba(255,255,255,0.82); font-size: var(--text-sm); margin: 0; line-height: 1.65;">Concerts, talent shows, and creative events give young people a real stage. They book the artists, sell the tickets, run the night.</p>
+            </div>
+          </div>
+
+          <!-- FootBeat — Sports -->
+          <div class="bento-item reveal reveal-delay-1" style="background: linear-gradient(155deg, rgba(124,58,237,0.75) 0%, rgba(168,85,247,0.65) 100%), url('/assets/images/bb-event-07.jpg') center/cover no-repeat; color: white; min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end;">
+            <div>
+              <img src="/assets/images/icons/icon-events.svg" alt="" aria-hidden="true" width="52" height="52" style="filter: brightness(0) invert(1); margin-bottom: var(--space-3); display: block;">
+              <h3 style="color: white; font-size: var(--text-2xl); margin-bottom: var(--space-2);">Sports Enterprise</h3>
+              <p style="color: rgba(255,255,255,0.82); font-size: var(--text-sm); margin: 0; line-height: 1.65;">Tournaments, sports days, and athletic events combine teamwork on the field with real business management off it.</p>
+            </div>
+          </div>
+
+          <!-- Climate -->
+          <div class="bento-item reveal reveal-delay-2" style="background: linear-gradient(155deg, rgba(5,150,105,0.75) 0%, rgba(16,185,129,0.65) 100%), url('/assets/images/bb-activity-01.jpeg') center/cover no-repeat; color: white; min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end;">
+            <div>
+              <img src="/assets/images/icons/icon-climate.svg" alt="" aria-hidden="true" width="52" height="52" style="filter: brightness(0) invert(1); margin-bottom: var(--space-3); display: block;">
+              <h3 style="color: white; font-size: var(--text-2xl); margin-bottom: var(--space-2);">Climate Action</h3>
+              <p style="color: rgba(255,255,255,0.82); font-size: var(--text-sm); margin: 0; line-height: 1.65;">25% of all ESE profits fund student-designed climate projects. Real environmental impact, driven and measured by the students themselves.</p>
+            </div>
+          </div>
+
+          <!-- Business Skills -->
+          <div class="bento-item reveal reveal-delay-3" style="background: linear-gradient(155deg, rgba(249,115,22,0.75) 0%, rgba(255,140,66,0.65) 100%), url('/assets/images/bb-activity-03.jpeg') center/cover no-repeat; color: white; min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end;">
+            <div>
+              <img src="/assets/images/icons/icon-finance.svg" alt="" aria-hidden="true" width="52" height="52" style="filter: brightness(0) invert(1); margin-bottom: var(--space-3); display: block;">
+              <h3 style="color: white; font-size: var(--text-2xl); margin-bottom: var(--space-2);">Real Business Skills</h3>
+              <p style="color: rgba(255,255,255,0.82); font-size: var(--text-sm); margin: 0; line-height: 1.65;">Finance, marketing, HR, legal, sales &mdash; students fill 14 real roles and manage real money. No simulations. No pretend currency.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WHAT STUDENTS EXPERIENCE — Sketch Icons ===== -->
+    <section class="section" style="background: var(--deep-navy); position: relative; overflow: hidden;">
+      <div class="orb" style="width: 500px; height: 500px; background: rgba(0,245,255,0.07); top: -20%; left: -10%;"></div>
+      <div class="orb" style="width: 350px; height: 350px; background: rgba(255,45,120,0.07); bottom: -10%; right: -5%;"></div>
+
+      <div class="container" style="position: relative; z-index: 2;">
+        <div class="text-center reveal" style="max-width: 720px; margin: 0 auto var(--space-12);">
+          <span class="neo-tag-cyan" style="margin-bottom: var(--space-4);">what students actually do</span>
+          <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4);">
+            Six Ways to <span class="text-gradient-aurora">Lead</span>
+          </h2>
+          <p style="color: rgba(255,255,255,0.7); font-size: var(--text-lg);">
+            Every student in a Blastbeat ESE fills one of 14 real business roles across six core capability areas. Here&rsquo;s what real looks like.
+          </p>
+        </div>
+
+        <div class="grid grid-3" style="gap: var(--space-5);">
+
+          <div class="sketch-icon-card reveal">
+            <img src="/assets/images/icons/icon-stage.svg" alt="" aria-hidden="true" class="sketch-icon">
+            <h3>Performance &amp; Events</h3>
+            <p>Students produce, host, and perform at real live events with paying audiences. From talent shows to music concerts &mdash; the stage is theirs.</p>
+          </div>
+
+          <div class="sketch-icon-card reveal reveal-delay-1">
+            <img src="/assets/images/icons/icon-content.svg" alt="" aria-hidden="true" class="sketch-icon">
+            <h3>Content Creation</h3>
+            <p>A dedicated content team films, edits, and publishes the ESE&rsquo;s journey weekly. They build a real portfolio and create the ESE&rsquo;s Blastbeat TV episode.</p>
+          </div>
+
+          <div class="sketch-icon-card reveal reveal-delay-2">
+            <img src="/assets/images/icons/icon-climate.svg" alt="" aria-hidden="true" class="sketch-icon" style="color: var(--neon-lime);">
+            <h3>Climate Action</h3>
+            <p>Students design and execute a real Climate Action Project (CAP), funded by 25% of their ESE profits. Measured, documented, and celebrated.</p>
+          </div>
+
+          <div class="sketch-icon-card reveal">
+            <img src="/assets/images/icons/icon-finance.svg" alt="" aria-hidden="true" class="sketch-icon" style="color: var(--electric-purple);">
+            <h3>Finance &amp; Business</h3>
+            <p>CFOs manage real budgets, track real revenue, and distribute real profits. Every rand is accounted for, with full financial reports at year end.</p>
+          </div>
+
+          <div class="sketch-icon-card reveal reveal-delay-1">
+            <img src="/assets/images/icons/icon-pitch.svg" alt="" aria-hidden="true" class="sketch-icon" style="color: var(--neon-pink);">
+            <h3>Pitching &amp; Strategy</h3>
+            <p>CEOs and their teams pitch to judges, sponsors, and audiences. Strategy decks, sales pitches, investor presentations &mdash; the full business toolkit.</p>
+          </div>
+
+          <div class="sketch-icon-card reveal reveal-delay-2">
+            <img src="/assets/images/icons/icon-events.svg" alt="" aria-hidden="true" class="sketch-icon" style="color: var(--sunset-orange);">
+            <h3>Operations &amp; Logistics</h3>
+            <p>Event Operations and H&amp;S Managers handle everything from venue to security to crowd management. Real responsibility, real stakes.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PHOTO GALLERY STRIP ===== -->
+    <section style="background: var(--deep-navy);" aria-hidden="true">
+      <div style="display: grid; grid-template-columns: repeat(5, 1fr); height: clamp(160px, 22vw, 260px);">
+        <img src="/assets/images/bb-event-03.jpg" alt="Blastbeat students" width="400" height="260" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+        <img src="/assets/images/bb-event-05.jpg" alt="Blastbeat event" width="400" height="260" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; object-position: center 20%;">
+        <img src="/assets/images/bb-activity-02.jpg" alt="Blastbeat team" width="400" height="260" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+        <img src="/assets/images/bb-event-11.jpg" alt="Blastbeat students performing" width="400" height="260" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; object-position: center 25%;">
+        <img src="/assets/images/bb-activity-04.jpeg" alt="Blastbeat programme activity" width="400" height="260" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+      </div>
+    </section>
+
+    <!-- ===== TEAM SECTION ===== -->
+    <section class="section section-dark" style="position: relative; overflow: hidden;">
+      <div class="orb" style="width: 350px; height: 350px; background: var(--electric-purple); top: -10%; right: -5%; opacity: 0.12; filter: blur(80px);"></div>
+      <div class="orb" style="width: 250px; height: 250px; background: var(--neon-cyan); bottom: -5%; left: 5%; opacity: 0.1; filter: blur(80px);"></div>
+
+      <div class="container" style="position: relative; z-index: 2;">
+        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-12);">
+          <span class="neo-tag-cyan" style="margin-bottom: var(--space-4);">the team</span>
+          <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4);">
+            The People Behind <span class="text-gradient-aurora">Blastbeat</span>
+          </h2>
+          <p style="color: rgba(255,255,255,0.7);">Educators, builders, and changemakers united by one belief: young people can lead.</p>
+        </div>
+
+        <div class="grid grid-2" style="gap: var(--space-8); margin-bottom: var(--space-12); align-items: stretch;">
+
+          <!-- Robert Stephenson -->
+          <div class="glass-card reveal" style="padding: var(--space-8); display: flex; gap: var(--space-6); align-items: flex-start;">
+            <div style="width: 90px; height: 90px; flex-shrink: 0; border-radius: 50%; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; font-size: var(--text-2xl); font-weight: 800; color: white; font-family: var(--font-heading);">RS</div>
+            <div>
+              <h3 style="color: white; font-size: var(--text-xl); margin-bottom: 4px;">Robert Stephenson</h3>
+              <p style="color: var(--neon-lime); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-4);">Founder &amp; Programme Director</p>
+              <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin: 0;">30+ years in youth development. Robert founded Blastbeat in Dublin in 2003 after recognising that music events could teach young people more about business &mdash; accountability, teamwork, leadership &mdash; than any classroom exercise could. His vision has now reached 360,000+ students across 19 countries.</p>
+            </div>
+          </div>
+
+          <!-- Tumelo -->
+          <div class="glass-card reveal reveal-delay-1" style="padding: var(--space-8); display: flex; gap: var(--space-6); align-items: flex-start;">
+            <div style="width: 90px; height: 90px; flex-shrink: 0; border-radius: 50%; background: var(--gradient-ocean); display: flex; align-items: center; justify-content: center; font-size: var(--text-2xl); font-weight: 800; color: white; font-family: var(--font-heading);">TN</div>
+            <div>
+              <h3 style="color: white; font-size: var(--text-xl); margin-bottom: 4px;">Tumelo Thabo Ncube</h3>
+              <p style="color: var(--neon-cyan); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-4);">Technical Co-Founder &amp; CTO</p>
+              <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin: 0;">Building the Blastbeat platform from the ground up. Tumelo leads all technology, product development, and digital infrastructure &mdash; creating the tools that allow schools across Southern Africa to run the full programme digitally and track real-world outcomes at scale.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="grid grid-3" style="gap: var(--space-5);">
+          <div class="glass-card reveal" style="padding: var(--space-6); text-align: center; border-style: dashed; border-color: rgba(255,140,66,0.3);">
+            <div style="width: 70px; height: 70px; border-radius: 50%; background: var(--gradient-sunset); margin: 0 auto var(--space-4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: var(--text-lg);">+</div>
+            <p style="color: var(--hot-coral); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-2);">Head of Partnerships</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: var(--text-sm); margin: 0;">Leading corporate and institutional partnerships across Africa and beyond. Position launching mid-2026.</p>
+          </div>
+          <div class="glass-card reveal reveal-delay-1" style="padding: var(--space-6); text-align: center; border-style: dashed; border-color: rgba(184,255,0,0.25);">
+            <div style="width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #B8FF00, #059669); margin: 0 auto var(--space-4); display: flex; align-items: center; justify-content: center; color: var(--deep-navy); font-weight: 700; font-size: var(--text-lg);">+</div>
+            <p style="color: var(--neon-lime); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-2);">Climate Programme Lead</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: var(--text-sm); margin: 0;">Overseeing student-led Climate Action Projects across all participating schools and verifying impact data.</p>
+          </div>
+          <div class="glass-card reveal reveal-delay-2" style="padding: var(--space-6); text-align: center; border-style: dashed; border-color: rgba(255,45,120,0.3);">
+            <div style="width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #FF2D78, #A855F7); margin: 0 auto var(--space-4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: var(--text-lg);">+</div>
+            <p style="color: var(--neon-pink); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-2);">Education &amp; Curriculum Lead</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: var(--text-sm); margin: 0;">Aligning Blastbeat with national curricula and managing teacher training across all partner schools.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TIMELINE ===== -->
+    <section id="timeline" class="section" style="background: var(--deep-navy); position: relative; overflow: hidden;">
+      <div class="orb" style="width: 350px; height: 350px; background: rgba(255,45,120,0.1); top: 10%; right: -8%;"></div>
+      <div class="orb" style="width: 250px; height: 250px; background: rgba(99,102,241,0.1); bottom: 15%; left: -5%;"></div>
+
+      <div class="container" style="position: relative; z-index: 2;">
+        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-14);">
+          <span class="neo-tag" style="margin-bottom: var(--space-4);">our journey</span>
+          <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4);">
+            23 Years of <span class="text-gradient-sunset">Youth-Led Change</span>
+          </h2>
+          <p style="color: rgba(255,255,255,0.7); font-size: var(--text-lg);">From a single event in Dublin to 19 countries, 360,000 students, and a national platform launching in South Africa.</p>
+        </div>
+
+        <div class="bb-timeline" style="max-width: 820px; margin: 0 auto;">
+
+          <!-- 2003 -->
+          <div class="bb-timeline-item reveal">
+            <div class="bb-timeline-year">2003</div>
+            <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+              <span class="neo-tag" style="font-size: 0.6rem;">The Beginning</span>
+            </div>
+            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Founded in Dublin, Ireland</h3>
+            <p style="color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: var(--space-4);">Robert Stephenson launches Blastbeat, pioneering the idea that running a real music event teaches young people more business and life skills than any simulation. The first ESE is formed at a Dublin secondary school. Students sell tickets, book artists, manage a budget &mdash; and keep the profit.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);">
+              <img src="/assets/images/bb-event-02.jpg" alt="Early Blastbeat event" width="400" height="220" loading="lazy" decoding="async" class="bb-timeline-photo">
+              <img src="/assets/images/bb-event-04.jpg" alt="Blastbeat students at event" width="400" height="220" loading="lazy" decoding="async" class="bb-timeline-photo">
+            </div>
+          </div>
+
+          <!-- 2008 -->
+          <div class="bb-timeline-item reveal">
+            <div class="bb-timeline-year">2008</div>
+            <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+              <span class="neo-tag-cyan" style="font-size: 0.6rem; padding: 4px 12px;">Going Global</span>
+            </div>
+            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Japan &mdash; The Model Goes International</h3>
+            <p style="color: rgba(255,255,255,0.7); line-height: 1.75; margin: 0;">Blastbeat expands to Japan, proving the model works across languages and cultures. Young people in Tokyo begin running their own Event Social Enterprises. The core insight holds: give students real stakes and real responsibility, and they rise to meet it. Over the next decade, the programme spreads to 19 countries.</p>
+          </div>
+
+          <!-- 2020 -->
+          <div class="bb-timeline-item reveal">
+            <div class="bb-timeline-year">2020</div>
+            <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+              <span class="neo-tag-pink" style="font-size: 0.6rem; padding: 4px 12px;">Africa</span>
+            </div>
+            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">South Africa Pilot</h3>
+            <p style="color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: var(--space-4);">Blastbeat launches its first pilot programme in South Africa &mdash; adapting the model for the African context. The climate component of the programme takes on new urgency. Students don&rsquo;t just fund climate action, they design it. The pilot proves not just viable, but transformative.</p>
+            <img src="/assets/images/bb-event-06.jpg" alt="Blastbeat South Africa programme" width="820" height="220" loading="lazy" decoding="async" class="bb-timeline-photo">
+          </div>
+
+          <!-- 2025 -->
+          <div class="bb-timeline-item reveal">
+            <div class="bb-timeline-year">2025</div>
+            <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+              <span class="neo-tag" style="font-size: 0.6rem;">Breakthrough Year</span>
+            </div>
+            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Web Summit &amp; NIPDB Partnership</h3>
+            <p style="color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: var(--space-4);">Blastbeat is selected for Web Summit 2025 in Lisbon &mdash; the world&rsquo;s largest technology conference &mdash; gaining international recognition as a social impact innovator. The same year, a landmark partnership with the Namibia Investment Promotion and Development Board (NIPDB) opens Blastbeat to Namibian schools, marking a significant step in continental expansion.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);">
+              <img src="/assets/images/bb-event-08.jpg" alt="Blastbeat at Web Summit" width="400" height="220" loading="lazy" decoding="async" class="bb-timeline-photo">
+              <img src="/assets/images/bb-event-12.jpg" alt="Blastbeat NIPDB Namibia partnership" width="400" height="220" loading="lazy" decoding="async" class="bb-timeline-photo">
+            </div>
+          </div>
+
+          <!-- 2026 -->
+          <div class="bb-timeline-item reveal" style="margin-bottom: 0;">
+            <div class="bb-timeline-year">2026</div>
+            <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+              <span class="neo-tag-pink" style="font-size: 0.6rem; padding: 4px 12px;">Now</span>
+            </div>
+            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">App Launch &amp; National Finals, Cape Town</h3>
+            <p style="color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: var(--space-4);">The Blastbeat digital platform goes live, enabling schools across Southern Africa to run the full 16-week programme with structured tools, video submissions, and real-time financial tracking. The inaugural South African National Finals will take place in Cape Town, bringing the best ESE teams together to showcase their enterprises, compete for prizes, and celebrate the next generation of African entrepreneurs.</p>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3);">
+              <img src="/assets/images/bb-event-09.jpg" alt="Blastbeat National Finals" width="280" height="200" loading="lazy" decoding="async" class="bb-timeline-photo" style="height: 180px;">
+              <img src="/assets/images/bb-event-13.jpg" alt="Blastbeat students 2026" width="280" height="200" loading="lazy" decoding="async" class="bb-timeline-photo" style="height: 180px;">
+              <img src="/assets/images/bb-event-14.jpg" alt="Blastbeat event 2026" width="280" height="200" loading="lazy" decoding="async" class="bb-timeline-photo" style="height: 180px;">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== AWARDS ===== -->
+    <section class="section section-dark" style="position: relative; overflow: hidden;">
+      <div class="orb" style="width: 300px; height: 300px; background: rgba(245,200,66,0.08); top: -15%; right: -5%;"></div>
+
+      <div class="container" style="position: relative; z-index: 2;">
+        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-12);">
+          <span class="neo-tag" style="margin-bottom: var(--space-4);">recognition</span>
+          <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4);">
+            Awards &amp; <span class="text-gradient-vivid">Recognition</span>
+          </h2>
+          <p style="font-size: var(--text-lg); color: rgba(255,255,255,0.7);">23 years of impact, recognised on the world stage.</p>
+        </div>
+
+        <div class="grid grid-2" style="max-width: 860px; margin: 0 auto; gap: var(--space-6);">
+          <div class="gradient-border reveal" style="background: rgba(255,255,255,0.04); padding: var(--space-8); border-radius: var(--radius-xl);">
+            <div style="margin-bottom: var(--space-5); border-radius: var(--radius-lg); overflow: hidden; height: 180px;">
+              <img src="/assets/images/hero-bg-1.jpg" alt="Web Summit Lisbon" width="600" height="180" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; object-position: center 35%;">
+            </div>
+            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Web Summit 2025</h3>
+            <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin: 0;">Selected as one of the standout education and social impact startups at the world&rsquo;s largest technology conference in Lisbon, Portugal. Blastbeat was featured for its scalable, real-world approach to youth entrepreneurship.</p>
+          </div>
+
+          <div class="gradient-border reveal reveal-delay-1" style="background: rgba(255,255,255,0.04); padding: var(--space-8); border-radius: var(--radius-xl);">
+            <div style="margin-bottom: var(--space-5); border-radius: var(--radius-lg); overflow: hidden; height: 180px;">
+              <img src="/assets/images/bb-event-10.jpg" alt="Blastbeat Social Enterprise Awards" width="600" height="180" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+            </div>
+            <h3 style="color: white; font-size: var(--text-xl); margin-bottom: var(--space-3);">Social Entrepreneurship Awards</h3>
+            <p style="color: rgba(255,255,255,0.7); font-size: var(--text-sm); line-height: 1.7; margin: 0;">Recognised for pioneering the Event Social Enterprise model &mdash; a scalable and replicable approach to youth empowerment through real-world business, performance, and climate action. The first of its kind globally.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== ORGANISATION INFO ===== -->
-    <section class="section">
-      <div class="container">
+    <section class="section" style="background: var(--deep-navy); position: relative; overflow: hidden;">
+      <div class="orb" style="width: 400px; height: 400px; background: rgba(99,102,241,0.1); bottom: -15%; right: -8%;"></div>
+
+      <div class="container" style="position: relative; z-index: 2;">
         <div class="grid grid-2 items-center" style="gap: var(--space-12);">
           <div class="reveal">
             <span class="neo-tag" style="margin-bottom: var(--space-6);">our organisation</span>
-            <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4); margin-bottom: var(--space-4);">
+            <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4); margin-bottom: var(--space-4); color: white;">
               Climate Actions Now
             </h2>
-            <p style="font-size: var(--text-lg); margin-bottom: var(--space-4);">
-              Blastbeat Education operates under Climate Actions Now, a UK registered charity dedicated to empowering youth through enterprise and environmental action.
+            <p style="font-size: var(--text-lg); margin-bottom: var(--space-4); color: rgba(255,255,255,0.75); line-height: 1.7;">
+              Blastbeat Education operates under Climate Actions Now, a UK registered charity dedicated to empowering youth through enterprise and environmental action. All programmes are designed to be measurable, scalable, and driven by real student outcomes &mdash; not metrics on paper.
             </p>
-
+            <p style="font-size: var(--text-base); margin-bottom: var(--space-6); color: rgba(255,255,255,0.6); line-height: 1.7;">
+              South African and Namibian operations are run in partnership with locally registered entities and comply fully with GDPR, POPIA, and applicable national data protection legislation. Guardian consent is required for all participating students under 18. All financial transactions between ESEs and schools are formally documented.
+            </p>
             <div class="pill-cloud" style="margin-bottom: var(--space-6);">
               <span class="pill pill-filled">UK Charity 1113530</span>
-              <span class="pill">Climate Actions Now</span>
-              <span class="pill">UN SDG 4 &mdash; Quality Education</span>
-              <span class="pill">UN SDG 8 &mdash; Decent Work</span>
-              <span class="pill">UN SDG 13 &mdash; Climate Action</span>
-              <span class="pill">UN SDG 17 &mdash; Partnerships</span>
+              <span class="pill" style="color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.2);">GDPR &amp; POPIA Compliant</span>
+              <span class="pill" style="color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.2);">SDG 4 &mdash; Education</span>
+              <span class="pill" style="color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.2);">SDG 8 &mdash; Decent Work</span>
+              <span class="pill" style="color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.2);">SDG 13 &mdash; Climate</span>
+              <span class="pill" style="color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.2);">BBBEE SED Aligned</span>
             </div>
-
             <div class="flex gap-4 flex-wrap">
               <a href="/pages/partners.html" class="btn btn-glow">Partner With Us</a>
-              <a href="/pages/contact.html" class="btn btn-secondary btn-pill">Get in Touch</a>
+              <a href="/pages/contact.html" class="btn btn-outline-glow">Get in Touch</a>
             </div>
           </div>
-          <div class="reveal reveal-delay-2">
-            <img src="/assets/images/hero-bg-3.jpg" alt="Blastbeat students at a live event" style="border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl);" width="600" height="400" loading="lazy" decoding="async">
+
+          <div class="reveal reveal-delay-1">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);">
+              <img src="/assets/images/bb-activity-02.jpg" alt="Blastbeat students collaborating" width="300" height="300" loading="lazy" decoding="async" style="width: 100%; height: 200px; object-fit: cover; object-position: center; border-radius: var(--radius-xl); grid-column: span 2;">
+              <img src="/assets/images/students-collaborating.jpeg" alt="Students working together" width="300" height="200" loading="lazy" decoding="async" style="width: 100%; height: 160px; object-fit: cover; object-position: center; border-radius: var(--radius-xl);">
+              <img src="/assets/images/bb-activity-03.jpeg" alt="Blastbeat activity" width="300" height="200" loading="lazy" decoding="async" style="width: 100%; height: 160px; object-fit: cover; object-position: center; border-radius: var(--radius-xl);">
+            </div>
           </div>
         </div>
       </div>
@@ -386,19 +477,23 @@
 
     <!-- ===== CTA ===== -->
     <section class="section section-dark" style="position: relative; overflow: hidden;">
-      <div class="orb" style="width: 300px; height: 300px; background: var(--electric-purple); top: -20%; right: -5%; filter: blur(80px); opacity: 0.4;"></div>
-      <div class="orb" style="width: 200px; height: 200px; background: var(--neon-cyan); bottom: -10%; left: 10%; filter: blur(80px); opacity: 0.3;"></div>
-      <div class="container text-center" style="max-width: 650px; position: relative; z-index: 2;">
-        <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-bottom: var(--space-4);">
-          Ready to Be Part of the <span class="text-gradient-vivid">Story?</span>
-        </h2>
-        <p style="font-size: var(--text-lg); margin-bottom: var(--space-8);">Whether you're a school, a partner, or a young person with big ideas &mdash; there's a place for you at Blastbeat.</p>
-        <div class="flex justify-center gap-4 flex-wrap">
-          <a href="/pages/apply.html" class="btn btn-glow btn-lg">&#9889; Apply for Your School</a>
-          <a href="/pages/contact.html" class="btn btn-outline-glow btn-lg">Contact Us &#8594;</a>
+      <div class="orb" style="width: 500px; height: 500px; background: rgba(99,102,241,0.12); top: -25%; left: 50%; transform: translateX(-50%);"></div>
+      <div class="container text-center" style="max-width: 680px; position: relative; z-index: 2;">
+        <div class="reveal">
+          <h2 class="text-chunky" style="font-size: clamp(2rem, 4.5vw, 3.5rem); margin-bottom: var(--space-4);">
+            Ready to Be Part of the <span class="text-gradient-vivid">Story?</span>
+          </h2>
+          <p style="font-size: var(--text-xl); color: rgba(255,255,255,0.7); margin-bottom: var(--space-8);">
+            Whether you&rsquo;re a school, a sponsor, or a young person with big ideas &mdash; there&rsquo;s a place for you at Blastbeat.
+          </p>
+          <div class="flex justify-center gap-4 flex-wrap">
+            <a href="/pages/apply.html" class="btn btn-glow btn-lg">Apply for Your School</a>
+            <a href="/pages/partners.html" class="btn btn-outline-glow btn-lg">Sponsor a School</a>
+          </div>
         </div>
       </div>
     </section>
+
   </main>
 
   <!-- ===== FOOTER ===== -->
@@ -407,11 +502,11 @@
       <div class="grid footer-grid" style="grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-10);">
         <div>
           <a href="/" class="bb-nav-logo" style="margin-bottom: var(--space-4); display: inline-flex;">
-            <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="36" height="36" loading="lazy" decoding="async" style="filter: brightness(10);">
+            <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="36" height="36" loading="lazy" decoding="async">
             <span style="color: var(--text-white);">BLASTBEAT</span>
           </a>
-          <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 300px;">Empowering young people through music, entrepreneurship, and climate action. 23 years. 19 countries. 360,000+ students.</p>
-          <p style="font-size: var(--text-xs); margin-top: var(--space-4); color: var(--text-muted);">Climate Actions Now<br>UK Registered Charity No. 1113530</p>
+          <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 300px; color: rgba(255,255,255,0.6);">Empowering young people through music, entrepreneurship, and climate action. 23 years. 19 countries. 360,000+ students.</p>
+          <p style="font-size: var(--text-xs); margin-top: var(--space-4); color: rgba(255,255,255,0.4);">Climate Actions Now<br>UK Registered Charity No. 1113530<br>GDPR &amp; POPIA Compliant</p>
           <div class="footer-social" style="margin-top: var(--space-6);">
             <a href="#" aria-label="LinkedIn">in</a>
             <a href="#" aria-label="Instagram">ig</a>
@@ -447,13 +542,13 @@
             <li><a href="/pages/contact.html">Contact Us</a></li>
           </ul>
           <div style="margin-top: var(--space-6);">
-            <p style="font-size: var(--text-xs); color: var(--text-muted); margin-bottom: var(--space-2);">General enquiries</p>
-            <a href="mailto:info@blastbeat.education" style="font-size: var(--text-sm);">info@blastbeat.education</a>
+            <p style="font-size: var(--text-xs); color: rgba(255,255,255,0.4); margin-bottom: var(--space-2);">General enquiries</p>
+            <a href="mailto:info@blastbeat.education" style="font-size: var(--text-sm); color: rgba(255,255,255,0.7);">info@blastbeat.education</a>
           </div>
         </div>
       </div>
       <div class="footer-bottom flex justify-between items-center flex-wrap gap-4">
-        <p style="margin: 0; color: var(--text-muted);">&copy; 2026 Climate Actions Now. All rights reserved. UK Charity 1113530</p>
+        <p style="margin: 0; color: rgba(255,255,255,0.4); font-size: var(--text-xs);">&copy; 2026 Climate Actions Now. All rights reserved. UK Charity 1113530 &bull; GDPR &amp; POPIA Compliant</p>
         <div class="flex gap-6">
           <a href="/pages/privacy-policy.html">Privacy Policy</a>
           <a href="/pages/terms-of-use.html">Terms of Use</a>
@@ -463,9 +558,8 @@
     </div>
   </footer>
 
-  <!-- Floating Apply Badge -->
   <div class="fab-badge">
-    <a href="/pages/apply.html">&#9889; Apply Now</a>
+    <a href="/pages/apply.html">Apply Now</a>
   </div>
 
   <script src="/assets/js/navigation.js" defer></script>
