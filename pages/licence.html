@@ -405,18 +405,232 @@
       background: #FF8C42; box-shadow: 0 0 8px #FF8C42;
     }
 
-    /* Cert layout — three across on wide desktop, two on tablet, one on mobile */
+    /* Cert layout — two-up showroom grid; each card has real breathing room */
     .cert-grid {
-      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-6);
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-8);
+      max-width: 1180px; margin: 0 auto;
     }
-    @media (max-width: 1280px) {
-      .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 920px; margin: 0 auto; }
-      .cert-grid > .bb-cert:nth-child(3) { grid-column: 1 / -1; max-width: 460px; justify-self: center; }
+    @media (max-width: 980px) {
+      .cert-grid { grid-template-columns: 1fr; max-width: 540px; }
+    }
+
+    /* === Programme-class accent themes — applied to .bb-cert via modifier === */
+    /* Pink — MACC (Music, Arts, Commerce, Culture) */
+    .bb-cert.theme-pink { background:
+        radial-gradient(ellipse at 20% 0%, rgba(255,45,120,0.22), transparent 55%),
+        radial-gradient(ellipse at 100% 100%, rgba(168,85,247,0.18), transparent 55%),
+        linear-gradient(180deg, #1A1126 0%, #110918 100%);
+    }
+    .bb-cert.theme-pink::before {
+      background: linear-gradient(135deg,
+        rgba(255,45,120,0.7) 0%, rgba(168,85,247,0.55) 50%,
+        rgba(255,107,166,0.7) 100%);
+    }
+
+    /* Cyan — FootBeat (Sport & Enterprise) */
+    .bb-cert.theme-cyan { background:
+        radial-gradient(ellipse at 20% 0%, rgba(0,245,255,0.22), transparent 55%),
+        radial-gradient(ellipse at 100% 100%, rgba(99,102,241,0.18), transparent 55%),
+        linear-gradient(180deg, #0B1A26 0%, #08111E 100%);
+    }
+    .bb-cert.theme-cyan::before {
+      background: linear-gradient(135deg,
+        rgba(0,245,255,0.7) 0%, rgba(99,102,241,0.55) 50%,
+        rgba(0,245,255,0.7) 100%);
+    }
+
+    /* Gold — Sponsor-Adopted (luxury / premium) */
+    .bb-cert.theme-gold { background:
+        radial-gradient(ellipse at 20% 0%, rgba(255,217,61,0.18), transparent 55%),
+        radial-gradient(ellipse at 100% 100%, rgba(212,175,55,0.18), transparent 55%),
+        linear-gradient(180deg, #1A1610 0%, #110D07 100%);
+      box-shadow:
+        0 30px 70px -20px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(212,175,55,0.18) inset,
+        0 0 30px rgba(255,217,61,0.05) inset;
+    }
+    .bb-cert.theme-gold::before {
+      background: linear-gradient(135deg,
+        #FFD93D 0%, #FFB454 25%, #D4AF37 50%,
+        #FFE48A 75%, #FFD93D 100%);
+      padding: 1.5px;
+    }
+
+    /* Purple — International Partner */
+    .bb-cert.theme-purple { background:
+        radial-gradient(ellipse at 20% 0%, rgba(168,85,247,0.22), transparent 55%),
+        radial-gradient(ellipse at 100% 100%, rgba(99,102,241,0.18), transparent 55%),
+        linear-gradient(180deg, #16111E 0%, #0E0918 100%);
+    }
+    .bb-cert.theme-purple::before {
+      background: linear-gradient(135deg,
+        rgba(168,85,247,0.7) 0%, rgba(99,102,241,0.55) 50%,
+        rgba(201,167,255,0.7) 100%);
+    }
+
+    /* Per-theme class tag colours (extended) */
+    .bb-cert-class-tag.pink   { border-color: rgba(255,45,120,0.45); background: rgba(255,45,120,0.10); color: #FF7BAA; }
+    .bb-cert-class-tag.gold   { border-color: rgba(212,175,55,0.55); background: rgba(255,217,61,0.10); color: #FFD93D; }
+
+    /* Per-theme accent colour for .bb-cert-title .accent text */
+    .bb-cert.theme-pink   .bb-cert-title .accent { background: linear-gradient(135deg, #FF2D78 0%, #FF7BAA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .bb-cert.theme-cyan   .bb-cert-title .accent { background: linear-gradient(135deg, #00F5FF 0%, #6366F1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .bb-cert.theme-gold   .bb-cert-title .accent { background: linear-gradient(135deg, #FFD93D 0%, #D4AF37 50%, #FFE48A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .bb-cert.theme-purple .bb-cert-title .accent { background: linear-gradient(135deg, #A855F7 0%, #6366F1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* Gold seal variant */
+    .bb-cert-seal.gold {
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,0.85), transparent 45%),
+        conic-gradient(from 0deg,
+          #FFD93D, #FFE48A, #D4AF37, #B8860B, #FFD93D);
+    }
+    .bb-cert-seal.gold .bb-cert-seal-inner {
+      background: rgba(20,15,5,0.92);
+      border-color: rgba(255,217,61,0.45);
+      color: #FFD93D;
+    }
+
+    /* Click-to-expand interaction */
+    .bb-cert {
+      cursor: zoom-in;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .bb-cert:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 36px 72px -18px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(255,255,255,0.1) inset;
+    }
+    .bb-cert.theme-gold:hover {
+      box-shadow:
+        0 36px 72px -18px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(212,175,55,0.35) inset,
+        0 0 50px rgba(255,217,61,0.10) inset;
+    }
+    .bb-cert-zoom-hint {
+      position: absolute;
+      bottom: 14px; left: 14px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,0.32);
+      z-index: 2;
+      pointer-events: none;
+      transition: color 0.25s ease;
+    }
+    .bb-cert:hover .bb-cert-zoom-hint { color: rgba(255,255,255,0.6); }
+    .bb-cert.theme-gold .bb-cert-zoom-hint { color: rgba(255,217,61,0.45); }
+    .bb-cert.theme-gold:hover .bb-cert-zoom-hint { color: rgba(255,217,61,0.85); }
+
+    /* Lightbox modal */
+    .cert-modal {
+      position: fixed; inset: 0;
+      background: rgba(5,5,12,0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9000;
+      display: none;
+      align-items: flex-start; justify-content: center;
+      padding: 40px 20px; overflow-y: auto;
+    }
+    .cert-modal.is-open { display: flex; }
+    .cert-modal-inner {
+      width: 100%; max-width: 720px;
+      animation: certPop 0.28s ease;
+    }
+    @keyframes certPop {
+      from { opacity: 0; transform: scale(0.96) translateY(12px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .cert-modal-close {
+      position: fixed; top: 18px; right: 18px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(20,20,40,0.9);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white; cursor: pointer;
+      font-size: 1.4rem; line-height: 1; font-weight: 400;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9001;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .cert-modal-close:hover { transform: rotate(90deg); background: rgba(40,40,80,0.95); }
+    .cert-modal .bb-cert { cursor: default; }
+    .cert-modal .bb-cert:hover { transform: none; }
+    .cert-modal-json {
+      margin-top: var(--space-6);
+      padding: var(--space-6);
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem; line-height: 1.6;
+      color: rgba(255,255,255,0.75);
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .cert-modal-json-label {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: var(--space-3);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--neon-cyan);
+    }
+    .cert-modal-json-label::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--neon-cyan); box-shadow: 0 0 8px var(--neon-cyan);
+    }
+
+    /* Photo strip — proof / context */
+    .photo-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3); margin-top: var(--space-12);
+      max-width: 1180px; margin-left: auto; margin-right: auto;
+    }
+    .photo-strip img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255,217,61,0.18);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+      transition: transform 0.4s ease, border-color 0.3s ease;
+    }
+    .photo-strip img:hover {
+      transform: scale(1.02);
+      border-color: rgba(255,217,61,0.5);
     }
     @media (max-width: 720px) {
-      .cert-grid { grid-template-columns: 1fr; max-width: 460px; }
-      .cert-grid > .bb-cert:nth-child(3) { grid-column: auto; max-width: none; }
+      .photo-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Hero visual — small image accent */
+    .hero-visual {
+      position: relative;
+      border-radius: var(--radius-2xl);
+      overflow: hidden;
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,217,61,0.18);
+    }
+    .hero-visual img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    .hero-visual::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(15,15,26,0.3), rgba(15,15,26,0.65));
+      pointer-events: none;
+    }
+
+    /* Gold luxury divider — for premium accents in section headers */
+    .gold-divider {
+      display: inline-flex; align-items: center; gap: 14px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(255,217,61,0.85);
+    }
+    .gold-divider::before, .gold-divider::after {
+      content: ""; height: 1px; width: 36px;
+      background: linear-gradient(90deg, transparent, #D4AF37, transparent);
     }
 
     /* Verification flow */
@@ -520,31 +734,37 @@
       <div class="orb orb-3" aria-hidden="true"></div>
 
       <div class="container" style="position: relative; z-index: 2;">
-        <div style="max-width: 880px;">
-          <div class="product-marker reveal" style="margin-bottom: var(--space-6);">
-            <span class="pm-num">01</span>
-            <span>Product 01 &nbsp;&middot;&nbsp; The Blastbeat Licence</span>
-          </div>
-          <h1 class="text-chunky reveal" style="font-size: clamp(2.4rem, 6vw, 4.4rem); margin-bottom: var(--space-6); line-height: 1.05;">
-            One verified licence.<br>
-            <span class="text-gradient-vivid">A whole school transformed.</span>
-          </h1>
-          <p class="reveal reveal-delay-1" style="font-size: var(--text-xl); max-width: 720px; margin-bottom: var(--space-6); color: rgba(255,255,255,0.75); line-height: 1.6;">
-            The Blastbeat Licence is our flagship digital product. Each licence is uniquely numbered, audit-trailed,
-            SDG-mapped and issued under the charter of <strong style="color:white;">Climate Actions Now (UK Charity 1113530)</strong>
-            &mdash; aligned with W3C Verifiable Credentials, ISO&nbsp;9001 quality processes, and an independent verification registry.
-          </p>
-          <div class="flex gap-4 flex-wrap reveal reveal-delay-2">
-            <a href="#certificates" class="btn btn-glow btn-lg">&#128196; View Sample Certificates</a>
-            <a href="#anatomy" class="btn btn-outline-glow btn-lg">Anatomy of a Licence &#8594;</a>
+        <div class="grid grid-2" style="gap: var(--space-10); align-items: center;">
+          <div>
+            <div class="product-marker reveal" style="margin-bottom: var(--space-6);">
+              <span class="pm-num">01</span>
+              <span>Product 01 &nbsp;&middot;&nbsp; The Blastbeat Licence</span>
+            </div>
+            <h1 class="text-chunky reveal" style="font-size: clamp(2.4rem, 5.5vw, 4rem); margin-bottom: var(--space-6); line-height: 1.05;">
+              One verified licence.<br>
+              <span class="text-gradient-vivid">A whole school transformed.</span>
+            </h1>
+            <p class="reveal reveal-delay-1" style="font-size: var(--text-lg); margin-bottom: var(--space-6); color: rgba(255,255,255,0.75); line-height: 1.6;">
+              The Blastbeat Licence is our flagship digital product. Each licence is uniquely numbered, audit-trailed,
+              SDG-mapped and issued under the charter of <strong style="color:white;">Climate Actions Now (UK Charity 1113530)</strong>
+              &mdash; aligned with W3C Verifiable Credentials, ISO&nbsp;9001 quality processes, and an independent verification registry.
+            </p>
+            <div class="flex gap-4 flex-wrap reveal reveal-delay-2">
+              <a href="#certificates" class="btn btn-glow btn-lg">&#128196; View Sample Certificates</a>
+              <a href="#anatomy" class="btn btn-outline-glow btn-lg">Anatomy of a Licence &#8594;</a>
+            </div>
+
+            <div class="reveal reveal-delay-3" style="margin-top: var(--space-8); display: flex; flex-wrap: wrap; gap: var(--space-2);">
+              <span class="bb-cert-chip lime licence-mono">SKU&nbsp;BBE-LIC-2026</span>
+              <span class="bb-cert-chip cyan licence-mono">W3C VC Aligned</span>
+              <span class="bb-cert-chip purple licence-mono">ISO 9001 Referenced</span>
+              <span class="bb-cert-chip pink licence-mono">UN SDG 4 / 8 / 9 / 13 / 17</span>
+              <span class="bb-cert-chip licence-mono" style="border-color:rgba(255,217,61,0.45); color:#FFD93D; background:rgba(255,217,61,0.08);">UK Charity 1113530</span>
+            </div>
           </div>
 
-          <div class="reveal reveal-delay-3" style="margin-top: var(--space-10); display: flex; flex-wrap: wrap; gap: var(--space-3);">
-            <span class="bb-cert-chip lime licence-mono">SKU&nbsp;BBE-LIC-2026</span>
-            <span class="bb-cert-chip cyan licence-mono">W3C VC Aligned</span>
-            <span class="bb-cert-chip purple licence-mono">ISO 9001 Referenced</span>
-            <span class="bb-cert-chip pink licence-mono">UN SDG 4 / 8 / 9 / 13 / 17</span>
-            <span class="bb-cert-chip licence-mono">UK Charity 1113530</span>
+          <div class="hero-visual reveal reveal-delay-1" aria-hidden="true">
+            <img src="/assets/images/bb-students-group.jpg" alt="" loading="eager" fetchpriority="high">
           </div>
         </div>
       </div>
@@ -611,26 +831,27 @@
     <!-- ===== SAMPLE CERTIFICATES ===== -->
     <section id="certificates" class="section" style="background: var(--deep-navy); position: relative; overflow: hidden;">
       <div class="orb" style="width: 480px; height: 480px; background: rgba(168,85,247,0.10); top: -15%; right: -10%;"></div>
-      <div class="orb" style="width: 360px; height: 360px; background: rgba(99,102,241,0.10); bottom: -15%; left: -8%;"></div>
+      <div class="orb" style="width: 360px; height: 360px; background: rgba(255,217,61,0.08); bottom: -15%; left: -8%;"></div>
 
       <div class="container" style="position: relative; z-index: 2;">
-        <div class="text-center reveal" style="max-width: 760px; margin: 0 auto var(--space-10);">
-          <span class="demo-banner" style="margin-bottom: var(--space-4);">SAMPLE &middot; FOR DISPLAY ONLY</span>
+        <div class="text-center reveal" style="max-width: 800px; margin: 0 auto var(--space-12);">
+          <div class="gold-divider" style="margin-bottom: var(--space-4);">Sample &middot; For display only</div>
           <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: var(--space-4);">
-            Three Classes. <span class="text-gradient-vivid">One Standard.</span>
+            Four programmes. <span class="text-gradient-vivid">One verification standard.</span>
           </h2>
           <p style="color: rgba(255,255,255,0.7); font-size: var(--text-lg); margin-top: var(--space-4);">
-            The Blastbeat Licence is issued in three classes &mdash; School, Sponsor-Adopted, and International Partner.
-            Every class shares the same credibility framework. The samples below use realistic but illustrative metadata.
+            Click any certificate to enlarge it and see the W3C Verifiable Credentials JSON it would generate. Each
+            programme has its own colour, but every licence shares the same credibility framework.
           </p>
         </div>
 
         <div class="cert-grid">
 
-          <!-- ===== CERTIFICATE 1 — SCHOOL CLASS ===== -->
-          <div class="bb-cert reveal" aria-labelledby="cert1-title">
-            <div class="bb-cert-watermark" aria-hidden="true">BLASTBEAT</div>
+          <!-- ===== CERTIFICATE 1 — MACC (Music, Arts, Commerce, Culture) — PINK ===== -->
+          <div class="bb-cert theme-pink reveal" role="button" tabindex="0" data-cert="macc" aria-labelledby="cert1-title">
+            <div class="bb-cert-watermark" aria-hidden="true">MACC</div>
             <div class="bb-cert-seal" aria-hidden="true"><div class="bb-cert-seal-inner">CAN<br>1113530</div></div>
+            <span class="bb-cert-zoom-hint" aria-hidden="true">&#128269; Click to enlarge</span>
 
             <div class="bb-cert-head">
               <div class="bb-cert-issuer">
@@ -641,15 +862,15 @@
                 </div>
               </div>
               <div class="bb-cert-class">
-                <div class="bb-cert-class-tag">Class A &middot; School</div>
-                <div class="bb-cert-id">BBE-LIC-2026-SCH-00142</div>
+                <div class="bb-cert-class-tag pink">Class A &middot; MACC</div>
+                <div class="bb-cert-id">BBE-LIC-2026-MAC-00142</div>
               </div>
             </div>
 
             <div class="bb-cert-title" id="cert1-title">
-              <div class="bb-cert-title-eyebrow">Certificate of Programme Licence</div>
-              <h3>The Blastbeat <span class="accent">Event Social Enterprise</span> Licence</h3>
-              <p>Granted under the Blastbeat Education Charter for the 2026 academic year.</p>
+              <div class="bb-cert-title-eyebrow">Programme Licence &middot; Music, Arts, Commerce &amp; Culture</div>
+              <h3>The <span class="accent">MACC</span> Programme Licence</h3>
+              <p>Granted under the Blastbeat charter for music, arts and creative-industry enterprise delivery.</p>
             </div>
 
             <div class="bb-cert-holder">
@@ -659,21 +880,96 @@
             </div>
 
             <div class="bb-cert-meta">
-              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Charter Ref</span><span class="bb-cert-meta-val">CAN/2026/SCH/00142</span></div>
+              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Charter Ref</span><span class="bb-cert-meta-val">CAN/2026/MAC/00142</span></div>
               <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Issued</span><span class="bb-cert-meta-val">2026-01-15</span></div>
               <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Valid Until</span><span class="bb-cert-meta-val">2026-12-31</span></div>
               <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Renewable</span><span class="bb-cert-meta-val">Yes &middot; Annual</span></div>
               <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Territory</span><span class="bb-cert-meta-val">South Africa</span></div>
               <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Cohort Size</span><span class="bb-cert-meta-val">14 ESE Roles</span></div>
-              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Modules</span><span class="bb-cert-meta-val">ESE &middot; MACC &middot; FootBeat</span></div>
-              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">DID</span><span class="bb-cert-meta-val">did:bbe:sch:00142</span></div>
+              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Discipline</span><span class="bb-cert-meta-val">Music &middot; Arts &middot; Culture</span></div>
+              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">DID</span><span class="bb-cert-meta-val">did:bbe:mac:00142</span></div>
             </div>
 
             <div class="bb-cert-strip">
+              <span class="bb-cert-chip pink">Music ESE</span>
               <span class="bb-cert-chip lime">SDG&nbsp;4</span>
               <span class="bb-cert-chip lime">SDG&nbsp;8</span>
               <span class="bb-cert-chip cyan">SDG&nbsp;9</span>
-              <span class="bb-cert-chip pink">SDG&nbsp;13</span>
+              <span class="bb-cert-chip">BBBEE&nbsp;SED</span>
+              <span class="bb-cert-chip">S.18A&nbsp;Eligible</span>
+            </div>
+
+            <div class="bb-cert-sig">
+              <div class="bb-cert-sig-block">
+                <div class="bb-cert-sig-line">Robert Stephenson</div>
+                <div class="bb-cert-sig-name">Robert Stephenson</div>
+                <div class="bb-cert-sig-role">Founder &amp; Programme Director</div>
+              </div>
+              <div class="bb-cert-sig-block">
+                <div class="bb-cert-sig-line">CAN Trustee</div>
+                <div class="bb-cert-sig-name">Trustee Signatory</div>
+                <div class="bb-cert-sig-role">Climate Actions Now (UK)</div>
+              </div>
+            </div>
+
+            <div class="bb-cert-foot">
+              <div class="bb-cert-qr" aria-hidden="true"></div>
+              <div class="bb-cert-verify-text">
+                <span class="vt-line vt-strong">Verify at blastbeat.education/verify</span>
+                <span class="vt-line">Reg: BBE-LIC-2026-MAC-00142</span>
+                <span class="bb-cert-hash">0x9F4A2E&hellip;C7B1D3</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== CERTIFICATE 2 — FOOTBEAT (Sport &amp; Enterprise) — CYAN ===== -->
+          <div class="bb-cert theme-cyan reveal reveal-delay-1" role="button" tabindex="0" data-cert="footbeat" aria-labelledby="cert2-title">
+            <div class="bb-cert-watermark" aria-hidden="true">FOOTBEAT</div>
+            <div class="bb-cert-seal" aria-hidden="true"><div class="bb-cert-seal-inner">CAN<br>1113530</div></div>
+            <span class="bb-cert-zoom-hint" aria-hidden="true">&#128269; Click to enlarge</span>
+
+            <div class="bb-cert-head">
+              <div class="bb-cert-issuer">
+                <img src="/assets/images/logo-blastbeat.png" alt="" loading="lazy">
+                <div>
+                  <div class="bb-cert-issuer-name">Climate Actions Now</div>
+                  <div class="bb-cert-issuer-sub">UK CHARITY 1113530 &middot; ISSUER</div>
+                </div>
+              </div>
+              <div class="bb-cert-class">
+                <div class="bb-cert-class-tag cyan">Class B &middot; FootBeat</div>
+                <div class="bb-cert-id">BBE-LIC-2026-FBT-00074</div>
+              </div>
+            </div>
+
+            <div class="bb-cert-title" id="cert2-title">
+              <div class="bb-cert-title-eyebrow">Programme Licence &middot; Sport &amp; Enterprise</div>
+              <h3>The <span class="accent">FootBeat</span> Programme Licence</h3>
+              <p>Granted under the Blastbeat charter for sport, athletics and event-enterprise delivery.</p>
+            </div>
+
+            <div class="bb-cert-holder">
+              <div class="bb-cert-holder-label">&mdash; Issued To &mdash;</div>
+              <div class="bb-cert-holder-name">Mitchells Plain Comprehensive</div>
+              <div class="bb-cert-holder-meta">Mitchells Plain, Cape Town &middot; 450 learners &middot; Grades 10&ndash;12</div>
+            </div>
+
+            <div class="bb-cert-meta">
+              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Charter Ref</span><span class="bb-cert-meta-val">CAN/2026/FBT/00074</span></div>
+              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Issued</span><span class="bb-cert-meta-val">2026-01-22</span></div>
+              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Valid Until</span><span class="bb-cert-meta-val">2026-12-31</span></div>
+              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Renewable</span><span class="bb-cert-meta-val">Yes &middot; Annual</span></div>
+              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Territory</span><span class="bb-cert-meta-val">South Africa</span></div>
+              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Cohort Size</span><span class="bb-cert-meta-val">14 ESE Roles</span></div>
+              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">Discipline</span><span class="bb-cert-meta-val">Football &middot; Athletics</span></div>
+              <div class="bb-cert-meta-row"><span class="bb-cert-meta-key">DID</span><span class="bb-cert-meta-val">did:bbe:fbt:00074</span></div>
+            </div>
+
+            <div class="bb-cert-strip">
+              <span class="bb-cert-chip cyan">Sport ESE</span>
+              <span class="bb-cert-chip lime">SDG&nbsp;3</span>
+              <span class="bb-cert-chip lime">SDG&nbsp;4</span>
+              <span class="bb-cert-chip lime">SDG&nbsp;8</span>
               <span class="bb-cert-chip purple">SDG&nbsp;17</span>
               <span class="bb-cert-chip">BBBEE&nbsp;SED</span>
               <span class="bb-cert-chip">S.18A&nbsp;Eligible</span>
@@ -696,16 +992,17 @@
               <div class="bb-cert-qr" aria-hidden="true"></div>
               <div class="bb-cert-verify-text">
                 <span class="vt-line vt-strong">Verify at blastbeat.education/verify</span>
-                <span class="vt-line">Reg: BBE-LIC-2026-SCH-00142</span>
-                <span class="bb-cert-hash">0x9F4A2E&hellip;C7B1D3</span>
+                <span class="vt-line">Reg: BBE-LIC-2026-FBT-00074</span>
+                <span class="bb-cert-hash">0x6B81F2&hellip;A4D907</span>
               </div>
             </div>
           </div>
 
-          <!-- ===== CERTIFICATE 2 — SPONSOR-ADOPTED CLASS ===== -->
-          <div class="bb-cert reveal reveal-delay-1" aria-labelledby="cert2-title">
+          <!-- ===== CERTIFICATE 3 — SPONSOR-ADOPTED — GOLD / LUXURY ===== -->
+          <div class="bb-cert theme-gold reveal reveal-delay-2" role="button" tabindex="0" data-cert="sponsor" aria-labelledby="cert3-title">
             <div class="bb-cert-watermark" aria-hidden="true">SPONSOR</div>
-            <div class="bb-cert-seal" aria-hidden="true"><div class="bb-cert-seal-inner">CAN<br>1113530</div></div>
+            <div class="bb-cert-seal gold" aria-hidden="true"><div class="bb-cert-seal-inner">CAN<br>1113530</div></div>
+            <span class="bb-cert-zoom-hint" aria-hidden="true">&#10024; Click to enlarge</span>
 
             <div class="bb-cert-head">
               <div class="bb-cert-issuer">
@@ -716,21 +1013,21 @@
                 </div>
               </div>
               <div class="bb-cert-class">
-                <div class="bb-cert-class-tag cyan">Class B &middot; Sponsor-Adopted</div>
+                <div class="bb-cert-class-tag gold">Class C &middot; Sponsor-Adopted</div>
                 <div class="bb-cert-id">BBE-LIC-2026-SPN-00037</div>
               </div>
             </div>
 
-            <div class="bb-cert-title" id="cert2-title">
-              <div class="bb-cert-title-eyebrow">Sponsor-Adopted Programme Licence</div>
-              <h3>Funded by a <span class="accent">named corporate sponsor</span> under the Adopt-A-School charter.</h3>
-              <p>Issued jointly to the school and the sponsoring organisation for the 2026 academic year.</p>
+            <div class="bb-cert-title" id="cert3-title">
+              <div class="bb-cert-title-eyebrow">Premium Sponsor-Adopted Programme Licence</div>
+              <h3>Funded by a <span class="accent">named corporate sponsor.</span></h3>
+              <p>Issued jointly to the school and the sponsoring organisation under the Adopt-A-School charter.</p>
             </div>
 
             <div class="bb-cert-holder">
               <div class="bb-cert-holder-label">&mdash; Issued To &mdash;</div>
               <div class="bb-cert-holder-name">Wynberg Girls&rsquo; High School</div>
-              <div class="bb-cert-holder-meta">Wynberg, Cape Town &middot; sponsored by <strong style="color:var(--neon-cyan);">Coca-Cola South Africa</strong></div>
+              <div class="bb-cert-holder-meta">Wynberg, Cape Town &middot; sponsored by <strong style="color:#FFD93D;">Coca-Cola South Africa</strong></div>
             </div>
 
             <div class="bb-cert-meta">
@@ -745,6 +1042,7 @@
             </div>
 
             <div class="bb-cert-strip">
+              <span class="bb-cert-chip" style="border-color:rgba(255,217,61,0.45); color:#FFD93D; background:rgba(255,217,61,0.08);">Premium</span>
               <span class="bb-cert-chip cyan">ESG&nbsp;Verified</span>
               <span class="bb-cert-chip lime">BBBEE&nbsp;SED</span>
               <span class="bb-cert-chip lime">S.18A&nbsp;Eligible</span>
@@ -776,10 +1074,11 @@
             </div>
           </div>
 
-          <!-- ===== CERTIFICATE 3 — INTERNATIONAL PARTNER ===== -->
-          <div class="bb-cert reveal reveal-delay-2" aria-labelledby="cert3-title">
+          <!-- ===== CERTIFICATE 4 — INTERNATIONAL PARTNER — PURPLE ===== -->
+          <div class="bb-cert theme-purple reveal reveal-delay-3" role="button" tabindex="0" data-cert="international" aria-labelledby="cert4-title">
             <div class="bb-cert-watermark" aria-hidden="true">INT&apos;L</div>
             <div class="bb-cert-seal" aria-hidden="true"><div class="bb-cert-seal-inner">CAN<br>1113530</div></div>
+            <span class="bb-cert-zoom-hint" aria-hidden="true">&#128269; Click to enlarge</span>
 
             <div class="bb-cert-head">
               <div class="bb-cert-issuer">
@@ -790,12 +1089,12 @@
                 </div>
               </div>
               <div class="bb-cert-class">
-                <div class="bb-cert-class-tag purple">Class C &middot; International</div>
+                <div class="bb-cert-class-tag purple">Class D &middot; International</div>
                 <div class="bb-cert-id">BBE-LIC-2026-INT-00009</div>
               </div>
             </div>
 
-            <div class="bb-cert-title" id="cert3-title">
+            <div class="bb-cert-title" id="cert4-title">
               <div class="bb-cert-title-eyebrow">International Partner Programme Licence</div>
               <h3>A regional rights agreement for <span class="accent">multi-school delivery.</span></h3>
               <p>Issued to a vetted international partner authorised to deliver Blastbeat in a defined territory.</p>
@@ -857,8 +1156,24 @@
           synthetic. On issuance, every Blastbeat Licence is rendered as a printable PDF, a web-verifiable URL and a
           machine-readable JSON record using the W3C Verifiable Credentials data model.
         </p>
+
+        <!-- Photo strip — proof / context -->
+        <div class="photo-strip reveal" aria-label="Blastbeat events and students">
+          <img src="/assets/images/bb-event-06.jpg" alt="Blastbeat student event &mdash; performance" loading="lazy">
+          <img src="/assets/images/bb-event-09.jpg" alt="Blastbeat student event &mdash; audience" loading="lazy">
+          <img src="/assets/images/bb-students-group.jpg" alt="Blastbeat student team" loading="lazy">
+          <img src="/assets/images/bb-event-12.jpg" alt="Blastbeat student event &mdash; team huddle" loading="lazy">
+        </div>
       </div>
     </section>
+
+    <!-- ===== LIGHTBOX MODAL (populated by JS) ===== -->
+    <div class="cert-modal" id="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title" aria-hidden="true">
+      <button type="button" class="cert-modal-close" aria-label="Close certificate preview">&times;</button>
+      <div class="cert-modal-inner" id="cert-modal-inner">
+        <!-- cert is cloned in here on click -->
+      </div>
+    </div>
 
     <!-- ===== ANATOMY OF A LICENCE ===== -->
     <section id="anatomy" class="section section-dark" style="position: relative; overflow: hidden;">
@@ -1214,5 +1529,114 @@
   <script src="/assets/js/animations.js" defer></script>
   <script src="/assets/js/cookie-consent.js" defer></script>
   <script src="/assets/js/beat-bot.js" defer></script>
+
+  <!-- Certificate lightbox modal — clones the clicked cert and shows it large + W3C VC JSON -->
+  <script>
+    (function () {
+      var modal = document.getElementById('cert-modal');
+      var inner = document.getElementById('cert-modal-inner');
+      if (!modal || !inner) return;
+      var closeBtn = modal.querySelector('.cert-modal-close');
+
+      // W3C Verifiable Credentials JSON-LD payloads — one per cert
+      var jsonByCert = {
+        macc: {
+          "@context": ["https://www.w3.org/ns/credentials/v2", "https://blastbeat.education/credentials/v1"],
+          "id": "urn:uuid:bbe-lic-2026-mac-00142",
+          "type": ["VerifiableCredential", "BlastbeatProgrammeLicence", "MACC"],
+          "issuer": { "id": "did:web:blastbeat.education", "name": "Climate Actions Now", "ukCharityNumber": "1113530" },
+          "validFrom": "2026-01-15T00:00:00Z",
+          "validUntil": "2026-12-31T23:59:59Z",
+          "credentialSubject": { "id": "did:bbe:mac:00142", "name": "Langa High School", "territory": "ZA-WC", "discipline": ["Music", "Arts", "Culture"], "cohortSize": 14 },
+          "sdgAlignment": [4, 8, 9],
+          "proof": { "type": "DataIntegrityProof", "cryptosuite": "eddsa-jcs-2022", "hash": "0x9F4A2E…C7B1D3" }
+        },
+        footbeat: {
+          "@context": ["https://www.w3.org/ns/credentials/v2", "https://blastbeat.education/credentials/v1"],
+          "id": "urn:uuid:bbe-lic-2026-fbt-00074",
+          "type": ["VerifiableCredential", "BlastbeatProgrammeLicence", "FootBeat"],
+          "issuer": { "id": "did:web:blastbeat.education", "name": "Climate Actions Now", "ukCharityNumber": "1113530" },
+          "validFrom": "2026-01-22T00:00:00Z",
+          "validUntil": "2026-12-31T23:59:59Z",
+          "credentialSubject": { "id": "did:bbe:fbt:00074", "name": "Mitchells Plain Comprehensive", "territory": "ZA-WC", "discipline": ["Football", "Athletics"], "cohortSize": 14 },
+          "sdgAlignment": [3, 4, 8, 17],
+          "proof": { "type": "DataIntegrityProof", "cryptosuite": "eddsa-jcs-2022", "hash": "0x6B81F2…A4D907" }
+        },
+        sponsor: {
+          "@context": ["https://www.w3.org/ns/credentials/v2", "https://blastbeat.education/credentials/v1"],
+          "id": "urn:uuid:bbe-lic-2026-spn-00037",
+          "type": ["VerifiableCredential", "BlastbeatProgrammeLicence", "SponsorAdopted"],
+          "issuer": { "id": "did:web:blastbeat.education", "name": "Climate Actions Now", "ukCharityNumber": "1113530" },
+          "validFrom": "2026-02-01T00:00:00Z",
+          "validUntil": "2026-12-31T23:59:59Z",
+          "credentialSubject": { "id": "did:bbe:spn:00037", "name": "Wynberg Girls' High School", "sponsor": { "name": "Coca-Cola South Africa", "tier": "Seed" }, "fundedValue": { "amount": 45000, "currency": "ZAR" } },
+          "saCompliance": { "bbbeeCode": "SED", "section18A": "eligible" },
+          "sdgAlignment": [4, 8, 13],
+          "proof": { "type": "DataIntegrityProof", "cryptosuite": "eddsa-jcs-2022", "hash": "0x4A8C19…E2F6A0" }
+        },
+        international: {
+          "@context": ["https://www.w3.org/ns/credentials/v2", "https://blastbeat.education/credentials/v1"],
+          "id": "urn:uuid:bbe-lic-2026-int-00009",
+          "type": ["VerifiableCredential", "BlastbeatProgrammeLicence", "InternationalPartner"],
+          "issuer": { "id": "did:web:blastbeat.education", "name": "Climate Actions Now", "ukCharityNumber": "1113530" },
+          "validFrom": "2026-03-04T00:00:00Z",
+          "validUntil": "2027-03-03T23:59:59Z",
+          "credentialSubject": { "id": "did:bbe:int:00009", "name": "NIPDB Namibia", "territory": "NA", "schoolsCovered": 25, "languages": ["en", "af"] },
+          "standards": ["W3C-VC-v2", "ISO-9001:2015"],
+          "sdgAlignment": [4, 8, 9, 13, 17],
+          "proof": { "type": "DataIntegrityProof", "cryptosuite": "eddsa-jcs-2022", "hash": "0x2D7B54…A091EE" }
+        }
+      };
+
+      function openModal(cert) {
+        var key = cert.getAttribute('data-cert');
+        var clone = cert.cloneNode(true);
+        // Strip the click hint + button role inside the modal copy
+        clone.removeAttribute('role');
+        clone.removeAttribute('tabindex');
+        clone.removeAttribute('data-cert');
+        var hint = clone.querySelector('.bb-cert-zoom-hint');
+        if (hint) hint.remove();
+
+        inner.innerHTML = '';
+        inner.appendChild(clone);
+
+        var json = jsonByCert[key];
+        if (json) {
+          var label = document.createElement('div');
+          label.className = 'cert-modal-json-label';
+          label.textContent = 'W3C Verifiable Credentials JSON-LD — what gets written to the registry';
+          var pre = document.createElement('pre');
+          pre.className = 'cert-modal-json';
+          pre.textContent = JSON.stringify(json, null, 2);
+          inner.appendChild(label);
+          inner.appendChild(pre);
+        }
+
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        inner.innerHTML = '';
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.bb-cert[data-cert]').forEach(function (c) {
+        c.addEventListener('click', function () { openModal(c); });
+        c.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(c); }
+        });
+      });
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+    })();
+  </script>
 </body>
 </html>
