@@ -1,148 +1,54 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog | Blastbeat Education</title>
-  <meta name="description" content="News, student stories, and updates from Blastbeat Education — youth entrepreneurship through music, sports, and climate action.">
+  <meta name="description" content="The Blastbeat Education blog — long-form essays, founder notes, school case studies and sponsor briefings. Twelve essays across four pillars: Founder, Schools, Students, Sponsors.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_GB">
   <meta property="og:url" content="https://www.blastbeat.education/blog/">
   <meta property="og:title" content="Blog | Blastbeat Education">
-  <meta property="og:description" content="The latest news, student stories, and updates from Blastbeat Education.">
+  <meta property="og:description" content="Long-form essays, founder notes, case studies and sponsor briefings. Twelve essays across four pillars.">
   <meta property="og:image" content="https://www.blastbeat.education/assets/images/bb-students-group.jpg">
   <meta name="twitter:image" content="https://www.blastbeat.education/assets/images/bb-students-group.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.blastbeat.education/blog/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
   <link rel="stylesheet" href="/assets/css/gen-z.css">
   <link rel="stylesheet" href="/assets/css/mobile.css">
+  <link rel="stylesheet" href="/assets/css/blog.css">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#6366F1">
-    <meta name="twitter:site" content="@BlastbeatEdu">
+  <meta name="twitter:site" content="@BlastbeatEdu">
   <meta name="twitter:creator" content="@BlastbeatEdu">
-  <style>
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-6);
-    }
-    @media (max-width: 1024px) {
-      .blog-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 768px) {
-      .blog-grid { grid-template-columns: 1fr; }
-    }
-    .blog-card {
-      background: var(--dark-card, #16213E);
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    .blog-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.25);
-      border-color: rgba(99,102,241,0.3);
-    }
-    .blog-card-strip {
-      height: 4px;
-      width: 100%;
-    }
-    .blog-card-body {
-      padding: var(--space-6);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      background: rgba(255,255,255,0.02);
-    }
-    .blog-card-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 12px;
-      border-radius: var(--radius-full);
-      font-size: var(--text-xs);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: var(--space-3);
-      width: fit-content;
-    }
-    .badge-news { background: rgba(99,102,241,0.2); color: #818CF8; border: 1px solid rgba(99,102,241,0.3); }
-    .badge-stories { background: rgba(168,85,247,0.2); color: #C084FC; border: 1px solid rgba(168,85,247,0.3); }
-    .badge-climate { background: rgba(52,211,153,0.15); color: #34D399; border: 1px solid rgba(52,211,153,0.25); }
-    .blog-card-title {
-      font-size: var(--text-xl);
-      font-weight: 800;
-      line-height: 1.25;
-      margin-bottom: var(--space-3);
-      color: rgba(255,255,255,0.92);
-    }
-    .blog-card-excerpt {
-      font-size: var(--text-sm);
-      color: rgba(255,255,255,0.55);
-      line-height: 1.7;
-      margin-bottom: var(--space-4);
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      flex: 1;
-    }
-    .blog-card-meta {
-      margin-top: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: var(--text-sm);
-      padding-top: var(--space-3);
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .blog-card-date {
-      color: rgba(255,255,255,0.35);
-      font-size: var(--text-xs);
-    }
-    .blog-card-link {
-      font-weight: 700;
-      color: #818CF8;
-      text-decoration: none;
-      transition: color 0.2s ease;
-      font-size: var(--text-xs);
-    }
-    .blog-card-link:hover {
-      color: #C084FC;
-    }
-  </style>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Blog","@id":"https://www.blastbeat.education/blog/","url":"https://www.blastbeat.education/blog/","name":"Blastbeat Education Blog","description":"News, student stories, and updates from Blastbeat Education — enterprise skills, youth entrepreneurship, and creative industries.","publisher":{"@type":"EducationalOrganization","name":"Blastbeat Education","url":"https://www.blastbeat.education"}}
+  {"@context":"https://schema.org","@type":"Blog","@id":"https://www.blastbeat.education/blog/","url":"https://www.blastbeat.education/blog/","name":"Blastbeat Education Blog","description":"Long-form essays, founder notes, case studies and sponsor briefings.","publisher":{"@id":"https://www.blastbeat.education/#organization"},"inLanguage":"en"}
   </script>
 </head>
-<body>
+<body class="post-page">
   <a href="#main" class="skip-link">Skip to main content</a>
 
-  <!-- NAV -->
   <nav class="bb-nav" role="navigation" aria-label="Main navigation">
     <div class="bb-nav-inner">
       <a href="/" class="bb-nav-logo">
-        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" width="40" height="40" decoding="async">
+        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="40" height="40" decoding="async">
         <span>BLASTBEAT</span>
       </a>
       <ul class="bb-nav-links">
         <li><a href="/pages/programme.html" class="bb-nav-link">Programme</a></li>
         <li><a href="/pages/for-schools.html" class="bb-nav-link">For Schools</a></li>
+        <li><a href="/pages/licence.html" class="bb-nav-link">Licence</a></li>
         <li><a href="/pages/about.html" class="bb-nav-link">About</a></li>
         <li><a href="/pages/impact.html" class="bb-nav-link">Impact</a></li>
-        <li><a href="/pages/international.html" class="bb-nav-link">International</a></li>
         <li><a href="/blog/" class="bb-nav-link active">Blog</a></li>
-        <li><a href="/pages/media.html" class="bb-nav-link">Press</a></li>
         <li><a href="/pages/partners.html" class="bb-nav-link">Partners</a></li>
       </ul>
       <div class="bb-nav-actions">
@@ -157,160 +63,189 @@
   <div class="bb-nav-mobile" aria-hidden="true">
     <a href="/pages/programme.html">Programme</a>
     <a href="/pages/for-schools.html">For Schools</a>
+    <a href="/pages/licence.html">Licence</a>
     <a href="/pages/about.html">About</a>
     <a href="/pages/impact.html">Impact</a>
-    <a href="/pages/international.html">International</a>
     <a href="/blog/" class="active">Blog</a>
-    <a href="/pages/media.html">Press</a>
     <a href="/pages/partners.html">Partners</a>
     <a href="/pages/contact.html">Contact</a>
     <a href="/pages/apply.html" class="btn btn-glow">Apply Now</a>
   </div>
 
   <main id="main">
-    <!-- ===== HERO ===== -->
-    <section class="hero-dark bg-mesh" style="min-height: 50vh;">
+    <section class="blog-hero">
       <div class="orb orb-1" aria-hidden="true"></div>
       <div class="orb orb-2" aria-hidden="true"></div>
-      <div class="orb orb-3" aria-hidden="true"></div>
-
       <div class="container" style="position: relative; z-index: 2;">
-        <div style="max-width: 700px;">
-          <div class="neo-tag" style="margin-bottom: var(--space-6);">
-            <span class="emoji-spin">&#128240;</span> Latest from Blastbeat
+        <div class="post-eyebrow">Notes &middot; Essays &middot; Field Reports</div>
+        <h1>The Blastbeat journal.</h1>
+        <p>Long-form pieces from the team, the schools, and the sponsors who back us. Twelve essays across four pillars &mdash; Founder, Schools, Students, Sponsors. Updated monthly.</p>
+        <div class="blog-pillar-tabs">
+          <a href="#all" class="active">All 12</a>
+          <a href="#founder">Founder</a>
+          <a href="#schools">Schools &amp; Teachers</a>
+          <a href="#students">Students</a>
+          <a href="#sponsors">Sponsors</a>
+          <a href="#impact">Impact</a>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding: 0 var(--space-6);">
+      <div class="container" style="max-width: 1180px; padding: 0;">
+
+        <!-- ========= FEATURED POST ========= -->
+        <article class="blog-featured">
+          <div class="blog-featured-img" style="background-image: url('/assets/images/bb-event-06.jpg');"></div>
+          <div class="blog-featured-body">
+            <span class="featured-tag">&#11088; Featured</span>
+            <h2><a href="/blog/why-i-built-blastbeat.html">Why I built Blastbeat &mdash; 23 years in.</a></h2>
+            <p>A founder&rsquo;s note from Robert Stephenson. Why Blastbeat exists, what 23 years of running real youth enterprise has taught me, and what we&rsquo;re betting everything on for the next ten.</p>
+            <p class="blog-featured-meta">Robert Stephenson &middot; 12 April 2026 &middot; 9 min read &middot; Founder</p>
           </div>
+        </article>
 
-          <h1 class="text-chunky" style="font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: var(--space-4);">
-            News &amp; <span class="text-gradient-vivid">Stories</span>
-          </h1>
+        <!-- ========= POST GRID ========= -->
+        <section id="all">
+          <div class="posts-grid">
 
-          <p style="font-size: var(--text-xl); max-width: 540px; color: rgba(255,255,255,0.7);">
-            Programme updates, student wins, partnership announcements, and climate action news from across the Blastbeat network.
-          </p>
+            <!-- Post 02 -->
+            <a class="post-card" href="/blog/the-licence-product-01.html">
+              <div class="post-card-img" style="background-image: url('/assets/images/bb-event-12.jpg');"></div>
+              <div class="post-card-body">
+                <div class="post-card-pillar gold">Founder &middot; Strategy</div>
+                <h3>The licence is Product 01 &mdash; here&rsquo;s why.</h3>
+                <p>Most education programmes sell &ldquo;curriculum.&rdquo; We sell a verifiable digital credential. The strategic case for treating the licence as the entire product.</p>
+                <div class="post-card-meta">22 Apr 2026 &middot; 7 min read</div>
+              </div>
+            </a>
+
+            <!-- Post 03 -->
+            <a class="post-card" href="/blog/dublin-to-cape-town.html">
+              <div class="post-card-img" style="background-image: url('/assets/images/bb-event-03.jpg');"></div>
+              <div class="post-card-body">
+                <div class="post-card-pillar purple">Founder &middot; Field</div>
+                <h3>Dublin to Cape Town: 19 countries, one programme.</h3>
+                <p>What travels and what doesn&rsquo;t. Twenty-three years of running youth ESE programmes across 19 countries &mdash; the things we kept, the things we threw out.</p>
+                <div class="post-card-meta">29 Apr 2026 &middot; 8 min read</div>
+              </div>
+            </a>
+
+            <!-- Post 04 -->
+            <a class="post-card" href="/blog/caps-aligned-ese-case.html">
+              <div class="post-card-img" style="background-image: url('/assets/images/students-collaborating.jpeg');"></div>
+              <div class="post-card-body">
+                <div class="post-card-pillar">Schools &middot; Curriculum</div>
+                <h3>The CAPS-aligned case for ESE in 2026.</h3>
+                <p>Why principals are adopting Blastbeat in 2026. Curriculum mapping, EMS &amp; Life Orientation fit, four-skill graduate alignment.</p>
+                <div class="post-card-meta">15 Apr 2026 &middot; 10 min read</div>
+              </div>
+            </a>
+
+            <!-- Post 05 -->
+            <a class="post-card" href="/blog/teacher-role-during-the-year.html">
+              <div class="post-card-img" style="background-image: url('/assets/images/bb-activity-04.jpeg');"></div>
+              <div class="post-card-body">
+                <div class="post-card-pillar lime">Teachers &middot; Practical</div>
+                <h3>What teachers actually do during a Blastbeat year.</h3>
+                <p>The honest week-by-week guide. What you do, what you don&rsquo;t, what to delegate, and the four moments you&rsquo;ll thank yourself.</p>
+                <div class="post-card-meta">18 Apr 2026 &middot; 11 min read</div>
+              </div>
+            </a>
+
+            <!-- Post 06 -->
+            <a class="post-card" href="/blog/14-ese-roles-principal-guide.html">
+              <div class="post-card-img" style="background-image: url('/assets/images/bb-event-07.jpg');"></div>
+              <div class="post-card-body">
+                <div class="post-card-pillar purple">Schools &middot; Roles</div>
+                <h3>The 14 ESE roles &mdash; a principal&rsquo;s reference card.</h3>
+                <p>Every team has fourteen real business roles. What each does, who&rsquo;s a good fit, and where the role ladders into post-school careers.</p>
+                <div class="post-card-meta">25 Apr 2026 &middot; 9 min read</div>
+              </div>
+            </a>
+
+            <!-- Post 07 -->
+            <a class="post-card" href="/blog/student-profit-calculator.html">
+              <div class="post-card-img" style="background-image: url('/assets/images/bb-event-05.jpg');"></div>
+              <div class="post-card-body">
+                <div class="post-card-pillar pink">Students &middot; Maths</div>
+                <h3>R0 to R45K. The maths of a Blastbeat year.</h3>
+                <p>How a 14-person team starts with R0 and ends a year holding real money &mdash; with a 25% climate-project ring-fence built in.</p>
+                <div class="post-card-meta">8 Apr 2026 &middot; 8 min read</div>
+              </div>
+            </a>
+
+            <!-- Post 08 -->
+            <a class="post-card" href="/blog/stage-to-cv.html">
+              <div class="post-card-img" style="background-image: url('/assets/images/bb-event-14.jpg');"></div>
+              <div class="post-card-body">
+                <div class="post-card-pillar pink">Students &middot; Career</div>
+                <h3>From stage to CV. Why a Blastbeat year outranks an internship.</h3>
+                <p>Recruiters say they want experience. They actually want evidence of judgement under stakes. A Blastbeat year is, line by line, exactly that.</p>
+                <div class="post-card-meta">4 Apr 2026 &middot; 9 min read</div>
+              </div>
+            </a>
+
+            <!-- Post 09 -->
+            <a class="post-card" href="/blog/r45k-question-csr.html">
+              <div class="post-card-img" style="background-image: url('/assets/images/bb-event-02.jpg');"></div>
+              <div class="post-card-body">
+                <div class="post-card-pillar gold">Sponsors &middot; CSR</div>
+                <h3>The R45,000 question.</h3>
+                <p>Why Adopt-A-School beats most CSR spend, line by line. Cost per beneficiary, BBBEE alignment, ESG outcomes, audit-grade reporting.</p>
+                <div class="post-card-meta">10 Apr 2026 &middot; 10 min read</div>
+              </div>
+            </a>
+
+            <!-- Post 10 -->
+            <a class="post-card" href="/blog/sponsor-compliance-cheatsheet.html">
+              <div class="post-card-img" style="background-image: url('/assets/images/bb-event-08.jpg');"></div>
+              <div class="post-card-body">
+                <div class="post-card-pillar gold">Sponsors &middot; Compliance</div>
+                <h3>The sponsor&rsquo;s compliance cheatsheet.</h3>
+                <p>ESG, BBBEE SED, SARS Section 18A &mdash; in plain English. Save this and send it to your finance team.</p>
+                <div class="post-card-meta">19 Apr 2026 &middot; 9 min read</div>
+              </div>
+            </a>
+
+            <!-- Post 11 -->
+            <a class="post-card" href="/blog/macc-effect-climate.html">
+              <div class="post-card-img" style="background-image: url('/assets/images/bb-activity-02.jpg');"></div>
+              <div class="post-card-body">
+                <div class="post-card-pillar lime">Impact &middot; Climate</div>
+                <h3>The MACC effect: when music funds climate action.</h3>
+                <p>Twenty-five per cent of every event funds a student-designed climate project. The data, with case studies.</p>
+                <div class="post-card-meta">26 Apr 2026 &middot; 10 min read</div>
+              </div>
+            </a>
+
+            <!-- Post 12 -->
+            <a class="post-card" href="/blog/youth-enterprise-sdgs-2030.html">
+              <div class="post-card-img" style="background-image: url('/assets/images/bb-event-09.jpg');"></div>
+              <div class="post-card-body">
+                <div class="post-card-pillar purple">Impact &middot; SDGs</div>
+                <h3>Five years to 2030: youth enterprise on the SDG map.</h3>
+                <p>Half a billion young people will enter the global workforce by 2030. Where Blastbeat sits on the UN SDG map, and what we&rsquo;re committing to.</p>
+                <div class="post-card-meta">2 May 2026 &middot; 11 min read</div>
+              </div>
+            </a>
+
+          </div>
+        </section>
+
+        <!-- Newsletter / lead magnet at the bottom -->
+        <div class="lead-magnet" style="margin: 2em 0 5em;">
+          <div>
+            <span class="lm-label">Monthly journal &middot; Free</span>
+            <h4>Get the Blastbeat journal in your inbox.</h4>
+            <p>One long-form piece per month. School stories, sponsor briefings, founder notes. No marketing, no fluff.</p>
+          </div>
+          <a href="/pages/contact.html?request=journal-subscribe">Subscribe &rarr;</a>
         </div>
-      </div>
-    </section>
-
-    <!-- ===== BLOG GRID ===== -->
-    <section class="section section-dark" style="position: relative; overflow: hidden;">
-      <div class="container">
-        <div class="blog-grid">
-
-          <!-- Article 1 -->
-          <article class="blog-card reveal">
-            <img src="/assets/images/bb-event-04.jpg" alt="Students at a Blastbeat ESE event" width="400" height="180" loading="lazy" decoding="async" style="width: 100%; height: 180px; object-fit: cover;">
-            <div class="blog-card-strip" style="background: var(--gradient-primary);"></div>
-            <div class="blog-card-body">
-              <span class="blog-card-badge badge-news">News</span>
-              <h3 class="blog-card-title">What is an Event Social Enterprise?</h3>
-              <p class="blog-card-excerpt">Explaining the ESE model — how students form real companies, take on business roles, run events, and split profits between their team and climate action.</p>
-              <div class="blog-card-meta">
-                <span class="blog-card-date">15 Mar 2026</span>
-                <a href="#" class="blog-card-link">Read More &#8594;</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Article 2 -->
-          <article class="blog-card reveal reveal-delay-1">
-            <img src="/assets/images/bb-event-05.jpg" alt="Blastbeat Namibia partnership announcement" width="400" height="180" loading="lazy" decoding="async" style="width: 100%; height: 180px; object-fit: cover;">
-            <div class="blog-card-strip" style="background: var(--gradient-ocean);"></div>
-            <div class="blog-card-body">
-              <span class="blog-card-badge badge-news">News</span>
-              <h3 class="blog-card-title">Blastbeat Partners with Namibia for National Programme</h3>
-              <p class="blog-card-excerpt">A landmark deal with NIPDB sees Blastbeat set to reach 500,000 Namibian students through a N$62M+ national investment in youth entrepreneurship.</p>
-              <div class="blog-card-meta">
-                <span class="blog-card-date">8 Mar 2026</span>
-                <a href="#" class="blog-card-link">Read More &#8594;</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Article 3 -->
-          <article class="blog-card reveal reveal-delay-2">
-            <img src="/assets/images/bb-event-08.jpg" alt="Cape Town students at their first ESE event" width="400" height="180" loading="lazy" decoding="async" style="width: 100%; height: 180px; object-fit: cover;">
-            <div class="blog-card-strip" style="background: var(--gradient-sunset);"></div>
-            <div class="blog-card-body">
-              <span class="blog-card-badge badge-stories">Student Stories</span>
-              <h3 class="blog-card-title">Students in Cape Town Earn R8,000 from First ESE Event</h3>
-              <p class="blog-card-excerpt">A team of Grade 10 students in the Western Cape organised their first music event, selling 200 tickets and proving the ESE model works in South Africa.</p>
-              <div class="blog-card-meta">
-                <span class="blog-card-date">28 Feb 2026</span>
-                <a href="#" class="blog-card-link">Read More &#8594;</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Article 4 -->
-          <article class="blog-card reveal">
-            <img src="/assets/images/bb-event-10.jpg" alt="Students developing entrepreneurship skills" width="400" height="180" loading="lazy" decoding="async" style="width: 100%; height: 180px; object-fit: cover;">
-            <div class="blog-card-strip" style="background: var(--gradient-aurora);"></div>
-            <div class="blog-card-body">
-              <span class="blog-card-badge badge-news">News</span>
-              <h3 class="blog-card-title">How Music Entrepreneurship Builds Real Skills</h3>
-              <p class="blog-card-excerpt">From budgeting to marketing, negotiation to teamwork — why running a real event teaches more than any textbook ever could.</p>
-              <div class="blog-card-meta">
-                <span class="blog-card-date">20 Feb 2026</span>
-                <a href="#" class="blog-card-link">Read More &#8594;</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Article 5 -->
-          <article class="blog-card reveal reveal-delay-1">
-            <img src="/assets/images/bb-activity-04.jpeg" alt="Student-led climate action project" width="400" height="180" loading="lazy" decoding="async" style="width: 100%; height: 180px; object-fit: cover;">
-            <div class="blog-card-strip" style="background: linear-gradient(135deg, #059669, #10B981);"></div>
-            <div class="blog-card-body">
-              <span class="blog-card-badge badge-climate">Climate</span>
-              <h3 class="blog-card-title">25% for Climate: How Student Profits Fund Real Change</h3>
-              <p class="blog-card-excerpt">Every ESE dedicates a quarter of its profits to climate action. Here is how those funds are making a measurable environmental difference.</p>
-              <div class="blog-card-meta">
-                <span class="blog-card-date">12 Feb 2026</span>
-                <a href="#" class="blog-card-link">Read More &#8594;</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Article 6 -->
-          <article class="blog-card reveal reveal-delay-2">
-            <img src="/assets/images/bb-event-12.jpg" alt="National Finals 2026 preview" width="400" height="180" loading="lazy" decoding="async" style="width: 100%; height: 180px; object-fit: cover;">
-            <div class="blog-card-strip" style="background: var(--gradient-primary);"></div>
-            <div class="blog-card-body">
-              <span class="blog-card-badge badge-stories">Student Stories</span>
-              <h3 class="blog-card-title">National Finals 2026: What to Expect</h3>
-              <p class="blog-card-excerpt">The best ESE teams from across the country will compete at the National Finals in Cape Town. Here is everything you need to know about the biggest event of the year.</p>
-              <div class="blog-card-meta">
-                <span class="blog-card-date">5 Feb 2026</span>
-                <a href="#" class="blog-card-link">Read More &#8594;</a>
-              </div>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== NEWSLETTER ===== -->
-    <section class="section section-dark" style="position: relative; overflow: hidden;">
-      <div class="orb" style="width: 300px; height: 300px; background: var(--electric-purple); top: -20%; right: -5%;" aria-hidden="true"></div>
-      <div class="orb" style="width: 200px; height: 200px; background: var(--neon-cyan); bottom: -10%; left: 10%;" aria-hidden="true"></div>
-      <div class="container text-center" style="max-width: 600px; position: relative; z-index: 2;">
-        <span class="emoji-xl emoji-spin">&#128140;</span>
-        <h2 class="text-chunky" style="margin-bottom: var(--space-3);">Stay in the Loop</h2>
-        <p style="font-size: var(--text-lg); margin-bottom: var(--space-8);">Programme updates, student wins, climate action news. No spam, ever.</p>
-
-        <form name="newsletter-blog" method="POST" data-netlify="true" action="/thank-you.html" class="flex gap-4" style="max-width: 480px; margin: 0 auto;">
-          <input type="hidden" name="form-name" value="newsletter-blog">
-          <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
-          <label for="newsletter-email-blog" class="sr-only">Email address</label>
-          <input type="email" id="newsletter-email-blog" name="email" placeholder="your@email.com" required autocomplete="email" inputmode="email" class="form-input" style="flex: 1; border-radius: var(--radius-full); background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white;">
-          <button type="submit" class="btn btn-glow">Subscribe</button>
-        </form>
       </div>
     </section>
   </main>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="bb-footer" style="background: var(--deep-navy);">
     <div class="container">
       <div class="grid footer-grid" style="grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-10);">
@@ -319,51 +254,44 @@
             <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="36" height="36" loading="lazy" decoding="async">
             <span style="color: var(--text-white);">BLASTBEAT</span>
           </a>
-          <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 300px;">Empowering young people through music, entrepreneurship, and climate action. 23 years. 19 countries. 360,000+ students.</p>
-          <p style="font-size: var(--text-xs); margin-top: var(--space-4); color: var(--text-muted);">Climate Actions Now<br>UK Registered Charity No. 1113530</p>
-          <div class="footer-social" style="margin-top: var(--space-6);">
-            <a href="#" aria-label="LinkedIn">in</a>
-            <a href="#" aria-label="Instagram">ig</a>
-            <a href="#" aria-label="X / Twitter">X</a>
-            <a href="#" aria-label="YouTube">YT</a>
-          </div>
+          <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 300px; color: rgba(255,255,255,0.6);">Empowering young people through music, entrepreneurship, and climate action. 23 years. 19 countries. 360,000+ students.</p>
+          <p style="font-size: var(--text-xs); margin-top: var(--space-4); color: rgba(255,255,255,0.4);">
+            Climate Actions Now<br>
+            UK Registered Charity No. 1113530<br>
+            GDPR &amp; POPIA Compliant
+          </p>
         </div>
         <div>
           <h5>Programme</h5>
           <ul class="footer-links">
             <li><a href="/pages/programme.html">What is Blastbeat?</a></li>
-            <li><a href="/pages/programme.html#macc">MACC Challenge</a></li>
-            <li><a href="/pages/programme.html#footbeat">FootBeat Sports</a></li>
+            <li><a href="/pages/licence.html">The Licence</a></li>
+            <li><a href="/pages/macc.html">MACC</a></li>
+            <li><a href="/pages/footbeat.html">FootBeat</a></li>
             <li><a href="/pages/for-schools.html">For Schools</a></li>
-            <li><a href="/pages/programme.html#roles">ESE Roles</a></li>
           </ul>
         </div>
         <div>
-          <h5>About Us</h5>
+          <h5>Read</h5>
           <ul class="footer-links">
-            <li><a href="/pages/about.html">Our Story</a></li>
-            <li><a href="/pages/impact.html">Impact</a></li>
-            <li><a href="/pages/international.html">International</a></li>
-            <li><a href="/pages/partners.html">Partners</a></li>
-            <li><a href="/blog/">News &amp; Blog</a></li>
-            <li><a href="/pages/media.html">Press Room</a></li>
+            <li><a href="/blog/why-i-built-blastbeat.html">Why I built Blastbeat</a></li>
+            <li><a href="/blog/the-licence-product-01.html">The licence as Product 01</a></li>
+            <li><a href="/blog/r45k-question-csr.html">The R45K question</a></li>
+            <li><a href="/blog/macc-effect-climate.html">The MACC effect</a></li>
+            <li><a href="/blog/">All posts</a></li>
           </ul>
         </div>
         <div>
           <h5>Get Involved</h5>
           <ul class="footer-links">
             <li><a href="/pages/apply.html">Apply for Your School</a></li>
-            <li><a href="/pages/partners.html">Corporate Partnership</a></li>
+            <li><a href="/pages/partners.html">Sponsor a Licence</a></li>
             <li><a href="/pages/contact.html">Contact Us</a></li>
           </ul>
-          <div style="margin-top: var(--space-6);">
-            <p style="font-size: var(--text-xs); color: var(--text-muted); margin-bottom: var(--space-2);">General enquiries</p>
-            <a href="mailto:info@blastbeat.education" style="font-size: var(--text-sm);">info@blastbeat.education</a>
-          </div>
         </div>
       </div>
       <div class="footer-bottom flex justify-between items-center flex-wrap gap-4">
-        <p style="margin: 0; color: var(--text-muted);">&copy; 2026 Climate Actions Now. All rights reserved. UK Charity 1113530</p>
+        <p style="margin: 0; color: rgba(255,255,255,0.4); font-size: var(--text-xs);">&copy; 2026 Climate Actions Now. UK Charity 1113530.</p>
         <div class="flex gap-6">
           <a href="/pages/privacy-policy.html">Privacy Policy</a>
           <a href="/pages/terms-of-use.html">Terms of Use</a>
@@ -373,14 +301,7 @@
     </div>
   </footer>
 
-  <!-- Floating Apply Badge -->
-  <div class="fab-badge">
-    <a href="/pages/apply.html">&#9889; Apply Now</a>
-  </div>
-
   <script src="/assets/js/navigation.js" defer></script>
   <script src="/assets/js/animations.js" defer></script>
-  <script src="/assets/js/cookie-consent.js" defer></script>
-  <script src="/assets/js/beat-bot.js" defer></script>
 </body>
 </html>
