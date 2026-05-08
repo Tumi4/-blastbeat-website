@@ -51,6 +51,7 @@
   <main id="main">
     <article>
       <header class="post-hero">
+        <!-- TODO: stock photo &mdash; drop /assets/images/blog/07-profit-calc.jpg here, currently using existing site photo -->
         <div class="post-hero-bg" style="background-image: url('/assets/images/bb-event-05.jpg');" aria-hidden="true"></div>
         <div class="post-hero-inner">
           <div class="post-eyebrow pink">For Students &middot; The Maths</div>
@@ -157,6 +158,97 @@
           <figcaption>Mitchells Plain&rsquo;s 2024 event night. Tickets sold real money. Profits funded a real beach clean.</figcaption>
         </figure>
 
+        <h2>Build your own &mdash; the live calculator</h2>
+
+        <p>Move the three sliders to model your own event. The numbers update live. Use this in your team&rsquo;s first planning week.</p>
+
+        <div class="bb-calc" id="profit-calc" aria-label="Interactive profit calculator">
+          <div class="bb-calc-controls">
+            <label for="tickets-slider">Tickets you plan to sell</label>
+            <div class="bb-calc-slider-row">
+              <input type="range" id="tickets-slider" min="50" max="600" value="312" step="10">
+              <output for="tickets-slider" id="tickets-out">312</output>
+            </div>
+          </div>
+          <div class="bb-calc-controls">
+            <label for="price-slider">Ticket price (R)</label>
+            <div class="bb-calc-slider-row">
+              <input type="range" id="price-slider" min="40" max="200" value="85" step="5">
+              <output for="price-slider" id="price-out">R 85</output>
+            </div>
+          </div>
+          <div class="bb-calc-controls">
+            <label for="sponsor-slider">Local sponsorship secured (R)</label>
+            <div class="bb-calc-slider-row">
+              <input type="range" id="sponsor-slider" min="0" max="50000" value="14000" step="1000">
+              <output for="sponsor-slider" id="sponsor-out">R 14,000</output>
+            </div>
+            <p class="bb-calc-hint">Costs assumed at R23,400 (median 2024 SA cohort). Concessions at R4,300 (median). Adjust as needed for your venue.</p>
+          </div>
+          <div class="bb-calc-results">
+            <div class="bb-calc-result"><div class="bb-calc-label">Ticket revenue</div><div class="bb-calc-value" id="pcalc-tickets">R 26,520</div><div class="bb-calc-sub">price &times; tickets sold</div></div>
+            <div class="bb-calc-result"><div class="bb-calc-label">Total revenue</div><div class="bb-calc-value" id="pcalc-revenue">R 44,820</div><div class="bb-calc-sub">tickets + sponsors + concessions</div></div>
+            <div class="bb-calc-result"><div class="bb-calc-label">Net profit</div><div class="bb-calc-value" id="pcalc-profit">R 21,420</div><div class="bb-calc-sub">after R23,400 in costs</div></div>
+            <div class="bb-calc-result"><div class="bb-calc-label">Team share (75%)</div><div class="bb-calc-value" id="pcalc-team">R 16,065</div><div class="bb-calc-sub">across 14 students</div></div>
+            <div class="bb-calc-result"><div class="bb-calc-label">Climate ring-fence (25%)</div><div class="bb-calc-value" id="pcalc-climate">R 5,355</div><div class="bb-calc-sub">team-designed project</div></div>
+            <div class="bb-calc-result"><div class="bb-calc-label">Profit margin</div><div class="bb-calc-value" id="pcalc-margin">47.8%</div><div class="bb-calc-sub">on revenue</div></div>
+          </div>
+        </div>
+
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);margin-top:0.6em;">Cost &amp; concession assumptions use the 2024 SA cohort median. If your team is below R0 net profit you&rsquo;ll see a negative figure &mdash; that&rsquo;s the conversation to have with the team in week 5, not week 12.</p>
+
+        <script>
+          (function () {
+            var tSlider = document.getElementById('tickets-slider');
+            var pSlider = document.getElementById('price-slider');
+            var sSlider = document.getElementById('sponsor-slider');
+            var tOut = document.getElementById('tickets-out');
+            var pOut = document.getElementById('price-out');
+            var sOut = document.getElementById('sponsor-out');
+            var ticketsEl = document.getElementById('pcalc-tickets');
+            var revEl = document.getElementById('pcalc-revenue');
+            var profitEl = document.getElementById('pcalc-profit');
+            var teamEl = document.getElementById('pcalc-team');
+            var climateEl = document.getElementById('pcalc-climate');
+            var marginEl = document.getElementById('pcalc-margin');
+            if (!tSlider) return;
+            var COST = 23400;
+            var CONCESSIONS = 4300;
+            function fmt(n) {
+              var sign = n < 0 ? '-' : '';
+              return sign + 'R ' + Math.abs(Math.round(n)).toLocaleString('en-GB');
+            }
+            function update() {
+              var t = parseInt(tSlider.value, 10);
+              var p = parseInt(pSlider.value, 10);
+              var s = parseInt(sSlider.value, 10);
+              var ticketRev = t * p;
+              var totalRev = ticketRev + s + CONCESSIONS;
+              var profit = totalRev - COST;
+              var team = profit > 0 ? profit * 0.75 : profit;
+              var climate = profit > 0 ? profit * 0.25 : 0;
+              var margin = totalRev > 0 ? (profit / totalRev) * 100 : 0;
+              tOut.textContent = t;
+              pOut.textContent = 'R ' + p;
+              sOut.textContent = fmt(s);
+              ticketsEl.textContent = fmt(ticketRev);
+              revEl.textContent = fmt(totalRev);
+              profitEl.textContent = fmt(profit);
+              teamEl.textContent = fmt(team);
+              climateEl.textContent = fmt(climate);
+              marginEl.textContent = (margin >= 0 ? '' : '') + margin.toFixed(1) + '%';
+              // Colour shift if profit goes red
+              profitEl.style.background = profit < 0
+                ? 'linear-gradient(135deg,#FF2D78,#FF7BAA)'
+                : '';
+              profitEl.style.webkitBackgroundClip = profit < 0 ? 'text' : '';
+              profitEl.style.webkitTextFillColor = profit < 0 ? 'transparent' : '';
+            }
+            [tSlider, pSlider, sSlider].forEach(function (s) { s.addEventListener('input', update); });
+            update();
+          })();
+        </script>
+
         <h2>Step 6: The 25% climate cut, in 23 years of numbers</h2>
 
         <p>Across 23 years, with about 360,000 students and a varying mean profit per team, the cumulative 25% climate cut from the global Blastbeat alumni network has funded over 1,800 student-led climate projects &mdash; from sea-grass restoration in the Cape to bee corridors in central Europe to a small reforestation plot in Kenya.</p>
@@ -238,5 +330,6 @@
     </div>
   </footer>
   <script src="/assets/js/navigation.js" defer></script>
+  <script src="/assets/js/interactive-data.js" defer></script>
 </body>
 </html>

@@ -277,7 +277,7 @@ p {
 .bb-nav-logo img {
   height: 40px;
   width: auto;
-  filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(99,102,241,0.45));
+  filter: drop-shadow(0 0 6px rgba(99,102,241,0.35));
 }
 
 .bb-nav-links {

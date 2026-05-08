@@ -311,6 +311,43 @@
         </div>
       </div>
     </section>
+
+    <!-- ===== FLOURISH-SLOT: footprint-map ===== -->
+    <!-- This is a prepared slot for an interactive Flourish.studio map.
+         Build the chart in flourish.studio (see FLOURISH-PLAN.md), then paste
+         the embed URL into the iframe src below. The fallback CSS card under
+         it guarantees the section still tells the story while the iframe
+         loads or if Flourish is unreachable. -->
+    <section class="section section-dark" style="position: relative; overflow: hidden;" id="global-footprint">
+      <div class="container" style="position: relative; z-index: 2; max-width: 1100px;">
+        <div class="text-center" style="margin-bottom: 2.5rem;">
+          <span class="neo-tag" style="margin-bottom: 1rem;">interactive &middot; 19 countries</span>
+          <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: 1rem; color: white;">The global footprint, on the map.</h2>
+          <p style="color: rgba(255,255,255,0.7); font-size: var(--text-lg); max-width: 60ch; margin: 1rem auto 0;">Click any country to see the local chapter, founding year, and students reached. Pan, zoom, explore.</p>
+        </div>
+        <div style="position: relative; border-radius: var(--radius-2xl); overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); aspect-ratio: 16/9; min-height: 360px;">
+          <!-- Fallback message + lo-fi visual until the Flourish embed is wired -->
+          <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 2rem; text-align: center; color: rgba(255,255,255,0.55);">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(184,255,0,0.7); margin-bottom: 0.6rem;">&#127759; Interactive map &middot; loading slot</div>
+            <p style="font-size: 0.95rem; max-width: 50ch; margin: 0 0 1.2rem; line-height: 1.55;">19 countries. 360,000+ students. The interactive choropleth lives here once the Flourish embed is generated. See <code style="color:white;">FLOURISH-PLAN.md</code> for the data + workflow.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 720px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; padding: 4px 10px; border: 1px solid rgba(184,255,0,0.3); color: var(--neon-lime); border-radius: 100px;">IE 82K</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; padding: 4px 10px; border: 1px solid rgba(0,245,255,0.3); color: var(--neon-cyan); border-radius: 100px;">ZA 52K</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; padding: 4px 10px; border: 1px solid rgba(168,85,247,0.3); color: #C9A7FF; border-radius: 100px;">GB 46K</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; padding: 4px 10px; border: 1px solid rgba(255,45,120,0.3); color: #FF7BAA; border-radius: 100px;">KE 28K</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; padding: 4px 10px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.65); border-radius: 100px;">ES 21K</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; padding: 4px 10px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.65); border-radius: 100px;">NL 18.5K</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; padding: 4px 10px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.65); border-radius: 100px;">FR 16.8K</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; padding: 4px 10px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.65); border-radius: 100px;">DE 14.2K</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; padding: 4px 10px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.65); border-radius: 100px;">+ 11 more</span>
+            </div>
+          </div>
+          <!-- Flourish iframe goes here. Replace src="" with the embed URL from flourish.studio. -->
+          <iframe src="" title="Blastbeat global footprint &mdash; 19 countries, 360,000+ students" loading="lazy" frameborder="0" scrolling="no" style="position:absolute;inset:0;width:100%;height:100%;border:none;background:transparent;display:none;" data-flourish-id="footprint-map"></iframe>
+        </div>
+        <p style="text-align: center; margin-top: 1rem; font-size: 0.78rem; color: rgba(255,255,255,0.4); font-family: 'IBM Plex Mono', monospace;">Source: Blastbeat chapter ledger, 2003&ndash;2026 cumulative.</p>
+      </div>
+    </section>
   </main>
 
   <!-- ===== FOOTER ===== -->
@@ -385,5 +422,18 @@
   <script src="/assets/js/animations.js" defer></script>
   <script src="/assets/js/cookie-consent.js" defer></script>
   <script src="/assets/js/beat-bot.js" defer></script>
+  <script src="/assets/js/interactive-data.js" defer></script>
+  <script>
+    // Reveal Flourish iframe + hide fallback once a real src is wired
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('iframe[data-flourish-id]').forEach(function (iframe) {
+        if (iframe.getAttribute('src')) {
+          iframe.style.display = 'block';
+          var fallback = iframe.parentElement.querySelector('div');
+          if (fallback) fallback.style.display = 'none';
+        }
+      });
+    });
+  </script>
 </body>
 </html>

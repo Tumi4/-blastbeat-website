@@ -323,6 +323,93 @@
 .donut-legend dt { font-weight: 700; color: white; }
 .donut-legend dd { margin: 0 0 0.5em; color: rgba(255,255,255,0.6); }
 
+/* ----- INTERACTIVE CALCULATOR ----- */
+.bb-calc {
+  margin: 2.4em 0;
+  padding: var(--space-7);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(184,255,0,0.10), transparent 50%),
+    radial-gradient(circle at 0% 100%, rgba(0,245,255,0.08), transparent 50%),
+    linear-gradient(135deg, rgba(20,20,40,0.85), rgba(15,15,26,0.95));
+  border: 1px solid rgba(184,255,0,0.20);
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
+}
+.bb-calc-controls { margin-bottom: var(--space-6); padding-bottom: var(--space-5); border-bottom: 1px dashed rgba(255,255,255,0.10); }
+.bb-calc-controls label {
+  display: block;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--neon-lime); margin-bottom: 14px;
+}
+.bb-calc-slider-row {
+  display: grid; grid-template-columns: 1fr 90px; gap: var(--space-4);
+  align-items: center; margin-bottom: 8px;
+}
+.bb-calc-slider-row input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 6px;
+  background: linear-gradient(90deg, var(--neon-lime), var(--neon-cyan));
+  border-radius: 100px; outline: none;
+}
+.bb-calc-slider-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: white; cursor: pointer;
+  box-shadow: 0 0 0 4px rgba(184,255,0,0.25), 0 4px 12px rgba(0,0,0,0.4);
+  transition: transform 0.15s ease;
+}
+.bb-calc-slider-row input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.bb-calc-slider-row input[type="range"]::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: white; cursor: pointer; border: none;
+  box-shadow: 0 0 0 4px rgba(184,255,0,0.25), 0 4px 12px rgba(0,0,0,0.4);
+}
+.bb-calc-slider-row output {
+  font-family: var(--font-heading); font-weight: 800;
+  font-size: 1.4rem; color: white;
+  text-align: center;
+  background: rgba(184,255,0,0.10);
+  border: 1px solid rgba(184,255,0,0.3);
+  border-radius: 100px; padding: 6px 0;
+}
+.bb-calc-hint {
+  font-size: 0.78rem; color: rgba(255,255,255,0.55);
+  margin: 0; line-height: 1.55;
+}
+
+.bb-calc-results {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+@media (max-width: 720px) { .bb-calc-results { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .bb-calc-results { grid-template-columns: 1fr; } }
+.bb-calc-result {
+  padding: var(--space-4);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.2s ease;
+}
+.bb-calc-result:hover { border-color: rgba(184,255,0,0.3); }
+.bb-calc-result .bb-calc-label {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); margin-bottom: 4px;
+}
+.bb-calc-result .bb-calc-value {
+  font-family: var(--font-heading);
+  font-size: 1.35rem; font-weight: 800;
+  color: white; line-height: 1.1;
+  background: linear-gradient(135deg, var(--neon-lime), var(--neon-cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  transition: opacity 0.15s ease;
+  margin-bottom: 4px;
+}
+.bb-calc-result .bb-calc-sub {
+  font-size: 0.72rem; color: rgba(255,255,255,0.48);
+}
+
 /* ----- LEAD MAGNET BLOCK ----- */
 .lead-magnet {
   margin: 2.4em 0;

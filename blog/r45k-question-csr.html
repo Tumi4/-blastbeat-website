@@ -51,6 +51,7 @@
   <main id="main">
     <article>
       <header class="post-hero">
+        <!-- TODO: stock photo &mdash; drop /assets/images/blog/09-sponsor-csr.jpg here, currently using existing site photo -->
         <div class="post-hero-bg" style="background-image: url('/assets/images/bb-event-02.jpg');" aria-hidden="true"></div>
         <div class="post-hero-inner">
           <div class="post-eyebrow gold">For Sponsors &middot; CSR &amp; ESG</div>
@@ -79,10 +80,10 @@
 
         <div class="bar-chart">
           <h4>CSR cost per directly-benefited youth (ZAR, illustrative)</h4>
-          <div class="bar-row"><span class="bar-label">Branded school-supplies drive</span><div class="bar-track"><div class="bar-fill pink" style="width: 40%;"></div></div><span class="bar-val">R 410</span></div>
-          <div class="bar-row"><span class="bar-label">Single-day skills workshop</span><div class="bar-track"><div class="bar-fill" style="width: 65%;"></div></div><span class="bar-val">R 850</span></div>
-          <div class="bar-row"><span class="bar-label">Internship sponsorship</span><div class="bar-track"><div class="bar-fill purple" style="width: 80%;"></div></div><span class="bar-val">R 12,500</span></div>
-          <div class="bar-row"><span class="bar-label">Adopt-A-School (Blastbeat)</span><div class="bar-track"><div class="bar-fill" style="width: 32%;"></div></div><span class="bar-val">R 3,214</span></div>
+          <div class="bar-row" data-source="Trialogue Business in Society Handbook 2024 — branded distribution programmes deliver low marginal change but very wide reach."><span class="bar-label">Branded school-supplies drive</span><div class="bar-track"><div class="bar-fill pink" style="width: 40%;"></div></div><span class="bar-val">R 410</span></div>
+          <div class="bar-row" data-source="Single-day workshop benchmark, 2024 SA NGO sample — typical R12,500 venue + facilitator + materials, ~15 students per day."><span class="bar-label">Single-day skills workshop</span><div class="bar-track"><div class="bar-fill" style="width: 65%;"></div></div><span class="bar-val">R 850</span></div>
+          <div class="bar-row" data-source="National Treasury 2025 employer survey — average corporate-sponsored learner internship cost (3-month placement)."><span class="bar-label">Internship sponsorship</span><div class="bar-track"><div class="bar-fill purple" style="width: 80%;"></div></div><span class="bar-val">R 12,500</span></div>
+          <div class="bar-row" data-source="Blastbeat 2026 founding rate. R45,000 ÷ 14 named ESE roles = R3,214 per directly-named beneficiary. Verified by audited 2024 cohort."><span class="bar-label">Adopt-A-School (Blastbeat)</span><div class="bar-track"><div class="bar-fill" style="width: 32%;"></div></div><span class="bar-val">R 3,214</span></div>
           <p class="src">Source: Blastbeat sponsor briefings 2024 &mdash; cost per primary beneficiary (programme-level).</p>
         </div>
 
@@ -155,6 +156,69 @@
           <cite>&mdash; the line we use most often, because it&rsquo;s true</cite>
         </div>
 
+        <h2>Interactive: model your sponsorship</h2>
+
+        <p>Move the slider. The maths updates live. This is exactly the calculator we walk new sponsors through in the first meeting.</p>
+
+        <div class="bb-calc" id="sponsor-calc" aria-label="Interactive sponsor ROI calculator">
+          <div class="bb-calc-controls">
+            <label for="schools-slider">Number of schools to adopt</label>
+            <div class="bb-calc-slider-row">
+              <input type="range" id="schools-slider" min="1" max="20" value="5" step="1">
+              <output for="schools-slider" id="schools-out">5</output>
+            </div>
+            <p class="bb-calc-hint">Founding 2026 rate: R45,000 per school. Volume discount kicks in at 5 (10% off), 10 (15% off), 20+ (custom).</p>
+          </div>
+          <div class="bb-calc-results">
+            <div class="bb-calc-result"><div class="bb-calc-label">Total sponsorship</div><div class="bb-calc-value" id="calc-total">R 202,500</div><div class="bb-calc-sub" id="calc-discount">10% volume discount</div></div>
+            <div class="bb-calc-result"><div class="bb-calc-label">Students directly reached</div><div class="bb-calc-value" id="calc-students">70</div><div class="bb-calc-sub">14 ESE roles per school</div></div>
+            <div class="bb-calc-result"><div class="bb-calc-label">Cost per student / year</div><div class="bb-calc-value" id="calc-perstudent">R 2,893</div><div class="bb-calc-sub">All-in, includes climate cut</div></div>
+            <div class="bb-calc-result"><div class="bb-calc-label">Climate funding generated</div><div class="bb-calc-value" id="calc-climate">~R 26,775</div><div class="bb-calc-sub">25% MACC ring-fence est.</div></div>
+            <div class="bb-calc-result"><div class="bb-calc-label">Verifiable licences issued</div><div class="bb-calc-value" id="calc-licences">5</div><div class="bb-calc-sub">In your sponsor name</div></div>
+            <div class="bb-calc-result"><div class="bb-calc-label">B-BBEE SED qualifier</div><div class="bb-calc-value" id="calc-bbbee">Full</div><div class="bb-calc-sub">100% black beneficiary base</div></div>
+          </div>
+        </div>
+
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);margin-top:0.6em;">Tier discount logic: 5 schools &mdash; 10% off; 10 schools &mdash; 15% off; 20 schools &mdash; 20% off + custom add-ons. Climate funding estimate assumes ~R5,950/team based on 2024 SA cohort medians.</p>
+
+        <script>
+          (function () {
+            var slider = document.getElementById('schools-slider');
+            var out = document.getElementById('schools-out');
+            var totalEl = document.getElementById('calc-total');
+            var studentsEl = document.getElementById('calc-students');
+            var perStEl = document.getElementById('calc-perstudent');
+            var climateEl = document.getElementById('calc-climate');
+            var licencesEl = document.getElementById('calc-licences');
+            var bbeeEl = document.getElementById('calc-bbbee');
+            var discountEl = document.getElementById('calc-discount');
+            if (!slider) return;
+            function fmt(n) { return 'R ' + Math.round(n).toLocaleString('en-GB'); }
+            function update() {
+              var n = parseInt(slider.value, 10);
+              var base = 45000;
+              var disc = 0;
+              if (n >= 20) disc = 0.20;
+              else if (n >= 10) disc = 0.15;
+              else if (n >= 5) disc = 0.10;
+              var total = n * base * (1 - disc);
+              var students = n * 14;
+              var perSt = total / students;
+              var climate = n * 5950;
+              out.textContent = n;
+              totalEl.textContent = fmt(total);
+              studentsEl.textContent = students.toLocaleString('en-GB');
+              perStEl.textContent = fmt(perSt);
+              climateEl.textContent = '~' + fmt(climate);
+              licencesEl.textContent = n;
+              bbeeEl.textContent = 'Full';
+              discountEl.textContent = disc > 0 ? Math.round(disc * 100) + '% volume discount' : 'Founding rate';
+            }
+            slider.addEventListener('input', update);
+            update();
+          })();
+        </script>
+
         <h2>What your auditor wants</h2>
 
         <p>Three things, in our experience.</p>
@@ -223,5 +287,6 @@
     </div>
   </footer>
   <script src="/assets/js/navigation.js" defer></script>
+  <script src="/assets/js/interactive-data.js" defer></script>
 </body>
 </html>

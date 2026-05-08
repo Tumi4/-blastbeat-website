@@ -65,6 +65,7 @@
   <main id="main">
     <article>
       <header class="post-hero">
+        <!-- TODO: stock photo &mdash; drop /assets/images/blog/01-founder-origin.jpg here, currently using existing site photo -->
         <div class="post-hero-bg" style="background-image: url('/assets/images/bb-event-06.jpg');" aria-hidden="true"></div>
         <div class="post-hero-inner">
           <div class="post-eyebrow">Founder Note &middot; Vision</div>
@@ -93,26 +94,26 @@
 
         <p>Look at the numbers. South Africa&rsquo;s expanded youth unemployment rate sits stubbornly above 60% for 15&ndash;24-year-olds<sup><a href="#src1">1</a></sup>. Globally, roughly one in five young people are NEET &mdash; not in education, employment or training<sup><a href="#src2">2</a></sup>. Employers in McKinsey&rsquo;s 2024 employer survey rated graduates &ldquo;ready to perform&rdquo; at a far lower rate than graduates rated themselves<sup><a href="#src3">3</a></sup>. Everyone is upset about the same gap.</p>
 
-        <div class="stat-strip">
-          <div class="stat">
-            <div class="num">60.7%</div>
-            <div class="label">SA youth unemployment</div>
-            <div class="source">StatsSA QLFS</div>
+        <div class="stat-strip" data-toggle="2024|2026" aria-label="Toggle between 2024 and 2026 figures">
+          <div class="stat" data-2024="60.7%" data-2026="60.0%">
+            <div class="num">60.0%</div>
+            <div class="label">SA youth unemployment (15&ndash;24, expanded)</div>
+            <div class="source">StatsSA QLFS Q4 2025</div>
           </div>
-          <div class="stat">
-            <div class="num">~20%</div>
-            <div class="label">Global NEET rate (15–24)</div>
-            <div class="source">ILO 2024</div>
+          <div class="stat" data-2024="~20%" data-2026="20.4%">
+            <div class="num">20.4%</div>
+            <div class="label">Global youth NEET rate</div>
+            <div class="source">ILO WESO 2025</div>
           </div>
-          <div class="stat">
-            <div class="num">39pt</div>
+          <div class="stat" data-2024="39pt" data-2026="42pt">
+            <div class="num">42pt</div>
             <div class="label">Self vs employer readiness gap</div>
-            <div class="source">McKinsey 2024</div>
+            <div class="source">WEF Future of Jobs 2025</div>
           </div>
-          <div class="stat">
+          <div class="stat" data-2024="23 yrs" data-2026="23 yrs">
             <div class="num">23 yrs</div>
             <div class="label">Of running this programme</div>
-            <div class="source">Blastbeat</div>
+            <div class="source">Blastbeat 2003&ndash;2026</div>
           </div>
         </div>
 
@@ -243,5 +244,6 @@
   </footer>
 
   <script src="/assets/js/navigation.js" defer></script>
+  <script src="/assets/js/interactive-data.js" defer></script>
 </body>
 </html>
