@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blastbeat Education | Run Real Events. Keep Real Profits. Create Real Change.</title>
   <meta name="description" content="Blastbeat turns students aged 14-18 into music &amp; sports entrepreneurs. Form your Event Social Enterprise, run real events, keep 75% of profits, and fund climate action. 23 years. 19 countries. 360K+ students.">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_GB">
   <meta property="og:url" content="https://www.blastbeat.education/">
   <meta property="og:title" content="Blastbeat Education | Run Real Events. Keep Real Profits. Create Real Change.">
   <meta property="og:description" content="Students form Event Social Enterprises with 14 real business roles, run real events, keep 75% of profits, and fund climate action.">
-  <meta property="og:image" content="https://blastbeat-education.netlify.app/assets/images/logo-blastbeat.png">
+  <meta property="og:image" content="https://www.blastbeat.education/assets/images/bb-students-group.jpg">
   <meta property="og:site_name" content="Blastbeat Education">
+  <meta name="twitter:image" content="https://www.blastbeat.education/assets/images/bb-students-group.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Blastbeat Education | Run Real Events. Keep Real Profits. Create Real Change.">
   <meta name="twitter:description" content="Students form Event Social Enterprises with 14 real business roles, run real events, keep 75% of profits, and fund climate action.">
@@ -31,14 +34,101 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Blastbeat Education",
-    "alternateName": "Climate Actions Now",
-    "url": "https://www.blastbeat.education",
-    "logo": "/assets/images/logo-blastbeat.png",
-    "description": "Youth entrepreneurship through music, sports and climate action.",
-    "foundingDate": "2003",
-    "contactPoint": { "@type": "ContactPoint", "email": "info@blastbeat.education", "contactType": "general" }
+    "@graph": [
+      {
+        "@type": ["EducationalOrganization", "NGO"],
+        "@id": "https://www.blastbeat.education/#organization",
+        "name": "Blastbeat Education",
+        "alternateName": ["Blastbeat", "Blastbeat ESE Programme"],
+        "url": "https://www.blastbeat.education/",
+        "logo": {
+          "@type": "ImageObject",
+          "@id": "https://www.blastbeat.education/#logo",
+          "url": "https://www.blastbeat.education/assets/images/logo-blastbeat.png",
+          "width": 512,
+          "height": 512,
+          "caption": "Blastbeat Education"
+        },
+        "image": "https://www.blastbeat.education/assets/images/bb-students-group.jpg",
+        "description": "Youth entrepreneurship education through music, sport, and climate action. Students aged 14–18 form Event Social Enterprises, run real events, keep 75% of profits, and fund climate projects.",
+        "slogan": "Run Real Events. Keep Real Profits. Create Real Change.",
+        "foundingDate": "2003",
+        "founder": {
+          "@type": "Person",
+          "name": "Robert Stephenson",
+          "jobTitle": "Founder & Programme Director"
+        },
+        "knowsLanguage": ["en", "af"],
+        "areaServed": [
+          { "@type": "Country", "name": "South Africa" },
+          { "@type": "Country", "name": "Namibia" },
+          { "@type": "Country", "name": "Ireland" },
+          { "@type": "Country", "name": "United Kingdom" }
+        ],
+        "audience": {
+          "@type": "EducationalAudience",
+          "educationalRole": "student",
+          "audienceType": "Secondary school learners aged 14–18"
+        },
+        "parentOrganization": { "@id": "https://www.blastbeat.education/#parent" },
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "email": "info@blastbeat.education",
+            "contactType": "general enquiries",
+            "availableLanguage": ["English"]
+          },
+          {
+            "@type": "ContactPoint",
+            "email": "robert@blastbeat.education",
+            "telephone": "+27-73-804-8409",
+            "contactType": "sponsorship enquiries",
+            "areaServed": ["ZA", "NA", "IE", "GB"],
+            "availableLanguage": ["English"]
+          }
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/company/blastbeat-education",
+          "https://www.instagram.com/blastbeateducation",
+          "https://twitter.com/BlastbeatEdu",
+          "https://www.youtube.com/@blastbeateducation"
+        ]
+      },
+      {
+        "@type": "NGO",
+        "@id": "https://www.blastbeat.education/#parent",
+        "name": "Climate Actions Now",
+        "alternateName": "CAN",
+        "url": "https://www.blastbeat.education/pages/can.html",
+        "description": "UK Registered Charity (No. 1113530). Parent organisation and issuer of record for the Blastbeat Licence.",
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "UK Charity Commission",
+          "value": "1113530"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "GB"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.blastbeat.education/#website",
+        "url": "https://www.blastbeat.education/",
+        "name": "Blastbeat Education",
+        "description": "Youth entrepreneurship through music, sports and climate action.",
+        "publisher": { "@id": "https://www.blastbeat.education/#organization" },
+        "inLanguage": "en",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.blastbeat.education/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
   }
   </script>
 </head>
