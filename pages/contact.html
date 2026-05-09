@@ -62,6 +62,7 @@
     </div>
   </nav>
   <div class="bb-nav-mobile" aria-hidden="true">
+    <div data-bb-currency-mount data-bb-currency-mount-mobile style="padding:8px 16px 0;display:flex;justify-content:flex-end;"></div>
     <a href="/pages/programme.html">Programme</a>
     <a href="/pages/for-schools.html">For Schools</a>
     <a href="/pages/about.html">About</a>
@@ -148,7 +149,61 @@
             <h3 style="color: white; font-size: var(--text-2xl); margin-bottom: var(--space-6); font-family: var(--font-heading); font-weight: 700;">Send a Message</h3>
             <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
               <input type="hidden" name="form-name" value="contact">
+              <input type="hidden" name="resource-requested" id="resource-requested" value="">
+              <input type="hidden" name="display-currency" id="display-currency" value="">
               <p style="display:none"><label>Don&rsquo;t fill this out: <input name="bot-field"></label></p>
+
+              <!-- Lead-magnet acknowledgement banner — populated by JS when ?request=<slug> is in the URL -->
+              <div id="lm-banner" style="display:none; padding: 14px 18px; margin-bottom: var(--space-6); border-radius: 12px; background: linear-gradient(135deg, rgba(184,255,0,0.08), rgba(0,245,255,0.06)); border: 1px solid rgba(184,255,0,0.3);">
+                <div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--neon-lime); margin-bottom: 4px;">&#128196; Resource request</div>
+                <div style="color: white; font-weight: 700; margin-bottom: 4px;" id="lm-banner-title">Requesting the brief.</div>
+                <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.55;" id="lm-banner-body">Drop us your details below and we&rsquo;ll email it within 24 hours.</div>
+              </div>
+              <script>
+                (function () {
+                  // Map of ?request=<slug> values to friendly names + a default subject
+                  var resources = {
+                    'founder-brief':       { label: 'the 12-page Founder’s Brief', subject: 'Resource request: Founder’s Brief' },
+                    'licence-one-pager':   { label: 'the Licence One-Pager (for your CSR team)', subject: 'Resource request: Licence One-Pager' },
+                    'principal-brief':     { label: 'the 8-page Principal’s Brief', subject: 'Resource request: Principal’s Brief' },
+                    'teacher-pack':        { label: 'the Lead-Teacher Handbook (PDF + workbook)', subject: 'Resource request: Lead-Teacher Handbook' },
+                    'role-cards':          { label: 'the printable 14 ESE Role Cards', subject: 'Resource request: ESE Role Cards' },
+                    'profit-workbook':     { label: 'the Student Profit-Calculator workbook', subject: 'Resource request: Profit Workbook' },
+                    'cv-pack':             { label: 'the Blastbeat alumni CV Pack', subject: 'Resource request: CV Pack' },
+                    'sponsor-pack':        { label: 'the 16-page Sponsor Pack', subject: 'Resource request: Sponsor Pack' },
+                    'compliance-pack':     { label: 'the Compliance Pack (ESG / B-BBEE / S.18A)', subject: 'Resource request: Compliance Pack' },
+                    'macc-2024-report':    { label: 'the 2024 MACC Annual Report', subject: 'Resource request: MACC Annual Report' },
+                    '2026-commitment-letter': { label: 'the 2026 Commitment Letter', subject: 'Resource request: 2026 Commitment Letter' },
+                    'international-brief': { label: 'the International Partner Brief', subject: 'Resource request: International Brief' },
+                    'journal-subscribe':   { label: 'the monthly Blastbeat journal newsletter', subject: 'Newsletter subscription: Blastbeat journal' }
+                  };
+                  var params = new URLSearchParams(window.location.search);
+                  var slug = params.get('request');
+                  if (slug && resources[slug]) {
+                    var r = resources[slug];
+                    document.getElementById('lm-banner').style.display = 'block';
+                    document.getElementById('lm-banner-title').textContent = 'Requesting: ' + r.label + '.';
+                    document.getElementById('resource-requested').value = slug;
+                    var subjectField = document.getElementById('subject');
+                    if (subjectField) subjectField.value = r.subject;
+                    var msgField = document.getElementById('message');
+                    if (msgField && !msgField.value) {
+                      msgField.value = 'Hi Blastbeat team — please send me ' + r.label + '. Thanks.';
+                    }
+                  }
+                  // Capture the visitor's chosen display currency at submit time
+                  var form = document.querySelector('form[name="contact"]');
+                  if (form) {
+                    form.addEventListener('submit', function () {
+                      try {
+                        var cur = (window.BBCurrency && window.BBCurrency.get && window.BBCurrency.get()) || localStorage.getItem('bb_currency') || '';
+                        var f = document.getElementById('display-currency');
+                        if (f) f.value = cur;
+                      } catch (e) {}
+                    });
+                  }
+                })();
+              </script>
 
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
                 <div class="form-group">
@@ -244,12 +299,7 @@
           </a>
           <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 300px; color: rgba(255,255,255,0.6);">Empowering young people through music, entrepreneurship, and climate action. 23 years. 19 countries. 360,000+ students.</p>
           <p style="font-size: var(--text-xs); margin-top: var(--space-4); color: rgba(255,255,255,0.4);">Climate Actions Now<br>UK Registered Charity No. 1113530<br>GDPR &amp; POPIA Compliant</p>
-          <div class="footer-social" style="margin-top: var(--space-6);">
-            <a href="#" aria-label="LinkedIn">in</a>
-            <a href="#" aria-label="Instagram">ig</a>
-            <a href="#" aria-label="X / Twitter">X</a>
-            <a href="#" aria-label="YouTube">YT</a>
-          </div>
+          <!-- footer-social hidden until real URLs are ready; restore by uncommenting this block and pasting in real links -->
         </div>
         <div>
           <h5>Programme</h5>

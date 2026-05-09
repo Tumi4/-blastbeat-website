@@ -359,6 +359,7 @@
     </div>
   </nav>
   <div class="bb-nav-mobile" aria-hidden="true">
+    <div data-bb-currency-mount data-bb-currency-mount-mobile style="padding:8px 16px 0;display:flex;justify-content:flex-end;"></div>
     <a href="/pages/programme.html">Programme</a>
     <a href="/pages/for-schools.html">For Schools</a>
     <a href="/pages/licence.html">Licence</a>
@@ -483,6 +484,7 @@
         <div class="apply-form-wrap">
           <form name="school-application" method="POST" data-netlify="true" action="/thank-you.html" novalidate>
             <input type="hidden" name="form-name" value="school-application">
+              <input type="hidden" name="display-currency" id="display-currency-apply" value="">
             <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
 
             <!-- School Details -->
@@ -722,5 +724,22 @@
   <script src="/assets/js/cookie-consent.js" defer></script>
   <script src="/assets/js/beat-bot.js" defer></script>
   <script src="/assets/js/currency.js" defer></script>
+
+<script>
+  (function () {
+    // Capture visitor's display currency at form submission for sponsor / school context.
+    // Tag: BBCurrency-on-submit-apply
+    var form = document.querySelector('form[name][method="POST"]');
+    if (!form) return;
+    form.addEventListener('submit', function () {
+      try {
+        var cur = (window.BBCurrency && window.BBCurrency.get && window.BBCurrency.get()) || localStorage.getItem('bb_currency') || '';
+        var f = form.querySelector('input[name="display-currency"]');
+        if (f) f.value = cur;
+      } catch (e) {}
+    });
+  })();
+</script>
+
 </body>
 </html>

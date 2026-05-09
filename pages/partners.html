@@ -62,6 +62,7 @@
     </div>
   </nav>
   <div class="bb-nav-mobile" aria-hidden="true">
+    <div data-bb-currency-mount data-bb-currency-mount-mobile style="padding:8px 16px 0;display:flex;justify-content:flex-end;"></div>
     <a href="/pages/programme.html">Programme</a>
     <a href="/pages/for-schools.html">For Schools</a>
     <a href="/pages/licence.html">Licence</a>
@@ -601,6 +602,7 @@
           <div class="glass-card reveal reveal-delay-1" style="padding: var(--space-8);">
             <form name="sponsorship-enquiry" method="POST" data-netlify="true" action="/thank-you.html">
               <input type="hidden" name="form-name" value="sponsorship-enquiry">
+              <input type="hidden" name="display-currency" id="display-currency-partners" value="">
               <p style="display:none"><label>Don&rsquo;t fill this out: <input name="bot-field"></label></p>
 
               <div class="form-group">
@@ -751,12 +753,7 @@
             UK Registered Charity No. 1113530<br>
             GDPR &amp; POPIA Compliant
           </p>
-          <div class="footer-social" style="margin-top: var(--space-6);">
-            <a href="#" aria-label="LinkedIn">in</a>
-            <a href="#" aria-label="Instagram">ig</a>
-            <a href="#" aria-label="X / Twitter">X</a>
-            <a href="#" aria-label="YouTube">YT</a>
-          </div>
+          <!-- footer-social hidden until real URLs are ready; restore by uncommenting this block and pasting in real links -->
         </div>
         <div>
           <h5>Programme</h5>
@@ -813,5 +810,22 @@
   <script src="/assets/js/cookie-consent.js" defer></script>
   <script src="/assets/js/beat-bot.js" defer></script>
   <script src="/assets/js/currency.js" defer></script>
+
+<script>
+  (function () {
+    // Capture visitor's display currency at form submission for sponsor / school context.
+    // Tag: BBCurrency-on-submit-partners
+    var form = document.querySelector('form[name][method="POST"]');
+    if (!form) return;
+    form.addEventListener('submit', function () {
+      try {
+        var cur = (window.BBCurrency && window.BBCurrency.get && window.BBCurrency.get()) || localStorage.getItem('bb_currency') || '';
+        var f = form.querySelector('input[name="display-currency"]');
+        if (f) f.value = cur;
+      } catch (e) {}
+    });
+  })();
+</script>
+
 </body>
 </html>
