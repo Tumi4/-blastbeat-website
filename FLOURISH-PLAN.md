@@ -12,7 +12,7 @@
 
 | Slot | Page | Chart type | Why Flourish |
 |---|---|---|---|
-| Global footprint map | `/pages/impact.html` | Choropleth world map (19 countries) | Click-to-explore, mobile-pan, rich Flourish UX |
+| Global footprint map | `/pages/impact.html` | Choropleth world map (11 countries) | Click-to-explore, mobile-pan, rich Flourish UX |
 | 23-year alumni timeline | `/pages/impact.html` | Animated horizontal timeline | Scroll-driven story |
 | MACC project explorer | `/blog/macc-effect-climate.html` | Filterable scatter plot (project type × spend × impact) | Filter chips, hover detail |
 | SDG progress radar | `/blog/youth-enterprise-sdgs-2030.html` | Radar / spider chart | SDG explorer is a Flourish strength |
@@ -43,7 +43,7 @@
 
 Build **one** interactive Flourish chart on the **Impact page** as a pilot:
 
-> **The Blastbeat global footprint** — choropleth map of 19 countries, sized by total students reached, click any country to see the chapter detail.
+> **The Blastbeat global footprint** — choropleth map of 11 countries, sized by total students reached, click any country to see the chapter detail.
 
 The slot is already prepared on `/pages/impact.html`. Just paste the embed code in.
 
@@ -63,24 +63,16 @@ The slot is already prepared on `/pages/impact.html`. Just paste the embed code 
 ```csv
 country,iso,students_reached,year_started,programme
 Ireland,IE,82000,2003,Founding chapter
-United Kingdom,GB,46000,2007,Active
-Northern Ireland,GB,8500,2009,Active
-Spain,ES,21000,2010,Active
-Netherlands,NL,18500,2011,Active
-Croatia,HR,9200,2012,Active
-Italy,IT,12800,2013,Active
-Hungary,HU,7400,2013,Active
-Poland,PL,11200,2014,Active
-France,FR,16800,2014,Active
-Belgium,BE,6800,2015,Active
-Germany,DE,14200,2015,Active
-Czech Republic,CZ,5400,2016,Active
-Slovakia,SK,3900,2016,Active
-Slovenia,SI,2800,2016,Active
-Austria,AT,4600,2017,Active
-Kenya,KE,28000,2018,African chapter
-South Africa,ZA,52000,2020,Active growth market
-Namibia,NA,7800,2024,New territory
+United Kingdom,GB,46000,2007,Past chapter
+Northern Ireland,GB,8500,2009,Past chapter
+Spain,ES,12000,2010,Past chapter
+Netherlands,NL,9000,2011,Past chapter
+United States,US,14000,2014,Past chapter
+Japan,JP,9500,2015,Past chapter
+South Korea,KR,7200,2016,Past chapter
+South Africa,ZA,52000,2020,Launching pilot 2026
+Uganda,UG,4800,2018,Active activity 2026
+Rwanda,RW,3200,2022,Active activity 2026
 ```
 
 ---

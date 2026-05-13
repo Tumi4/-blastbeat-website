@@ -10,7 +10,7 @@
 
 ## 1. What we're building
 
-A choropleth world map showing the 19 countries Blastbeat has run in. Countries are colored by total students reached. Click any country → tooltip with chapter detail (founding year, students reached, programme status).
+A choropleth world map showing the 11 countries Blastbeat has run in. Countries are colored by total students reached. Click any country → tooltip with chapter detail (founding year, students reached, programme status).
 
 It will land in the prepared slot on `/pages/impact.html` (look for `<!-- FLOURISH-SLOT: footprint-map -->` in the source). The slot already has a styled fallback so the page works fine until the embed lands.
 
@@ -36,25 +36,17 @@ Click "Data" tab in Flourish, then **Paste data**. Paste exactly this:
 
 ```csv
 country,iso,students_reached,year_started,programme,blurb
-Ireland,IE,82000,2003,Founding chapter,Where it all started in 2003.
-United Kingdom,GB,46000,2007,Active,Programme launched in London 2007.
-Spain,ES,21000,2010,Active,Strong Catalonia and Madrid presence.
-Netherlands,NL,18500,2011,Active,Amsterdam-based hub.
-Croatia,HR,9200,2012,Active,Zagreb cohort + coastal events.
-Italy,IT,12800,2013,Active,Northern Italy school network.
-Hungary,HU,7400,2013,Active,Budapest founding cohort.
-Poland,PL,11200,2014,Active,Warsaw and Krakow chapters.
-France,FR,16800,2014,Active,Paris and Lyon programmes.
-Belgium,BE,6800,2015,Active,Brussels chapter.
-Germany,DE,14200,2015,Active,Berlin-led, expanding south.
-Czech Republic,CZ,5400,2016,Active,Prague chapter.
-Slovakia,SK,3900,2016,Active,Bratislava cohort.
-Slovenia,SI,2800,2016,Active,Ljubljana cohort.
-Austria,AT,4600,2017,Active,Vienna chapter.
-Kenya,KE,28000,2018,African chapter,First African chapter — Nairobi-led.
-South Africa,ZA,52000,2020,Active growth market,Strongest current growth — Western Cape.
-Namibia,NA,7800,2024,New territory,Newest chapter — Windhoek-led 2024 launch.
-Northern Ireland,GB,8500,2009,Active,Belfast cohort.
+Ireland,IE,82000,2003,Founding chapter,Where it all started in 2003 — RTÉ 2 broadcast.
+United Kingdom,GB,46000,2007,Past chapter,London-based programme.
+Northern Ireland,GB,8500,2009,Past chapter,Belfast cohort.
+Spain,ES,12000,2010,Past chapter,Catalonia & Madrid cohorts.
+Netherlands,NL,9000,2011,Past chapter,Amsterdam hub.
+United States,US,14000,2014,Past chapter,US schools cohort.
+Japan,JP,9500,2015,Past chapter,Tokyo & Osaka.
+South Korea,KR,7200,2016,Past chapter,Seoul-based cohort.
+South Africa,ZA,52000,2020,Launching pilot 2026,Cape Town pilot schools launching June 2026.
+Uganda,UG,4800,2018,Active activity 2026,CACU rural communities — current activity.
+Rwanda,RW,3200,2022,Active activity 2026,CAN Rwanda + Tia Kids Africa — current activity.
 ```
 
 **The "geographic" column** Flourish should auto-detect is `iso` (the 2-letter ISO codes). If it asks, tell it to map countries to the `iso` column.
@@ -135,7 +127,7 @@ If Flourish uses `{{ }}` instead of `{ }`, switch the brackets accordingly.
 Open `pages/impact.html`. Find this line (around line 351):
 
 ```html
-<iframe src="" title="Blastbeat global footprint &mdash; 19 countries, 360,000+ students" loading="lazy" frameborder="0" scrolling="no" style="position:absolute;inset:0;width:100%;height:100%;border:none;background:transparent;display:none;" data-flourish-id="footprint-map"></iframe>
+<iframe src="" title="Blastbeat global footprint &mdash; 11 countries, 360,000+ students" loading="lazy" frameborder="0" scrolling="no" style="position:absolute;inset:0;width:100%;height:100%;border:none;background:transparent;display:none;" data-flourish-id="footprint-map"></iframe>
 ```
 
 Paste the Flourish URL into the empty `src=""`:
@@ -192,7 +184,7 @@ STEPS
    geographic column should be "iso" (ISO 2-letter codes). The value
    column to colour by should be "students_reached".
 
-6. Switch to the "Preview" tab. The map should show 19 countries
+6. Switch to the "Preview" tab. The map should show 11 countries
    coloured. If "ZA" / "GB" / "IE" etc. are not lighting up, the
    geography mapping needs fixing — set it to "iso" / "ISO 2-letter".
 
@@ -214,25 +206,17 @@ STEPS
 DATA (paste in step 4)
 
 country,iso,students_reached,year_started,programme,blurb
-Ireland,IE,82000,2003,Founding chapter,Where it all started in 2003.
-United Kingdom,GB,46000,2007,Active,Programme launched in London 2007.
-Spain,ES,21000,2010,Active,Strong Catalonia and Madrid presence.
-Netherlands,NL,18500,2011,Active,Amsterdam-based hub.
-Croatia,HR,9200,2012,Active,Zagreb cohort + coastal events.
-Italy,IT,12800,2013,Active,Northern Italy school network.
-Hungary,HU,7400,2013,Active,Budapest founding cohort.
-Poland,PL,11200,2014,Active,Warsaw and Krakow chapters.
-France,FR,16800,2014,Active,Paris and Lyon programmes.
-Belgium,BE,6800,2015,Active,Brussels chapter.
-Germany,DE,14200,2015,Active,Berlin-led, expanding south.
-Czech Republic,CZ,5400,2016,Active,Prague chapter.
-Slovakia,SK,3900,2016,Active,Bratislava cohort.
-Slovenia,SI,2800,2016,Active,Ljubljana cohort.
-Austria,AT,4600,2017,Active,Vienna chapter.
-Kenya,KE,28000,2018,African chapter,First African chapter — Nairobi-led.
-South Africa,ZA,52000,2020,Active growth market,Strongest current growth — Western Cape.
-Namibia,NA,7800,2024,New territory,Newest chapter — Windhoek-led 2024 launch.
-Northern Ireland,GB,8500,2009,Active,Belfast cohort.
+Ireland,IE,82000,2003,Founding chapter,Where it all started in 2003 — RTÉ 2 broadcast.
+United Kingdom,GB,46000,2007,Past chapter,London-based programme.
+Northern Ireland,GB,8500,2009,Past chapter,Belfast cohort.
+Spain,ES,12000,2010,Past chapter,Catalonia & Madrid cohorts.
+Netherlands,NL,9000,2011,Past chapter,Amsterdam hub.
+United States,US,14000,2014,Past chapter,US schools cohort.
+Japan,JP,9500,2015,Past chapter,Tokyo & Osaka.
+South Korea,KR,7200,2016,Past chapter,Seoul-based cohort.
+South Africa,ZA,52000,2020,Launching pilot 2026,Cape Town pilot schools launching June 2026.
+Uganda,UG,4800,2018,Active activity 2026,CACU rural communities — current activity.
+Rwanda,RW,3200,2022,Active activity 2026,CAN Rwanda + Tia Kids Africa — current activity.
 
 STYLING (apply in step 7)
 
