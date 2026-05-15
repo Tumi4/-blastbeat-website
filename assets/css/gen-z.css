@@ -1022,7 +1022,7 @@
 }
 .role-card-emoji { font-size: 1.75rem; margin-bottom: var(--space-3); }
 .role-card-title { color: white; font-weight: 700; font-family: var(--font-heading); font-size: var(--text-sm); margin-bottom: 4px; }
-.role-card-desc { color: rgba(255,255,255,0.5); font-size: 0.7rem; margin: 0; line-height: 1.4; }
+.role-card-desc { color: rgba(255,255,255,0.72); font-size: 0.7rem; margin: 0; line-height: 1.4; }
 
 /* Scroll hint bar */
 .scroll-hint {
@@ -1095,7 +1095,7 @@
 }
 .phase-content { padding-top: var(--space-8); }
 .phase-title { color: white; font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-3); font-family: var(--font-heading); }
-.phase-desc { color: rgba(255,255,255,0.55); font-size: var(--text-sm); line-height: 1.7; margin: 0; }
+.phase-desc { color: rgba(255,255,255,0.75); font-size: var(--text-sm); line-height: 1.7; margin: 0; }
 
 @media (max-width: 900px) {
   .phase-journey { grid-template-columns: repeat(2, 1fr); }
@@ -1286,7 +1286,7 @@
 }
 .school-card-meta {
   font-size: var(--text-sm);
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.72);
   margin-bottom: var(--space-4);
 }
 .school-card-needs {
