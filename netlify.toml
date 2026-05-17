@@ -1,6 +1,12 @@
 [build]
   publish = "."
 
+# Netlify Functions — /api/beat proxies to Claude API for the in-page AI chatbot.
+# Set ANTHROPIC_API_KEY in Site settings → Environment variables.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # Security headers
 [[headers]]
   for = "/*"
