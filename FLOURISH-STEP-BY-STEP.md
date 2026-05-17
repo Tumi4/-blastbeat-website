@@ -1,295 +1,222 @@
-# Flourish — Step-by-Step (Robert version)
+# Flourish Map — Step-by-Step Implementation Guide
 
-> The 10-minute guide to building Blastbeat's first interactive map.
-> No code involved. Coffee recommended.
+This is the practical, click-by-click guide to publish the Blastbeat global-footprint map on Flourish and drop the embed onto `pages/impact.html`. Time required: ~25 minutes.
 
----
+The site already has a placeholder iframe waiting for the embed URL — `pages/impact.html` around line 348:
 
-## What you're doing
-
-Adding an interactive world map to the **Impact** page on the Blastbeat website. The map will show all 11 countries we've run in, coloured by how many students each chapter has reached. Visitors can hover or click each country to see the chapter detail.
-
-You're using a free tool called **Flourish** to build the chart. It exports a single URL. You send that URL to me, and I drop it into the website.
-
----
-
-## Before you start
-
-You need:
-
-- A web browser (any modern one)
-- About 10 minutes
-- An email address you can check (for the Flourish sign-up confirmation). `info@blastbeat.education` is ideal — that way the account belongs to Blastbeat, not just to you.
-
-That's it.
-
----
-
-## Step 1 — Sign up at flourish.studio
-
-Go to **https://flourish.studio**.
-
-- Click **"Sign up"** (top right)
-- Use the Blastbeat email + a strong password
-- Check the inbox, click the confirmation link
-- You'll land in your empty Flourish dashboard
-
----
-
-## Step 2 — Start a new visualisation
-
-On the dashboard:
-
-- Click the big **"+ New visualisation"** button
-- A template gallery opens
-- In the search box at the top, type: **`projection map`**
-- Click the template called **"Projection map"** (it's a flat world-map template, NOT the 3D one)
-- Click **"Use this template"**
-
-You're now inside the chart editor.
-
----
-
-## Step 3 — Replace the demo data with Blastbeat data
-
-Flourish opens with sample data already loaded. We replace it.
-
-- At the top of the editor, click the **"Data"** tab
-- You'll see a spreadsheet
-- Click any cell, then **Cmd/Ctrl + A** to select all, **Delete** to clear
-- Then click **"Paste data"** (top of the data panel)
-
-**Paste this exactly:**
-
-```
-country,iso,students_reached,year_started,programme,blurb
-Ireland,IE,82000,2003,Founding chapter,Where it all started in 2003 — RTÉ 2 broadcast.
-United Kingdom,GB,46000,2007,Past chapter,London-based programme.
-Northern Ireland,GB,8500,2009,Past chapter,Belfast cohort.
-Spain,ES,12000,2010,Past chapter,Catalonia & Madrid cohorts.
-Netherlands,NL,9000,2011,Past chapter,Amsterdam hub.
-United States,US,14000,2014,Past chapter,US schools cohort.
-Japan,JP,9500,2015,Past chapter,Tokyo & Osaka.
-South Korea,KR,7200,2016,Past chapter,Seoul-based cohort.
-South Africa,ZA,52000,2020,Launching pilot 2026,Cape Town pilot schools launching June 2026.
-Uganda,UG,4800,2018,Active activity 2026,CACU rural communities — current activity.
-Rwanda,RW,3200,2022,Active activity 2026,CAN Rwanda + Tia Kids Africa — current activity.
+```html
+<iframe src="" ... data-flourish-id="footprint-map"></iframe>
 ```
 
-- Click **"Save and back to chart"** (or similar)
-- The map should now be coloured for our 11 countries. If it's not, see step 3a below.
-
-### Step 3a (only if the map looks blank)
-
-- Look for a panel called **"Bind data"** or **"Geography"** (usually in the sidebar)
-- Make sure the **Region** field is set to: **`iso`** (the column with our 2-letter codes)
-- Make sure the **Value** / **Color** field is set to: **`students_reached`**
-- The map will now light up.
+When you finish this guide, you replace the empty `src=""` with the Flourish embed URL.
 
 ---
 
-## Step 4 — Make it look like Blastbeat
+## Part 1 — Prepare the data
 
-Click the **"Settings"** or **"Customise"** panel (paint-roller icon, usually right side).
+### 1.1 Create the CSV
 
-You'll see a long list of tabs. Apply these values. If you can't find a field by name, find the closest one and just match the colour:
+Open Google Sheets / Excel and paste:
 
-### Colours
+```csv
+country,iso3,year_launched,status,students,note
+Ireland,IRL,2003,Founding,80000,Where Blastbeat began — AIB then Coca-Cola era
+United Kingdom,GBR,2007,Active,150000,O2 Arena final 2010 — 60+ schools nationwide
+United States,USA,2007,Archive,15000,Seven-city US run during the Coca-Cola era
+Japan,JPN,2009,Active,80000,Blastbeat Japan Foundation — still running today (blastbeat.jp)
+South Korea,KOR,2009,Archive,8000,Bilateral with Japan
+Belgium,BEL,2006,Archive,5000,Early international expansion partner
+Slovakia,SVK,2007,Archive,3000,Central European pilot
+Czechia,CZE,2007,Archive,3000,Central European pilot
+Rwanda,RWA,2024,Launching,500,V2 pilot cohort in Kigali
+Uganda,UGA,2024,Active,500,CACU + Gorilla Highlands partners
+South Africa,ZAF,2020,Launching,15000,2026 national launch with founding schools
+```
 
-| Field | Value |
-|---|---|
-| Background colour | **`#0F0F1A`** |
-| Country fill — lowest | **`#1A1A2E`** |
-| Country fill — highest | **`#B8FF00`** |
-| Country fill — middle (if there's a third stop) | **`#00F5FF`** |
-| Hidden countries (rest of world) | **`#0E0E18`** |
-| Country border on hover | **`#FFD93D`** |
-| Tooltip background | **`#0F0F1A`** |
-| Tooltip border | **`#00F5FF`** |
-| Tooltip text | **`#FFFFFF`** |
+Save as **`blastbeat-countries.csv`**.
 
-### Layout
+> Numbers are rough lifetime estimates — adjust freely. They drive bubble size on the map.
 
-| Field | Value |
-|---|---|
-| Show chart title above the map | **No** (we already have a title on the website) |
-| Show legend | **Yes** — position **bottom** |
-| Legend title | `Students reached` |
-| Map projection | **Robinson** |
-| Zoom controls | **Yes** |
-| Initial zoom | **Auto-fit** to coloured countries |
-
-### Font
-
-| Field | Value |
-|---|---|
-| Font family | **Space Grotesk** if available, otherwise any default sans |
+### 1.2 Optional: ISO-3 codes
+The `iso3` column is what Flourish uses to identify countries. Cross-check at [iso.org/obp](https://www.iso.org/obp/ui).
 
 ---
 
-## Step 5 — The clickable popup (best part)
+## Part 2 — Build on Flourish
 
-Find the **"Popups"** or **"Tooltips"** tab in Settings.
+### 2.1 Create the project
+1. Go to **[flourish.studio](https://flourish.studio)** and sign in (free tier is fine for one map).
+2. Click **+ New visualisation**.
+3. Search the template gallery for **"Projection map"** → click **Create from template**.
 
-Replace whatever's in the popup template with:
+### 2.2 Load the data
+1. Top-left, click the **Data** tab (it's next to **Preview**).
+2. **Delete the demo rows**: select all and hit delete.
+3. **Upload your CSV**: click **"Upload data file"** → pick `blastbeat-countries.csv`.
+4. Flourish auto-detects column types. Confirm:
+   - `country` → text
+   - `iso3` → text
+   - `year_launched` → number
+   - `status` → text (categorical)
+   - `students` → number
+   - `note` → text
 
-```
-{country}
-─────────────
-Started: {year_started}
-Students reached: {students_reached}
-Status: {programme}
+### 2.3 Map the columns
+Stay in the **Data** tab. In the right-hand "Bindings" panel:
 
-{blurb}
-```
+| Flourish field | Set to column | Why |
+|---|---|---|
+| Geometry ID (countries) | `iso3` | Tells Flourish which country to colour |
+| Name | `country` | Tooltip headline |
+| Categories (colour) | `status` | Founding / Active / Launching / Archive get different colours |
+| Size (bubble) | `students` | Bigger circle = more lifetime students |
+| Popup → metadata 1 | `year_launched` | Shows in tooltip |
+| Popup → metadata 2 | `note` | Shows in tooltip |
 
-Save. Now if you hover or click any country, the popup will read like:
+### 2.4 Style it on-brand
+Click **Preview** tab (top), then in the right rail:
 
-> **Ireland**
-> ─────────────
-> Started: 2003
-> Students reached: 82,000
-> Status: Founding chapter
->
-> Where it all started in 2003.
+- **Colour scheme** → Categorical → set:
+  - Founding = `#FF6B35` (sunset orange)
+  - Active = `#B8FF00` (neon lime)
+  - Launching = `#00F5FF` (neon cyan)
+  - Archive = `rgba(255,255,255,0.35)` (faded white)
+- **Background** → `#0F1424` (matches the site dark)
+- **Country outline colour** → `rgba(255,255,255,0.08)`
+- **Title** → "Blastbeat — 11 countries, 23 years"
+- **Subtitle** → "Lifetime reach by country and chapter status"
+- **Font** → "Space Grotesk" if available, else "Inter"
+- **Caption** (bottom) → "Source: Blastbeat chapter ledger, 2003–2026"
 
-If Flourish complains about the brackets, try double-bracing them: `{{country}}` instead of `{country}`.
+### 2.5 Set the projection
+- **Projection** → "Equal Earth" (best world view) OR "Robinson"
+- **Centre** → roughly `[10, 20]` to centre Europe + Africa nicely
+- **Zoom** → 1.0 (fits everything)
 
----
+### 2.6 Test the tooltips
+Hover any country in the preview. The tooltip should show:
+- Country name (big)
+- Status pill
+- Year launched
+- Students (lifetime)
+- The note
 
-## Step 6 — Publish
-
-Top right of the screen, click **"Export & publish"** (or just **"Publish"**).
-
-- Choose **"Public"** (free tier — fine for now, adds a small "Made with Flourish" badge in the corner; we can remove that later by upgrading)
-- Confirm
-
-After publish, you'll see two things:
-
-- A **link to share** the chart
-- An **"Embed"** tab — this contains an iframe URL
-
-**Click "Embed". Copy the URL.** It will look like:
-
-```
-https://flo.uri.sh/visualisation/12345678/embed
-```
-
-That's the only thing the website needs.
-
----
-
-## Step 7 — Send the URL to me
-
-Just paste the URL in your reply. Something like:
-
-> "Here's the chart: https://flo.uri.sh/visualisation/12345678/embed"
-
-I'll plug it into the website's prepared slot on the Impact page (90 seconds), commit, push, and the chart will be live.
-
----
-
-## If something goes wrong
-
-| Problem | Fix |
-|---|---|
-| **The map is blank.** | Step 3a above — your geography field probably isn't pointing at `iso`. |
-| **The colours look wrong.** | Double-check the hex codes have the `#` in front. |
-| **The popup is empty or shows literal `{country}` text.** | The bracket style is wrong — switch `{country}` to `{{country}}` and save again. |
-| **Flourish wants me to upgrade to publish.** | Stop. The Free tier publishes Public charts. If you're being asked to pay, you may have selected a premium template — go back to step 2 and search "projection map" again to make sure you're on the free template. |
-| **Northern Ireland looks like part of the UK.** | That's expected — they share the ISO code `GB`. We can split with sub-regions in v2 if you want. |
+If a field is missing, go back to **Data → Bindings** and check it's mapped.
 
 ---
 
-## If you'd rather have Claude's browser extension do it
+## Part 3 — Publish & embed
 
-Open Claude with the browser extension active. Paste this prompt as a single message — it contains all the context Claude needs to drive Flourish for you:
+### 3.1 Publish
+Top-right of the Flourish editor: click **Publish**. Choose **Public — embed anywhere**. Confirm.
 
-```
-You are helping me build my first Flourish.studio chart for the
-Blastbeat Education website. Free tier is fine. I'll be next to you
-the whole time. Don't bypass authentication — pause and ask me to
-type passwords or click verification links.
+You'll land on a publish-success page with three options. Use the **iframe** one — it looks like:
 
-GOAL: end the session with a published Flourish embed URL of the
-form https://flo.uri.sh/visualisation/<id>/embed that I can paste
-into our website.
-
-STEPS
-
-1. Open https://flourish.studio. Sign in (pause for me to enter
-   credentials).
-2. Click "+ New visualisation".
-3. Search the gallery for "projection map" and choose "Projection
-   map" (NOT 3D, NOT Marker).
-4. In the Data tab, paste the CSV from the DATA block below,
-   replacing all sample data.
-5. Confirm Flourish maps the geography column to "iso" and the value
-   column to "students_reached".
-6. Open Settings. Apply the styling values from the STYLING block
-   below. Where you can't find a named field, pick the closest
-   equivalent and tell me what you chose.
-7. Set the popup/tooltip template per the TOOLTIP block below. If
-   Flourish uses double curly braces, swap { } for {{ }}.
-8. Top right, "Export & publish" → "Public".
-9. Find the "Embed" tab. Copy the iframe URL — it starts
-   https://flo.uri.sh/visualisation/ and ends /embed.
-10. Paste that URL in your reply. That URL is the only thing I need.
-
-DATA
-
-country,iso,students_reached,year_started,programme,blurb
-Ireland,IE,82000,2003,Founding chapter,Where it all started in 2003 — RTÉ 2 broadcast.
-United Kingdom,GB,46000,2007,Past chapter,London-based programme.
-Northern Ireland,GB,8500,2009,Past chapter,Belfast cohort.
-Spain,ES,12000,2010,Past chapter,Catalonia & Madrid cohorts.
-Netherlands,NL,9000,2011,Past chapter,Amsterdam hub.
-United States,US,14000,2014,Past chapter,US schools cohort.
-Japan,JP,9500,2015,Past chapter,Tokyo & Osaka.
-South Korea,KR,7200,2016,Past chapter,Seoul-based cohort.
-South Africa,ZA,52000,2020,Launching pilot 2026,Cape Town pilot schools launching June 2026.
-Uganda,UG,4800,2018,Active activity 2026,CACU rural communities — current activity.
-Rwanda,RW,3200,2022,Active activity 2026,CAN Rwanda + Tia Kids Africa — current activity.
-
-STYLING
-
-Background: #0F0F1A
-Country fill, low value: #1A1A2E
-Country fill, high value: #B8FF00
-Country fill, mid (if 3-stop): #00F5FF
-Hidden / unused countries: #0E0E18
-Country border: thin, low-opacity grey
-Country border on hover: #FFD93D
-Tooltip background: #0F0F1A
-Tooltip border colour: #00F5FF
-Tooltip text colour: #FFFFFF
-Font: Space Grotesk if available, else default sans
-Show legend: yes, position bottom, title "Students reached"
-Show chart title above the map: NO
-Map projection: Robinson (or Equal Earth as fallback)
-Zoom controls: yes
-Initial zoom: auto-fit
-
-TOOLTIP
-
-Title: {country}
-Body lines:
-  Started: {year_started}
-  Students reached: {students_reached}
-  Status: {programme}
-  (blank line)
-  {blurb}
-
-If Flourish uses double curly braces, switch { } to {{ }}.
-
-NOTES
-- Don't bypass auth.
-- If a styling field has no obvious match, pick closest and tell me.
-- If publish requires a paid plan, stop — Public publish should be
-  free.
-- Final answer is just the embed URL.
+```html
+<div class="flourish-embed flourish-map" data-src="visualisation/XXXXXXXX"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
 ```
 
-That's it. About 10 minutes.
+You only need the **`XXXXXXXX` visualisation ID**. Copy it.
 
-— Send me the URL when you have it and I'll close out the loop.
+### 3.2 Get the direct embed URL
+The clean iframe URL is:
+
+```
+https://flo.uri.sh/visualisation/XXXXXXXX/embed
+```
+
+Where `XXXXXXXX` is your visualisation ID from step 3.1.
+
+---
+
+## Part 4 — Drop it onto the site
+
+### 4.1 Find the placeholder
+
+In your editor, open **`pages/impact.html`** and search for `data-flourish-id="footprint-map"`. You'll find this iframe (currently `src=""`):
+
+```html
+<iframe src="" title="Blastbeat global footprint — 11 countries, 360,000+ students"
+        loading="lazy" frameborder="0" scrolling="no"
+        style="position:absolute;inset:0;width:100%;height:100%;border:none;background:transparent;display:none;"
+        data-flourish-id="footprint-map"></iframe>
+```
+
+### 4.2 Wire it up
+
+Two edits to that line:
+
+1. Set the `src` to your Flourish URL.
+2. Remove `display: none;` so the iframe shows.
+
+Result:
+
+```html
+<iframe src="https://flo.uri.sh/visualisation/XXXXXXXX/embed"
+        title="Blastbeat global footprint — 11 countries, 360,000+ students"
+        loading="lazy" frameborder="0" scrolling="no"
+        style="position:absolute;inset:0;width:100%;height:100%;border:none;background:transparent;"
+        data-flourish-id="footprint-map"></iframe>
+```
+
+### 4.3 Hide the chip-cloud fallback (optional)
+
+Just above that iframe is a `<div>` with all the chips ("IE · Ireland · Founding" etc.) that serves as a fallback for when the embed isn't set yet. Once your real map works, you can either:
+
+- **Leave both** (chips below the map — gives keyboard / no-JS users a non-iframe path), or
+- **Hide the chips** by adding `style="display:none;"` to the fallback `<div>`.
+
+I recommend leaving both. It's a 30-line block at most, and accessibility wins.
+
+### 4.4 Allow the Flourish iframe in CSP
+
+Open **`netlify.toml`** and find the `Content-Security-Policy` line. Add `https://flo.uri.sh https://public.flourish.studio` to the `frame-src` list:
+
+```
+frame-src 'self' https://drive.google.com https://www.youtube.com https://www.youtube-nocookie.com https://youtube.com https://cdn.iframe.ly https://*.iframe.ly https://flo.uri.sh https://public.flourish.studio;
+```
+
+Without this, Chrome will silently block the iframe.
+
+### 4.5 Commit + push
+
+```bash
+git add pages/impact.html netlify.toml
+git commit -m "feat(impact): wire Flourish global-footprint map"
+git push
+```
+
+Netlify deploys in ~60 seconds. Hard-refresh `https://www.blastbeat.education/pages/impact.html` and the live map should be there.
+
+---
+
+## Part 5 — Updating the data later
+
+Flourish supports **Live Data** so you can update the CSV without re-publishing every time:
+
+1. In Flourish editor → **Data tab** → **"Connect to Google Sheet"**.
+2. Paste a public Google Sheet URL with the same column structure.
+3. Set refresh interval (24h is plenty).
+
+Now whenever Robert updates the sheet, the map updates the next day. No code changes.
+
+---
+
+## Troubleshooting
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| Iframe is blank / blocked | CSP doesn't include flo.uri.sh | Add to `frame-src` in netlify.toml (4.4) |
+| Map shows but no bubbles | `iso3` column not bound | Data tab → Bindings → set Geometry ID to `iso3` |
+| Wrong country highlighted | Bad ISO-3 code | Cross-check at iso.org/obp |
+| Mobile too small / cropped | Default Flourish responsive | The wrapping `<div>` already has `min-height: 360px` |
+| Tooltip missing year/note | Metadata 1/2 not mapped | Data → Bindings → Popup metadata fields |
+| Want to share an editable copy with Robert | Flourish free tier limits | "Duplicate visualisation" then share that URL — keeps the live one safe |
+
+---
+
+## What you should end up with
+
+A dark, on-brand projection map with 11 highlighted countries, four colour-coded statuses (Founding / Active / Launching / Archive), tooltips per country, and a "23 years" footer caption. Sized to the existing card on `/pages/impact.html` so it slots into the layout cleanly.
+
+Ping me when you hit step 4.2 and I'll do the wiring in the same PR if you want.

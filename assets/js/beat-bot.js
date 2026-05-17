@@ -143,6 +143,52 @@
       outline-offset: 3px;
     }
     #bb-bot-trigger svg { width: 26px; height: 26px; }
+    #bb-bot-greeting {
+      position: fixed;
+      bottom: 1.6rem;
+      right: 5.5rem;
+      z-index: 9988;
+      background: linear-gradient(135deg, #1a1f3a, #131725);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px 18px 6px 18px;
+      padding: 10px 16px;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      transform: translateY(8px) scale(0.95);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+      white-space: nowrap;
+      max-width: calc(100vw - 8rem);
+    }
+    #bb-bot-greeting::after {
+      content: '';
+      position: absolute;
+      right: -7px;
+      bottom: 14px;
+      width: 14px;
+      height: 14px;
+      background: linear-gradient(135deg, #1a1f3a, #131725);
+      border-right: 1px solid rgba(255,255,255,0.14);
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+      transform: rotate(-45deg);
+    }
+    #bb-bot-greeting.show {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #bb-bot-greeting .bb-wave { display: inline-block; animation: bb-wave 1s ease-in-out infinite; transform-origin: 70% 70%; margin-right: 4px; }
+    @keyframes bb-wave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(18deg); }
+      75% { transform: rotate(-12deg); }
+    }
+    @media (max-width: 480px) {
+      #bb-bot-greeting { font-size: 0.78rem; padding: 8px 12px; bottom: 1.4rem; right: 4.6rem; }
+    }
     #bb-bot-badge {
       position: absolute;
       top: -3px;
@@ -425,6 +471,36 @@
 
   document.body.appendChild(trigger);
   document.body.appendChild(panel);
+
+  /* ---- Friendly greeting bubble ---- */
+  var greetEl = document.createElement('div');
+  greetEl.id = 'bb-bot-greeting';
+  greetEl.setAttribute('role', 'button');
+  greetEl.setAttribute('tabindex', '0');
+  greetEl.setAttribute('aria-label', "Open Beat — Blastbeat's AI guide");
+  greetEl.innerHTML = '<span class="bb-wave" aria-hidden="true">👋</span> Hey, I\'m <strong>Beat</strong> — need a hand?';
+  document.body.appendChild(greetEl);
+
+  // Show once per session, ~6 seconds after page load, only if bot panel hasn't been opened yet
+  try {
+    var seen = sessionStorage.getItem('bb-bot-greeted');
+    if (!seen) {
+      setTimeout(function () {
+        if (panel.classList.contains('hidden')) {
+          greetEl.classList.add('show');
+          sessionStorage.setItem('bb-bot-greeted', '1');
+          // Auto-hide after 8s if user ignores it
+          setTimeout(function () { greetEl.classList.remove('show'); }, 8000);
+        }
+      }, 6000);
+    }
+  } catch (e) { /* sessionStorage blocked — no greeting */ }
+
+  function hideGreeting() { greetEl.classList.remove('show'); }
+  greetEl.addEventListener('click', function () { hideGreeting(); trigger.click(); });
+  greetEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hideGreeting(); trigger.click(); }
+  });
 
   /* ── Logic ── */
   var msgs = document.getElementById('bb-messages');
