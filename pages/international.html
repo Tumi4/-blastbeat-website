@@ -21,6 +21,8 @@
   <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
   <link rel="stylesheet" href="/assets/css/gen-z.css">
   <link rel="stylesheet" href="/assets/css/mobile.css">
+  <link rel="stylesheet" href="/assets/css/magic-hero.css">
+  <link rel="preload" as="image" href="/assets/images/bb-event-08.jpg" fetchpriority="high">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
       <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#6366F1">
@@ -75,39 +77,38 @@
   </div>
 
   <main id="main">
-    <!-- ===== HERO — Dark, Mesh Background ===== -->
-    <section class="hero-dark bg-mesh">
-      <div class="orb orb-1" aria-hidden="true"></div>
-      <div class="orb orb-2" aria-hidden="true"></div>
-      <div class="orb orb-3" aria-hidden="true"></div>
-
-      <div class="container" style="position: relative; z-index: 2;">
-        <div class="grid grid-2 items-center" style="gap: var(--space-10);">
-          <div>
-            <div class="neo-tag" style="margin-bottom: var(--space-6);">
-              <span class="emoji-spin">&#127758;</span> 11 Countries &bull; 5 Continents &bull; 1 Mission
+    <!-- ===== HERO — Magic Full-Bleed ===== -->
+    <section class="bb-magic-hero">
+      <div class="bb-magic-hero-bg" aria-hidden="true" style="background-image: url('/assets/images/bb-event-08.jpg');"></div>
+      <div class="bb-magic-hero-veil" aria-hidden="true"></div>
+      <div class="bb-magic-hero-grain" aria-hidden="true"></div>
+      <div class="bb-magic-hero-inner">
+        <div class="container">
+          <div class="reveal" style="max-width: 880px;">
+            <div class="bb-magic-eyebrow">
+              <span class="bb-pulse-dot" aria-hidden="true"></span>
+              11 Countries &bull; 5 Continents &bull; 1 Mission
             </div>
-
-            <h1 class="text-chunky" style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: var(--space-6);">
-              A Global Movement for<br>
-              <span class="text-gradient-vivid">Young Entrepreneurs</span>
+            <h1>
+              A Global Movement<br>for <span class="accent-vivid">Young Entrepreneurs.</span>
             </h1>
-
-            <p style="font-size: var(--text-xl); max-width: 580px; margin-bottom: var(--space-10); color: rgba(255,255,255,0.82);">
-              From Ireland to Southern Africa, Rwanda and beyond, Blastbeat empowers the next generation through music, sports, and enterprise. Government-backed. Community-driven. Student-led.
-            </p>
-
-            <div class="flex gap-4 flex-wrap">
-              <a href="/pages/contact.html" class="btn btn-glow btn-lg">&#127758; Bring Blastbeat to Your Country</a>
-              <a href="/pages/apply.html" class="btn btn-outline-glow btn-lg">Apply Now &#8594;</a>
+            <p class="bb-magic-deck">From Ireland to Cape Town to Kigali, Blastbeat empowers the next generation through music, sports, content creation and climate action.</p>
+            <p class="bb-magic-supporting">Government-backed. Community-driven. Student-led. Same engine in every country &mdash; localised pricing, currencies, sponsor categories and curriculum mappings.</p>
+            <div class="bb-magic-cta-row">
+              <a href="/pages/contact.html" class="bb-magic-cta-primary" data-cursor="magnet"><span>&#127758;</span> Bring Blastbeat to Your Country</a>
+              <a href="/pages/apply.html" class="bb-magic-cta-ghost" data-cursor="magnet">Apply Now &nbsp;&#8594;</a>
             </div>
           </div>
-
-          <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);">
-            <img src="/assets/images/bb-event-02.jpg" alt="Blastbeat in Ireland — where it started" loading="lazy" decoding="async" width="320" height="200" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-xl);">
-            <img src="https://irp.cdn-website.com/ef5fd9dc/dms3rep/multi/ugandar.png" alt="CAN Music young artists in Uganda" loading="lazy" decoding="async" width="320" height="200" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-xl);">
-            <img src="https://irp.cdn-website.com/ef5fd9dc/dms3rep/multi/WhatsApp+Image+2025-10-22+at+10.06.06_5f72d0d5.jpg" alt="TIA Kids early childhood programme in Rwanda" loading="lazy" decoding="async" width="320" height="200" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-xl);">
-            <img src="https://irp.cdn-website.com/ef5fd9dc/dms3rep/multi/505439684_10023406234413237_6717053678356210410_n.jpg" alt="Blastbeat West Coast pilot, Cape Town" loading="lazy" decoding="async" width="320" height="200" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-xl);">
+        </div>
+      </div>
+      <div class="bb-magic-scroll-cue" aria-hidden="true"><span>Scroll</span><span class="bb-magic-scroll-line"></span></div>
+      <div class="bb-magic-stat-shelf">
+        <div class="container">
+          <div class="bb-magic-stats">
+            <div class="bb-magic-stat"><div class="bb-magic-stat-num">11<span class="stat-unit">countries</span></div><div class="bb-magic-stat-label">Since 2003</div></div>
+            <div class="bb-magic-stat"><div class="bb-magic-stat-num">5<span class="stat-unit">continents</span></div><div class="bb-magic-stat-label">Europe / Asia / Africa / Americas</div></div>
+            <div class="bb-magic-stat"><div class="bb-magic-stat-num">4<span class="stat-unit">currencies</span></div><div class="bb-magic-stat-label">ZAR / EUR / GBP / USD</div></div>
+            <div class="bb-magic-stat"><div class="bb-magic-stat-num">1<span class="stat-unit">model</span></div><div class="bb-magic-stat-label">75 / 25 ESE Split</div></div>
           </div>
         </div>
       </div>

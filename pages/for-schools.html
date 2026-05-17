@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
   <link rel="stylesheet" href="/assets/css/gen-z.css">
   <link rel="stylesheet" href="/assets/css/mobile.css">
+  <link rel="stylesheet" href="/assets/css/magic-hero.css">
+  <link rel="preload" as="image" href="/assets/images/students-collaborating.jpeg" fetchpriority="high">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
       <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#6366F1">
@@ -77,51 +79,40 @@
 
   <main id="main">
 
-    <!-- ===== HERO — Dark Mesh ===== -->
-    <section class="hero-dark bg-mesh" style="min-height: 80vh; padding: calc(var(--nav-height) + 4rem) 0 5rem;">
-      <div class="orb orb-1" aria-hidden="true"></div>
-      <div class="orb orb-2" aria-hidden="true"></div>
-      <div class="orb orb-3" aria-hidden="true"></div>
-
-      <div class="container" style="position: relative; z-index: 2;">
-        <div class="grid grid-2 items-center" style="gap: var(--space-12);">
-
-          <!-- LEFT: Copy -->
-          <div class="reveal">
-            <div class="neo-tag" style="margin-bottom: var(--space-6);">
-              <span>&#127891;</span> For Principals, Teachers &amp; Coaches
+    <!-- ===== HERO — Magic Full-Bleed ===== -->
+    <section class="bb-magic-hero">
+      <div class="bb-magic-hero-bg" aria-hidden="true" style="background-image: url('/assets/images/students-collaborating.jpeg');"></div>
+      <div class="bb-magic-hero-veil" aria-hidden="true"></div>
+      <div class="bb-magic-hero-grain" aria-hidden="true"></div>
+      <div class="bb-magic-hero-inner">
+        <div class="container">
+          <div class="reveal" style="max-width: 880px;">
+            <div class="bb-magic-eyebrow">
+              <span class="bb-pulse-dot" aria-hidden="true"></span>
+              For Principals, Teachers &amp; Coaches
             </div>
-            <h1 class="text-chunky" style="font-size: clamp(2.25rem, 5vw, 3.75rem); margin-bottom: var(--space-6); color: white; line-height: 1.08;">
-              Turn Your School Into <span class="text-gradient-vivid">A Real-World Startup Classroom.</span>
+            <h1>
+              Turn Your School Into<br>
+              <span class="accent-vivid">A Real-World Startup Classroom.</span>
             </h1>
-            <p style="font-size: var(--text-xl); max-width: 580px; margin-bottom: var(--space-5); color: rgba(255,255,255,0.78); line-height: 1.55;">
-              Blastbeat helps young people aged <strong style="color:white;">14&ndash;18 in schools</strong> &mdash; and <strong style="color:white;">14&ndash;34 in sports clubs and community programmes</strong> &mdash; run real events, earn real profits, and fund real climate action.
-            </p>
-            <p style="font-size: var(--text-base); max-width: 580px; margin-bottom: var(--space-6); color: rgba(255,255,255,0.65); line-height: 1.7;">
-              Students form an Event Social Enterprise, plan concerts and tournaments, work with sponsors, and handle real money &mdash; not simulations. They learn to plan and run events from idea to live show or match, gain business and money skills, grow creative and media skills, and turn climate anxiety into action by investing <strong style="color:white;">25% of their profits</strong> into climate projects they choose.
-            </p>
-            <div class="flex gap-4 flex-wrap">
-              <a href="/pages/apply.html" class="btn btn-glow btn-lg">Book A 20-Minute School Demo</a>
-              <a href="#how-it-works" class="btn btn-outline-glow btn-lg">How It Works &#8595;</a>
-            </div>
-            <p style="font-size: 0.85rem; color: rgba(255,255,255,0.72); margin-top: var(--space-4); max-width: 540px;">
-              See how one class can plan an event, earn real profit, and fund a climate project &mdash; in a single term.
-            </p>
-          </div>
-
-          <!-- RIGHT: Image + badge -->
-          <div class="reveal reveal-delay-2" style="position: relative;">
-            <img src="/assets/images/students-collaborating.jpeg"
-                 alt="Students collaborating on their Blastbeat ESE project"
-                 style="border-radius: var(--radius-2xl); box-shadow: 0 0 40px rgba(99,102,241,0.25), 0 24px 60px rgba(0,0,0,0.5); width: 100%; opacity: 0.92;"
-                 width="600" height="400" loading="eager" fetchpriority="high" decoding="async">
-            <div style="position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); z-index: 10;">
-              <div class="founding-badge" style="white-space: nowrap; box-shadow: 0 8px 30px rgba(245,200,66,0.3); font-size: var(--text-sm); padding: 10px 20px;">
-                &#11088; Founding Schools 2026 &mdash; 25% Off
-              </div>
+            <p class="bb-magic-deck">Blastbeat helps young people aged <strong style="color:#fff;">14&ndash;18 in schools</strong> and <strong style="color:#fff;">14&ndash;34 in sports clubs and community programmes</strong> run real events, earn real profits, and fund real climate action.</p>
+            <p class="bb-magic-supporting">Students form an Event Social Enterprise, plan concerts and tournaments, work with sponsors, and handle real money. They keep 75% of profits and invest 25% in climate projects they choose. One class, one term, one real business.</p>
+            <div class="bb-magic-cta-row">
+              <a href="/pages/apply.html" class="bb-magic-cta-primary" data-cursor="magnet">Book A 20-Minute School Demo</a>
+              <a href="#how-it-works" class="bb-magic-cta-ghost" data-cursor="magnet">How It Works &nbsp;&#8595;</a>
             </div>
           </div>
-
+        </div>
+      </div>
+      <div class="bb-magic-scroll-cue" aria-hidden="true"><span>Scroll</span><span class="bb-magic-scroll-line"></span></div>
+      <div class="bb-magic-stat-shelf">
+        <div class="container">
+          <div class="bb-magic-stats">
+            <div class="bb-magic-stat"><div class="bb-magic-stat-num">1<span class="stat-unit">term</span></div><div class="bb-magic-stat-label">From idea to live event</div></div>
+            <div class="bb-magic-stat"><div class="bb-magic-stat-num">14<span class="stat-unit">roles</span></div><div class="bb-magic-stat-label">Per ESE team</div></div>
+            <div class="bb-magic-stat"><div class="bb-magic-stat-num">CAPS<span class="stat-unit"> + IJC</span></div><div class="bb-magic-stat-label">Curriculum-aligned</div></div>
+            <div class="bb-magic-stat"><div class="bb-magic-stat-num">25<span class="stat-unit">% off</span></div><div class="bb-magic-stat-label">Founding Schools 2026</div></div>
+          </div>
         </div>
       </div>
     </section>
