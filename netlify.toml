@@ -7,6 +7,15 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# Friendly path for the Beat AI endpoint. The function also declares
+# `config.path = "/api/beat"` natively, but this redirect is belt-and-
+# suspenders in case the v2 routing isn't honored on first deploy.
+[[redirects]]
+  from = "/api/beat"
+  to = "/.netlify/functions/beat"
+  status = 200
+  force = true
+
 # Security headers
 [[headers]]
   for = "/*"

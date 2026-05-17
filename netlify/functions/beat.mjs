@@ -10,7 +10,15 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 
-const client = new Anthropic(); // reads ANTHROPIC_API_KEY from env
+// Lazy client — `new Anthropic()` throws synchronously when ANTHROPIC_API_KEY
+// is missing, so deferring construction until after the env-var check keeps
+// the function importable and lets us return a friendly fallback instead of
+// a 502 cold-start crash.
+let cachedClient = null;
+function getClient() {
+  if (!cachedClient) cachedClient = new Anthropic();
+  return cachedClient;
+}
 
 // ----- Rate limit (per IP, best-effort across same warm instance) -----
 const RATE_LIMIT_REQUESTS = 12;
@@ -204,7 +212,7 @@ export default async (req) => {
   ];
 
   try {
-    const response = await client.messages.create({
+    const response = await getClient().messages.create({
       model: "claude-haiku-4-5",
       max_tokens: 512,
       system: [
