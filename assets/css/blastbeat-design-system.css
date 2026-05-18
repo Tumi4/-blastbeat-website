@@ -272,6 +272,7 @@ p {
   font-size: var(--text-xl);
   color: white;
   text-decoration: none;
+  margin-right: var(--space-8);
 }
 
 .bb-nav-logo img {
@@ -364,6 +365,7 @@ p {
   align-items: center;
   gap: var(--space-3);
 }
+.bb-nav-actions .btn { white-space: nowrap; }
 
 /* Mobile hamburger */
 .bb-nav-toggle {

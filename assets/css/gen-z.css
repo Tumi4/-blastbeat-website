@@ -1150,7 +1150,7 @@
   margin-bottom: var(--space-3);
 }
 .sketch-icon-card p {
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.85);
   font-size: var(--text-sm);
   line-height: 1.7;
   margin: 0;

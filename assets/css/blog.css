@@ -129,11 +129,13 @@
 }
 
 .post-body a {
-  color: var(--neon-cyan); text-decoration: none;
-  border-bottom: 1px solid rgba(0,245,255,0.35);
+  color: #FFB347;
+  text-decoration: none;
+  border-bottom: 1.5px solid rgba(255,179,71,0.55);
+  font-weight: 600;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
-.post-body a:hover { color: white; border-color: var(--neon-cyan); }
+.post-body a:hover { color: #fff; border-color: #FFB347; }
 
 .post-body ul, .post-body ol {
   padding-left: 1.4em; margin: 0;
