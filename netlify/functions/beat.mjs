@@ -63,7 +63,7 @@ Operates under Climate Actions Now (CAN) — Climate Actions Now Ltd (Ireland) h
 - **CAN** (Climate Actions Now) — Terms 3 & 4. The 25% climate fund every ESE generates. Student-designed projects: tree planting, clean-ups, renewable energy workshops, biodiversity, food security.
 
 # The 14 canonical ESE roles (used in every team — Leadership / Commercial / Brand & Audience / Production & Operations)
-CEO, CFO, Sales Manager, Marketing Manager, PR Manager, Social Media Manager, Content Creator, Talent Manager, Events Manager, Venue Manager, HR Manager, Legal & Compliance, Sustainability Manager, Audience Development.
+CEO, CFO, Climate Lead, Sales Manager, Marketing Manager, PR Manager, Social Media Manager, Content Creator, Talent Manager, Audience Development, Events Manager, Venue Manager, HR Manager, Legal & Compliance.
 
 # The 16-week journey
 Weeks 1-4: Foundation (team formation, role assignment, business planning, brand identity).
