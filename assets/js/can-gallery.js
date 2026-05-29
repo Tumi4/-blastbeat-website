@@ -1,22 +1,22 @@
 /* ============================================================
    <can-gallery> — reusable video gallery web component
-   Reads /can-videos.json (cached across instances) and renders a
-   filterable grid of YouTube-thumbnail cards. Iframes only load on
-   click (facade pattern) into an accessible lightbox.
+   Cinema-house styling: framed thumbnails, theatrical hover,
+   letterboxed lightbox. Reads /can-videos.json (cached) and
+   renders a filterable grid. Iframes only load on click (facade).
 
    Usage:
-     <can-gallery data-theme="Climate Action" data-limit="6" data-layout="grid"></can-gallery>
-     <can-gallery data-featured="true"></can-gallery>
+     <can-gallery data-theme="Climate Action" data-limit="6"></can-gallery>
+     <can-gallery data-featured="true" data-layout="featured"></can-gallery>
      <can-gallery data-category="Uganda & Community" data-layout="carousel"></can-gallery>
 
-   Attributes (all optional):
-     data-theme       Filter to a single theme (e.g. "Climate Action")
-     data-category    Filter to a single category (e.g. "Music & CAN Music")
-     data-search      Substring match on title + blurb (case-insensitive)
+   Attributes:
+     data-theme       Filter to a single theme
+     data-category    Filter to a single category
+     data-search      Substring match on title + blurb
      data-featured    "true" → show only featured items
      data-limit       Cap to N items
-     data-layout      "grid" (default) | "carousel"
-     data-hide-blurb  "true" → render compact cards (title only)
+     data-layout      "grid" (default) | "carousel" | "featured"
+     data-hide-blurb  "true" → compact title-only cards
    ============================================================ */
 
 (function () {
@@ -36,45 +36,72 @@
     return dataPromise;
   }
 
-  /* ---- Shared styles, injected once ---- */
+  /* ---- Shared cinema styles, injected once ---- */
   var STYLE_ID = 'can-gallery-styles';
   function injectStyles() {
     if (document.getElementById(STYLE_ID)) return;
     var s = document.createElement('style');
     s.id = STYLE_ID;
     s.textContent = ''
-      + '.cg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem}'
-      + '.cg-carousel{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:0.75rem;scrollbar-width:thin}'
-      + '.cg-carousel .cg-card{flex:0 0 280px;scroll-snap-align:start}'
-      + '.cg-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .25s ease,border-color .25s ease,box-shadow .3s ease;display:flex;flex-direction:column;text-align:left;font-family:inherit;color:inherit;width:100%;padding:0;position:relative}'
-      + '.cg-card:hover{transform:translateY(-4px);border-color:rgba(52,211,153,0.45);box-shadow:0 20px 40px -10px rgba(0,0,0,0.4)}'
-      + '.cg-card:focus-visible{outline:3px solid #00F5FF;outline-offset:3px}'
-      + '.cg-thumb{position:relative;aspect-ratio:16/9;background:#0a0e1a}'
-      + '.cg-thumb img{width:100%;height:100%;object-fit:cover;display:block}'
-      + '.cg-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,0.0),rgba(0,0,0,0.55));transition:background .25s}'
-      + '.cg-card:hover .cg-play{background:linear-gradient(180deg,rgba(0,0,0,0.1),rgba(0,0,0,0.7))}'
-      + '.cg-play svg{width:64px;height:64px;filter:drop-shadow(0 4px 14px rgba(0,0,0,0.5));transition:transform .25s}'
-      + '.cg-card:hover .cg-play svg{transform:scale(1.08)}'
-      + '.cg-tag{position:absolute;top:12px;left:12px;display:inline-block;font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,0.6);color:#34D399;border:1px solid rgba(52,211,153,0.4);backdrop-filter:blur(4px)}'
-      + '.cg-tag.featured{color:#FFE08A;border-color:rgba(255,224,138,0.45);background:rgba(40,28,0,0.7)}'
-      + '.cg-body{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;gap:0.45rem;flex:1}'
-      + '.cg-title{font-family:"Space Grotesk","DM Sans",sans-serif;font-weight:700;font-size:0.95rem;line-height:1.35;color:#fff;margin:0}'
-      + '.cg-blurb{font-size:0.78rem;line-height:1.5;color:rgba(255,255,255,0.7);margin:0}'
-      + '.cg-cat{font-family:"IBM Plex Mono","Space Grotesk",monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:auto}'
-      + '.cg-empty{padding:2rem;text-align:center;color:rgba(255,255,255,0.6);font-style:italic}'
-      /* Lightbox */
-      + '#cg-lightbox{position:fixed;inset:0;z-index:9995;background:rgba(8,9,16,0.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:1.5rem;animation:cg-fade .25s ease}'
+      /* ===== layouts ===== */
+      + '.cg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:2rem;justify-content:center;max-width:1200px;margin:0 auto}'
+      + '.cg-featured{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:2.5rem;justify-content:center;max-width:1200px;margin:0 auto}'
+      + '.cg-featured .cg-card{max-width:560px;margin:0 auto;width:100%}'
+      + '.cg-carousel{display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:0.5rem 0 1.5rem;scrollbar-width:thin;justify-content:flex-start}'
+      + '.cg-carousel .cg-card{flex:0 0 340px;scroll-snap-align:start}'
+      + '@media (max-width:600px){.cg-grid{grid-template-columns:1fr;gap:1.5rem}.cg-featured{grid-template-columns:1fr;gap:1.5rem}.cg-carousel .cg-card{flex-basis:280px}}'
+      /* ===== the card — movie-poster frame ===== */
+      + '.cg-card{position:relative;background:#0A0A0E;border:1px solid rgba(232,195,107,0.18);border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .35s cubic-bezier(0.34,1.56,0.64,1),border-color .3s ease,box-shadow .35s ease;display:flex;flex-direction:column;text-align:left;font-family:inherit;color:inherit;width:100%;padding:0;box-shadow:0 14px 40px -10px rgba(0,0,0,0.6),0 0 0 1px rgba(232,195,107,0.05)}'
+      + '.cg-card::before{content:"";position:absolute;inset:0;border-radius:8px;border:1px solid rgba(255,255,255,0.04);pointer-events:none;z-index:3}'
+      + '.cg-card:hover{transform:translateY(-6px);border-color:rgba(232,195,107,0.55);box-shadow:0 28px 60px -10px rgba(0,0,0,0.75),0 0 50px -10px rgba(232,195,107,0.35),0 0 0 1px rgba(232,195,107,0.25)}'
+      + '.cg-card:focus-visible{outline:3px solid #E8C36B;outline-offset:4px}'
+      /* ===== thumb with letterbox + spotlight ===== */
+      + '.cg-thumb{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}'
+      + '.cg-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease,filter .35s ease}'
+      + '.cg-card:hover .cg-thumb img{transform:scale(1.04);filter:brightness(1.05) contrast(1.05)}'
+      /* spotlight veil */
+      + '.cg-thumb::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,0.45) 100%),linear-gradient(180deg,transparent 50%,rgba(0,0,0,0.65) 100%);pointer-events:none;transition:background .35s ease}'
+      + '.cg-card:hover .cg-thumb::after{background:radial-gradient(ellipse at center,rgba(232,195,107,0.10) 20%,transparent 60%,rgba(0,0,0,0.65) 100%),linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.7) 100%)}'
+      /* play button */
+      + '.cg-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2}'
+      + '.cg-play svg{width:78px;height:78px;filter:drop-shadow(0 6px 20px rgba(0,0,0,0.8)) drop-shadow(0 0 30px rgba(232,195,107,0.25));transition:transform .35s cubic-bezier(0.34,1.56,0.64,1)}'
+      + '.cg-card:hover .cg-play svg{transform:scale(1.12);filter:drop-shadow(0 8px 24px rgba(0,0,0,0.9)) drop-shadow(0 0 40px rgba(232,195,107,0.55))}'
+      + '.cg-featured .cg-play svg{width:96px;height:96px}'
+      /* tag like a film-classification badge */
+      + '.cg-tag{position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:0.3rem;font-family:"IBM Plex Mono","Space Grotesk",monospace;font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:5px 12px;border-radius:3px;background:rgba(0,0,0,0.7);color:#E8C36B;border:1px solid rgba(232,195,107,0.45);backdrop-filter:blur(6px);z-index:2}'
+      + '.cg-tag.featured{color:#1a1206;background:linear-gradient(135deg,#E8C36B,#C9A24B);border-color:#E8C36B;font-weight:800}'
+      /* runtime ticker (decorative — "Now Playing" feel) */
+      + '.cg-runtime{position:absolute;bottom:14px;right:14px;font-family:"IBM Plex Mono",monospace;font-size:0.62rem;letter-spacing:0.1em;color:rgba(255,255,255,0.85);background:rgba(0,0,0,0.7);padding:3px 8px;border-radius:3px;border:1px solid rgba(255,255,255,0.15);backdrop-filter:blur(4px);z-index:2}'
+      /* body — marquee strip under the poster */
+      + '.cg-body{padding:1.1rem 1.25rem 1.4rem;display:flex;flex-direction:column;gap:0.5rem;flex:1;background:linear-gradient(180deg,#0A0A0E 0%,#15110A 100%);border-top:1px solid rgba(232,195,107,0.15);position:relative}'
+      + '.cg-featured .cg-body{padding:1.4rem 1.6rem 1.6rem}'
+      + '.cg-title{font-family:"Space Grotesk","DM Sans",sans-serif;font-weight:700;font-size:1.05rem;line-height:1.3;color:#F4ECD8;margin:0;letter-spacing:-0.005em}'
+      + '.cg-featured .cg-title{font-size:1.3rem;font-weight:800}'
+      + '.cg-blurb{font-size:0.82rem;line-height:1.55;color:rgba(244,236,216,0.7);margin:0}'
+      + '.cg-featured .cg-blurb{font-size:0.92rem;line-height:1.65}'
+      + '.cg-cat{font-family:"IBM Plex Mono","Space Grotesk",monospace;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:#E8C36B;margin-top:auto;opacity:0.85}'
+      + '.cg-empty{padding:3rem 2rem;text-align:center;color:rgba(244,236,216,0.5);font-style:italic;font-family:"Space Grotesk",sans-serif}'
+      /* ===== Lightbox — cinema screen ===== */
+      + '#cg-lightbox{position:fixed;inset:0;z-index:9995;background:#000;display:none;align-items:center;justify-content:center;padding:0;animation:cg-fade .35s ease}'
+      + '#cg-lightbox::before,#cg-lightbox::after{content:"";position:absolute;left:0;right:0;height:60px;background:linear-gradient(180deg,#000,transparent);z-index:2;pointer-events:none}'
+      + '#cg-lightbox::before{top:0}'
+      + '#cg-lightbox::after{bottom:0;background:linear-gradient(0deg,#000,transparent)}'
       + '#cg-lightbox.open{display:flex}'
       + '@keyframes cg-fade{from{opacity:0}to{opacity:1}}'
-      + '.cg-lb-inner{width:100%;max-width:1080px;display:flex;flex-direction:column;gap:1rem}'
-      + '.cg-lb-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,0.1)}'
+      + '@keyframes cg-screen-in{from{transform:scale(0.96);opacity:0}to{transform:scale(1);opacity:1}}'
+      + '.cg-lb-inner{width:100%;max-width:1280px;display:flex;flex-direction:column;gap:1.25rem;padding:2rem 1.5rem;animation:cg-screen-in .45s cubic-bezier(0.34,1.2,0.64,1)}'
+      + '.cg-lb-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:6px;overflow:hidden;border:1px solid rgba(232,195,107,0.25);box-shadow:0 0 0 1px rgba(255,255,255,0.04),0 30px 80px rgba(0,0,0,0.7),0 0 100px rgba(232,195,107,0.18)}'
       + '.cg-lb-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}'
-      + '.cg-lb-meta{color:rgba(255,255,255,0.85);font-family:"DM Sans",sans-serif}'
-      + '.cg-lb-meta h3{font-family:"Space Grotesk",sans-serif;font-weight:800;font-size:1.15rem;margin:0 0 0.3rem}'
-      + '.cg-lb-meta p{font-size:0.85rem;color:rgba(255,255,255,0.7);margin:0;line-height:1.55}'
-      + '.cg-lb-close{position:absolute;top:1rem;right:1rem;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);color:#fff;cursor:pointer;font-size:1.5rem;display:flex;align-items:center;justify-content:center;line-height:1;transition:background .2s}'
-      + '.cg-lb-close:hover{background:rgba(255,255,255,0.2)}'
-      + '.cg-lb-close:focus-visible{outline:2px solid #00F5FF;outline-offset:2px}';
+      + '.cg-lb-meta{color:rgba(244,236,216,0.92);font-family:"DM Sans",sans-serif;display:flex;justify-content:space-between;gap:1.5rem;align-items:flex-end;flex-wrap:wrap}'
+      + '.cg-lb-meta-l{flex:1;min-width:240px}'
+      + '.cg-lb-meta h3{font-family:"Space Grotesk",sans-serif;font-weight:800;font-size:1.4rem;margin:0 0 0.4rem;color:#F4ECD8;letter-spacing:-0.01em}'
+      + '.cg-lb-meta p{font-size:0.9rem;color:rgba(244,236,216,0.72);margin:0;line-height:1.55;max-width:760px}'
+      + '.cg-lb-stamp{font-family:"IBM Plex Mono",monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:#E8C36B;padding:6px 14px;border:1px solid rgba(232,195,107,0.4);border-radius:3px;white-space:nowrap}'
+      + '.cg-lb-close{position:fixed;top:1.5rem;right:1.5rem;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(232,195,107,0.35);color:#E8C36B;cursor:pointer;font-size:1.6rem;display:flex;align-items:center;justify-content:center;line-height:1;transition:all .25s;z-index:3;backdrop-filter:blur(8px)}'
+      + '.cg-lb-close:hover{background:rgba(232,195,107,0.2);color:#fff;transform:rotate(90deg)}'
+      + '.cg-lb-close:focus-visible{outline:2px solid #E8C36B;outline-offset:3px}'
+      + '@media (max-width:640px){.cg-lb-inner{padding:1.25rem 1rem}.cg-lb-meta h3{font-size:1.15rem}.cg-lb-close{top:1rem;right:1rem;width:42px;height:42px}}'
+      ;
     document.head.appendChild(s);
   }
 
@@ -92,7 +119,10 @@
       '<button class="cg-lb-close" aria-label="Close video">&times;</button>' +
       '<div class="cg-lb-inner">' +
         '<div class="cg-lb-frame"></div>' +
-        '<div class="cg-lb-meta"><h3 id="cg-lb-title"></h3><p id="cg-lb-blurb"></p></div>' +
+        '<div class="cg-lb-meta">' +
+          '<div class="cg-lb-meta-l"><h3 id="cg-lb-title"></h3><p id="cg-lb-blurb"></p></div>' +
+          '<span class="cg-lb-stamp" id="cg-lb-stamp">CAN Music</span>' +
+        '</div>' +
       '</div>';
     document.body.appendChild(lb);
     lb.querySelector('.cg-lb-close').addEventListener('click', closeLightbox);
@@ -100,7 +130,6 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && lb.classList.contains('open')) closeLightbox();
       if (e.key === 'Tab' && lb.classList.contains('open')) {
-        // Simple focus trap — only one focusable inside, keep it on the close button
         e.preventDefault();
         lb.querySelector('.cg-lb-close').focus();
       }
@@ -113,6 +142,7 @@
     lastFocus = document.activeElement;
     lb.querySelector('#cg-lb-title').textContent = video.title;
     lb.querySelector('#cg-lb-blurb').textContent = video.blurb || '';
+    lb.querySelector('#cg-lb-stamp').textContent = video.category || 'CAN Music';
     var frame = lb.querySelector('.cg-lb-frame');
     frame.innerHTML = '<iframe src="' + video.url + '?autoplay=1&rel=0&modestbranding=1" title="' + escapeHtml(video.title) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
     lb.classList.add('open');
@@ -122,7 +152,7 @@
   function closeLightbox() {
     if (!lb) return;
     lb.classList.remove('open');
-    lb.querySelector('.cg-lb-frame').innerHTML = ''; // stop the video
+    lb.querySelector('.cg-lb-frame').innerHTML = '';
     document.body.style.overflow = '';
     if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
   }
@@ -144,7 +174,10 @@
       var search = (el.getAttribute('data-search') || '').toLowerCase();
       var featured = el.getAttribute('data-featured') === 'true';
       var limit = parseInt(el.getAttribute('data-limit'), 10);
-      var layout = el.getAttribute('data-layout') === 'carousel' ? 'carousel' : 'grid';
+      var layoutAttr = el.getAttribute('data-layout') || 'grid';
+      var layoutClass = layoutAttr === 'carousel' ? 'cg-carousel'
+                     : layoutAttr === 'featured' ? 'cg-featured'
+                     : 'cg-grid';
       var hideBlurb = el.getAttribute('data-hide-blurb') === 'true';
 
       el.innerHTML = '<div class="cg-empty">Loading videos&hellip;</div>';
@@ -165,7 +198,7 @@
         if (!items.length) { el.innerHTML = '<div class="cg-empty">No videos match this filter yet.</div>'; return; }
 
         var wrap = document.createElement('div');
-        wrap.className = layout === 'carousel' ? 'cg-carousel' : 'cg-grid';
+        wrap.className = layoutClass;
         items.forEach(function (v) { wrap.appendChild(buildCard(v, hideBlurb)); });
         el.innerHTML = '';
         el.appendChild(wrap);
@@ -183,10 +216,15 @@
 
     card.innerHTML =
       '<div class="cg-thumb">' +
-        (v.featured ? '<span class="cg-tag featured">Featured</span>' : '<span class="cg-tag">' + escapeHtml(v.category || '') + '</span>') +
+        (v.featured ? '<span class="cg-tag featured">&#9733; Featured</span>' : '<span class="cg-tag">' + escapeHtml(v.category || '') + '</span>') +
+        '<span class="cg-runtime">&#9658; HD</span>' +
         '<img src="' + v.thumbnail + '" alt="" loading="lazy" decoding="async">' +
         '<span class="cg-play" aria-hidden="true">' +
-          '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.55)" stroke="rgba(255,255,255,0.85)" stroke-width="2"/><path d="M26 21 L46 32 L26 43 Z" fill="#fff"/></svg>' +
+          '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">' +
+            '<circle cx="40" cy="40" r="38" fill="rgba(0,0,0,0.55)" stroke="rgba(232,195,107,0.85)" stroke-width="1.5"/>' +
+            '<circle cx="40" cy="40" r="32" fill="none" stroke="rgba(244,236,216,0.4)" stroke-width="0.5"/>' +
+            '<path d="M33 26 L58 40 L33 54 Z" fill="#F4ECD8"/>' +
+          '</svg>' +
         '</span>' +
       '</div>' +
       '<div class="cg-body">' +
@@ -203,7 +241,5 @@
   }
 
   customElements.define('can-gallery', CanGallery);
-
-  // expose for the hub page filter bar
   window.CanGallery = { load: loadData, open: openLightbox };
 })();
