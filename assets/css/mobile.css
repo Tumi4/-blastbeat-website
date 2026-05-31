@@ -327,3 +327,158 @@ button, [role="button"], a, input[type="submit"], input[type="button"] {
 @media (max-width: 480px) {
   .responsive-4col { grid-template-columns: 1fr !important; }
 }
+
+/* ============================================================
+   MAGIC CURSOR — desktop only, hover-capable pointers
+   ============================================================ */
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+  body a, body button, body [role="button"], body input, body textarea, body select,
+  body label, body summary, body [data-cursor="magnet"] { cursor: none; }
+
+  #bb-cursor-trail {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  #bb-magic-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
+  }
+  #bb-magic-cursor.bb-cursor-hidden .bb-cursor-dot,
+  #bb-magic-cursor.bb-cursor-hidden .bb-cursor-ring { opacity: 0; }
+
+  .bb-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    margin: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0.85) 35%, rgba(255,255,255,0) 75%);
+    box-shadow:
+      0 0 10px rgba(255,255,255,0.9),
+      0 0 20px rgba(99,102,241,0.8),
+      0 0 40px rgba(0,245,255,0.5);
+    transition: opacity 0.2s ease;
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  .bb-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, rgba(0,245,255,0.08) 50%, transparent 80%);
+    box-shadow:
+      0 0 18px rgba(99,102,241,0.35),
+      inset 0 0 12px rgba(0,245,255,0.25);
+    transition: opacity 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  #bb-magic-cursor.bb-cursor-hover .bb-cursor-ring {
+    border-color: rgba(255,107,53,0.85);
+    background: radial-gradient(circle, rgba(255,107,53,0.22) 0%, rgba(255,45,120,0.12) 60%, transparent 80%);
+    box-shadow:
+      0 0 28px rgba(255,107,53,0.55),
+      inset 0 0 18px rgba(255,45,120,0.35);
+  }
+  #bb-magic-cursor.bb-cursor-hover .bb-cursor-dot {
+    box-shadow:
+      0 0 16px rgba(255,255,255,0.95),
+      0 0 30px rgba(255,107,53,0.8),
+      0 0 60px rgba(255,45,120,0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body { cursor: auto !important; }
+  #bb-magic-cursor, #bb-cursor-trail { display: none !important; }
+}
+
+/* ============================================================
+   MOBILE — Hero collage tuning (programme/partners/impact/
+   international/can pages each have a right-column photo
+   collage in their hero). On phones, drop to 2 photos max
+   and tighten spacing.
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero-dark .grid.grid-2,
+  .hero-dark [class*="grid-2"] {
+    gap: 1.75rem !important;
+  }
+  .hero-dark .grid.grid-2 > div:last-child img:nth-child(n+3) {
+    display: none;
+  }
+  .hero-dark .grid.grid-2 > div:last-child {
+    max-height: 320px;
+  }
+  .hero-dark .grid.grid-2 > div:last-child img {
+    max-height: 200px;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Phone: keep just the lead image on hero collages */
+  .hero-dark .grid.grid-2 > div:last-child img:nth-child(n+2) { display: none; }
+  .hero-dark .grid.grid-2 > div:last-child { max-height: 240px; }
+  .hero-dark .grid.grid-2 > div:last-child img { max-height: 220px; border-radius: 18px; }
+}
+
+/* ============================================================
+   MOBILE — Bring text contrast up sitewide.
+   Below 640px, low-opacity body copy becomes hard to read on
+   bright sun-lit phone screens. Bump the floor.
+   ============================================================ */
+@media (max-width: 640px) {
+  p[style*="rgba(255,255,255,0.6)"] { color: rgba(255,255,255,0.78) !important; }
+  p[style*="rgba(255,255,255,0.65)"] { color: rgba(255,255,255,0.82) !important; }
+  p[style*="rgba(255,255,255,0.7)"] { color: rgba(255,255,255,0.85) !important; }
+}
+
+/* ============================================================
+   MOBILE — Sticky CTA bar visibility on form pages
+   ============================================================ */
+@media (max-width: 640px) {
+  /* Apply page: ensure CTA never disappears under the keyboard */
+  .apply-form-wrap button[type="submit"] {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* ============================================================
+   MOBILE — Reduce big image weight on slower connections
+   ============================================================ */
+@media (max-width: 480px) {
+  .bb-timeline-photo { object-position: center 35%; }
+}
+
+/* ============================================================
+   TAP-FRIENDLY: bump min tap target on nav + small buttons
+   ============================================================ */
+@media (max-width: 768px) {
+  .bb-nav-link, .bb-nav-mobile a, .footer-grid a,
+  .post-meta a, .post-related a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}

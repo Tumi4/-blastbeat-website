@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The ESE Programme | Blastbeat Education</title>
   <meta name="description" content="Discover Blastbeat's 16-week Event Social Enterprise programme. 14 real business roles, three verticals (MACC, FootBeat, CAN), and a competition path to the National Finals.">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_GB">
   <meta property="og:url" content="https://www.blastbeat.education/pages/programme.html">
   <meta property="og:title" content="The ESE Programme | Blastbeat Education">
   <meta property="og:description" content="16 weeks. 14 roles. Real events. Real profits. Real change.">
-  <meta property="og:image" content="https://blastbeat-education.netlify.app/assets/images/logo-blastbeat.png">
+  <meta property="og:image" content="https://www.blastbeat.education/assets/images/bb-students-group.jpg">
+  <meta name="twitter:image" content="https://www.blastbeat.education/assets/images/bb-students-group.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.blastbeat.education/pages/programme.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,15 +21,15 @@
   <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
   <link rel="stylesheet" href="/assets/css/gen-z.css">
   <link rel="stylesheet" href="/assets/css/mobile.css">
+  <link rel="stylesheet" href="/assets/css/magic-hero.css">
+  <link rel="preload" as="image" href="/assets/images/bb-event-09.jpg" fetchpriority="high">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
+      <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#6366F1">
     <meta name="twitter:site" content="@BlastbeatEdu">
   <meta name="twitter:creator" content="@BlastbeatEdu">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@graph":[{"@type":"Course","@id":"https://www.blastbeat.education/pages/programme.html#macc","name":"MACC — Music, Arts, Commerce & Culture","description":"Enterprise skills programme for youth through music, arts, and creative industries. Students form real businesses, produce events, and compete nationally.","provider":{"@type":"EducationalOrganization","name":"Blastbeat Education","url":"https://www.blastbeat.education"},"educationalLevel":"Secondary","typicalAgeRange":"14-21","isAccessibleForFree":true,"inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"ZAR","availability":"LimitedAvailability"}},{"@type":"Course","@id":"https://www.blastbeat.education/pages/programme.html#footbeat","name":"FootBeat — Sport & Enterprise","description":"Enterprise skills through sport. Students run sports businesses, manage events, and compete at national level.","provider":{"@type":"EducationalOrganization","name":"Blastbeat Education","url":"https://www.blastbeat.education"},"educationalLevel":"Secondary","typicalAgeRange":"14-21","isAccessibleForFree":true}]}
+  {"@context":"https://schema.org","@graph":[{"@type":"Course","@id":"https://www.blastbeat.education/pages/programme.html#macc","name":"MACC — Music, Arts, Commerce & Culture","description":"Enterprise skills programme for youth through music, arts, and creative industries. Students form real businesses, produce events, and compete nationally.","provider":{"@type":"EducationalOrganization","name":"Blastbeat Education","url":"https://www.blastbeat.education"},"educationalLevel":"Secondary","typicalAgeRange":"14-34","isAccessibleForFree":true,"inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"ZAR","availability":"LimitedAvailability"}},{"@type":"Course","@id":"https://www.blastbeat.education/pages/programme.html#footbeat","name":"FootBeat — Sport & Enterprise","description":"Enterprise skills through sport. Students run sports businesses, manage events, and compete at national level.","provider":{"@type":"EducationalOrganization","name":"Blastbeat Education","url":"https://www.blastbeat.education"},"educationalLevel":"Secondary","typicalAgeRange":"14-34","isAccessibleForFree":true}]}
   </script>
 </head>
 <body>
@@ -50,6 +53,7 @@
         <li><a href="/pages/partners.html" class="bb-nav-link">Partners</a></li>
       </ul>
       <div class="bb-nav-actions">
+        <span data-bb-currency-mount style="margin-right:10px;"></span>
         <a href="/pages/contact.html" class="bb-nav-link login-link">Contact</a>
         <a href="/pages/apply.html" class="btn btn-glow btn-sm">Apply Now</a>
       </div>
@@ -59,6 +63,7 @@
     </div>
   </nav>
   <div class="bb-nav-mobile" aria-hidden="true">
+    <div data-bb-currency-mount data-bb-currency-mount-mobile style="padding:8px 16px 0;display:flex;justify-content:flex-end;"></div>
     <a href="/pages/programme.html">Programme</a>
     <a href="/pages/for-schools.html">For Schools</a>
     <a href="/pages/about.html">About</a>
@@ -72,29 +77,39 @@
   </div>
 
   <main id="main">
-    <!-- ===== HERO — Dark, Bold ===== -->
-    <section class="hero-dark bg-mesh">
-      <div class="orb orb-1" aria-hidden="true"></div>
-      <div class="orb orb-2" aria-hidden="true"></div>
-      <div class="orb orb-3" aria-hidden="true"></div>
-
-      <div class="container" style="position: relative; z-index: 2;">
-        <div style="max-width: 820px;">
-          <div class="neo-tag" style="margin-bottom: var(--space-6);">
-            <span class="emoji-spin">&#127915;</span> The Full Programme Breakdown
+    <!-- ===== HERO — Magic Full-Bleed ===== -->
+    <section class="bb-magic-hero">
+      <div class="bb-magic-hero-bg" aria-hidden="true" style="background-image: url('/assets/images/bb-event-09.jpg');"></div>
+      <div class="bb-magic-hero-veil" aria-hidden="true"></div>
+      <div class="bb-magic-hero-grain" aria-hidden="true"></div>
+      <div class="bb-magic-hero-inner">
+        <div class="container">
+          <div class="reveal" style="max-width: 880px;">
+            <div class="bb-magic-eyebrow">
+              <span class="bb-pulse-dot" aria-hidden="true"></span>
+              The Full Programme Breakdown
+            </div>
+            <h1>
+              The <span class="accent-vivid">ESE Programme.</span><br>
+              <span class="accent-action">16 weeks.</span> Real change.
+            </h1>
+            <p class="bb-magic-deck">16 weeks. 14 roles. Real events. Real profits. Real climate action.</p>
+            <p class="bb-magic-supporting">A complete classroom-to-event framework: students form a real Event Social Enterprise, fill 14 business roles, build the brand, sell tickets, secure sponsors, run the live show, and split the profit 75 / 25 with a climate project they choose.</p>
+            <div class="bb-magic-cta-row">
+              <a href="/pages/apply.html" class="bb-magic-cta-primary" data-cursor="magnet"><span>&#9889;</span> Apply for Your School</a>
+              <a href="#verticals" class="bb-magic-cta-ghost" data-cursor="magnet">Explore Below &nbsp;&#8595;</a>
+            </div>
           </div>
-
-          <h1 class="text-chunky" style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: var(--space-6);">
-            The <span class="text-gradient-vivid">ESE Programme</span>
-          </h1>
-
-          <p style="font-size: var(--text-xl); max-width: 620px; margin-bottom: var(--space-10); color: rgba(255,255,255,0.7);">
-            16 weeks. 14 roles. Real events. Real profits. Real change.
-          </p>
-
-          <div class="flex gap-4 flex-wrap">
-            <a href="/pages/apply.html" class="btn btn-glow btn-lg">&#9889; Apply for Your School</a>
-            <a href="#verticals" class="btn btn-outline-glow btn-lg">Explore Below &#8595;</a>
+        </div>
+      </div>
+      <div class="bb-magic-scroll-cue" aria-hidden="true"><span>Scroll</span><span class="bb-magic-scroll-line"></span></div>
+      <div class="bb-magic-stat-shelf">
+        <div class="container">
+          <div class="bb-magic-stats">
+            <div class="bb-magic-stat"><div class="bb-magic-stat-num">16<span class="stat-unit">weeks</span></div><div class="bb-magic-stat-label">End-to-end programme</div></div>
+            <div class="bb-magic-stat"><div class="bb-magic-stat-num">14<span class="stat-unit">roles</span></div><div class="bb-magic-stat-label">Real business titles</div></div>
+            <div class="bb-magic-stat"><div class="bb-magic-stat-num">3<span class="stat-unit">verticals</span></div><div class="bb-magic-stat-label">MACC / FootBeat / CAN</div></div>
+            <div class="bb-magic-stat"><div class="bb-magic-stat-num">75 / 25</div><div class="bb-magic-stat-label">Student / Climate split</div></div>
           </div>
         </div>
       </div>
@@ -337,8 +352,8 @@
           </div>
           <div class="glass-card reveal">
             <span class="emoji-xl">&#127807;</span>
-            <div style="font-weight: 700; color: white; margin-bottom: 4px;">Sustainability Manager</div>
-            <p style="font-size: var(--text-sm); margin: 0;">Leads climate projects with the 25% fund</p>
+            <div style="font-weight: 700; color: white; margin-bottom: 4px;">Climate Lead</div>
+            <p style="font-size: var(--text-sm); margin: 0;">Leads the team&rsquo;s climate project, funded by the 25% ring-fence</p>
           </div>
           <div class="glass-card reveal reveal-delay-1">
             <span class="emoji-xl">&#127911;</span>
@@ -425,18 +440,18 @@
           <!-- Visual Split -->
           <div class="bento-item bento-span-2 reveal gradient-border" style="background: rgba(255,255,255,0.03); min-height: 260px;">
             <div class="text-center" style="width: 100%;">
-              <p class="text-uppercase-sm" style="color: rgba(255,255,255,0.4); margin-bottom: var(--space-6);">How Profits Are Shared</p>
+              <p class="text-uppercase-sm" style="color: rgba(255,255,255,0.65); margin-bottom: var(--space-6);">How Profits Are Shared</p>
               <div class="flex justify-center gap-8" style="margin-bottom: var(--space-6);">
                 <div>
                   <div class="text-gradient-vivid" style="font-size: var(--text-6xl); font-weight: 800; line-height: 1;">75%</div>
                   <div style="font-weight: 700; margin-top: var(--space-2); font-size: var(--text-lg); color: white;">Your ESE Team</div>
-                  <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.55); margin-top: var(--space-1);">Split equally among all 14 members</p>
+                  <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.75); margin-top: var(--space-1);">Split equally among all 14 members</p>
                 </div>
                 <div style="width: 2px; background: rgba(255,255,255,0.15);"></div>
                 <div>
                   <div class="text-gradient-sunset" style="font-size: var(--text-6xl); font-weight: 800; line-height: 1;">25%</div>
                   <div style="font-weight: 700; margin-top: var(--space-2); font-size: var(--text-lg); color: white;">Climate Action</div>
-                  <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.55); margin-top: var(--space-1);">Funds your CAN project</p>
+                  <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.75); margin-top: var(--space-1);">Funds your CAN project</p>
                 </div>
               </div>
             </div>
@@ -490,8 +505,8 @@
           </div>
           <div class="glass-card reveal reveal-delay-1 text-center" style="padding: var(--space-8);">
             <div class="text-gradient-vivid" style="font-size: var(--text-4xl); font-weight: 800; margin-bottom: var(--space-3);">02</div>
-            <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2); color: white;">School Heats</h3>
-            <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.65);">Best ESEs from each school go head-to-head</p>
+            <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2); color: white;">School Showcase</h3>
+            <p style="font-size: var(--text-sm); color: rgba(255,255,255,0.65);">Each team showcases its event and outcomes to its own community</p>
           </div>
           <div class="glass-card reveal reveal-delay-2 text-center" style="padding: var(--space-8);">
             <div class="text-gradient-sunset" style="font-size: var(--text-4xl); font-weight: 800; margin-bottom: var(--space-3);">03</div>
@@ -525,6 +540,31 @@
         </div>
       </div>
     </section>
+
+    <!-- ===== CONTEXTUAL READ-MORE STRIP ===== -->
+    <section class="section section-dark" style="padding-top: 0;">
+      <div class="container">
+        <div style="max-width: 920px; margin: 0 auto; padding: var(--space-7); border: 1px solid rgba(184,255,0,0.18); border-radius: var(--radius-2xl); background: linear-gradient(135deg, rgba(184,255,0,0.04), rgba(0,245,255,0.03));">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--neon-lime); margin-bottom: var(--space-3);">Read deeper</div>
+          <h3 style="color: white; font-size: var(--text-2xl); font-weight: 800; margin: 0 0 var(--space-3); line-height: 1.2;">See the maths, the roles, and the year-by-year logic.</h3>
+          <p style="color: rgba(255,255,255,0.7); margin: 0 0 var(--space-5); line-height: 1.65;">Three long-form pieces from the Blastbeat journal that go deeper into the programme than this overview can.</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-3);">
+            <a href="/blog/student-profit-calculator.html" style="display:block; padding: var(--space-4); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); text-decoration: none; transition: border-color 0.2s ease;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; color: #FF7BAA; margin-bottom: 6px;">STUDENTS</div>
+              <div style="color: white; font-weight: 700; line-height: 1.3;">R0 to R45K — the live profit calculator &rarr;</div>
+            </a>
+            <a href="/blog/14-ese-roles-principal-guide.html" style="display:block; padding: var(--space-4); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); text-decoration: none;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; color: #C9A7FF; margin-bottom: 6px;">SCHOOLS</div>
+              <div style="color: white; font-weight: 700; line-height: 1.3;">The 14 ESE roles, with career paths &rarr;</div>
+            </a>
+            <a href="/blog/macc-effect-climate.html" style="display:block; padding: var(--space-4); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); text-decoration: none;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; color: var(--neon-lime); margin-bottom: 6px;">IMPACT</div>
+              <div style="color: white; font-weight: 700; line-height: 1.3;">The MACC effect — when music funds climate &rarr;</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ===== FOOTER ===== -->
@@ -536,14 +576,10 @@
             <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="36" height="36" loading="lazy" decoding="async">
             <span style="color: var(--text-white);">BLASTBEAT</span>
           </a>
-          <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 300px;">Empowering young people through music, entrepreneurship, and climate action. 23 years. 19 countries. 360,000+ students.</p>
-          <p style="font-size: var(--text-xs); margin-top: var(--space-4); color: var(--text-muted);">Climate Actions Now<br>UK Registered Charity No. 1113530</p>
-          <div class="footer-social" style="margin-top: var(--space-6);">
-            <a href="#" aria-label="LinkedIn">in</a>
-            <a href="#" aria-label="Instagram">ig</a>
-            <a href="#" aria-label="X / Twitter">X</a>
-            <a href="#" aria-label="YouTube">YT</a>
-          </div>
+          <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 300px;">Empowering young people through music, entrepreneurship, and climate action. 23 years. 11 countries. 360,000+ students.</p>
+          <p style="font-size: var(--text-xs); margin-top: var(--space-3); color: rgba(255,255,255,0.7); line-height: 1.6;">Part of the Climate Actions Now group: <a href="https://www.climateactionsnow.org" rel="noopener" style="color:rgba(255,255,255,0.7);">Climate Actions Now</a> &middot; <a href="https://www.eduponics.co.za" rel="noopener" style="color:rgba(255,255,255,0.7);">Eduponics</a> (climate-smart agritech in schools) &middot; Can Music (independent label &amp; artist platform).</p>
+          <p style="font-size: var(--text-xs); margin-top: var(--space-4); color: var(--text-muted);">Climate Actions Now<br>Climate Actions Now Ltd, Ireland</p>
+          <!-- footer-social hidden until real URLs are ready; restore by uncommenting this block and pasting in real links -->
         </div>
         <div>
           <h5>Programme</h5>
@@ -580,7 +616,7 @@
         </div>
       </div>
       <div class="footer-bottom flex justify-between items-center flex-wrap gap-4">
-        <p style="margin: 0; color: var(--text-muted);">&copy; 2026 Climate Actions Now. All rights reserved. UK Charity 1113530</p>
+        <p style="margin: 0; color: var(--text-muted);">&copy; 2026 Climate Actions Now. All rights reserved. Climate Actions Now group</p>
         <div class="flex gap-6">
           <a href="/pages/privacy-policy.html">Privacy Policy</a>
           <a href="/pages/terms-of-use.html">Terms of Use</a>
@@ -596,9 +632,12 @@
   </div>
 
   <script src="/assets/js/navigation.js" defer></script>
+  <script src="/assets/js/magic-cursor.js" defer></script>
   <script src="/assets/js/animations.js" defer></script>
   <script src="/assets/js/cookie-consent.js" defer></script>
   <script src="/assets/js/student-tools.js" defer></script>
   <script src="/assets/js/beat-bot.js" defer></script>
+  <script src="/assets/js/whatsapp.js" defer></script>
+  <script src="/assets/js/currency.js" defer></script>
 </body>
 </html>

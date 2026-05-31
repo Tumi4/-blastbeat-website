@@ -1,0 +1,51 @@
+{
+  "_comment": "Single source of truth for currency display across the Blastbeat site. Rates are BRAND-FRIENDLY (rounded to clean numbers) — they do NOT track real-time FX. Update quarterly. The base currency is ZAR; every price on the site is annotated with data-price-zar; the JS multiplies by the chosen-currency rate at render time.",
+  "base": "ZAR",
+  "updated": "2026-05-08",
+  "next_review": "2026-08-01",
+  "default_locale_map": {
+    "en-IE": "EUR",
+    "en-GB": "GBP",
+    "en-ZA": "ZAR",
+    "en-NA": "ZAR",
+    "fr-FR": "EUR",
+    "de-DE": "EUR",
+    "es-ES": "EUR",
+    "nl-NL": "EUR",
+    "en-US": "USD"
+  },
+  "fallback": "USD",
+  "currencies": {
+    "ZAR": {
+      "name": "South African Rand",
+      "symbol": "R",
+      "rate": 1,
+      "format": "R {value}",
+      "round_to": 1
+    },
+    "EUR": {
+      "name": "Euro",
+      "symbol": "€",
+      "rate": 0.0556,
+      "format": "€{value}",
+      "round_to": 10,
+      "note": "Brand-friendly: R45,000 = €2,500"
+    },
+    "GBP": {
+      "name": "British Pound",
+      "symbol": "£",
+      "rate": 0.0444,
+      "format": "£{value}",
+      "round_to": 10,
+      "note": "Brand-friendly: R45,000 = £2,000"
+    },
+    "USD": {
+      "name": "US Dollar",
+      "symbol": "$",
+      "rate": 0.0556,
+      "format": "${value}",
+      "round_to": 10,
+      "note": "Brand-friendly: R45,000 = $2,500"
+    }
+  }
+}

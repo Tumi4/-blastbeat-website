@@ -1,0 +1,9 @@
+{
+  "name": "blastbeat-education",
+  "private": true,
+  "type": "module",
+  "description": "Static site with one Netlify Function that proxies to the Claude API for the Beat AI assistant.",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1"
+  }
+}

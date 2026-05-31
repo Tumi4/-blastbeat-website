@@ -2,17 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blastbeat Education | Run Real Events. Keep Real Profits. Create Real Change.</title>
-  <meta name="description" content="Blastbeat turns students aged 14-18 into music &amp; sports entrepreneurs. Form your Event Social Enterprise, run real events, keep 75% of profits, and fund climate action. 23 years. 19 countries. 360K+ students.">
+  <title>Blastbeat Education | Create Real Profitable Events. Grow Business, Community &amp; Life Skills. Drive Positive Action.</title>
+  <meta name="description" content="Blastbeat turns students aged 14-18 into music &amp; sports entrepreneurs. Form your Event Social Enterprise, run real events, keep 75% of profits, and fund climate action. 23 years. 11 countries. 360K+ students.">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_GB">
   <meta property="og:url" content="https://www.blastbeat.education/">
-  <meta property="og:title" content="Blastbeat Education | Run Real Events. Keep Real Profits. Create Real Change.">
+  <meta property="og:title" content="Blastbeat Education | Create Real Profitable Events. Grow Business, Community & Life Skills. Drive Positive Action.">
   <meta property="og:description" content="Students form Event Social Enterprises with 14 real business roles, run real events, keep 75% of profits, and fund climate action.">
-  <meta property="og:image" content="https://blastbeat-education.netlify.app/assets/images/logo-blastbeat.png">
+  <meta property="og:image" content="https://www.blastbeat.education/assets/images/bb-students-group.jpg">
   <meta property="og:site_name" content="Blastbeat Education">
+  <meta name="twitter:image" content="https://www.blastbeat.education/assets/images/bb-students-group.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Blastbeat Education | Run Real Events. Keep Real Profits. Create Real Change.">
+  <meta name="twitter:title" content="Blastbeat Education | Create Real Profitable Events. Grow Business, Community & Life Skills. Drive Positive Action.">
   <meta name="twitter:description" content="Students form Event Social Enterprises with 14 real business roles, run real events, keep 75% of profits, and fund climate action.">
   <link rel="canonical" href="https://www.blastbeat.education/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,24 +24,111 @@
   <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
   <link rel="stylesheet" href="/assets/css/gen-z.css">
   <link rel="stylesheet" href="/assets/css/mobile.css">
+  <link rel="stylesheet" href="/assets/css/magic-hero.css">
+  <link rel="preload" as="image" href="/assets/images/bb-event-06.jpg" fetchpriority="high">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
+      <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#6366F1">
     <meta name="twitter:site" content="@BlastbeatEdu">
   <meta name="twitter:creator" content="@BlastbeatEdu">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Blastbeat Education",
-    "alternateName": "Climate Actions Now",
-    "url": "https://www.blastbeat.education",
-    "logo": "/assets/images/logo-blastbeat.png",
-    "description": "Youth entrepreneurship through music, sports and climate action.",
-    "foundingDate": "2003",
-    "contactPoint": { "@type": "ContactPoint", "email": "info@blastbeat.education", "contactType": "general" }
+    "@graph": [
+      {
+        "@type": ["EducationalOrganization", "NGO"],
+        "@id": "https://www.blastbeat.education/#organization",
+        "name": "Blastbeat Education",
+        "alternateName": ["Blastbeat", "Blastbeat ESE Programme"],
+        "url": "https://www.blastbeat.education/",
+        "logo": {
+          "@type": "ImageObject",
+          "@id": "https://www.blastbeat.education/#logo",
+          "url": "https://www.blastbeat.education/assets/images/logo-blastbeat.png",
+          "width": 512,
+          "height": 512,
+          "caption": "Blastbeat Education"
+        },
+        "image": "https://www.blastbeat.education/assets/images/bb-students-group.jpg",
+        "description": "Youth entrepreneurship education through music, sport, and climate action. Students aged 14–18 form Event Social Enterprises, run real events, keep 75% of profits, and fund climate projects.",
+        "slogan": "Create Real Profitable Events. Grow Business, Community & Life Skills. Drive Positive Action.",
+        "foundingDate": "2003",
+        "founder": {
+          "@type": "Person",
+          "name": "Robert Stephenson",
+          "jobTitle": "Founder & Programme Director"
+        },
+        "knowsLanguage": ["en", "af"],
+        "areaServed": [
+          { "@type": "Country", "name": "South Africa" },
+          { "@type": "Country", "name": "Namibia" },
+          { "@type": "Country", "name": "Ireland" },
+          { "@type": "Country", "name": "United Kingdom" }
+        ],
+        "audience": {
+          "@type": "EducationalAudience",
+          "educationalRole": "student",
+          "audienceType": "Secondary school learners aged 14–18"
+        },
+        "parentOrganization": { "@id": "https://www.blastbeat.education/#parent" },
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "email": "info@blastbeat.education",
+            "contactType": "general enquiries",
+            "availableLanguage": ["English"]
+          },
+          {
+            "@type": "ContactPoint",
+            "email": "robert@blastbeat.education",
+            "telephone": "+27-73-804-8409",
+            "contactType": "sponsorship enquiries",
+            "areaServed": ["ZA", "NA", "IE", "GB"],
+            "availableLanguage": ["English"]
+          }
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/company/blastbeat-education",
+          "https://www.instagram.com/blastbeateducation",
+          "https://twitter.com/BlastbeatEdu",
+          "https://www.youtube.com/@blastbeateducation"
+        ]
+      },
+      {
+        "@type": "NGO",
+        "@id": "https://www.blastbeat.education/#parent",
+        "name": "Climate Actions Now",
+        "alternateName": "CAN",
+        "url": "https://www.blastbeat.education/pages/can.html",
+        "description": "Group entity. African licences are issued by Climate Actions Now RSA (Pty) Ltd; European operations via Climate Actions Now Ltd, Ireland. A Section 18A foundation arm is planned for climate-action grants in South Africa.",
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "company registration",
+          "value": "1113530"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "GB"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.blastbeat.education/#website",
+        "url": "https://www.blastbeat.education/",
+        "name": "Blastbeat Education",
+        "description": "Youth entrepreneurship through music, sports, content creation and climate action.",
+        "publisher": { "@id": "https://www.blastbeat.education/#organization" },
+        "inLanguage": "en",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.blastbeat.education/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -55,14 +145,15 @@
       <ul class="bb-nav-links">
         <li><a href="/pages/programme.html" class="bb-nav-link">Programme</a></li>
         <li><a href="/pages/for-schools.html" class="bb-nav-link">For Schools</a></li>
+        <li><a href="/pages/licence.html" class="bb-nav-link">Licence</a></li>
         <li><a href="/pages/about.html" class="bb-nav-link">About</a></li>
         <li><a href="/pages/impact.html" class="bb-nav-link">Impact</a></li>
         <li><a href="/pages/international.html" class="bb-nav-link">International</a></li>
         <li><a href="/blog/" class="bb-nav-link">Blog</a></li>
-        <li><a href="/pages/media.html" class="bb-nav-link">Press</a></li>
         <li><a href="/pages/partners.html" class="bb-nav-link">Partners</a></li>
       </ul>
       <div class="bb-nav-actions">
+        <span data-bb-currency-mount style="margin-right:10px;"></span>
         <a href="/pages/contact.html" class="bb-nav-link login-link">Contact</a>
         <a href="/pages/apply.html" class="btn btn-glow btn-sm">Apply Now</a>
       </div>
@@ -72,8 +163,10 @@
     </div>
   </nav>
   <div class="bb-nav-mobile" aria-hidden="true">
+    <div data-bb-currency-mount data-bb-currency-mount-mobile style="padding:8px 16px 0;display:flex;justify-content:flex-end;"></div>
     <a href="/pages/programme.html">Programme</a>
     <a href="/pages/for-schools.html">For Schools</a>
+    <a href="/pages/licence.html">Licence</a>
     <a href="/pages/about.html">About</a>
     <a href="/pages/impact.html">Impact</a>
     <a href="/pages/international.html">International</a>
@@ -87,53 +180,69 @@
   <main id="main">
 
     <!-- ===== HERO — Dark Mesh, Split Layout ===== -->
-    <section class="hero-dark bg-mesh" style="min-height: 100vh; padding: calc(var(--nav-height) + 4rem) 0 5rem;">
-      <div class="orb orb-1" aria-hidden="true"></div>
-      <div class="orb orb-2" aria-hidden="true"></div>
-      <div class="orb orb-3" aria-hidden="true"></div>
+    <section class="bb-magic-hero">
+      <div class="bb-magic-hero-bg" aria-hidden="true" style="background-image: url('/assets/images/bb-event-06.jpg');"></div>
+      <div class="bb-magic-hero-veil" aria-hidden="true"></div>
+      <div class="bb-magic-hero-grain" aria-hidden="true"></div>
 
-      <div class="container" style="position: relative; z-index: 2; width: 100%;">
-        <div class="grid grid-2 items-center" style="gap: var(--space-12);">
-
-          <!-- LEFT: Copy -->
-          <div class="reveal">
-            <div class="neo-tag" style="margin-bottom: var(--space-6);">
-              <span>&#9889;</span> 23 Years &bull; 19 Countries &bull; 360K+ Students
+      <div class="bb-magic-hero-inner">
+        <div class="container">
+          <div class="reveal" style="max-width: 880px;">
+            <div class="bb-magic-eyebrow">
+              <span class="bb-pulse-dot" aria-hidden="true"></span>
+              23 Years &bull; 11 Countries &bull; 360K+ Students
             </div>
 
-            <h1 class="text-chunky" style="font-size: clamp(2.25rem, 5vw, 3.75rem); margin-bottom: var(--space-6); color: white; line-height: 1.08;">
-              Run Real Events.<br>
-              <span class="text-gradient-vivid">Keep Real Profits.</span><br>
-              Create Real Change.
+            <h1>
+              Create Real <br>
+              <span class="accent-vivid">Profitable Events.</span><br>
+              <span class="accent-action">Drive Positive Action.</span>
             </h1>
 
-            <p style="font-size: var(--text-xl); max-width: 560px; margin-bottom: var(--space-10); color: rgba(255,255,255,0.75); line-height: 1.6;">
-              Blastbeat turns ages 14&ndash;18 into music &amp; sports entrepreneurs.
-              Your school forms a real <strong style="color: white;">Event Social Enterprise (ESE)</strong>,
-              runs real events with real audiences, keeps 75% of profits &mdash; and funds climate action with the rest.
-              No simulations. No pretend money. Real business.
+            <p class="bb-magic-deck">
+              <strong style="color:#fff;">Blastbeat V2</strong> &mdash; the AI-enhanced digital platform that turns classrooms, sports clubs and community groups into real Event Social Enterprises.
+            </p>
+            <p class="bb-magic-supporting">
+              Young people aged <strong style="color:#fff;">14&ndash;18 in schools</strong> and <strong style="color:#fff;">14&ndash;34 in sports clubs &amp; community programmes</strong> run live events with real audiences, keep <strong style="color:#fff;">75% of profits</strong>, and invest <strong style="color:#fff;">25%</strong> in a climate project they choose. No simulations. No pretend money.
             </p>
 
-            <div class="flex gap-4 flex-wrap">
-              <a href="/pages/apply.html" class="btn btn-glow btn-lg">&#9889; Apply for Your School</a>
-              <a href="/pages/programme.html" class="btn btn-outline-glow btn-lg">How It Works &#8594;</a>
+            <div class="bb-magic-cta-row">
+              <a href="/pages/apply.html" class="bb-magic-cta-primary" data-cursor="magnet">
+                <span>&#9889;</span> Book A 20-Minute School Demo
+              </a>
+              <a href="/pages/programme.html" class="bb-magic-cta-ghost" data-cursor="magnet">
+                How It Works &nbsp;&#8594;
+              </a>
             </div>
           </div>
+        </div>
+      </div>
 
-          <!-- RIGHT: Image + TV badge -->
-          <div class="reveal reveal-delay-2" style="position: relative;">
-            <img src="/assets/images/bb-event-06.jpg"
-                 alt="Blastbeat students performing at a live event"
-                 style="border-radius: var(--radius-2xl); box-shadow: 0 0 40px rgba(99,102,241,0.25), 0 24px 60px rgba(0,0,0,0.5); width: 100%; opacity: 0.92;"
-                 width="600" height="400" loading="eager" fetchpriority="high" decoding="async">
-            <!-- Floating TV Badge -->
-            <div style="position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); z-index: 10;">
-              <div class="tv-badge" style="white-space: nowrap; box-shadow: 0 8px 30px rgba(255,45,120,0.4); font-size: var(--text-sm); padding: 10px 20px;">
-                &#9654; Now with Blastbeat TV
-              </div>
+      <div class="bb-magic-scroll-cue" aria-hidden="true">
+        <span>Scroll</span>
+        <span class="bb-magic-scroll-line"></span>
+      </div>
+
+      <div class="bb-magic-stat-shelf">
+        <div class="container">
+          <div class="bb-magic-stats">
+            <div class="bb-magic-stat">
+              <div class="bb-magic-stat-num">23<span class="stat-unit">yrs</span></div>
+              <div class="bb-magic-stat-label">Proven Programme</div>
+            </div>
+            <div class="bb-magic-stat">
+              <div class="bb-magic-stat-num">11<span class="stat-unit">countries</span></div>
+              <div class="bb-magic-stat-label">5 Continents</div>
+            </div>
+            <div class="bb-magic-stat">
+              <div class="bb-magic-stat-num">360K<span class="stat-unit">+ students</span></div>
+              <div class="bb-magic-stat-label">Lifetime Reach</div>
+            </div>
+            <div class="bb-magic-stat">
+              <div class="bb-magic-stat-num">75 / 25</div>
+              <div class="bb-magic-stat-label">Student / Climate Split</div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -153,18 +262,19 @@
           </p>
         </div>
         <div class="reveal" style="max-width: 880px; margin: 0 auto;">
-          <div style="position: relative; padding-bottom: 56.25%; border-radius: var(--radius-2xl); overflow: hidden; box-shadow: 0 0 60px rgba(99,102,241,0.22), 0 30px 80px rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.08);">
+          <div style="position: relative; padding-bottom: 56.25%; border-radius: var(--radius-2xl); overflow: hidden; box-shadow: 0 0 60px rgba(99,102,241,0.22), 0 30px 80px rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.08); background: #000;">
             <iframe
-              src="https://drive.google.com/file/d/15pIcreiYbI2c9H80g7JF5ShXeDACuy_r/preview"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; border: none;"
-              allow="autoplay"
+              src="https://cdn.iframe.ly/api/iframe?playerjs=1&amp;url=https%3A%2F%2Fyoutu.be%2FmEIjrUi_E2A&amp;key=b1f1695cf195f831e4fb4916520b9657"
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+              allow="autoplay *; accelerometer *; clipboard-write *; encrypted-media *; gyroscope *; picture-in-picture *; web-share *;"
               allowfullscreen
-              title="What is Blastbeat? — Programme Overview V2"
+              scrolling="no"
+              title="What is Blastbeat? — Programme Overview"
               loading="lazy">
             </iframe>
           </div>
-          <p style="text-align: center; margin-top: var(--space-6); font-size: var(--text-sm); color: rgba(255,255,255,0.4);">
-            Blastbeat Education — Programme Overview &bull; Real students. Real enterprise. Real change.
+          <p style="text-align: center; margin-top: var(--space-6); font-size: var(--text-sm); color: rgba(255,255,255,0.65);">
+            Blastbeat Education &mdash; Programme Overview &bull; Real students. Real enterprise. Real change.
           </p>
         </div>
       </div>
@@ -268,7 +378,7 @@
         </div>
 
         <div class="text-center">
-          <a href="/pages/programme.html#blastbeat-tv" class="btn btn-glow btn-lg">Learn About Blastbeat TV &#8594;</a>
+          <a href="/pages/programme.html" class="btn btn-glow btn-lg">Learn About Blastbeat TV &#8594;</a>
         </div>
       </div>
     </section>
@@ -279,7 +389,7 @@
         <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-12);">
           <span class="neo-tag-pink" style="margin-bottom: var(--space-4);">three verticals, one mission</span>
           <h2 class="text-chunky" style="font-size: clamp(1.75rem, 4vw, 2.75rem); margin-top: var(--space-4); color: white;">How Blastbeat Works</h2>
-          <p style="color: rgba(255,255,255,0.65); font-size: var(--text-lg);">Form your ESE. Choose your role. Run real events. Fund real change.</p>
+          <p style="color: rgba(255,255,255,0.65); font-size: var(--text-lg);">Form your ESE. Choose your role. Run real profitable events. Grow real skills. Drive positive action.</p>
         </div>
 
         <div class="bento-grid" style="grid-template-columns: repeat(2, 1fr); gap: var(--space-4);">
@@ -325,144 +435,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 4 PHASES — Journey Layout ===== -->
-    <section style="background: var(--dark-surface); overflow: hidden;" id="phases">
-      <div class="container" style="padding: var(--space-20) 0 var(--space-12);">
-        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto;">
-          <span class="neo-tag-cyan" style="margin-bottom: var(--space-4);">16-week programme</span>
-          <h2 class="text-chunky" style="font-size: clamp(1.75rem, 4vw, 2.75rem); margin-top: var(--space-4); color: white;">
-            <span class="text-gradient-vivid">Four Phases</span> to Launch
-          </h2>
-          <p style="color: rgba(255,255,255,0.65); font-size: var(--text-lg);">A structured journey from day one to National Finals.</p>
-        </div>
-      </div>
-
-      <!-- Phase journey strips — no container padding, full section width -->
-      <div class="phase-journey reveal">
-
-        <div class="phase-step">
-          <div class="phase-step-bg" style="background-image: url('/assets/images/bb-event-04.jpg');"></div>
-          <div class="phase-num">01</div>
-          <div class="phase-content">
-            <div style="margin-bottom: var(--space-4);"><span class="neo-tag" style="font-size: 0.6rem;">Weeks 1&ndash;4</span></div>
-            <h3 class="phase-title">Foundation &amp; Identity</h3>
-            <p class="phase-desc">Form your ESE. Elect leadership. Assign all 14 roles. Build brand identity and social presence.</p>
-          </div>
-        </div>
-
-        <div class="phase-step">
-          <div class="phase-step-bg" style="background-image: url('/assets/images/bb-event-05.jpg');"></div>
-          <div class="phase-num">02</div>
-          <div class="phase-content">
-            <div style="margin-bottom: var(--space-4);"><span class="neo-tag-pink" style="font-size: 0.6rem;">Weeks 5&ndash;8</span></div>
-            <h3 class="phase-title">Build &amp; Sell</h3>
-            <p class="phase-desc">Launch ticket sales. Book talent. Secure venue. Begin weekly Blastbeat TV episodes.</p>
-          </div>
-        </div>
-
-        <div class="phase-step">
-          <div class="phase-step-bg" style="background-image: url('/assets/images/bb-event-08.jpg');"></div>
-          <div class="phase-num">03</div>
-          <div class="phase-content">
-            <div style="margin-bottom: var(--space-4);"><span class="neo-tag-cyan" style="font-size: 0.6rem;">Weeks 9&ndash;12</span></div>
-            <h3 class="phase-title">Event &amp; Impact</h3>
-            <p class="phase-desc">Run your real event. Collect revenue. Film the experience for your Blastbeat TV submission.</p>
-          </div>
-        </div>
-
-        <div class="phase-step">
-          <div class="phase-step-bg" style="background-image: url('/assets/images/bb-event-10.jpg');"></div>
-          <div class="phase-num">04</div>
-          <div class="phase-content">
-            <div style="margin-bottom: var(--space-4);"><span class="founding-badge" style="font-size: 0.6rem; padding: 4px 10px;">Weeks 13&ndash;16</span></div>
-            <h3 class="phase-title">Finance, CAP &amp; Finals</h3>
-            <p class="phase-desc">Distribute profits. Fund your Climate Action Project. Submit TV episode. Compete at Finals.</p>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="container" style="padding: var(--space-10) 0 var(--space-20);">
-        <div class="text-center">
-          <a href="/pages/programme.html" class="btn btn-outline-glow">Explore the Full Programme &#8594;</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 14 ROLES — Horizontal Scroll ===== -->
-    <section class="section section-dark" style="padding: var(--space-20) 0; overflow: hidden;" id="roles">
-      <div class="container">
-        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-10);">
-          <span class="neo-tag-cyan" style="margin-bottom: var(--space-4);">14 real business roles</span>
-          <h2 class="text-chunky" style="font-size: clamp(1.75rem, 4vw, 2.75rem); margin-top: var(--space-4); color: white;">Every Student Gets a Title</h2>
-          <p style="color: rgba(255,255,255,0.65);">Your ESE mirrors a real company. 4 teams, 14 roles. Pick yours. Own it.</p>
-        </div>
-      </div>
-
-      <!-- Teams legend -->
-      <div class="container" style="margin-bottom: var(--space-6);">
-        <div class="flex gap-4 flex-wrap reveal">
-          <div class="flex items-center gap-2" style="font-size: var(--text-xs); color: rgba(255,255,255,0.5); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
-            <span style="width: 20px; height: 3px; background: linear-gradient(90deg, #6366F1, #A855F7); border-radius: 2px; display: inline-block;"></span> Business
-          </div>
-          <div class="flex items-center gap-2" style="font-size: var(--text-xs); color: rgba(255,255,255,0.5); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
-            <span style="width: 20px; height: 3px; background: linear-gradient(90deg, #FF2D78, #FF8C42); border-radius: 2px; display: inline-block;"></span> Events
-          </div>
-          <div class="flex items-center gap-2" style="font-size: var(--text-xs); color: rgba(255,255,255,0.5); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
-            <span style="width: 20px; height: 3px; background: linear-gradient(90deg, #A855F7, #00F5FF); border-radius: 2px; display: inline-block;"></span> Creative
-          </div>
-          <div class="flex items-center gap-2" style="font-size: var(--text-xs); color: rgba(255,255,255,0.5); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
-            <span style="width: 20px; height: 3px; background: linear-gradient(90deg, #059669, #B8FF00); border-radius: 2px; display: inline-block;"></span> Climate/ESG
-          </div>
-        </div>
-      </div>
-
-      <!-- Horizontal scroll track — full bleed -->
-      <div style="padding: 0 clamp(1rem, 3vw, 3rem);">
-        <div class="h-scroll-track reveal" id="roles-track">
-
-          <!-- Business: 4 roles -->
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #6366F1, #A855F7)"><span class="role-card-team">Business</span><div class="role-card-emoji">&#128188;</div><div class="role-card-title">CEO</div><p class="role-card-desc">Leads the ESE, sets vision and strategy</p></div></div>
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #6366F1, #A855F7)"><span class="role-card-team">Business</span><div class="role-card-emoji">&#128176;</div><div class="role-card-title">CFO / Vice-CEO</div><p class="role-card-desc">Budgets, finance and profit tracking</p></div></div>
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #6366F1, #A855F7)"><span class="role-card-team">Business</span><div class="role-card-emoji">&#128200;</div><div class="role-card-title">Sales &amp; Marketing</div><p class="role-card-desc">Ticket sales and revenue growth</p></div></div>
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #6366F1, #A855F7)"><span class="role-card-team">Business</span><div class="role-card-emoji">&#128187;</div><div class="role-card-title">IT / Multimedia</div><p class="role-card-desc">Tech, platform and systems</p></div></div>
-
-          <!-- Divider -->
-          <div style="flex: 0 0 1px; height: 190px; background: rgba(255,255,255,0.08); align-self: center; margin: 0 var(--space-2);"></div>
-
-          <!-- Events: 2 roles -->
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #FF2D78, #FF8C42)"><span class="role-card-team">Events</span><div class="role-card-emoji">&#127914;</div><div class="role-card-title">Event Ops &amp; H&amp;S</div><p class="role-card-desc">Logistics and production</p></div></div>
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #FF2D78, #FF8C42)"><span class="role-card-team">Events</span><div class="role-card-emoji">&#127908;</div><div class="role-card-title">Talent Scout</div><p class="role-card-desc">Artist booking and relations</p></div></div>
-
-          <!-- Divider -->
-          <div style="flex: 0 0 1px; height: 190px; background: rgba(255,255,255,0.08); align-self: center; margin: 0 var(--space-2);"></div>
-
-          <!-- Creative: 5 roles -->
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #A855F7, #00F5FF)"><span class="role-card-team">Creative</span><div class="role-card-emoji">&#127916;</div><div class="role-card-title">Content Creator Manager</div><p class="role-card-desc">Leads content strategy</p></div></div>
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #A855F7, #00F5FF)"><span class="role-card-team">Creative</span><div class="role-card-emoji">&#127912;</div><div class="role-card-title">Videographers</div><p class="role-card-desc">Film, edit, post</p></div></div>
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #A855F7, #00F5FF)"><span class="role-card-team">Creative</span><div class="role-card-emoji">&#128240;</div><div class="role-card-title">Journalist / Writer</div><p class="role-card-desc">Stories, press, blog</p></div></div>
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #A855F7, #00F5FF)"><span class="role-card-team">Creative</span><div class="role-card-emoji">&#127775;</div><div class="role-card-title">Art &amp; Design</div><p class="role-card-desc">Posters, identity, merch</p></div></div>
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #A855F7, #00F5FF)"><span class="role-card-team">Creative</span><div class="role-card-emoji">&#128241;</div><div class="role-card-title">Social Media</div><p class="role-card-desc">Content calendar, engagement</p></div></div>
-
-          <!-- Divider -->
-          <div style="flex: 0 0 1px; height: 190px; background: rgba(255,255,255,0.08); align-self: center; margin: 0 var(--space-2);"></div>
-
-          <!-- Climate/ESG: 3 roles -->
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #059669, #B8FF00)"><span class="role-card-team">Climate</span><div class="role-card-emoji">&#127807;</div><div class="role-card-title">Ecology / ESG</div><p class="role-card-desc">Climate projects, 25% fund</p></div></div>
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #059669, #B8FF00)"><span class="role-card-team">Climate</span><div class="role-card-emoji">&#129309;</div><div class="role-card-title">Community Outreach</div><p class="role-card-desc">Partnerships and community</p></div></div>
-          <div class="h-scroll-card"><div class="role-card" style="--team-accent: linear-gradient(90deg, #059669, #B8FF00)"><span class="role-card-team">Climate</span><div class="role-card-emoji">&#128227;</div><div class="role-card-title">PR &amp; Comms</div><p class="role-card-desc">Media and public image</p></div></div>
-
-        </div>
-        <div class="scroll-hint reveal">Drag or swipe to explore all 14 roles</div>
-      </div>
-
-      <div class="container" style="padding-top: var(--space-10);">
-        <div class="text-center">
-          <a href="/pages/programme.html#roles" class="btn btn-glow">Explore the Full Programme</a>
         </div>
       </div>
     </section>
@@ -542,11 +514,11 @@
                   <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-2);">
                     <div>
                       <div style="color: white; font-weight: 700; font-family: var(--font-heading);">Full Bundle (All 3 Verticals)</div>
-                      <div style="color: rgba(255,255,255,0.5); font-size: var(--text-xs); margin-top: 2px;">54 users &bull; MACC + FootBeat + CAN</div>
+                      <div style="color: rgba(255,255,255,0.72); font-size: var(--text-xs); margin-top: 2px;">54 users &bull; MACC + FootBeat + CAN</div>
                     </div>
                     <div style="text-align: right;">
-                      <div style="color: #F5C842; font-weight: 800; font-size: var(--text-xl); font-family: var(--font-heading);">R45,000/yr</div>
-                      <div style="color: rgba(255,255,255,0.4); font-size: var(--text-xs); text-decoration: line-through;">R60,000</div>
+                      <div style="color: #F5C842; font-weight: 800; font-size: var(--text-xl); font-family: var(--font-heading);"><span data-price-zar="45000">R45,000</span>/yr</div>
+                      <div style="color: rgba(255,255,255,0.65); font-size: var(--text-xs); text-decoration: line-through;">R60,000</div>
                     </div>
                   </div>
                 </div>
@@ -571,7 +543,7 @@
 
         <!-- What's Included -->
         <div class="reveal text-center" style="max-width: 800px; margin: 0 auto;">
-          <p class="text-uppercase-sm" style="color: rgba(255,255,255,0.4); margin-bottom: var(--space-6);">What&rsquo;s included in every licence</p>
+          <p class="text-uppercase-sm" style="color: rgba(255,255,255,0.65); margin-bottom: var(--space-6);">What&rsquo;s included in every licence</p>
           <div class="flex justify-center flex-wrap" style="gap: var(--space-3);">
             <span class="pill" style="background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.1); font-size: var(--text-xs);">&#10003; Platform Access</span>
             <span class="pill" style="background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.1); font-size: var(--text-xs);">&#10003; AI Mentor</span>
@@ -624,24 +596,21 @@
             <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="36" height="36" loading="lazy" decoding="async">
             <span style="color: white;">BLASTBEAT</span>
           </a>
-          <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 300px; color: rgba(255,255,255,0.5);">Empowering young people through music, entrepreneurship, and climate action. 23 years. 19 countries. 360,000+ students.</p>
-          <p style="font-size: var(--text-xs); margin-top: var(--space-4); color: rgba(255,255,255,0.35);">Climate Actions Now<br>UK Registered Charity No. 1113530</p>
-          <div class="footer-social" style="margin-top: var(--space-6);">
-            <a href="#" aria-label="LinkedIn">in</a>
-            <a href="#" aria-label="Instagram">ig</a>
-            <a href="#" aria-label="X / Twitter">X</a>
-            <a href="#" aria-label="YouTube">YT</a>
-          </div>
+          <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 300px; color: rgba(255,255,255,0.72);">Empowering young people through music, entrepreneurship, and climate action. 23 years. 11 countries. 360,000+ students.</p>
+          <p style="font-size: var(--text-xs); margin-top: var(--space-3); color: rgba(255,255,255,0.7); line-height: 1.6;">Part of the Climate Actions Now group: <a href="https://www.climateactionsnow.org" rel="noopener" style="color:rgba(255,255,255,0.7);">Climate Actions Now</a> &middot; <a href="https://www.eduponics.co.za" rel="noopener" style="color:rgba(255,255,255,0.7);">Eduponics</a> (climate-smart agritech in schools) &middot; Can Music (independent label &amp; artist platform).</p>
+          <p style="font-size: var(--text-xs); margin-top: var(--space-4); color: rgba(255,255,255,0.62);">Climate Actions Now<br>Climate Actions Now Ltd, Ireland</p>
+          <!-- footer-social hidden until real URLs are ready; restore by uncommenting this block and pasting in real links -->
         </div>
         <div>
           <h5>Programme</h5>
           <ul class="footer-links">
             <li><a href="/pages/programme.html">What is Blastbeat?</a></li>
+            <li><a href="/pages/licence.html">The Licence</a></li>
             <li><a href="/pages/programme.html#macc">MACC Challenge</a></li>
             <li><a href="/pages/programme.html#footbeat">FootBeat Sports</a></li>
             <li><a href="/pages/for-schools.html">For Schools</a></li>
             <li><a href="/pages/programme.html#roles">ESE Roles</a></li>
-            <li><a href="#blastbeat-tv">Blastbeat TV</a></li>
+            <li><a href="/pages/programme.html">Blastbeat TV</a></li>
           </ul>
         </div>
         <div>
@@ -649,6 +618,8 @@
           <ul class="footer-links">
             <li><a href="/pages/about.html">Our Story</a></li>
             <li><a href="/pages/impact.html">Impact</a></li>
+            <li><a href="/pages/projects.html">Projects &amp; Use Cases</a></li>
+            <li><a href="/pages/see-it-in-action.html">See It In Action</a></li>
             <li><a href="/pages/international.html">International</a></li>
             <li><a href="/pages/partners.html">Partners</a></li>
             <li><a href="/blog/">News &amp; Blog</a></li>
@@ -659,17 +630,21 @@
           <h5>Get Involved</h5>
           <ul class="footer-links">
             <li><a href="/pages/apply.html">Apply for Your School</a></li>
+            <li><a href="/pages/patrons.html">Founders&rsquo; Circle</a></li>
+            <li><a href="/pages/2winaid.html">2winAid Sponsorship</a></li>
+            <li><a href="/pages/ambassadors.html">Ambassadors &amp; Affiliates</a></li>
+            <li><a href="/pages/app.html">The Blastbeat App</a></li>
             <li><a href="/pages/partners.html">Corporate Partnership</a></li>
             <li><a href="/pages/contact.html">Contact Us</a></li>
           </ul>
           <div style="margin-top: var(--space-6);">
-            <p style="font-size: var(--text-xs); color: rgba(255,255,255,0.4); margin-bottom: var(--space-2);">General enquiries</p>
+            <p style="font-size: var(--text-xs); color: rgba(255,255,255,0.65); margin-bottom: var(--space-2);">General enquiries</p>
             <a href="mailto:info@blastbeat.education" style="font-size: var(--text-sm); color: rgba(255,255,255,0.7);">info@blastbeat.education</a>
           </div>
         </div>
       </div>
       <div class="footer-bottom flex justify-between items-center flex-wrap gap-4">
-        <p style="margin: 0; color: rgba(255,255,255,0.35);">&copy; 2026 Climate Actions Now. All rights reserved. UK Charity 1113530</p>
+        <p style="margin: 0; color: rgba(255,255,255,0.62);">&copy; 2026 Climate Actions Now. All rights reserved. Climate Actions Now group</p>
         <div class="flex gap-6">
           <a href="/pages/privacy-policy.html">Privacy Policy</a>
           <a href="/pages/terms-of-use.html">Terms of Use</a>
@@ -685,9 +660,12 @@
   </div>
 
   <script src="/assets/js/navigation.js" defer></script>
+  <script src="/assets/js/magic-cursor.js" defer></script>
   <script src="/assets/js/animations.js" defer></script>
   <script src="/assets/js/cookie-consent.js" defer></script>
   <script src="/assets/js/student-tools.js" defer></script>
   <script src="/assets/js/beat-bot.js" defer></script>
+  <script src="/assets/js/whatsapp.js" defer></script>
+  <script src="/assets/js/currency.js" defer></script>
 </body>
 </html>

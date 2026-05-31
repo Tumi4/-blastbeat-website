@@ -9,12 +9,12 @@
   var KB = [
     {
       patterns: ['hello', 'hi', 'hey', 'sup', 'yo', 'hiya', 'howzit'],
-      reply: "Yo! 👋 I'm BeatBot — your Blastbeat guide.\nAsk me anything about the programme, how to apply, or what being part of Blastbeat looks like. What's on your mind?",
+      reply: "Yo! 👋 I'm Beat — your Blastbeat guide.\nAsk me anything about the programme, how to apply, or what being part of Blastbeat looks like. What's on your mind?",
       chips: ['What is Blastbeat?', 'How do I apply?', 'Is it free?']
     },
     {
       patterns: ['what is blastbeat', 'about blastbeat', 'tell me about', 'what do you do', 'explain blastbeat'],
-      reply: "Blastbeat Education is an Enterprise Skills Education (ESE) programme for young people aged 14–21.\n\nStudents work in real business teams, produce creative projects, and compete at national level — building skills in leadership, finance, marketing, music, sport, and more.\n\nWe've been doing this since 2003. 360,000+ students across 19 countries. Real experience, not just theory.",
+      reply: "Blastbeat Education is an Enterprise Skills Education (ESE) programme for young people aged 14–21.\n\nStudents work in real business teams, produce creative projects, and compete at national level — building skills in leadership, finance, marketing, music, sport, and more.\n\nWe've been doing this since 2003. 360,000+ students across 11 countries. Real experience, not just theory.",
       chips: ['MACC programme', 'FootBeat programme', 'How do I apply?']
     },
     {
@@ -60,7 +60,7 @@
     },
     {
       patterns: ['where', 'country', 'south africa', 'ireland', 'namibia', 'international', 'global', 'location'],
-      reply: "Blastbeat has been running across 19 countries 🌍\n\nWe're currently expanding in:\n🇿🇦 South Africa (priority market — founding cohort open now)\n🇮🇪 Ireland\n🇳🇦 Namibia\n🇯🇵 Japan\n🇷🇼 Rwanda\n\nIf your school is outside these countries, get in touch — we're open to new territories.",
+      reply: "Blastbeat has been running across 11 countries 🌍\n\nWe're currently expanding in:\n🇿🇦 South Africa (priority market — founding cohort open now)\n🇮🇪 Ireland\n🇳🇦 Namibia\n🇯🇵 Japan\n🇷🇼 Rwanda\n\nIf your school is outside these countries, get in touch — we're open to new territories.",
       chips: ['Apply now →', 'Contact us', 'Is it free?']
     },
     {
@@ -92,7 +92,7 @@
     },
     {
       patterns: ['impact', 'results', 'stats', 'data', 'how many', 'proof', 'evidence'],
-      reply: "Blastbeat's impact in numbers:\n\n📈 360,000+ students reached\n🌍 19 countries\n⏳ 23+ years of delivery\n💼 14 enterprise roles per school\n🏆 National competitions since 2003\n\nWe track skills development outcomes and learner confidence — full impact data is on our website.",
+      reply: "Blastbeat's impact in numbers:\n\n📈 360,000+ students reached\n🌍 11 countries\n⏳ 23+ years of delivery\n💼 14 enterprise roles per school\n🏆 National competitions since 2003\n\nWe track skills development outcomes and learner confidence — full impact data is on our website.",
       chips: ['Impact page', 'Apply now →'],
       links: [{ label: 'See impact data', url: '/pages/impact.html' }]
     }
@@ -143,6 +143,52 @@
       outline-offset: 3px;
     }
     #bb-bot-trigger svg { width: 26px; height: 26px; }
+    #bb-bot-greeting {
+      position: fixed;
+      bottom: 1.6rem;
+      right: 5.5rem;
+      z-index: 9988;
+      background: linear-gradient(135deg, #1a1f3a, #131725);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px 18px 6px 18px;
+      padding: 10px 16px;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      transform: translateY(8px) scale(0.95);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+      white-space: nowrap;
+      max-width: calc(100vw - 8rem);
+    }
+    #bb-bot-greeting::after {
+      content: '';
+      position: absolute;
+      right: -7px;
+      bottom: 14px;
+      width: 14px;
+      height: 14px;
+      background: linear-gradient(135deg, #1a1f3a, #131725);
+      border-right: 1px solid rgba(255,255,255,0.14);
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+      transform: rotate(-45deg);
+    }
+    #bb-bot-greeting.show {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #bb-bot-greeting .bb-wave { display: inline-block; animation: bb-wave 1s ease-in-out infinite; transform-origin: 70% 70%; margin-right: 4px; }
+    @keyframes bb-wave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(18deg); }
+      75% { transform: rotate(-12deg); }
+    }
+    @media (max-width: 480px) {
+      #bb-bot-greeting { font-size: 0.78rem; padding: 8px 12px; bottom: 1.4rem; right: 4.6rem; }
+    }
     #bb-bot-badge {
       position: absolute;
       top: -3px;
@@ -384,7 +430,7 @@
   /* ── Build HTML ── */
   var trigger = document.createElement('button');
   trigger.id = 'bb-bot-trigger';
-  trigger.setAttribute('aria-label', 'Chat with BeatBot');
+  trigger.setAttribute('aria-label', 'Chat with Beat');
   trigger.setAttribute('aria-expanded', 'false');
   trigger.innerHTML = `
     <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -401,19 +447,19 @@
   panel.id = 'bb-bot-panel';
   panel.className = 'hidden';
   panel.setAttribute('role', 'dialog');
-  panel.setAttribute('aria-label', 'BeatBot chat');
+  panel.setAttribute('aria-label', 'Beat chat');
   panel.innerHTML = `
     <div id="bb-bot-header">
       <div id="bb-bot-avatar">🎵</div>
       <div id="bb-bot-info">
-        <strong>BeatBot</strong>
+        <strong>Beat</strong>
         <span>● Online — Blastbeat AI</span>
       </div>
       <button id="bb-bot-close" aria-label="Close chat">✕</button>
     </div>
     <div id="bb-messages" role="log" aria-live="polite"></div>
     <div id="bb-input-row">
-      <input id="bb-input" type="text" placeholder="Ask me anything..." autocomplete="off" aria-label="Message BeatBot" maxlength="200">
+      <input id="bb-input" type="text" placeholder="Ask me anything..." autocomplete="off" aria-label="Message Beat" maxlength="200">
       <button id="bb-send" aria-label="Send message">
         <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M2 9h14M10 3l6 6-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -425,6 +471,36 @@
 
   document.body.appendChild(trigger);
   document.body.appendChild(panel);
+
+  /* ---- Friendly greeting bubble ---- */
+  var greetEl = document.createElement('div');
+  greetEl.id = 'bb-bot-greeting';
+  greetEl.setAttribute('role', 'button');
+  greetEl.setAttribute('tabindex', '0');
+  greetEl.setAttribute('aria-label', "Open Beat — Blastbeat's AI guide");
+  greetEl.innerHTML = '<span class="bb-wave" aria-hidden="true">👋</span> Hey, I\'m <strong>Beat</strong> — need a hand?';
+  document.body.appendChild(greetEl);
+
+  // Show once per session, ~6 seconds after page load, only if bot panel hasn't been opened yet
+  try {
+    var seen = sessionStorage.getItem('bb-bot-greeted');
+    if (!seen) {
+      setTimeout(function () {
+        if (panel.classList.contains('hidden')) {
+          greetEl.classList.add('show');
+          sessionStorage.setItem('bb-bot-greeted', '1');
+          // Auto-hide after 8s if user ignores it
+          setTimeout(function () { greetEl.classList.remove('show'); }, 8000);
+        }
+      }, 6000);
+    }
+  } catch (e) { /* sessionStorage blocked — no greeting */ }
+
+  function hideGreeting() { greetEl.classList.remove('show'); }
+  greetEl.addEventListener('click', function () { hideGreeting(); trigger.click(); });
+  greetEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hideGreeting(); trigger.click(); }
+  });
 
   /* ── Logic ── */
   var msgs = document.getElementById('bb-messages');
@@ -450,7 +526,7 @@
       setTimeout(function () {
         removeTyping();
         addBotMsg(
-          "Hey! 👋 I'm **BeatBot**, Blastbeat's digital guide.\n\nI can tell you about the programme, how to apply, or what it's like being a Blastbeat student. What would you like to know?",
+          "Hey! 👋 I'm **Beat**, Blastbeat's digital guide.\n\nI can tell you about the programme, how to apply, or what it's like being a Blastbeat student. What would you like to know?",
           ['What is Blastbeat?', 'How do I apply?', 'Is it free?']
         );
       }, 1200);
@@ -473,26 +549,72 @@
     if (!text) return;
     input.value = '';
     addUserMsg(text);
-    respond(text.toLowerCase());
+    recordUserTurn(text);
+    respond(text.toLowerCase(), text);
   }
 
-  function respond(text) {
+  // Keep the last N exchanges to send to the AI endpoint as context.
+  var conversationHistory = [];
+  var MAX_HISTORY = 8;
+
+  function recordUserTurn(content) {
+    conversationHistory.push({ role: 'user', content: content });
+    if (conversationHistory.length > MAX_HISTORY) conversationHistory.shift();
+  }
+  function recordAssistantTurn(content) {
+    conversationHistory.push({ role: 'assistant', content: content });
+    if (conversationHistory.length > MAX_HISTORY) conversationHistory.shift();
+  }
+
+  function askAI(text, originalText) {
+    return fetch('/api/beat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: originalText || text,
+        history: conversationHistory.slice(0, -1), // exclude the just-added user turn
+      }),
+    }).then(function (res) {
+      if (!res.ok && res.status !== 429 && res.status !== 503) {
+        return res.json().then(function (j) {
+          throw new Error(j.error || ('http_' + res.status));
+        }).catch(function () { throw new Error('http_' + res.status); });
+      }
+      return res.json();
+    });
+  }
+
+  function respond(text, originalText) {
     addTyping();
-    setTimeout(function () {
-      removeTyping();
-      var match = null;
-      for (var i = 0; i < KB.length; i++) {
-        for (var j = 0; j < KB[i].patterns.length; j++) {
-          if (text.indexOf(KB[i].patterns[j]) !== -1) { match = KB[i]; break; }
-        }
-        if (match) break;
+    var matchedKB = null;
+    for (var i = 0; i < KB.length; i++) {
+      for (var j = 0; j < KB[i].patterns.length; j++) {
+        if (text.indexOf(KB[i].patterns[j]) !== -1) { matchedKB = KB[i]; break; }
       }
-      if (match) {
-        addBotMsg(match.reply, match.chips, match.links);
-      } else {
+      if (matchedKB) break;
+    }
+
+    if (matchedKB) {
+      setTimeout(function () {
+        removeTyping();
+        addBotMsg(matchedKB.reply, matchedKB.chips, matchedKB.links);
+        recordAssistantTurn(matchedKB.reply);
+      }, 600 + Math.random() * 400);
+      return;
+    }
+
+    // No KB match — try the AI endpoint.
+    askAI(text, originalText)
+      .then(function (data) {
+        removeTyping();
+        var reply = data.reply || DEFAULT_REPLY;
+        addBotMsg(reply, DEFAULT_CHIPS);
+        recordAssistantTurn(reply);
+      })
+      .catch(function () {
+        removeTyping();
         addBotMsg(DEFAULT_REPLY, DEFAULT_CHIPS);
-      }
-    }, 600 + Math.random() * 400);
+      });
   }
 
   function addBotMsg(text, chips, links) {
@@ -524,7 +646,8 @@
         btn.addEventListener('click', function () {
           if (QUICK_LINKS[c]) { window.location.href = QUICK_LINKS[c]; return; }
           addUserMsg(c);
-          respond(c.toLowerCase());
+          recordUserTurn(c);
+          respond(c.toLowerCase(), c);
         });
         cr.appendChild(btn);
       });

@@ -1,6 +1,21 @@
 [build]
   publish = "."
 
+# Netlify Functions — /api/beat proxies to Claude API for the in-page AI chatbot.
+# Set ANTHROPIC_API_KEY in Site settings → Environment variables.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Friendly path for the Beat AI endpoint. The function also declares
+# `config.path = "/api/beat"` natively, but this redirect is belt-and-
+# suspenders in case the v2 routing isn't honored on first deploy.
+[[redirects]]
+  from = "/api/beat"
+  to = "/.netlify/functions/beat"
+  status = 200
+  force = true
+
 # Security headers
 [[headers]]
   for = "/*"
@@ -10,7 +25,7 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'self'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.iframe.ly; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://i.ytimg.com https://*.ytimg.com https://*.ggpht.com https://irp.cdn-website.com https://*.cdn-website.com https://drive.google.com https://*.googleusercontent.com https://cdn.iframe.ly; connect-src 'self' https://cdn.iframe.ly; frame-src 'self' https://drive.google.com https://www.youtube.com https://www.youtube-nocookie.com https://youtube.com https://cdn.iframe.ly https://*.iframe.ly; media-src 'self' https://drive.google.com; frame-ancestors 'self'"
 
 # Cache static assets (1 year)
 [[headers]]
