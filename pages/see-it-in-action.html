@@ -227,6 +227,104 @@
       background-size: 18px 6px; background-repeat: repeat-x;
     }
 
+    /* ===== Filmstrip divider — actual 35mm look ===== */
+    .filmstrip {
+      position: relative; height: 64px; margin: 0;
+      background: #000;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(255,255,255,0.05);
+      overflow: hidden;
+    }
+    /* Sprocket holes — top + bottom rows */
+    .filmstrip::before, .filmstrip::after {
+      content: ""; position: absolute; left: 0; right: 0; height: 10px;
+      background-image:
+        linear-gradient(90deg, transparent 0 8px, #15110A 8px 22px, transparent 22px 30px);
+      background-size: 30px 10px;
+      background-repeat: repeat-x;
+    }
+    .filmstrip::before { top: 6px; }
+    .filmstrip::after { bottom: 6px; }
+    /* Frames between the sprocket rows */
+    .filmstrip-frames {
+      position: absolute; top: 22px; bottom: 22px; left: 0; right: 0;
+      background:
+        linear-gradient(90deg,
+          rgba(232,195,107,0.04) 0 50%,
+          rgba(232,195,107,0.10) 50% 100%),
+        repeating-linear-gradient(90deg,
+          rgba(244,236,216,0.06) 0 4px,
+          transparent 4px 40px,
+          rgba(244,236,216,0.06) 40px 44px,
+          transparent 44px 80px);
+      mix-blend-mode: screen;
+      opacity: 0.6;
+      animation: filmstrip-pan 14s linear infinite;
+    }
+    @keyframes filmstrip-pan { from { background-position: 0 0, 0 0; } to { background-position: 0 0, 80px 0; } }
+
+    /* ===== Coming Soon — marquee card ===== */
+    .coming-soon-section {
+      padding: 5rem 1.5rem; background: linear-gradient(180deg, #100C18 0%, var(--th-bg) 100%);
+      position: relative; z-index: 5;
+    }
+    .coming-soon-card {
+      max-width: 880px; margin: 0 auto; position: relative;
+      background: linear-gradient(135deg, #15110A 0%, #2A1A05 100%);
+      border: 1px solid rgba(232,195,107,0.4);
+      border-radius: 8px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 60px rgba(232,195,107,0.18), inset 0 1px 0 rgba(244,236,216,0.08);
+      overflow: hidden;
+      text-align: center;
+    }
+    /* corner ticket-stub notches */
+    .coming-soon-card::before, .coming-soon-card::after {
+      content: ""; position: absolute; top: 50%; transform: translateY(-50%);
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--th-bg);
+      box-shadow: inset 0 0 0 1px rgba(232,195,107,0.3);
+    }
+    .coming-soon-card::before { left: -16px; }
+    .coming-soon-card::after { right: -16px; }
+    .coming-soon-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--th-gold); margin-bottom: 1.25rem;
+    }
+    .coming-soon-eyebrow .bulb { width: 8px; height: 8px; border-radius: 50%; background: var(--th-gold); box-shadow: 0 0 10px var(--th-gold); animation: bulb-blink 1.6s ease-in-out infinite; }
+    .coming-soon-title {
+      font-family: 'Playfair Display', serif; font-style: italic; font-weight: 900;
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      color: var(--th-cream); line-height: 1.05; margin: 0 0 1rem;
+    }
+    .coming-soon-title .gold { background: linear-gradient(120deg, #F5E2A8, #E8C36B 50%, #C9A24B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .coming-soon-body { color: rgba(244,236,216,0.75); font-size: 1.05rem; line-height: 1.7; max-width: 50ch; margin: 0 auto 1.75rem; }
+    /* Scrolling marquee strip below */
+    .marquee-strip {
+      margin: 1.75rem -2.5rem -3rem; padding: 1rem 0;
+      border-top: 1px solid rgba(232,195,107,0.25);
+      background: linear-gradient(180deg, rgba(0,0,0,0.4), transparent);
+      overflow: hidden; white-space: nowrap; mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    }
+    .marquee-strip-track { display: inline-flex; gap: 3rem; animation: marquee-scroll 28s linear infinite; padding-left: 3rem; }
+    .marquee-strip-track span {
+      font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem;
+      color: rgba(244,236,216,0.5); text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .marquee-strip-track span::before { content: "★"; color: var(--th-gold); margin-right: 1rem; }
+    @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .coming-soon-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 1.75rem; border-radius: 4px;
+      background: transparent; border: 1.5px solid var(--th-gold);
+      color: var(--th-gold);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: all 0.25s;
+    }
+    .coming-soon-cta:hover { background: rgba(232,195,107,0.12); color: var(--th-cream); }
+
     /* ===== CTA — "Get Your Ticket" ===== */
     .ticket-cta {
       position: relative; padding: 6rem 1.5rem;
@@ -320,7 +418,33 @@
       <can-gallery data-featured="true" data-layout="featured"></can-gallery>
     </section>
 
-    <div class="curtain-divider" aria-hidden="true"></div>
+    <!-- Filmstrip divider -->
+    <div class="filmstrip" aria-hidden="true"><div class="filmstrip-frames"></div></div>
+
+    <!-- ===== COMING SOON — marquee teaser ===== -->
+    <section class="coming-soon-section">
+      <div class="coming-soon-card">
+        <div class="coming-soon-eyebrow"><span class="bulb"></span> Coming Soon &bull; 2026 Programme</div>
+        <h2 class="coming-soon-title">The Founding Cohort, <span class="gold">on Film.</span></h2>
+        <p class="coming-soon-body">Twenty schools in Cape Town and Kigali. Six months. Twenty ESEs filming their own ten-minute episodes. The next wave of CAN Music drops here as it lands &mdash; tap the bell on the YouTube channel, or get on the early-access list through your school application.</p>
+        <a href="/pages/apply.html" class="coming-soon-cta">&#127915; Join the Cohort &mdash; Apply</a>
+        <div class="marquee-strip" aria-hidden="true">
+          <div class="marquee-strip-track">
+            <span>The Founding Cohort 2026</span>
+            <span>Cape Town &middot; Kigali &middot; New Films Loading</span>
+            <span>Tonight&rsquo;s Bill: 54 Films &mdash; Tomorrow&rsquo;s: Yours</span>
+            <span>Free Admission for Students</span>
+            <span>The Founding Cohort 2026</span>
+            <span>Cape Town &middot; Kigali &middot; New Films Loading</span>
+            <span>Tonight&rsquo;s Bill: 54 Films &mdash; Tomorrow&rsquo;s: Yours</span>
+            <span>Free Admission for Students</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filmstrip divider -->
+    <div class="filmstrip" aria-hidden="true"><div class="filmstrip-frames"></div></div>
 
     <!-- ===== THE PROGRAMME — FULL LIBRARY ===== -->
     <section class="programme-section">
