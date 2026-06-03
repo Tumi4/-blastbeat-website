@@ -131,6 +131,67 @@
     .marquee-meta { display: inline-flex; gap: 1.5rem; padding: 0.8rem 1.75rem; border-radius: 999px; background: rgba(0,0,0,0.55); border: 1px solid rgba(232,195,107,0.3); font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(244,236,216,0.85); margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; }
     .marquee-meta span { color: var(--th-gold); margin-right: 0.4rem; }
 
+    /* ===== Entry hall — four "screening rooms" ===== */
+    .entry-hall { padding: 5rem 1.5rem 4rem; background: var(--th-bg); position: relative; z-index: 5; }
+    .entry-hall-head { text-align: center; max-width: 720px; margin: 0 auto 2.5rem; }
+    .entry-hall-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--th-gold); margin-bottom: 1rem;
+    }
+    .entry-hall-eyebrow .bulb { width: 8px; height: 8px; border-radius: 50%; background: var(--th-gold); box-shadow: 0 0 10px var(--th-gold); animation: bulb-blink 1.6s ease-in-out infinite; }
+    .entry-hall-title {
+      font-family: 'Playfair Display', serif; font-style: italic; font-weight: 900;
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      color: var(--th-cream); line-height: 1.05; margin: 0 0 0.75rem;
+    }
+    .entry-hall-sub { font-size: 1rem; color: rgba(244,236,216,0.7); max-width: 56ch; margin: 0 auto; }
+    .entry-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; max-width: 1200px; margin: 0 auto; }
+    @media (max-width: 920px) { .entry-tiles { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .entry-tiles { grid-template-columns: 1fr; } }
+    .entry-tile {
+      display: flex; flex-direction: column; gap: 0.75rem;
+      padding: 1.75rem 1.5rem;
+      background: linear-gradient(180deg, #15110A 0%, #0A0A0E 100%);
+      border: 1px solid rgba(232,195,107,0.25);
+      border-radius: 8px;
+      text-decoration: none; color: var(--th-cream);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+      cursor: pointer;
+    }
+    .entry-tile::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--th-gold), transparent);
+      opacity: 0.45; transition: opacity 0.3s;
+    }
+    .entry-tile:hover { transform: translateY(-6px); border-color: rgba(232,195,107,0.6); box-shadow: 0 24px 50px rgba(0,0,0,0.5), 0 0 50px rgba(232,195,107,0.18); }
+    .entry-tile:hover::before { opacity: 1; }
+    .entry-tile:focus-visible { outline: 2px solid var(--th-gold); outline-offset: 4px; }
+    .entry-tile-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; color: var(--th-gold); }
+    .entry-tile-icon { font-size: 1.8rem; line-height: 1; }
+    .entry-tile-title { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 900; font-size: 1.35rem; color: var(--th-cream); margin: 0; line-height: 1.15; }
+    .entry-tile-body { font-size: 0.85rem; line-height: 1.55; color: rgba(244,236,216,0.7); margin: 0; flex: 1; }
+    .entry-tile-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--th-gold); display: flex; align-items: center; gap: 0.4rem; margin-top: 0.5rem; }
+    .entry-tile-meta::before { content: "▶"; font-size: 0.7rem; }
+
+    /* ===== Room sections — each Blastbeat / CAN Music / CAP / Projects ===== */
+    .room-section { padding: 5rem 1.5rem; background: var(--th-bg); position: relative; z-index: 5; scroll-margin-top: calc(var(--nav-height, 80px) + 1rem); }
+    .room-head { text-align: center; max-width: 760px; margin: 0 auto 2.5rem; }
+    .room-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.4rem 1.25rem; border-radius: 999px;
+      background: linear-gradient(135deg, var(--th-gold), var(--th-gold-deep));
+      color: #1a1206; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.25rem;
+      box-shadow: 0 8px 30px rgba(232,195,107,0.35);
+    }
+    .room-title {
+      font-family: 'Playfair Display', serif; font-style: italic; font-weight: 900;
+      font-size: clamp(2rem, 4.5vw, 3.25rem); color: var(--th-cream); margin: 0 0 0.85rem; line-height: 1.05;
+    }
+    .room-title .gold { background: linear-gradient(120deg, #F5E2A8, #E8C36B 50%, #C9A24B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .room-sub { font-size: 1.02rem; color: rgba(244,236,216,0.78); line-height: 1.6; max-width: 60ch; margin: 0 auto; }
+
     /* ===== Now Showing — featured row ===== */
     .now-showing { padding: 6rem 1.5rem; background: linear-gradient(180deg, var(--th-bg) 0%, #100C18 100%); position: relative; z-index: 5; }
     .now-showing-head { text-align: center; max-width: 760px; margin: 0 auto 3.5rem; }
@@ -408,14 +469,95 @@
       </div>
     </section>
 
-    <!-- ===== NOW SHOWING — FEATURED ===== -->
-    <section class="now-showing">
-      <div class="now-showing-head">
-        <span class="now-showing-eyebrow">&#9733; Tonight&rsquo;s Feature Presentation</span>
-        <h2 class="now-showing-title">The Headliners</h2>
-        <p class="now-showing-sub">The five films every prospective school, sponsor and student should see first. Big, bold, centre of the room.</p>
+    <!-- ===== ENTRY HALL — four screening rooms ===== -->
+    <section class="entry-hall">
+      <div class="entry-hall-head">
+        <span class="entry-hall-eyebrow"><span class="bulb"></span> Choose Your Screening Room <span class="bulb"></span></span>
+        <h2 class="entry-hall-title">Four Rooms. One Cinema.</h2>
+        <p class="entry-hall-sub">Start where it matters to you &mdash; the Blastbeat programme itself, the CAN Music content side, the CAP climate-action projects, or our wider partner stories.</p>
       </div>
-      <can-gallery data-featured="true" data-layout="featured"></can-gallery>
+      <div class="entry-tiles">
+        <a class="entry-tile" href="#room-blastbeat">
+          <div class="entry-tile-num">Room 01</div>
+          <div class="entry-tile-icon">&#127891;</div>
+          <h3 class="entry-tile-title">The Blastbeat<br>Programme</h3>
+          <p class="entry-tile-body">The 16-week Event Social Enterprise in motion &mdash; testimonials, the V2 platform, and stories from Rwanda to Cape Town.</p>
+          <div class="entry-tile-meta">Enter Room 01</div>
+        </a>
+        <a class="entry-tile" href="#room-canmusic">
+          <div class="entry-tile-num">Room 02</div>
+          <div class="entry-tile-icon">&#127908;</div>
+          <h3 class="entry-tile-title">CAN Music<br>&amp; Content</h3>
+          <p class="entry-tile-body">The content-creation side &mdash; Sir Kisoro, Tinta Tribe, Giles et Diego, DJ Tease and the music videos that hit 22 million views.</p>
+          <div class="entry-tile-meta">Enter Room 02</div>
+        </a>
+        <a class="entry-tile" href="#room-cap">
+          <div class="entry-tile-num">Room 03</div>
+          <div class="entry-tile-icon">&#127793;</div>
+          <h3 class="entry-tile-title">CAP &mdash; Climate<br>Actions Project</h3>
+          <p class="entry-tile-body">Real student-funded climate projects &mdash; songs, surf-clean-ups, breakfast clubs, and the competitions that made them.</p>
+          <div class="entry-tile-meta">Enter Room 03</div>
+        </a>
+        <a class="entry-tile" href="#room-projects">
+          <div class="entry-tile-num">Room 04</div>
+          <div class="entry-tile-icon">&#129309;</div>
+          <h3 class="entry-tile-title">Our Projects<br>&amp; Partners</h3>
+          <p class="entry-tile-body">Kwa Mlungu, CCF, Eduponics, Nkuringo Bright Future School, Gorilla Highlands &mdash; the family of projects making it real.</p>
+          <div class="entry-tile-meta">Enter Room 04</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Filmstrip divider -->
+    <div class="filmstrip" aria-hidden="true"><div class="filmstrip-frames"></div></div>
+
+    <!-- ===== ROOM 01 — THE BLASTBEAT PROGRAMME ===== -->
+    <section class="room-section" id="room-blastbeat">
+      <div class="room-head">
+        <span class="room-eyebrow">Room 01 &bull; Now Showing</span>
+        <h2 class="room-title">The Blastbeat <span class="gold">Programme.</span></h2>
+        <p class="room-sub">The Event Social Enterprise in real life &mdash; the V2 platform that runs it, student testimonials, and how the programme lands in classrooms from Cape Town to Kigali.</p>
+      </div>
+      <can-gallery data-category="Education & BlastBeat" data-layout="featured"></can-gallery>
+    </section>
+
+    <!-- Filmstrip divider -->
+    <div class="filmstrip" aria-hidden="true"><div class="filmstrip-frames"></div></div>
+
+    <!-- ===== ROOM 02 — CAN MUSIC ===== -->
+    <section class="room-section" id="room-canmusic">
+      <div class="room-head">
+        <span class="room-eyebrow">Room 02 &bull; The Music Room</span>
+        <h2 class="room-title">CAN Music &amp; <span class="gold">Content Creation.</span></h2>
+        <p class="room-sub">The content side of the family &mdash; Sir Kisoro, Tinta Tribe, Giles et Diego, DJ Tease. Music videos, behind-the-scenes and the songs that built the catalogue.</p>
+      </div>
+      <can-gallery data-category="Music & CAN Music" data-limit="9"></can-gallery>
+    </section>
+
+    <!-- Filmstrip divider -->
+    <div class="filmstrip" aria-hidden="true"><div class="filmstrip-frames"></div></div>
+
+    <!-- ===== ROOM 03 — CAP (Climate Actions Project) ===== -->
+    <section class="room-section" id="room-cap">
+      <div class="room-head">
+        <span class="room-eyebrow">Room 03 &bull; CAP</span>
+        <h2 class="room-title">CAP &mdash; Climate <span class="gold">Actions Project.</span></h2>
+        <p class="room-sub">The 25% in action. Songs For Our Climate, the eco-surf challenges, township enterprises, and the artists turning the message into momentum.</p>
+      </div>
+      <can-gallery data-theme="Climate Action" data-limit="9"></can-gallery>
+    </section>
+
+    <!-- Filmstrip divider -->
+    <div class="filmstrip" aria-hidden="true"><div class="filmstrip-frames"></div></div>
+
+    <!-- ===== ROOM 04 — Our Projects & Partners ===== -->
+    <section class="room-section" id="room-projects">
+      <div class="room-head">
+        <span class="room-eyebrow">Room 04 &bull; The Family</span>
+        <h2 class="room-title">Our Projects &amp; <span class="gold">Partners.</span></h2>
+        <p class="room-sub">Kwa Mlungu in South Africa. Nkuringo Bright Future School and Gorilla Highlands in Uganda. Bin Scrub, Shack&rsquo;s Breakfast Club, the Greening of Zisukhanyo. The constellation around Blastbeat.</p>
+      </div>
+      <can-gallery data-categories="Uganda & Community|Environment & Enterprise|Surf, Skate & Eco" data-limit="9"></can-gallery>
     </section>
 
     <!-- Filmstrip divider -->

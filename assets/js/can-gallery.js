@@ -180,6 +180,13 @@
                      : 'cg-grid';
       var hideBlurb = el.getAttribute('data-hide-blurb') === 'true';
 
+      // Multi-category and multi-theme — pipe-separated (because some category
+      // names already contain commas, e.g. "Surf, Skate & Eco").
+      var categoriesAttr = el.getAttribute('data-categories');
+      var themesAttr = el.getAttribute('data-themes');
+      var categories = categoriesAttr ? categoriesAttr.split('|').map(function(s){return s.trim();}).filter(Boolean) : null;
+      var themes = themesAttr ? themesAttr.split('|').map(function(s){return s.trim();}).filter(Boolean) : null;
+
       el.innerHTML = '<div class="cg-empty">Loading videos&hellip;</div>';
 
       loadData().then(function (data) {
@@ -187,6 +194,12 @@
           if (featured && !v.featured) return false;
           if (theme && (!v.themes || v.themes.indexOf(theme) === -1)) return false;
           if (category && v.category !== category) return false;
+          if (themes && themes.length) {
+            if (!v.themes || !themes.some(function (t) { return v.themes.indexOf(t) !== -1; })) return false;
+          }
+          if (categories && categories.length) {
+            if (categories.indexOf(v.category) === -1) return false;
+          }
           if (search) {
             var hay = ((v.title || '') + ' ' + (v.blurb || '')).toLowerCase();
             if (hay.indexOf(search) === -1) return false;
