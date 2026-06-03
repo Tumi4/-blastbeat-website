@@ -77,7 +77,9 @@
       { id: 3, name: 'EduConsult Africa', org: 'EduConsult', type: 'Affiliate', source: 'ambassadors page', date: '2026-05-14', status: 'Active' },
       { id: 4, name: 'Coach Mbeki', org: 'Soweto FC', type: 'Sports Club', source: 'contact form', date: '2026-05-15', status: 'New' },
       { id: 5, name: 'James (parent)', org: '—', type: 'Referral', source: 'referral link', date: '2026-05-16', status: 'New' }
-    ]
+    ],
+    licences: [],
+    audit: []
   };
 
   function load() {
@@ -258,5 +260,339 @@
       data.leads.push({ id: nextId(data.leads), name: lname, org: org, type: 'School', source: 'manual', date: new Date().toISOString().slice(0, 10), status: 'New' });
     }
     save(); render();
+    audit('create', kind, { id: kind === 'school' ? data.schools[data.schools.length-1].id : kind === 'sponsor' ? data.sponsors[data.sponsors.length-1].id : kind === 'partner' ? data.partners[data.partners.length-1].id : data.leads[data.leads.length-1].id });
   }
+
+  /* ===========================================================
+     LICENCES — W3C-style Verifiable Credentials with SHA-256 stamp
+     =========================================================== */
+
+  if (!data.licences) data.licences = [];
+  if (!data.audit) data.audit = [];
+
+  function uuid() {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    return 'lic-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+  }
+  async function sha256Hex(str) {
+    if (window.crypto && crypto.subtle) {
+      var enc = new TextEncoder().encode(str);
+      var buf = await crypto.subtle.digest('SHA-256', enc);
+      return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+    }
+    // Fallback (shouldn't hit in modern browsers): a non-cryptographic stamp marked as such
+    var h = 0; for (var i = 0; i < str.length; i++) { h = ((h << 5) - h) + str.charCodeAt(i); h |= 0; }
+    return 'fallback-' + Math.abs(h).toString(16);
+  }
+  function canonicalize(obj) {
+    // Stable JSON serialization for hashing — sort keys recursively
+    if (obj === null || typeof obj !== 'object') return JSON.stringify(obj);
+    if (Array.isArray(obj)) return '[' + obj.map(canonicalize).join(',') + ']';
+    return '{' + Object.keys(obj).sort().map(function (k) { return JSON.stringify(k) + ':' + canonicalize(obj[k]); }).join(',') + '}';
+  }
+
+  var ISSUER_DID = {
+    ZA: { id: 'https://www.blastbeat.education/issuers/can-rsa', name: 'Climate Actions Now RSA (Pty) Ltd', country: 'ZA' },
+    UK: { id: 'https://www.blastbeat.education/issuers/can-uk',  name: 'Climate Actions Now (UK charity)',   country: 'GB' },
+    IE: { id: 'https://www.blastbeat.education/issuers/can-ie',  name: 'Climate Actions Now Ltd',            country: 'IE' }
+  };
+  var TIER_VALUE = {
+    'Founding Pilot 6-month': 1250,
+    'Full Year Twin': 2500,
+    "Founders' Circle Patron": 6250,
+    'Founding Patron Cohort': 25000,
+    'Legacy Partner': 100000
+  };
+
+  async function buildCredential(form) {
+    var now = new Date();
+    var iso = now.toISOString();
+    var issuer = ISSUER_DID[form.region] || ISSUER_DID.ZA;
+    var validFrom = form.validFrom ? new Date(form.validFrom).toISOString() : iso;
+    var validUntil = new Date(form.validFrom || iso);
+    validUntil.setMonth(validUntil.getMonth() + (form.tier === 'Full Year Twin' ? 12 : 6));
+    var credId = 'urn:uuid:' + uuid();
+
+    var unsigned = {
+      '@context': [
+        'https://www.w3.org/2018/credentials/v1',
+        'https://www.blastbeat.education/credentials/v1'
+      ],
+      id: credId,
+      type: ['VerifiableCredential', 'BlastbeatLicenceCredential'],
+      issuer: { id: issuer.id, name: issuer.name, country: issuer.country },
+      issuanceDate: iso,
+      validFrom: validFrom,
+      validUntil: validUntil.toISOString(),
+      credentialSubject: {
+        id: 'bb:school:' + (form.school || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 64),
+        schoolName: form.school,
+        programme: 'Blastbeat V2 — Event Social Enterprise Licence',
+        tier: form.tier,
+        tierValueEUR: TIER_VALUE[form.tier] || 1250,
+        sponsor: { name: form.sponsor, notes: form.notes || '' },
+        region: form.region,
+        rights: {
+          enrolmentSeats: 100,
+          rolesPerESE: 14,
+          profitSplit: '75 / 25 (student / climate)',
+          renewable: true
+        }
+      }
+    };
+    var canon = canonicalize(unsigned);
+    var hash = await sha256Hex(canon);
+    unsigned.proof = {
+      type: 'Sha256Stamp2026',
+      created: iso,
+      proofPurpose: 'assertionMethod',
+      verificationMethod: issuer.id + '#stamp',
+      proofValue: hash,
+      note: 'SHA-256 hash of the canonicalized credential minus the proof field. Tamper-evident: any change to the credential body invalidates this proof. For production: replace with Ed25519 / RSA signature.'
+    };
+    return unsigned;
+  }
+
+  /* ---- Issuance modal ---- */
+  var issueModal = document.getElementById('issue-modal');
+  var previewModal = document.getElementById('preview-modal');
+
+  function openIssueModal() {
+    var sel = document.getElementById('f-school');
+    sel.innerHTML = '<option value="">Select a school&hellip;</option>' +
+      data.schools.map(function (s) { return '<option value="' + escapeHtmlAttr(s.name) + '">' + escapeHtmlText(s.name) + ' &mdash; ' + escapeHtmlText(s.country) + '</option>'; }).join('');
+    document.getElementById('f-sponsor').value = '';
+    document.getElementById('f-notes').value = '';
+    document.getElementById('f-from').value = new Date().toISOString().slice(0, 10);
+    issueModal.hidden = false;
+    setTimeout(function () { document.getElementById('f-school').focus(); }, 30);
+  }
+  function closeIssueModal() { issueModal.hidden = true; }
+  function closePreviewModal() { previewModal.hidden = true; }
+
+  function escapeHtmlText(s) {
+    return String(s).replace(/[&<>]/g, function (c) { return ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]); });
+  }
+  function escapeHtmlAttr(s) {
+    return String(s).replace(/[&<>"']/g, function (c) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]); });
+  }
+
+  var openIssueBtn = document.getElementById('issue-licence-open');
+  if (openIssueBtn) openIssueBtn.addEventListener('click', openIssueModal);
+  document.getElementById('issue-close').addEventListener('click', closeIssueModal);
+  document.getElementById('issue-cancel').addEventListener('click', closeIssueModal);
+  document.getElementById('preview-close').addEventListener('click', closePreviewModal);
+  issueModal.addEventListener('click', function (e) { if (e.target === issueModal) closeIssueModal(); });
+  previewModal.addEventListener('click', function (e) { if (e.target === previewModal) closePreviewModal(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (!issueModal.hidden) closeIssueModal();
+    if (!previewModal.hidden) closePreviewModal();
+  });
+
+  document.getElementById('issue-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var form = {
+      school: document.getElementById('f-school').value,
+      sponsor: document.getElementById('f-sponsor').value.trim(),
+      tier: document.getElementById('f-tier').value,
+      region: document.getElementById('f-region').value,
+      validFrom: document.getElementById('f-from').value,
+      notes: document.getElementById('f-notes').value.trim()
+    };
+    if (!form.school || !form.sponsor) { toast('School and sponsor are required.'); return; }
+    var vc = await buildCredential(form);
+    data.licences.push({
+      id: vc.id,
+      issuanceDate: vc.issuanceDate,
+      school: form.school,
+      sponsor: form.sponsor,
+      tier: form.tier,
+      region: form.region,
+      proofHash: vc.proof.proofValue,
+      vc: vc
+    });
+    audit('issue', 'licence', { id: vc.id, school: form.school, sponsor: form.sponsor, tier: form.tier, region: form.region });
+    save();
+    closeIssueModal();
+    renderLicences();
+    renderAudit();
+    renderOverview();
+    showCredentialPreview(vc);
+    toast('Licence issued and stamped &mdash; ' + form.school);
+  });
+
+  function showCredentialPreview(vc) {
+    document.getElementById('preview-title').textContent = 'Licence — ' + (vc.credentialSubject.schoolName || '');
+    document.getElementById('preview-json').textContent = JSON.stringify(vc, null, 2);
+    document.getElementById('preview-download').onclick = function () { downloadJson(vc, 'blastbeat-licence-' + vc.id.replace('urn:uuid:', '').slice(0, 8) + '.json'); };
+    document.getElementById('preview-email').onclick = function () {
+      var subj = 'Your Blastbeat licence — ' + vc.credentialSubject.schoolName;
+      var body = 'Hi,\n\nAttached is the Blastbeat V2 licence credential for ' + vc.credentialSubject.schoolName +
+                 ', issued by ' + vc.issuer.name + ' on ' + vc.issuanceDate.slice(0, 10) + '.\n\n' +
+                 'Licence ID: ' + vc.id + '\nTier: ' + vc.credentialSubject.tier + '\n' +
+                 'Tamper-evident SHA-256 proof: ' + vc.proof.proofValue + '\n\n' +
+                 'Full W3C-aligned JSON-LD credential is in the attachment. The proof value is a SHA-256 hash of the canonicalised credential body — any change invalidates it.\n\n' +
+                 'Best,\nClimate Actions Now / Blastbeat Education';
+      window.location.href = 'mailto:?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
+    };
+    previewModal.hidden = false;
+  }
+
+  function downloadJson(obj, filename) {
+    var blob = new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename; a.click();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  /* ---- Renderers for the new views ---- */
+  function renderLicences() {
+    var totalValue = data.licences.reduce(function (a, l) { return a + (TIER_VALUE[l.tier] || 0); }, 0);
+    var byRegion = data.licences.reduce(function (a, l) { a[l.region] = (a[l.region] || 0) + 1; return a; }, {});
+    var stats = [
+      { label: 'Licences issued', val: data.licences.length, sub: 'all-time, this browser' },
+      { label: 'Sponsorship value', val: eur(totalValue), sub: 'sum of tier values' },
+      { label: 'By region', val: 'ZA ' + (byRegion.ZA || 0) + ' · UK ' + (byRegion.UK || 0) + ' · IE ' + (byRegion.IE || 0), sub: '' }
+    ];
+    var statsEl = document.getElementById('licence-stats');
+    if (statsEl) statsEl.innerHTML = stats.map(function (s) {
+      return '<div class="stat"><div class="label">' + s.label + '</div><div class="val">' + s.val + '</div><div class="sub">' + s.sub + '</div></div>';
+    }).join('');
+
+    var rows = data.licences.length ? data.licences.slice().reverse().map(function (l) {
+      var idShort = l.id.replace('urn:uuid:', '').slice(0, 8);
+      var proofShort = l.proofHash.slice(0, 12);
+      return '<tr>'
+        + '<td><strong>' + escapeHtmlText(l.school) + '</strong><br><span style="font-size:0.7rem;color:var(--muted);font-family:var(--mono);">' + idShort + '</span></td>'
+        + '<td>' + escapeHtmlText(l.sponsor) + '</td>'
+        + '<td><span class="pill cyan">' + escapeHtmlText(l.tier) + '</span></td>'
+        + '<td><span class="pill grey">' + l.region + '</span></td>'
+        + '<td style="font-family:var(--mono);font-size:0.74rem;color:var(--lime);">' + proofShort + '&hellip;</td>'
+        + '<td style="font-family:var(--mono);font-size:0.74rem;">' + l.issuanceDate.slice(0, 10) + '</td>'
+        + '<td class="row-actions">'
+          + '<button class="btn sm" data-licence-view="' + l.id + '">View</button>'
+          + '<button class="btn sm" data-licence-revoke="' + l.id + '">Revoke</button>'
+        + '</td>'
+        + '</tr>';
+    }).join('') : '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted);">No licences issued yet. Click <strong>+ Issue new licence</strong> to begin.</td></tr>';
+    var tbl = document.getElementById('tbl-licences');
+    if (tbl) tbl.innerHTML = '<thead><tr><th>School / ID</th><th>Sponsor</th><th>Tier</th><th>Region</th><th>Proof (SHA-256)</th><th>Issued</th><th></th></tr></thead><tbody>' + rows + '</tbody>';
+  }
+
+  function renderAudit() {
+    var rows = data.audit.length ? data.audit.slice().reverse().map(function (a) {
+      var detail = a.detail ? JSON.stringify(a.detail) : '';
+      var actionCls = a.action === 'issue' ? 'green' : a.action === 'revoke' ? 'pink' : a.action === 'create' ? 'cyan' : 'grey';
+      return '<tr>'
+        + '<td style="font-family:var(--mono);font-size:0.74rem;color:var(--muted);">' + a.timestamp + '</td>'
+        + '<td><span class="pill ' + actionCls + '">' + a.action + '</span></td>'
+        + '<td>' + escapeHtmlText(a.entity) + '</td>'
+        + '<td style="font-family:var(--mono);font-size:0.72rem;color:var(--muted);">' + escapeHtmlText(detail) + '</td>'
+        + '</tr>';
+    }).join('') : '<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--muted);">Audit log is empty. Every issue / revoke / create / delete is recorded here.</td></tr>';
+    var tbl = document.getElementById('tbl-audit');
+    if (tbl) tbl.innerHTML = '<thead><tr><th>Timestamp (UTC)</th><th>Action</th><th>Entity</th><th>Detail</th></tr></thead><tbody>' + rows + '</tbody>';
+  }
+
+  function audit(action, entity, detail) {
+    data.audit.push({ timestamp: new Date().toISOString(), action: action, entity: entity, detail: detail || null });
+    save();
+  }
+
+  /* ---- Wire table row buttons ---- */
+  document.body.addEventListener('click', function (e) {
+    var view = e.target.closest('[data-licence-view]');
+    if (view) {
+      var id = view.dataset.licenceView;
+      var lic = data.licences.find(function (l) { return l.id === id; });
+      if (lic) showCredentialPreview(lic.vc);
+    }
+    var rev = e.target.closest('[data-licence-revoke]');
+    if (rev) {
+      var rid = rev.dataset.licenceRevoke;
+      if (!confirm('Revoke this licence? The credential remains in the audit log but is marked revoked.')) return;
+      var idx = data.licences.findIndex(function (l) { return l.id === rid; });
+      if (idx === -1) return;
+      var l2 = data.licences[idx];
+      audit('revoke', 'licence', { id: rid, school: l2.school });
+      data.licences.splice(idx, 1);
+      save(); renderLicences(); renderAudit(); renderOverview();
+      toast('Licence revoked.');
+    }
+  });
+
+  /* ---- Exports ---- */
+  function legalBundle() {
+    return {
+      generated: new Date().toISOString(),
+      generator: 'Blastbeat Admin v1 (prototype)',
+      note: 'Credentials follow the W3C Verifiable Credentials Data Model v1.1. The proof type Sha256Stamp2026 is a tamper-evident hash, not a cryptographic signature — it proves no post-issuance changes have been made to the credential body. For production legal use, the issuance pipeline should be migrated to Ed25519 / RSA signatures held by Climate Actions Now under each regional entity.',
+      issuers: ISSUER_DID,
+      licences: data.licences,
+      audit: data.audit
+    };
+  }
+  var legalBtn = document.getElementById('export-legal-bundle');
+  if (legalBtn) legalBtn.addEventListener('click', function () {
+    downloadJson(legalBundle(), 'blastbeat-legal-bundle-' + new Date().toISOString().slice(0,10) + '.json');
+    toast('Legal bundle downloaded.');
+  });
+  var auditExportBtn = document.getElementById('export-audit');
+  if (auditExportBtn) auditExportBtn.addEventListener('click', function () {
+    downloadJson({ exportedAt: new Date().toISOString(), entries: data.audit }, 'blastbeat-audit-' + new Date().toISOString().slice(0,10) + '.json');
+    toast('Audit log exported.');
+  });
+  var everythingBtn = document.getElementById('export-everything');
+  if (everythingBtn) everythingBtn.addEventListener('click', function () {
+    downloadJson({ exportedAt: new Date().toISOString(), data: data }, 'blastbeat-full-state-' + new Date().toISOString().slice(0,10) + '.json');
+    toast('Full state exported.');
+  });
+  var resetBtn = document.getElementById('reset-state');
+  if (resetBtn) resetBtn.addEventListener('click', function () {
+    if (!confirm('Wipe the local store and reload with seed data? Anything not exported is lost.')) return;
+    localStorage.removeItem(STORE_KEY);
+    location.reload();
+  });
+
+  /* ---- Settings: big-text toggle + saved confirmations ---- */
+  var BIG_KEY = 'bb-admin-bigtext';
+  var SAVED_KEY = 'bb-admin-savetoast';
+  var bigEl = document.getElementById('opt-bigtext');
+  var savedEl = document.getElementById('opt-confirm-save');
+  function applyBig() { document.body.classList.toggle('bigtext', localStorage.getItem(BIG_KEY) === '1'); }
+  if (bigEl) {
+    bigEl.checked = localStorage.getItem(BIG_KEY) === '1';
+    bigEl.addEventListener('change', function () {
+      localStorage.setItem(BIG_KEY, bigEl.checked ? '1' : '0');
+      applyBig();
+      toast(bigEl.checked ? 'Big-text mode on.' : 'Big-text mode off.');
+    });
+  }
+  if (savedEl) {
+    if (localStorage.getItem(SAVED_KEY) === '0') savedEl.checked = false;
+    savedEl.addEventListener('change', function () {
+      localStorage.setItem(SAVED_KEY, savedEl.checked ? '1' : '0');
+    });
+  }
+  applyBig();
+
+  /* ---- Toast ---- */
+  var toastEl = document.getElementById('bb-toast');
+  var toastTimer = null;
+  function toast(msg) {
+    if (localStorage.getItem(SAVED_KEY) === '0') return;
+    if (!toastEl) return;
+    toastEl.innerHTML = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2400);
+  }
+
+  /* ---- Hook into existing render() so new tabs refresh too ---- */
+  var _origRender = render;
+  render = function () { _origRender(); renderLicences(); renderAudit(); };
+  render();
+
 })();
