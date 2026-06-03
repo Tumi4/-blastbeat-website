@@ -47,36 +47,36 @@
 
   var SEED = {
     schools: [
-      { id: 1, name: 'Mitchells Plain Secondary', country: 'South Africa', contact: 'Ms. Adams', status: 'Active', twin: 'Naspers', progress: 65, start: '2026-05-18' },
-      { id: 2, name: 'COSAT, Khayelitsha', country: 'South Africa', contact: 'Mr. Dlamini', status: 'Active', twin: 'Old Mutual', progress: 40, start: '2026-05-18' },
-      { id: 3, name: 'Kigali Heights Academy', country: 'Rwanda', contact: 'Ms. Uwase', status: 'Active', twin: 'Bank of Kigali', progress: 30, start: '2026-05-18' },
-      { id: 4, name: 'Pinelands High', country: 'South Africa', contact: 'Mr. Botha', status: 'Onboarding', twin: 'Woolworths', progress: 10, start: '2026-06-01' },
-      { id: 5, name: 'Gugulethu Comprehensive', country: 'South Africa', contact: 'Ms. Nkosi', status: 'Onboarding', twin: 'Capitec', progress: 5, start: '2026-06-01' },
-      { id: 6, name: 'Green Hills School, Kigali', country: 'Rwanda', contact: 'Mr. Habimana', status: 'Confirmed', twin: 'MTN Rwanda', progress: 0, start: '2026-06-15' },
-      { id: 7, name: 'Belhar High', country: 'South Africa', contact: 'Ms. Petersen', status: 'Awaiting twin', twin: '', progress: 0, start: 'TBC' },
-      { id: 8, name: 'Athlone High', country: 'South Africa', contact: 'Mr. Jacobs', status: 'Awaiting twin', twin: '', progress: 0, start: 'TBC' }
+      { id: 1, _sample: true, name: 'Mitchells Plain Secondary', country: 'South Africa', contact: 'Ms. Adams', status: 'Active', twin: 'Naspers', progress: 65, start: '2026-05-18' },
+      { id: 2, _sample: true, name: 'COSAT, Khayelitsha', country: 'South Africa', contact: 'Mr. Dlamini', status: 'Active', twin: 'Old Mutual', progress: 40, start: '2026-05-18' },
+      { id: 3, _sample: true, name: 'Kigali Heights Academy', country: 'Rwanda', contact: 'Ms. Uwase', status: 'Active', twin: 'Bank of Kigali', progress: 30, start: '2026-05-18' },
+      { id: 4, _sample: true, name: 'Pinelands High', country: 'South Africa', contact: 'Mr. Botha', status: 'Onboarding', twin: 'Woolworths', progress: 10, start: '2026-06-01' },
+      { id: 5, _sample: true, name: 'Gugulethu Comprehensive', country: 'South Africa', contact: 'Ms. Nkosi', status: 'Onboarding', twin: 'Capitec', progress: 5, start: '2026-06-01' },
+      { id: 6, _sample: true, name: 'Green Hills School, Kigali', country: 'Rwanda', contact: 'Mr. Habimana', status: 'Confirmed', twin: 'MTN Rwanda', progress: 0, start: '2026-06-15' },
+      { id: 7, _sample: true, name: 'Belhar High', country: 'South Africa', contact: 'Ms. Petersen', status: 'Awaiting twin', twin: '', progress: 0, start: 'TBC' },
+      { id: 8, _sample: true, name: 'Athlone High', country: 'South Africa', contact: 'Mr. Jacobs', status: 'Awaiting twin', twin: '', progress: 0, start: 'TBC' }
     ],
     sponsors: [
-      { id: 1, company: 'Naspers', tier: 'Twin (1 school)', value: 1250, twin: 'Mitchells Plain Secondary', status: 'Funded', contact: 'csr@naspers.com' },
-      { id: 2, company: 'Old Mutual', tier: 'Twin (1 school)', value: 1250, twin: 'COSAT, Khayelitsha', status: 'Funded', contact: 'esg@oldmutual.com' },
-      { id: 3, company: 'Bank of Kigali', tier: 'Twin (1 school)', value: 1250, twin: 'Kigali Heights Academy', status: 'Funded', contact: 'impact@bk.rw' },
-      { id: 4, company: 'Woolworths', tier: 'Twin (1 school)', value: 1250, twin: 'Pinelands High', status: 'Invoiced', contact: 'gooddifference@woolworths.co.za' },
-      { id: 5, company: 'Capitec', tier: 'Twin (1 school)', value: 1250, twin: 'Gugulethu Comprehensive', status: 'Invoiced', contact: 'sed@capitec.co.za' },
-      { id: 6, company: 'MTN Rwanda', tier: 'Twin (1 school)', value: 1250, twin: 'Green Hills School, Kigali', status: 'Pledged', contact: 'foundation@mtn.rw' }
+      { id: 1, _sample: true, company: 'Naspers', tier: 'Twin (1 school)', value: 1250, twin: 'Mitchells Plain Secondary', status: 'Funded', contact: 'csr@naspers.com' },
+      { id: 2, _sample: true, company: 'Old Mutual', tier: 'Twin (1 school)', value: 1250, twin: 'COSAT, Khayelitsha', status: 'Funded', contact: 'esg@oldmutual.com' },
+      { id: 3, _sample: true, company: 'Bank of Kigali', tier: 'Twin (1 school)', value: 1250, twin: 'Kigali Heights Academy', status: 'Funded', contact: 'impact@bk.rw' },
+      { id: 4, _sample: true, company: 'Woolworths', tier: 'Twin (1 school)', value: 1250, twin: 'Pinelands High', status: 'Invoiced', contact: 'gooddifference@woolworths.co.za' },
+      { id: 5, _sample: true, company: 'Capitec', tier: 'Twin (1 school)', value: 1250, twin: 'Gugulethu Comprehensive', status: 'Invoiced', contact: 'sed@capitec.co.za' },
+      { id: 6, _sample: true, company: 'MTN Rwanda', tier: 'Twin (1 school)', value: 1250, twin: 'Green Hills School, Kigali', status: 'Pledged', contact: 'foundation@mtn.rw' }
     ],
     partners: [
-      { id: 1, name: 'Lerato M.', type: 'Affiliate', referred: 4, signed: 3, owed: 1125, status: 'Active', link: 'bb.education/r/lerato' },
-      { id: 2, name: 'Mr. Naidoo (teacher)', type: 'Ambassador', referred: 2, signed: 2, owed: 150, status: 'Active', link: 'bb.education/r/naidoo' },
-      { id: 3, name: 'EduConsult Africa', type: 'Affiliate', referred: 9, signed: 6, owed: 2250, status: 'Active', link: 'bb.education/r/educonsult' },
-      { id: 4, name: 'Thandi (alumna)', type: 'Ambassador', referred: 5, signed: 4, owed: 300, status: 'Active', link: 'bb.education/r/thandi' },
-      { id: 5, name: 'Parent — J. Smit', type: 'Referral', referred: 1, signed: 1, owed: 100, status: 'Payout due', link: 'bb.education/r/jsmit' }
+      { id: 1, _sample: true, name: 'Lerato M.', type: 'Affiliate', referred: 4, signed: 3, owed: 1125, status: 'Active', link: 'bb.education/r/lerato' },
+      { id: 2, _sample: true, name: 'Mr. Naidoo (teacher)', type: 'Ambassador', referred: 2, signed: 2, owed: 150, status: 'Active', link: 'bb.education/r/naidoo' },
+      { id: 3, _sample: true, name: 'EduConsult Africa', type: 'Affiliate', referred: 9, signed: 6, owed: 2250, status: 'Active', link: 'bb.education/r/educonsult' },
+      { id: 4, _sample: true, name: 'Thandi (alumna)', type: 'Ambassador', referred: 5, signed: 4, owed: 300, status: 'Active', link: 'bb.education/r/thandi' },
+      { id: 5, _sample: true, name: 'Parent — J. Smit', type: 'Referral', referred: 1, signed: 1, owed: 100, status: 'Payout due', link: 'bb.education/r/jsmit' }
     ],
     leads: [
-      { id: 1, name: 'Heather Adams', org: 'Mitchells Plain Secondary', type: 'School', source: 'apply form', date: '2026-05-12', status: 'Converted' },
-      { id: 2, name: 'CSR Team', org: 'Naspers', type: 'Sponsor', source: '2winaid', date: '2026-05-13', status: 'Converted' },
-      { id: 3, name: 'EduConsult Africa', org: 'EduConsult', type: 'Affiliate', source: 'ambassadors page', date: '2026-05-14', status: 'Active' },
-      { id: 4, name: 'Coach Mbeki', org: 'Soweto FC', type: 'Sports Club', source: 'contact form', date: '2026-05-15', status: 'New' },
-      { id: 5, name: 'James (parent)', org: '—', type: 'Referral', source: 'referral link', date: '2026-05-16', status: 'New' }
+      { id: 1, _sample: true, name: 'Heather Adams', org: 'Mitchells Plain Secondary', type: 'School', source: 'apply form', date: '2026-05-12', status: 'Converted' },
+      { id: 2, _sample: true, name: 'CSR Team', org: 'Naspers', type: 'Sponsor', source: '2winaid', date: '2026-05-13', status: 'Converted' },
+      { id: 3, _sample: true, name: 'EduConsult Africa', org: 'EduConsult', type: 'Affiliate', source: 'ambassadors page', date: '2026-05-14', status: 'Active' },
+      { id: 4, _sample: true, name: 'Coach Mbeki', org: 'Soweto FC', type: 'Sports Club', source: 'contact form', date: '2026-05-15', status: 'New' },
+      { id: 5, _sample: true, name: 'James (parent)', org: '—', type: 'Referral', source: 'referral link', date: '2026-05-16', status: 'New' }
     ],
     licences: [],
     audit: []
@@ -156,10 +156,14 @@
     return '<button class="btn sm" data-del="' + kind + '" data-id="' + id + '">Remove</button>';
   }
 
+  function sampleTag(rec) {
+    return rec && rec._sample ? ' <span class="pill amber" style="font-size:0.58rem;margin-left:0.4rem;letter-spacing:0.1em;">SAMPLE</span>' : '';
+  }
+
   function renderPilot() {
     var rows = data.schools.map(function (s) {
-      return '<tr>'
-        + '<td><strong>' + s.name + '</strong></td>'
+      return '<tr' + (s._sample ? ' class="sample-row"' : '') + '>'
+        + '<td><strong>' + s.name + '</strong>' + sampleTag(s) + '</td>'
         + '<td>' + s.country + '</td>'
         + '<td>' + (s.twin ? s.twin : '<span class="pill pink">needs twin</span>') + '</td>'
         + '<td>' + pill(s.status) + '</td>'
@@ -173,8 +177,8 @@
 
   function renderSponsors() {
     var rows = data.sponsors.map(function (s) {
-      return '<tr>'
-        + '<td><strong>' + s.company + '</strong><br><span style="font-size:0.72rem;color:var(--muted);">' + s.contact + '</span></td>'
+      return '<tr' + (s._sample ? ' class="sample-row"' : '') + '>'
+        + '<td><strong>' + s.company + '</strong>' + sampleTag(s) + '<br><span style="font-size:0.72rem;color:var(--muted);">' + s.contact + '</span></td>'
         + '<td>' + s.tier + '</td>'
         + '<td style="font-family:var(--head);font-weight:700;">' + eur(s.value) + '</td>'
         + '<td>' + (s.twin || '—') + '</td>'
@@ -201,8 +205,8 @@
 
     var rows = data.partners.map(function (p) {
       var typeCls = p.type === 'Affiliate' ? 'amber' : (p.type === 'Ambassador' ? 'cyan' : 'green');
-      return '<tr>'
-        + '<td><strong>' + p.name + '</strong><br><span style="font-size:0.72rem;color:var(--muted);font-family:var(--mono);">' + p.link + '</span></td>'
+      return '<tr' + (p._sample ? ' class="sample-row"' : '') + '>'
+        + '<td><strong>' + p.name + '</strong>' + sampleTag(p) + '<br><span style="font-size:0.72rem;color:var(--muted);font-family:var(--mono);">' + p.link + '</span></td>'
         + '<td><span class="pill ' + typeCls + '">' + p.type + '</span></td>'
         + '<td>' + p.referred + '</td>'
         + '<td>' + p.signed + '</td>'
@@ -216,8 +220,8 @@
 
   function renderLeads() {
     var rows = data.leads.map(function (l) {
-      return '<tr>'
-        + '<td><strong>' + l.name + '</strong></td>'
+      return '<tr' + (l._sample ? ' class="sample-row"' : '') + '>'
+        + '<td><strong>' + l.name + '</strong>' + sampleTag(l) + '</td>'
         + '<td>' + l.org + '</td>'
         + '<td><span class="pill grey">' + l.type + '</span></td>'
         + '<td style="font-size:0.78rem;color:var(--muted);">' + l.source + '</td>'
@@ -590,9 +594,135 @@
     toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2400);
   }
 
+  /* ---- Samples banner + clearSamples ---- */
+  var DISMISS_KEY = 'bb-admin-samples-dismissed';
+  var bannerEl = document.getElementById('samples-banner');
+  function hasSamples() {
+    return (data.schools || []).some(function (r) { return r._sample; })
+      || (data.sponsors || []).some(function (r) { return r._sample; })
+      || (data.partners || []).some(function (r) { return r._sample; })
+      || (data.leads || []).some(function (r) { return r._sample; });
+  }
+  function updateSamplesBanner() {
+    if (!bannerEl) return;
+    var show = hasSamples() && localStorage.getItem(DISMISS_KEY) !== '1';
+    if (show) bannerEl.removeAttribute('hidden'); else bannerEl.setAttribute('hidden', '');
+  }
+  function clearSamples() {
+    var before = (data.schools.length + data.sponsors.length + data.partners.length + data.leads.length);
+    data.schools = data.schools.filter(function (r) { return !r._sample; });
+    data.sponsors = data.sponsors.filter(function (r) { return !r._sample; });
+    data.partners = data.partners.filter(function (r) { return !r._sample; });
+    data.leads = data.leads.filter(function (r) { return !r._sample; });
+    var after = (data.schools.length + data.sponsors.length + data.partners.length + data.leads.length);
+    var removed = before - after;
+    audit('clear', 'samples', { removed: removed });
+    save();
+    render();
+    updateSamplesBanner();
+    toast('Cleared ' + removed + ' sample record' + (removed === 1 ? '' : 's') + '. Fresh slate.');
+  }
+  var clearBtn = document.getElementById('clear-samples');
+  if (clearBtn) clearBtn.addEventListener('click', function () {
+    if (!confirm('Delete all sample records? This clears the demo schools, sponsors, partners and leads so you can start with your real data.')) return;
+    clearSamples();
+  });
+  var dismissBtn = document.getElementById('dismiss-samples');
+  if (dismissBtn) dismissBtn.addEventListener('click', function () {
+    localStorage.setItem(DISMISS_KEY, '1');
+    updateSamplesBanner();
+  });
+  var settingsClearBtn = document.getElementById('settings-clear-samples');
+  if (settingsClearBtn) settingsClearBtn.addEventListener('click', function () {
+    if (!hasSamples()) { toast('No sample data left to clear.'); return; }
+    if (!confirm('Delete all sample records?')) return;
+    clearSamples();
+  });
+
+  /* ---- Beat tour (6-step guided walkthrough) ---- */
+  var TOUR_KEY = 'bb-admin-tour-done';
+  var tourEl = document.getElementById('beat-tour');
+  var tourTitle = document.getElementById('beat-title');
+  var tourText = document.getElementById('beat-text');
+  var tourStepNum = document.getElementById('beat-step-num');
+  var tourBar = document.getElementById('beat-progress-bar');
+  var tourBack = document.getElementById('beat-back');
+  var tourNext = document.getElementById('beat-next');
+  var tourSkip = document.getElementById('beat-skip');
+  var TOUR_STEPS = [
+    {
+      title: 'Hey Robert, I&rsquo;m Beat.',
+      body: 'I&rsquo;m your dashboard guide. Three minutes &mdash; I&rsquo;ll show you the four things you need today. Tap <strong>Next</strong> when you&rsquo;re ready, or <strong>Skip</strong> if you want to dive in.'
+    },
+    {
+      title: 'Everything you see right now is a sample.',
+      body: 'Every row marked <strong>SAMPLE</strong> &mdash; the orange-striped ones &mdash; is example data. None of it is real. It&rsquo;s there so you can see how the dashboard works.'
+    },
+    {
+      title: 'First step &mdash; clear the samples.',
+      body: 'When you close this tour, click the big gold button at the top: <strong>Clear sample data &rarr;</strong>. That wipes every example so you start with a clean slate. Don&rsquo;t worry &mdash; you can always reset later from Settings.'
+    },
+    {
+      title: 'Issue a real licence.',
+      body: 'Open <strong>Licences</strong> in the left menu, then <strong>+ Issue new licence</strong>. Pick the school, the sponsor, the tier and the region &mdash; I&rsquo;ll build a W3C verifiable credential, hash it (SHA-256), and write it to the audit log. Email or download the JSON straight from the preview.'
+    },
+    {
+      title: 'For your lawyer &mdash; one-click bundle.',
+      body: 'On the <strong>Licences</strong> page, scroll to <strong>Export legal bundle</strong>. That hands your lawyer every credential plus the full audit trail in one file. Tamper with a credential after issuance and the proof breaks &mdash; that&rsquo;s the whole point.'
+    },
+    {
+      title: 'One last thing.',
+      body: 'In <strong>Settings</strong> you can turn on <strong>big text + high-contrast mode</strong>, replay this tour any time, and export everything. If anything ever feels off, WhatsApp Tumi. You&rsquo;ve got this.'
+    }
+  ];
+  var tourIdx = 0;
+  function renderTourStep() {
+    var s = TOUR_STEPS[tourIdx];
+    tourTitle.innerHTML = s.title;
+    tourText.innerHTML = s.body;
+    tourStepNum.textContent = (tourIdx + 1) + ' / ' + TOUR_STEPS.length;
+    tourBar.style.width = ((tourIdx + 1) / TOUR_STEPS.length * 100) + '%';
+    if (tourIdx === 0) tourBack.setAttribute('hidden', ''); else tourBack.removeAttribute('hidden');
+    tourNext.innerHTML = (tourIdx === TOUR_STEPS.length - 1) ? 'Got it &mdash; let&rsquo;s go' : 'Next &rarr;';
+  }
+  function openTour() {
+    tourIdx = 0;
+    renderTourStep();
+    tourEl.removeAttribute('hidden');
+  }
+  function closeTour() {
+    tourEl.setAttribute('hidden', '');
+    localStorage.setItem(TOUR_KEY, '1');
+  }
+  if (tourNext) tourNext.addEventListener('click', function () {
+    if (tourIdx === TOUR_STEPS.length - 1) { closeTour(); return; }
+    tourIdx++;
+    renderTourStep();
+  });
+  if (tourBack) tourBack.addEventListener('click', function () {
+    if (tourIdx === 0) return;
+    tourIdx--;
+    renderTourStep();
+  });
+  if (tourSkip) tourSkip.addEventListener('click', closeTour);
+  var restartBtn = document.getElementById('restart-tour');
+  if (restartBtn) restartBtn.addEventListener('click', openTour);
+  var settingsRestartBtn = document.getElementById('settings-restart-tour');
+  if (settingsRestartBtn) settingsRestartBtn.addEventListener('click', openTour);
+
   /* ---- Hook into existing render() so new tabs refresh too ---- */
   var _origRender = render;
-  render = function () { _origRender(); renderLicences(); renderAudit(); };
+  render = function () { _origRender(); renderLicences(); renderAudit(); updateSamplesBanner(); };
   render();
+
+  /* ---- Auto-launch tour on first unlock ---- */
+  function maybeAutoLaunchTour() {
+    if (localStorage.getItem(TOUR_KEY) === '1') return;
+    if (gate && !gate.classList.contains('hidden')) return;
+    setTimeout(openTour, 600);
+  }
+  var _origUnlock = unlock;
+  unlock = function () { _origUnlock(); maybeAutoLaunchTour(); };
+  if (sessionStorage.getItem(SESSION_KEY) === '1') maybeAutoLaunchTour();
 
 })();

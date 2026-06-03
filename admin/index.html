@@ -136,6 +136,83 @@
     body.bigtext .field input, body.bigtext .field select, body.bigtext .field textarea { font-size: 1.05rem; padding: 0.85rem 1rem; }
     body.bigtext { color: #fff; }
     body.bigtext .muted, body.bigtext .stat .sub, body.bigtext .stat .label { color: rgba(255,255,255,0.78); }
+
+    /* SAMPLE rows — visibly dimmed + striped */
+    .sample-row { background: repeating-linear-gradient(45deg, rgba(255,107,53,0.04) 0 10px, transparent 10px 20px); }
+    .sample-row strong { color: rgba(255,255,255,0.78); }
+    .sample-row td { color: rgba(255,255,255,0.62); }
+    .pill.amber { background: rgba(255,107,53,0.18); color: var(--orange); border: 1px solid rgba(255,107,53,0.4); }
+
+    /* SAMPLES BANNER — sticky top, gold, dismissible */
+    #samples-banner {
+      position: sticky; top: 0; z-index: 80;
+      background: linear-gradient(135deg, #E8C36B, #C9A24B);
+      color: #1a1206; padding: 0.9rem 1.4rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+      flex-wrap: wrap;
+    }
+    #samples-banner[hidden] { display: none; }
+    #samples-banner strong { font-weight: 800; }
+    #samples-banner .row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    #samples-banner .btn-clear {
+      background: #1a1206; color: #E8C36B; border: none; padding: 0.55rem 1.1rem; border-radius: 8px;
+      font-family: var(--font); font-weight: 800; font-size: 0.86rem; cursor: pointer;
+      letter-spacing: 0.04em; transition: transform .2s, background .2s;
+    }
+    #samples-banner .btn-clear:hover { transform: translateY(-1px); background: #2a1c08; }
+    #samples-banner .btn-tour {
+      background: rgba(26,18,6,0.18); border: 1px solid rgba(26,18,6,0.45); color: #1a1206;
+      padding: 0.45rem 0.9rem; border-radius: 8px; font-weight: 700; font-size: 0.78rem; cursor: pointer;
+    }
+    #samples-banner .btn-tour:hover { background: rgba(26,18,6,0.3); }
+    #samples-banner .x { background: transparent; border: none; color: #1a1206; font-size: 1.2rem; line-height: 1; cursor: pointer; padding: 0 0.4rem; opacity: 0.6; }
+    #samples-banner .x:hover { opacity: 1; }
+
+    /* BEAT TOUR */
+    #beat-tour {
+      position: fixed; inset: 0; z-index: 200;
+      background: radial-gradient(ellipse at center, rgba(99,102,241,0.16), rgba(8,9,16,0.92));
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+      animation: fade .3s ease;
+    }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    #beat-tour[hidden] { display: none; }
+    .beat-card {
+      width: 100%; max-width: 480px;
+      background: linear-gradient(180deg, #11162a 0%, #0F1424 100%);
+      border: 1px solid rgba(232,195,107,0.3);
+      border-radius: 22px; padding: 0;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(99,102,241,0.2);
+      overflow: hidden;
+      animation: rise .35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes rise { from { transform: translateY(20px) scale(0.98); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+    .beat-head { display: flex; align-items: center; gap: 0.85rem; padding: 1.4rem 1.5rem 0; }
+    .beat-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+      box-shadow: 0 8px 24px rgba(99,102,241,0.45);
+      flex-shrink: 0;
+    }
+    .beat-id { flex: 1; }
+    .beat-id .name { font-family: var(--head); font-weight: 800; font-size: 1.1rem; color: #fff; }
+    .beat-id .role { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--lime); margin-top: 0.2rem; }
+    .beat-step-num { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; color: var(--muted); }
+    .beat-body { padding: 1.25rem 1.5rem 0; }
+    .beat-body h3 { font-family: var(--head); font-weight: 800; font-size: 1.3rem; line-height: 1.2; color: #fff; margin: 0 0 0.5rem; }
+    .beat-body p { font-size: 0.95rem; line-height: 1.65; color: rgba(255,255,255,0.85); margin: 0 0 0.85rem; }
+    .beat-body p strong { color: var(--lime); }
+    .beat-progress { height: 4px; background: rgba(255,255,255,0.06); margin: 1.25rem 0 0; }
+    .beat-progress > div { height: 100%; background: linear-gradient(90deg, var(--purple), var(--pink)); transition: width .35s ease; }
+    .beat-foot { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem 1.4rem; gap: 0.6rem; flex-wrap: wrap; }
+    .beat-foot .btn { font-size: 0.86rem; padding: 0.65rem 1.1rem; }
+    .beat-foot .btn.primary { padding: 0.7rem 1.4rem; font-size: 0.9rem; }
+    body.bigtext .beat-body h3 { font-size: 1.5rem; }
+    body.bigtext .beat-body p { font-size: 1.05rem; }
   </style>
 </head>
 <body>
@@ -173,6 +250,16 @@
     </aside>
 
     <main class="main">
+      <div id="samples-banner" hidden>
+        <div class="row">
+          <span>&#11088; <strong>Heads up &mdash; everything here is sample data</strong> so you can see how it looks. <strong>First step:</strong> clear it and start fresh.</span>
+        </div>
+        <div class="row">
+          <button class="btn-tour" id="restart-tour">&#128173; Beat tour</button>
+          <button class="btn-clear" id="clear-samples">Clear sample data &rarr;</button>
+          <button class="x" id="dismiss-samples" aria-label="Hide this banner">&times;</button>
+        </div>
+      </div>
       <div class="demo-banner">
         <strong>Prototype mode.</strong> Data is stored locally in this browser (localStorage) with seed records you can edit. Connecting it to live Netlify form submissions + a Supabase backend with real login is the next step &mdash; see the note at the bottom of Overview.
       </div>
@@ -275,6 +362,14 @@
           <p style="color:var(--muted); font-size:0.86rem; line-height:1.65; margin-bottom: 1rem;">Full snapshot of every record in this browser. Use this to migrate to Trixta OS, hand to your lawyer, or back up before a major change.</p>
           <button class="btn primary" id="export-everything">&#128229; Export full state (.json)</button>
         </div>
+        <div class="card">
+          <h3>Onboarding</h3>
+          <p style="color:var(--muted); font-size:0.86rem; line-height:1.65; margin-bottom: 1rem;">Run Beat&rsquo;s guided tour again any time, or clear all sample records in one click.</p>
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+            <button class="btn primary" id="settings-restart-tour">&#128173; Start Beat tour</button>
+            <button class="btn" id="settings-clear-samples">&#129529; Clear sample data</button>
+          </div>
+        </div>
         <div class="card" style="border-color: rgba(255,107,53,0.3);">
           <h3 style="color: var(--orange);">Danger zone</h3>
           <p style="color:var(--muted); font-size:0.86rem; line-height:1.65; margin-bottom: 1rem;">Wipes the local store and reloads with seed data. Anything not exported is gone.</p>
@@ -354,8 +449,34 @@
     </div>
   </div>
 
+  <!-- BEAT TOUR -->
+  <div id="beat-tour" hidden role="dialog" aria-modal="true" aria-labelledby="beat-title">
+    <div class="beat-card">
+      <div class="beat-head">
+        <div class="beat-avatar">&#127908;</div>
+        <div class="beat-id">
+          <div class="name">Beat</div>
+          <div class="role">Your dashboard guide</div>
+        </div>
+        <div class="beat-step-num" id="beat-step-num">1 / 6</div>
+      </div>
+      <div class="beat-body">
+        <h3 id="beat-title">Welcome, Robert.</h3>
+        <p id="beat-text">Quick three-minute tour. I&rsquo;ll show you the four things you need today &mdash; nothing more.</p>
+      </div>
+      <div class="beat-progress"><div id="beat-progress-bar" style="width:16%;"></div></div>
+      <div class="beat-foot">
+        <button type="button" class="btn" id="beat-skip">Skip tour</button>
+        <div style="display:flex; gap:0.5rem;">
+          <button type="button" class="btn" id="beat-back" hidden>&larr; Back</button>
+          <button type="button" class="btn primary" id="beat-next">Next &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- TOAST -->
-  <div id="bb-toast" style="position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(120%);padding:0.85rem 1.5rem;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border-radius:10px;font-weight:600;font-size:0.9rem;box-shadow:0 14px 40px rgba(0,0,0,0.4);z-index:200;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);font-family:var(--font);"></div>
+  <div id="bb-toast" style="position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(120%);padding:0.85rem 1.5rem;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border-radius:10px;font-weight:600;font-size:0.9rem;box-shadow:0 14px 40px rgba(0,0,0,0.4);z-index:250;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);font-family:var(--font);"></div>
 
   <script src="/assets/js/admin.js" defer></script>
 </body>
