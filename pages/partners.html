@@ -31,6 +31,7 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebPage","@id":"https://www.blastbeat.education/pages/partners.html","url":"https://www.blastbeat.education/pages/partners.html","name":"Partner With Blastbeat — Adopt-A-School Sponsorship","description":"Corporate sponsorship packages for Blastbeat Education. Adopt a school, earn BBBEE SED points, and invest in South Africa's youth.","isPartOf":{"@type":"WebSite","url":"https://www.blastbeat.education"}}
   </script>
+  <script src="/assets/js/analytics.js"></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -483,7 +484,7 @@
         </div>
 
         <div class="grid grid-3" style="gap: var(--space-6);">
-          <div class="gradient-border reveal" style="background: linear-gradient(180deg, rgba(20,25,45,0.55), rgba(20,25,45,0.5)), url('/assets/images/bb-event-06.jpg') center/cover no-repeat; padding: var(--space-8); border-radius: var(--radius-xl); position: relative;">
+          <div class="gradient-border reveal" style="background: linear-gradient(180deg, rgba(20,25,45,0.55), rgba(20,25,45,0.5)), url('/assets/images/bb-event-06.webp') center/cover no-repeat; padding: var(--space-8); border-radius: var(--radius-xl); position: relative;">
             <div style="position: absolute; top: -1px; left: 50%; transform: translateX(-50%);">
               <span class="neo-tag" style="font-size: var(--text-xs);">&#11088; Most Popular</span>
             </div>
@@ -522,7 +523,7 @@
             </div>
           </div>
 
-          <div class="gradient-border reveal reveal-delay-2" style="background: linear-gradient(180deg, rgba(20,25,45,0.55), rgba(20,25,45,0.5)), url('/assets/images/bb-activity-01.jpeg') center/cover no-repeat; padding: var(--space-8); border-radius: var(--radius-xl);">
+          <div class="gradient-border reveal reveal-delay-2" style="background: linear-gradient(180deg, rgba(20,25,45,0.55), rgba(20,25,45,0.5)), url('/assets/images/bb-activity-01.webp') center/cover no-repeat; padding: var(--space-8); border-radius: var(--radius-xl);">
             <div style="text-align: center; margin-bottom: var(--space-6);">
               <span style="font-size: 3rem;">&#127793;</span>
               <h3 style="color: white; font-size: var(--text-2xl); margin-bottom: var(--space-2);">Community Partner</h3>
@@ -652,7 +653,7 @@
 
           <!-- Form Side -->
           <div class="glass-card reveal reveal-delay-1" style="padding: var(--space-8);">
-            <form name="sponsorship-enquiry" method="POST" data-netlify="true" action="/thank-you.html">
+            <form name="sponsorship-enquiry" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/thank-you.html">
               <input type="hidden" name="form-name" value="sponsorship-enquiry">
               <input type="hidden" name="display-currency" id="display-currency-partners" value="">
               <p style="display:none"><label>Don&rsquo;t fill this out: <input name="bot-field"></label></p>

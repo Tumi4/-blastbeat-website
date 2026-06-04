@@ -325,6 +325,7 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebPage","@id":"https://www.blastbeat.education/pages/apply.html","url":"https://www.blastbeat.education/pages/apply.html","name":"Apply for Blastbeat — School Registration","description":"Register your school for the Blastbeat ESE programme. Free for the first 12 founding schools. Full teacher training and competition access included.","isPartOf":{"@type":"WebSite","url":"https://www.blastbeat.education"},"potentialAction":{"@type":"RegisterAction","target":"https://www.blastbeat.education/pages/apply.html","name":"Apply for Blastbeat"}}
   </script>
+  <script src="/assets/js/analytics.js"></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -480,7 +481,7 @@
         </div>
 
         <div class="apply-form-wrap">
-          <form name="school-application" method="POST" data-netlify="true" action="/thank-you.html" novalidate>
+          <form name="school-application" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/thank-you.html" novalidate>
             <input type="hidden" name="form-name" value="school-application">
               <input type="hidden" name="display-currency" id="display-currency-apply" value="">
             <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>

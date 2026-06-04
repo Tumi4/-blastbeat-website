@@ -1,6 +1,14 @@
-/* Blastbeat Cookie Consent */
+/* Blastbeat Cookie Consent — GDPR / POPIA / UK GDPR compliant */
 (function () {
-  if (localStorage.getItem('bb-cookie-consent')) return;
+  var STORAGE_KEY = 'bb-cookie-consent';
+  try {
+    if (localStorage.getItem(STORAGE_KEY)) return;
+  } catch (e) { /* private mode */ }
+
+  function fireConsent(choice) {
+    try { localStorage.setItem(STORAGE_KEY, choice); } catch (e) {}
+    window.dispatchEvent(new CustomEvent('bb:consent', { detail: { choice: choice } }));
+  }
 
   var banner = document.createElement('div');
   banner.id = 'cookie-banner';
@@ -8,17 +16,22 @@
   banner.setAttribute('aria-label', 'Cookie consent');
   banner.innerHTML =
     '<div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">' +
-      '<p style="margin:0;font-size:0.875rem;color:rgba(255,255,255,0.8);flex:1;min-width:200px;">' +
-        '&#127850; We use cookies to improve your experience on blastbeat.education.' +
+      '<p style="margin:0;font-size:0.875rem;color:rgba(255,255,255,0.85);flex:1;min-width:200px;line-height:1.5;">' +
+        '&#127850; We use cookies to measure traffic and improve your experience. Analytics &amp; ad cookies are off until you accept.' +
       '</p>' +
-      '<div style="display:flex;gap:0.75rem;align-items:center;flex-shrink:0;">' +
-        '<a href="/pages/privacy-policy.html" style="font-size:0.8rem;color:rgba(255,255,255,0.5);text-decoration:underline;">Learn More</a>' +
+      '<div style="display:flex;gap:0.6rem;align-items:center;flex-shrink:0;flex-wrap:wrap;">' +
+        '<a href="/pages/privacy-policy.html" style="font-size:0.78rem;color:rgba(255,255,255,0.55);text-decoration:underline;">Privacy</a>' +
+        '<button id="cookie-reject" style="' +
+          'background:transparent;color:rgba(255,255,255,0.85);' +
+          'border:1px solid rgba(255,255,255,0.25);padding:9px 18px;border-radius:999px;' +
+          'font-weight:600;font-size:0.82rem;cursor:pointer;font-family:inherit;' +
+        '">Reject</button>' +
         '<button id="cookie-accept" style="' +
           'background:linear-gradient(135deg,#6366F1,#A855F7,#FF2D78);' +
-          'color:white;border:none;padding:10px 24px;border-radius:999px;' +
-          'font-weight:700;font-size:0.85rem;cursor:pointer;' +
+          'color:white;border:none;padding:10px 22px;border-radius:999px;' +
+          'font-weight:700;font-size:0.85rem;cursor:pointer;font-family:inherit;' +
           'transition:transform 0.2s ease,box-shadow 0.2s ease;' +
-        '">Accept All</button>' +
+        '">Accept</button>' +
       '</div>' +
     '</div>';
 
@@ -28,21 +41,22 @@
     'border-radius:16px;padding:1rem 1.25rem;z-index:9999;' +
     'box-shadow:0 20px 60px rgba(0,0,0,0.4);' +
     'transform:translateY(120%);transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);' +
-    'max-width:720px;margin:0 auto;backdrop-filter:blur(20px);';
+    'max-width:760px;margin:0 auto;backdrop-filter:blur(20px);';
 
   document.body.appendChild(banner);
 
   requestAnimationFrame(function () {
-    requestAnimationFrame(function () {
-      banner.style.transform = 'translateY(0)';
-    });
+    requestAnimationFrame(function () { banner.style.transform = 'translateY(0)'; });
   });
 
-  document.getElementById('cookie-accept').addEventListener('click', function () {
-    localStorage.setItem('bb-cookie-consent', 'accepted');
+  function dismiss(choice) {
+    fireConsent(choice);
     banner.style.transform = 'translateY(120%)';
     setTimeout(function () { banner.remove(); }, 500);
-  });
+  }
+
+  document.getElementById('cookie-accept').addEventListener('click', function () { dismiss('accepted'); });
+  document.getElementById('cookie-reject').addEventListener('click', function () { dismiss('rejected'); });
 
   var btn = document.getElementById('cookie-accept');
   btn.addEventListener('mouseenter', function () {
