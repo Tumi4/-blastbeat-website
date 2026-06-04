@@ -326,6 +326,8 @@
   {"@context":"https://schema.org","@type":"WebPage","@id":"https://www.blastbeat.education/pages/apply.html","url":"https://www.blastbeat.education/pages/apply.html","name":"Apply for Blastbeat — School Registration","description":"Register your school for the Blastbeat ESE programme. Free for the first 12 founding schools. Full teacher training and competition access included.","isPartOf":{"@type":"WebSite","url":"https://www.blastbeat.education"},"potentialAction":{"@type":"RegisterAction","target":"https://www.blastbeat.education/pages/apply.html","name":"Apply for Blastbeat"}}
   </script>
   <script src="/assets/js/analytics.js"></script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.blastbeat.education/"},{"@type":"ListItem","position":2,"name":"Apply","item":"https://www.blastbeat.education/pages/apply.html"}]}</script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -877,7 +879,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="/" class="footer-logo">
-            <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo">
+            <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" loading="lazy">
             <span>BLASTBEAT</span>
           </a>
           <p>Entrepreneurial skills education for youth aged 14–21. Empowering the next generation of African business leaders since 2003.</p>
@@ -934,6 +936,11 @@
         var cur = (window.BBCurrency && window.BBCurrency.get && window.BBCurrency.get()) || localStorage.getItem('bb_currency') || '';
         var f = form.querySelector('input[name="display-currency"]');
         if (f) f.value = cur;
+        if (window.bbTrack) {
+          var school = (form.querySelector('input[name="school-name"]') || {}).value || '';
+          var country = (form.querySelector('select[name="country"], input[name="country"]') || {}).value || '';
+          window.bbTrack('apply_completed', { school_name: school, country: country });
+        }
       } catch (e) {}
     });
   })();

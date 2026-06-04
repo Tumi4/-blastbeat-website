@@ -30,6 +30,8 @@
   {"@context":"https://schema.org","@type":"ContactPage","@id":"https://www.blastbeat.education/pages/contact.html","url":"https://www.blastbeat.education/pages/contact.html","name":"Contact Blastbeat Education","description":"Get in touch with the Blastbeat Education team for school partnerships, sponsorship enquiries, or general questions.","isPartOf":{"@type":"WebSite","url":"https://www.blastbeat.education"}}
   </script>
   <script src="/assets/js/analytics.js"></script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.blastbeat.education/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://www.blastbeat.education/pages/contact.html"}]}</script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -204,6 +206,10 @@
                         var cur = (window.BBCurrency && window.BBCurrency.get && window.BBCurrency.get()) || localStorage.getItem('bb_currency') || '';
                         var f = document.getElementById('display-currency');
                         if (f) f.value = cur;
+                        if (window.bbTrack) {
+                          var topic = (form.querySelector('select[name="topic"], input[name="topic"]') || {}).value || '';
+                          window.bbTrack('contact_submitted', { topic: topic });
+                        }
                       } catch (e) {}
                     });
                   }
@@ -273,17 +279,17 @@
         </div>
         <div class="grid grid-3" style="gap: var(--space-5);">
           <a href="/pages/for-schools.html" class="glass-card reveal" style="padding: var(--space-7); text-decoration: none; display: block;">
-            <img src="/assets/images/icons/icon-pitch.svg" alt="" aria-hidden="true" width="44" height="44" style="filter: drop-shadow(0 0 6px rgba(0,245,255,0.3)) brightness(0) invert(1); margin-bottom: var(--space-4); display: block;">
+            <img src="/assets/images/icons/icon-pitch.svg" alt="" aria-hidden="true" width="44" height="44" style="filter: drop-shadow(0 0 6px rgba(0,245,255,0.3)) brightness(0) invert(1); margin-bottom: var(--space-4); display: block;" loading="lazy">
             <h3 style="color: white; font-weight: 700; margin-bottom: var(--space-2);">School Information</h3>
             <p style="color: rgba(255,255,255,0.6); font-size: var(--text-sm); margin: 0;">Curriculum alignment, costs, teacher training, and how to get started.</p>
           </a>
           <a href="/pages/apply.html" class="glass-card reveal reveal-delay-1" style="padding: var(--space-7); text-decoration: none; display: block; border-color: rgba(99,102,241,0.3);">
-            <img src="/assets/images/icons/icon-events.svg" alt="" aria-hidden="true" width="44" height="44" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.4)) brightness(0) invert(1); margin-bottom: var(--space-4); display: block;">
+            <img src="/assets/images/icons/icon-events.svg" alt="" aria-hidden="true" width="44" height="44" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.4)) brightness(0) invert(1); margin-bottom: var(--space-4); display: block;" loading="lazy">
             <h3 style="color: white; font-weight: 700; margin-bottom: var(--space-2);">Apply for Your School</h3>
             <p style="color: rgba(255,255,255,0.6); font-size: var(--text-sm); margin: 0;">Ready to bring Blastbeat to your students? Start the application now.</p>
           </a>
           <a href="/pages/partners.html" class="glass-card reveal reveal-delay-2" style="padding: var(--space-7); text-decoration: none; display: block; border-color: rgba(255,45,120,0.3);">
-            <img src="/assets/images/icons/icon-finance.svg" alt="" aria-hidden="true" width="44" height="44" style="filter: drop-shadow(0 0 6px rgba(255,45,120,0.4)) brightness(0) invert(1); margin-bottom: var(--space-4); display: block;">
+            <img src="/assets/images/icons/icon-finance.svg" alt="" aria-hidden="true" width="44" height="44" style="filter: drop-shadow(0 0 6px rgba(255,45,120,0.4)) brightness(0) invert(1); margin-bottom: var(--space-4); display: block;" loading="lazy">
             <h3 style="color: white; font-weight: 700; margin-bottom: var(--space-2);">Corporate Sponsorship</h3>
             <p style="color: rgba(255,255,255,0.6); font-size: var(--text-sm); margin: 0;">Adopt a school, sponsor a licence, and get verified ESG impact.</p>
           </a>

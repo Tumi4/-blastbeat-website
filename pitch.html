@@ -232,6 +232,8 @@
     }
   </style>
   <script src="/assets/js/analytics.js"></script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.blastbeat.education/"},{"@type":"ListItem","position":2,"name":"20-School Pilot Pitch","item":"https://www.blastbeat.education/pitch.html"}]}</script>
 </head>
 <body>
 
@@ -358,7 +360,7 @@
 
       <!-- QR -->
       <div class="qr-strip">
-        <img class="qr-img" alt="QR code to this pitch" src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&amp;margin=8&amp;color=1A1206&amp;bgcolor=FFFFFF&amp;data=https%3A%2F%2Fwww.blastbeat.education%2Fpitch.html">
+        <img class="qr-img" alt="QR code to this pitch" src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&amp;margin=8&amp;color=1A1206&amp;bgcolor=FFFFFF&amp;data=https%3A%2F%2Fwww.blastbeat.education%2Fpitch.html" loading="lazy">
         <div>
           <h4>Show this on your phone</h4>
           <p>Across the table, in a queue, after the keynote &mdash; let someone scan straight into the pitch.</p>
@@ -377,6 +379,20 @@
   </section>
 
 </main>
+
+<script>
+  // Fire view_pitch with UTM parameters auto-captured from the URL.
+  (function () {
+    if (!window.bbTrack) return;
+    var p = new URLSearchParams(window.location.search);
+    window.bbTrack('view_pitch', {
+      utm_source: p.get('utm_source') || '(direct)',
+      utm_medium: p.get('utm_medium') || '(none)',
+      utm_campaign: p.get('utm_campaign') || '(none)',
+      utm_content: p.get('utm_content') || ''
+    });
+  })();
+</script>
 
 </body>
 </html>
