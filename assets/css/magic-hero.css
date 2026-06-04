@@ -188,6 +188,38 @@
   transform: translateY(-2px);
 }
 
+/* Audience paths — slim chips below CTAs */
+.bb-magic-paths {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.bb-magic-path {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.05rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.88);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: all 0.2s ease;
+}
+.bb-magic-path:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-1px);
+  color: #fff;
+}
+.bb-magic-path span { font-size: 1rem; line-height: 1; }
+
 /* Stat shelf */
 .bb-magic-stat-shelf {
   position: absolute;

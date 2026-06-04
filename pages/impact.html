@@ -334,7 +334,7 @@
         <div class="text-center" style="margin-bottom: 2.5rem;">
           <span class="neo-tag" style="margin-bottom: 1rem;">interactive &middot; 11 countries</span>
           <h2 class="text-chunky" style="font-size: var(--text-4xl); margin-top: 1rem; color: white;">The global footprint, on the map.</h2>
-          <p style="color: rgba(255,255,255,0.7); font-size: var(--text-lg); max-width: 60ch; margin: 1rem auto 0;">Click any country to see the local chapter, founding year, and students reached. Pan, zoom, explore.</p>
+          <p style="color: rgba(255,255,255,0.7); font-size: var(--text-lg); max-width: 60ch; margin: 1rem auto 0;">Eleven countries since 2003. Hover any chip below for the chapter snapshot &mdash; founding year, status, and students reached.</p>
         </div>
         <div style="position: relative; border-radius: var(--radius-2xl); overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); aspect-ratio: 16/9; min-height: 360px;">
           <!-- Fallback message + lo-fi visual until the Flourish embed is wired -->
@@ -355,8 +355,10 @@
               <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; padding: 4px 10px; border: 1px solid rgba(255,45,120,0.3); color: #FF7BAA; border-radius: 100px;">RW &middot; Rwanda &middot; Active</span>
             </div>
           </div>
-          <!-- Flourish iframe goes here. Replace src="" with the embed URL from flourish.studio. -->
-          <iframe src="" title="Blastbeat global footprint &mdash; 11 countries, 360,000+ students" loading="lazy" frameborder="0" scrolling="no" style="position:absolute;inset:0;width:100%;height:100%;border:none;background:transparent;display:none;" data-flourish-id="footprint-map"></iframe>
+          <!-- Flourish iframe slot: when ready, replace the comment below with
+               <iframe src="https://flo.uri.sh/visualisation/[ID]/embed" ...></iframe>.
+               Leaving a bare src="" causes an extra browser request to the
+               current page, so we omit the element until the embed URL exists. -->
         </div>
         <p style="text-align: center; margin-top: 1rem; font-size: 0.78rem; color: rgba(255,255,255,0.65); font-family: 'IBM Plex Mono', monospace;">Source: Blastbeat chapter ledger, 2003&ndash;2026 cumulative.</p>
       </div>

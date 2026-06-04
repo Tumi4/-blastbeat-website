@@ -36,7 +36,7 @@
     {
       patterns: ['free', 'cost', 'price', 'fee', 'pay', 'money', 'afford', 'licence'],
       reply: "Great news — it's **completely free** for founding schools 🙌\n\nBlastbeat is a registered charity. We're running a founding cohort model: the first 12 schools get full access at no cost, including teacher training, platform, and competition entry.\n\n6 of 12 spots are taken — if your school is interested, now is the time.",
-      chips: ['Apply for a spot', 'What's included?', 'How do I apply?']
+      chips: ['Apply for a spot', "What's included?", 'How do I apply?']
     },
     {
       patterns: ['what\'s included', "what is included", 'included', 'get when', 'what do we get', 'benefits'],
@@ -51,7 +51,7 @@
     {
       patterns: ['caps', 'curriculum', 'aligned', 'official', 'department', 'dbe'],
       reply: "Yes! The Blastbeat curriculum is CAPS-aligned for:\n\n📚 Business Studies\n📚 Economics & Management Sciences (EMS)\n📚 Life Orientation\n📚 Arts & Culture\n\nNo extra lesson time needed — it integrates directly into your existing timetable. HODs can use completion data for reporting.",
-      chips: ['Apply now →', 'What's included?', 'How do I apply?']
+      chips: ['Apply now →', "What's included?", 'How do I apply?']
     },
     {
       patterns: ['age', 'old', 'grade', 'year group', 'who is it for', 'student'],
@@ -71,7 +71,7 @@
     {
       patterns: ['teacher', 'training', 'cpd', 'educator', 'facilitator', 'staff', 'professional development'],
       reply: "Teacher support is central to how Blastbeat works.\n\nAll founding school educators receive:\n🎓 Two days of in-school or virtual onboarding\n🎓 Certified ESE Facilitator status\n🎓 Ongoing virtual CPD workshops\n🎓 Access to lesson resources and support community\n\nNo experience in entrepreneurship needed — we train your team from scratch.",
-      chips: ['Apply for your school', 'What's included?', 'Is it free?']
+      chips: ['Apply for your school', "What's included?", 'Is it free?']
     },
     {
       patterns: ['roles', 'role', 'job', 'team', 'what can i do', 'position'],
