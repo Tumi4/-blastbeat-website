@@ -371,6 +371,11 @@
             <button class="btn" id="settings-clear-samples">&#129529; Clear sample data</button>
           </div>
         </div>
+        <div class="card">
+          <h3>Partner kits</h3>
+          <p style="color:var(--muted); font-size:0.86rem; line-height:1.65; margin-bottom: 1rem;">One CSV with every partner&rsquo;s name, email, referral code and personalised resources URL. Use this for accounting, board reports, or to bulk-resend welcome emails from your mail client.</p>
+          <button class="btn primary" id="export-partner-kits">&#128221; Export partner kits (.csv)</button>
+        </div>
         <div class="card" style="border-color: rgba(255,107,53,0.3);">
           <h3 style="color: var(--orange);">Danger zone</h3>
           <p style="color:var(--muted); font-size:0.86rem; line-height:1.65; margin-bottom: 1rem;">Wipes the local store and reloads with seed data. Anything not exported is gone.</p>
@@ -423,6 +428,11 @@
             <input name="validFrom" id="f-from" type="date" required>
           </label>
         </div>
+        <label class="field">
+          <span>Partner referral (optional &mdash; if a reseller closed this)</span>
+          <input name="partner" id="f-partner" type="text" list="partners-ref-datalist" placeholder="Start typing the partner&rsquo;s name or referral code" autocomplete="off">
+          <datalist id="partners-ref-datalist"></datalist>
+        </label>
         <label class="field">
           <span>Notes (optional, internal)</span>
           <textarea name="notes" id="f-notes" rows="2" placeholder="Anything you want preserved on the audit record"></textarea>

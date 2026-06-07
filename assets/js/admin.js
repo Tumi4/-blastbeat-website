@@ -133,9 +133,19 @@
     var owed = data.partners.reduce(function (a, p) { return a + p.owed; }, 0);
     var newLeads = data.leads.filter(function (l) { return /new/i.test(l.status); }).length;
 
+    // Partner attribution — count licences issued in the current calendar month
+    // and how many of those carry a partner referral code.
+    var now = new Date();
+    var monthKey = now.toISOString().slice(0, 7);
+    var monthLicences = (data.licences || []).filter(function (l) {
+      return (l.issuanceDate || '').slice(0, 7) === monthKey;
+    });
+    var partnerLicences = monthLicences.filter(function (l) { return !!l.partner; });
+
     var stats = [
       { label: 'Pilot schools', val: data.schools.length + ' / 20', sub: twinned + ' twinned with a sponsor' },
       { label: 'Sponsorship funded', val: eur(funded), sub: eur(pipeline) + ' total pipeline' },
+      { label: 'Licences this month', val: monthLicences.length, sub: partnerLicences.length + ' via partner referrals' },
       { label: 'Commission owed', val: eur(owed), sub: data.partners.length + ' active partners' },
       { label: 'Open leads', val: newLeads, sub: data.leads.length + ' total in pipeline' }
     ];
@@ -215,6 +225,7 @@
         + '<td class="row-actions">'
           + '<button class="btn sm" data-partner-kit="' + p.id + '" title="Open the partner&rsquo;s personalised resources URL">&#127873;&nbsp;Kit</button>&nbsp;'
           + '<button class="btn sm" data-partner-welcome="' + p.id + '" title="Send the welcome email">&#9993;&nbsp;Welcome</button>&nbsp;'
+          + '<button class="btn sm" data-partner-rotate="' + p.id + '" title="Issue a new referral code (invalidates the old kit URL)">&#128260;</button>&nbsp;'
           + delBtn('partners', p.id)
         + '</td>'
         + '</tr>';
@@ -256,8 +267,12 @@
       var pid = parseInt(welcomeBtn.dataset.partnerWelcome, 10);
       var pp = data.partners.find(function (x) { return x.id === pid; });
       if (!pp) return;
+      if (!pp.email) {
+        toast('No email on file for ' + pp.name + ' &mdash; add one before sending.');
+        return;
+      }
       if (!pp.refCode) { pp.refCode = refCodeFor(pp); save(); }
-      var to = pp.email || '';
+      var to = pp.email;
       var first = (pp.name || '').split(' ')[0] || 'there';
       var url = partnerKitUrl(pp);
       var subj = 'Welcome to the Blastbeat partner cohort — your kit is ready';
@@ -283,6 +298,21 @@
       window.location.href = 'mailto:' + encodeURIComponent(to) + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
       audit('send', 'partner-welcome', { id: pid, code: pp.refCode });
       toast('Welcome email opened &mdash; ' + pp.name);
+      return;
+    }
+    var rotateBtn = e.target.closest('[data-partner-rotate]');
+    if (rotateBtn) {
+      var rid = parseInt(rotateBtn.dataset.partnerRotate, 10);
+      var rp = data.partners.find(function (x) { return x.id === rid; });
+      if (!rp) return;
+      var oldCode = rp.refCode || refCodeFor(rp);
+      if (!confirm('Rotate referral code for ' + rp.name + '?\n\nThis invalidates the existing kit URL (' + oldCode + '). Any links the partner has already shared will still resolve to the page, but will be attributed to the OLD code. Generate the new welcome email afterwards.')) return;
+      var nextSuffix = (parseInt(((oldCode.match(/-(\d+)$/) || [])[1] || '0'), 10) + 1);
+      rp.refCode = oldCode.replace(/-\d+$/, '') + '-' + String(nextSuffix).padStart(3, '0');
+      save();
+      audit('rotate', 'partner-code', { id: rid, from: oldCode, to: rp.refCode });
+      render();
+      toast('Code rotated &mdash; new: ' + rp.refCode);
       return;
     }
   });
@@ -408,6 +438,7 @@
         tierValueEUR: TIER_VALUE[form.tier] || 1250,
         sponsor: { name: form.sponsor, notes: form.notes || '' },
         region: form.region,
+        referredBy: (form.partner || form.partnerCode) ? { partner: form.partner || '', code: form.partnerCode || '' } : null,
         rights: {
           enrolmentSeats: 100,
           rolesPerESE: 14,
@@ -446,8 +477,16 @@
         return '<option value="' + escapeHtmlAttr(s.company) + '">' + escapeHtmlText(s.tier || '') + '</option>';
       }).join('');
     }
+    var partnerDl = document.getElementById('partners-ref-datalist');
+    if (partnerDl) {
+      partnerDl.innerHTML = data.partners.map(function (p) {
+        var code = p.refCode || refCodeFor(p);
+        return '<option value="' + escapeHtmlAttr(p.name) + '">' + escapeHtmlText(code) + ' &mdash; ' + escapeHtmlText(p.type || '') + '</option>';
+      }).join('');
+    }
     document.getElementById('f-school').value = '';
     document.getElementById('f-sponsor').value = '';
+    var fp = document.getElementById('f-partner'); if (fp) fp.value = '';
     document.getElementById('f-notes').value = '';
     document.getElementById('f-from').value = new Date().toISOString().slice(0, 10);
     issueModal.hidden = false;
@@ -478,12 +517,18 @@
 
   document.getElementById('issue-form').addEventListener('submit', async function (e) {
     e.preventDefault();
+    var partnerInput = (document.getElementById('f-partner') || {}).value || '';
+    var matchedPartner = data.partners.find(function (p) {
+      return p.name && p.name.toLowerCase() === partnerInput.trim().toLowerCase();
+    });
     var form = {
       school: document.getElementById('f-school').value.trim(),
       sponsor: document.getElementById('f-sponsor').value.trim(),
       tier: document.getElementById('f-tier').value,
       region: document.getElementById('f-region').value,
       validFrom: document.getElementById('f-from').value,
+      partner: partnerInput.trim(),
+      partnerCode: matchedPartner ? (matchedPartner.refCode || refCodeFor(matchedPartner)) : '',
       notes: document.getElementById('f-notes').value.trim()
     };
     if (!form.school || !form.sponsor) { toast('School and sponsor are required.'); return; }
@@ -508,10 +553,17 @@
       sponsor: form.sponsor,
       tier: form.tier,
       region: form.region,
+      partner: form.partner || '',
+      partnerCode: form.partnerCode || '',
       proofHash: vc.proof.proofValue,
       vc: vc
     });
-    audit('issue', 'licence', { id: vc.id, school: form.school, sponsor: form.sponsor, tier: form.tier, region: form.region });
+    // Credit referred deals against the partner's pipeline counter
+    if (matchedPartner) {
+      matchedPartner.signed = (matchedPartner.signed || 0) + 1;
+      matchedPartner.owed   = (matchedPartner.owed   || 0) + Math.round((TIER_VALUE[form.tier] || 0) * 0.20);
+    }
+    audit('issue', 'licence', { id: vc.id, school: form.school, sponsor: form.sponsor, tier: form.tier, region: form.region, partner: form.partnerCode || form.partner || '' });
     save();
     closeIssueModal();
     renderLicences();
@@ -740,6 +792,36 @@
     downloadJson({ exportedAt: new Date().toISOString(), data: data }, 'blastbeat-full-state-' + new Date().toISOString().slice(0,10) + '.json');
     toast('Full state exported.');
   });
+  // Bulk-export every partner with their kit URL — accounting + board reports
+  var kitsBtn = document.getElementById('export-partner-kits');
+  if (kitsBtn) kitsBtn.addEventListener('click', function () {
+    var csvCell = function (v) {
+      var s = String(v == null ? '' : v);
+      return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+    };
+    var header = ['id','name','email','type','refCode','status','signed','owed_eur','kit_url','welcome_subject'];
+    var lines = [header.join(',')];
+    data.partners.forEach(function (p) {
+      if (!p.refCode) p.refCode = refCodeFor(p);
+      var row = [
+        p.id, p.name, p.email || '', p.type || '', p.refCode, p.status || '',
+        p.signed || 0, p.owed || 0,
+        partnerKitUrl(p),
+        'Welcome to the Blastbeat partner cohort — your kit is ready'
+      ].map(csvCell).join(',');
+      lines.push(row);
+    });
+    var csv = lines.join('\n');
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'blastbeat-partner-kits-' + new Date().toISOString().slice(0,10) + '.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    save();
+    audit('export', 'partner-kits', { count: data.partners.length });
+    toast('Partner kits CSV exported &mdash; ' + data.partners.length + ' partners.');
+  });
   var resetBtn = document.getElementById('reset-state');
   if (resetBtn) resetBtn.addEventListener('click', function () {
     if (!confirm('Wipe the local store and reload with seed data? Anything not exported is lost.')) return;
@@ -839,7 +921,7 @@
   var TOUR_STEPS = [
     {
       title: 'Hey Robert, I&rsquo;m Beat.',
-      body: 'I&rsquo;m your dashboard guide. Three minutes &mdash; I&rsquo;ll show you the four things you need today. Tap <strong>Next</strong> when you&rsquo;re ready, or <strong>Skip</strong> if you want to dive in.'
+      body: 'I&rsquo;m your dashboard guide. Four minutes &mdash; I&rsquo;ll walk you through everything you can do today. Tap <strong>Next</strong> when you&rsquo;re ready, or <strong>Skip</strong> if you want to dive in.'
     },
     {
       title: 'Everything you see right now is a sample.',
@@ -850,8 +932,16 @@
       body: 'When you close this tour, click the big gold button at the top: <strong>Clear sample data &rarr;</strong>. That wipes every example so you start with a clean slate. Don&rsquo;t worry &mdash; you can always reset later from Settings.'
     },
     {
-      title: 'Issue a real licence.',
-      body: 'Open <strong>Licences</strong> in the left menu, then <strong>+ Issue new licence</strong>. Pick the school, the sponsor, the tier and the region &mdash; I&rsquo;ll build a W3C verifiable credential, hash it (SHA-256), and write it to the audit log. Email or download the JSON straight from the preview.'
+      title: 'Issue a real licence &mdash; one step.',
+      body: 'Open <strong>Licences</strong> in the left menu, then <strong>+ Issue new licence</strong>. Just <em>type</em> the school name &mdash; if it&rsquo;s new, I&rsquo;ll add it automatically. Same for the sponsor. Then pick tier and region &mdash; I&rsquo;ll build a W3C verifiable credential, hash it (SHA-256), and write it to the audit log.'
+    },
+    {
+      title: 'Send a real certificate &mdash; the sponsor&rsquo;s deliverable.',
+      body: 'After you issue, the preview opens with three buttons. The gold one &mdash; <strong>Print certificate (PDF)</strong> &mdash; opens a wall-worthy A4 certificate with the QR, the sponsor&rsquo;s name, the proof hash. Browser print dialog gives you <em>Save as PDF</em>. Email that to the sponsor. They can verify it any time at <code>blastbeat.education/verify</code>.'
+    },
+    {
+      title: 'Onboard a partner &mdash; two buttons.',
+      body: 'Open <strong>Ambassadors &amp; Affiliates</strong>. Each row has two new actions: <strong>&#127873; Kit</strong> opens that partner&rsquo;s personalised resources page (their links, scripts, calculator, cheatsheet &mdash; URL-only, no login needed). <strong>&#9993; Welcome</strong> drafts the welcome email with their URL pre-filled. Two clicks per new partner.'
     },
     {
       title: 'For your lawyer &mdash; one-click bundle.',
@@ -859,7 +949,7 @@
     },
     {
       title: 'One last thing.',
-      body: 'In <strong>Settings</strong> you can turn on <strong>big text + high-contrast mode</strong>, replay this tour any time, and export everything. If anything ever feels off, WhatsApp Tumi. You&rsquo;ve got this.'
+      body: 'In <strong>Settings</strong> you can turn on <strong>big text + high-contrast mode</strong>, replay this tour any time, export everything, and bulk-export all partner kit URLs. If anything ever feels off, WhatsApp Tumi. You&rsquo;ve got this.'
     }
   ];
   var tourIdx = 0;

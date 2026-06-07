@@ -235,6 +235,28 @@
       stamp.textContent = 'Verifying licence ' + idArg;
       document.getElementById('verify-heading').textContent = 'Verifying licence ' + idArg.toUpperCase();
       document.getElementById('verify-lead').innerHTML = 'You’ve arrived from a licence QR code or printed certificate. To verify the cryptographic proof we need the full JSON credential. Ask the sponsor (or whoever issued the certificate) for the <code style="font-family:\'IBM Plex Mono\',monospace;font-size:0.82em;background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">.json</code> file from the original issuance email &mdash; the same file Blastbeat emailed when this licence was created &mdash; and paste it below.';
+
+      // Admin-device shortcut: if this browser holds the admin store
+      // (bb-admin-data-v1), look up the licence by its short ID and
+      // auto-fill the JSON. Same-origin localStorage is per-browser,
+      // so this only triggers on Robert / Tumi's own machine — no
+      // privacy leak to a sponsor scanning the QR on their phone.
+      try {
+        var raw = localStorage.getItem('bb-admin-data-v1');
+        if (raw) {
+          var store = JSON.parse(raw);
+          var needle = idArg.toLowerCase();
+          var hit = (store.licences || []).find(function (l) {
+            var idClean = (l.id || '').replace('urn:uuid:', '').toLowerCase();
+            return idClean.indexOf(needle) === 0 || idClean.indexOf(needle.replace(/-/g, '')) === 0;
+          });
+          if (hit && hit.vc) {
+            input.value = JSON.stringify(hit.vc, null, 2);
+            document.getElementById('verify-lead').innerHTML = 'Found this licence in your admin store. Pre-filled and ready to verify &mdash; click <strong>Verify proof</strong> to recompute the hash.';
+            setTimeout(verify, 50);
+          }
+        }
+      } catch (e) { /* corrupt store, ignore — manual paste still works */ }
     }
 
     function show(kind, html) {

@@ -229,8 +229,14 @@
                 <option value="2">2&times;</option>
               </select>
             </label>
-            <label>&nbsp;
-              <span style="color: var(--muted); font-size: 0.75rem;">Currency &mdash; EUR</span>
+            <label>Currency
+              <select id="calc-currency">
+                <option value="EUR">EUR &mdash; &euro;</option>
+                <option value="ZAR">ZAR &mdash; R</option>
+                <option value="GBP">GBP &mdash; &pound;</option>
+                <option value="USD">USD &mdash; $</option>
+                <option value="NAD">NAD &mdash; N$</option>
+              </select>
             </label>
           </div>
           <div class="calc-out">
@@ -439,23 +445,29 @@
       }
     });
 
-    // Calculator
+    // Multi-currency calculator. Rates match assets/js/currency.js
+    // so the calculator agrees with the site-wide currency converter.
+    var FX = { EUR: 1, ZAR: 20.5, GBP: 0.84, USD: 1.08, NAD: 20.5 };
+    var SYM = { EUR: '€', ZAR: 'R ', GBP: '£', USD: '$', NAD: 'N$ ' };
     function calc() {
       var v = document.getElementById('calc-tier').value.split('|');
-      var price = parseInt(v[0], 10);
+      var priceEur = parseInt(v[0], 10);
       var rate = parseInt(v[1], 10) / 100;
       var deals = Math.max(1, parseInt(document.getElementById('calc-deals').value, 10) || 1);
       var uplift = parseFloat(document.getElementById('calc-uplift').value) || 1;
-      var perSale = price * uplift;
+      var ccy = document.getElementById('calc-currency').value || 'EUR';
+      var fx = FX[ccy] || 1;
+      var sym = SYM[ccy] || '';
+      var perSale = priceEur * uplift * fx;
       var perComm = perSale * rate;
       var totalSales = perSale * deals;
       var totalComm = perComm * deals;
-      function fmt(n) { return '€' + Math.round(n).toLocaleString('en-IE'); }
+      function fmt(n) { return sym + Math.round(n).toLocaleString('en-IE'); }
       document.getElementById('calc-out-commission').textContent = fmt(totalComm);
       document.getElementById('calc-out-sales').textContent = fmt(totalSales);
       document.getElementById('calc-out-per').textContent = fmt(perComm);
     }
-    ['calc-tier', 'calc-deals', 'calc-uplift'].forEach(function (id) {
+    ['calc-tier', 'calc-deals', 'calc-uplift', 'calc-currency'].forEach(function (id) {
       document.getElementById(id).addEventListener('input', calc);
       document.getElementById(id).addEventListener('change', calc);
     });
