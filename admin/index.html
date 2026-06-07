@@ -390,11 +390,13 @@
       <form class="modal-body" id="issue-form" autocomplete="off">
         <label class="field">
           <span>School</span>
-          <select name="school" id="f-school" required></select>
+          <input name="school" id="f-school" type="text" list="schools-datalist" placeholder="Type the school name &mdash; we&rsquo;ll add it if it&rsquo;s new" autocomplete="off" required>
+          <datalist id="schools-datalist"></datalist>
         </label>
         <label class="field">
           <span>Sponsor company / patron</span>
-          <input name="sponsor" id="f-sponsor" type="text" placeholder="e.g. Naspers, or a patron's name" required>
+          <input name="sponsor" id="f-sponsor" type="text" list="sponsors-datalist" placeholder="e.g. Naspers, or a patron&rsquo;s name" autocomplete="off" required>
+          <datalist id="sponsors-datalist"></datalist>
         </label>
         <label class="field">
           <span>Tier</span>
@@ -443,7 +445,8 @@
         <pre id="preview-json" style="white-space:pre-wrap; word-break:break-all; background:#0a0e1a; padding:1rem; border-radius:8px; font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--cyan); max-height:50vh; overflow:auto; margin:0;"></pre>
         <div class="modal-foot">
           <button type="button" class="btn" id="preview-email">&#9993; Email to sponsor</button>
-          <button type="button" class="btn primary" id="preview-download">&#128229; Download .json</button>
+          <button type="button" class="btn" id="preview-download">&#128229; Download .json</button>
+          <button type="button" class="btn primary" id="preview-certificate">&#128196; Print certificate (PDF)</button>
         </div>
       </div>
     </div>

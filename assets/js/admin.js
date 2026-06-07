@@ -212,11 +212,80 @@
         + '<td>' + p.signed + '</td>'
         + '<td style="font-family:var(--head);font-weight:700;color:var(--lime);">' + eur(p.owed) + '</td>'
         + '<td>' + pill(p.status) + '</td>'
-        + '<td class="row-actions">' + delBtn('partners', p.id) + '</td>'
+        + '<td class="row-actions">'
+          + '<button class="btn sm" data-partner-kit="' + p.id + '" title="Open the partner&rsquo;s personalised resources URL">&#127873;&nbsp;Kit</button>&nbsp;'
+          + '<button class="btn sm" data-partner-welcome="' + p.id + '" title="Send the welcome email">&#9993;&nbsp;Welcome</button>&nbsp;'
+          + delBtn('partners', p.id)
+        + '</td>'
         + '</tr>';
     }).join('');
     document.getElementById('tbl-partners').innerHTML = table(['Partner', 'Programme', 'Referred', 'Signed', 'Owed', 'Status', ''], rows);
   }
+
+  /* ---- Partner kit URL generator + welcome mailto ---- */
+  function refCodeFor(p) {
+    // Stable, human-readable code: first-name-initial + last-name + 3-digit id, all upper-case
+    var bits = (p.name || '').trim().split(/\s+/);
+    var first = (bits[0] || 'P').slice(0, 1).toUpperCase();
+    var last = (bits[bits.length - 1] || '').replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 12) || 'PARTNER';
+    var id = String(p.id || 0).padStart(3, '0');
+    return first + last + '-' + id;
+  }
+  function partnerKitUrl(p) {
+    var code = p.refCode || refCodeFor(p);
+    var qs = new URLSearchParams({ code: code, name: p.name || '', email: p.email || '' });
+    return 'https://www.blastbeat.education/pages/partner-resources.html?' + qs.toString();
+  }
+  document.body.addEventListener('click', function (e) {
+    var kitBtn = e.target.closest('[data-partner-kit]');
+    if (kitBtn) {
+      var id = parseInt(kitBtn.dataset.partnerKit, 10);
+      var p = data.partners.find(function (x) { return x.id === id; });
+      if (!p) return;
+      if (!p.refCode) { p.refCode = refCodeFor(p); save(); }
+      var url = partnerKitUrl(p);
+      // Copy + open
+      navigator.clipboard && navigator.clipboard.writeText(url);
+      window.open(url, '_blank');
+      toast('Kit URL copied &mdash; ' + p.name);
+      audit('open', 'partner-kit', { id: id, code: p.refCode });
+      return;
+    }
+    var welcomeBtn = e.target.closest('[data-partner-welcome]');
+    if (welcomeBtn) {
+      var pid = parseInt(welcomeBtn.dataset.partnerWelcome, 10);
+      var pp = data.partners.find(function (x) { return x.id === pid; });
+      if (!pp) return;
+      if (!pp.refCode) { pp.refCode = refCodeFor(pp); save(); }
+      var to = pp.email || '';
+      var first = (pp.name || '').split(' ')[0] || 'there';
+      var url = partnerKitUrl(pp);
+      var subj = 'Welcome to the Blastbeat partner cohort — your kit is ready';
+      var body = 'Hi ' + first + ',\n\n' +
+        'Welcome aboard. You are now part of the Blastbeat founding partner cohort.\n\n' +
+        'Your personalised kit lives here — bookmark this URL, it is yours:\n' +
+        url + '\n\n' +
+        'Inside the kit:\n' +
+        '  • Your pre-tagged links for pitch / for-schools / apply / 2winAid / patrons / see-it-in-action\n' +
+        '  • Three sales scripts (cold email to schools, cold email to sponsors, WhatsApp warm intro)\n' +
+        '  • A LinkedIn DM template\n' +
+        '  • Live commission calculator\n' +
+        '  • Printable A4 cheatsheet (PDF)\n' +
+        '  • Logo + photo pack\n\n' +
+        'Your referral code is ' + pp.refCode + '. Every link in your kit auto-attributes to you.\n\n' +
+        'Three actions this week:\n' +
+        '  1. Day 1 — cold email two principals and two sponsors using the scripts in the kit.\n' +
+        '  2. Day 3 — WhatsApp your two warmest contacts.\n' +
+        '  3. End of week — reply to this email with a short pipeline note: who you reached out to, what came back.\n\n' +
+        'Quick replies, real humans. Anything weird, just ping me.\n\n' +
+        'Tumelo\n' +
+        'Partnership Lead, Blastbeat Education / Climate Actions Now';
+      window.location.href = 'mailto:' + encodeURIComponent(to) + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
+      audit('send', 'partner-welcome', { id: pid, code: pp.refCode });
+      toast('Welcome email opened &mdash; ' + pp.name);
+      return;
+    }
+  });
 
   function renderLeads() {
     var rows = data.leads.map(function (l) {
@@ -257,7 +326,10 @@
     } else if (kind === 'partner') {
       var pname = prompt('Partner name?'); if (!pname) return;
       var type = prompt('Programme — Ambassador, Affiliate or Referral?', 'Ambassador') || 'Ambassador';
-      data.partners.push({ id: nextId(data.partners), name: pname, type: type, referred: 0, signed: 0, owed: 0, status: 'Active', link: 'bb.education/r/new' });
+      var pemail = prompt('Email (for welcome message)?', '') || '';
+      var rec = { id: nextId(data.partners), name: pname, type: type, email: pemail, referred: 0, signed: 0, owed: 0, status: 'Active', link: 'bb.education/r/new' };
+      rec.refCode = refCodeFor(rec);
+      data.partners.push(rec);
     } else if (kind === 'lead') {
       var lname = prompt('Lead name?'); if (!lname) return;
       var org = prompt('Organisation?', '') || '—';
@@ -362,9 +434,19 @@
   var previewModal = document.getElementById('preview-modal');
 
   function openIssueModal() {
-    var sel = document.getElementById('f-school');
-    sel.innerHTML = '<option value="">Select a school&hellip;</option>' +
-      data.schools.map(function (s) { return '<option value="' + escapeHtmlAttr(s.name) + '">' + escapeHtmlText(s.name) + ' &mdash; ' + escapeHtmlText(s.country) + '</option>'; }).join('');
+    var dl = document.getElementById('schools-datalist');
+    if (dl) {
+      dl.innerHTML = data.schools.map(function (s) {
+        return '<option value="' + escapeHtmlAttr(s.name) + '">' + escapeHtmlText(s.country) + '</option>';
+      }).join('');
+    }
+    var sponsorDl = document.getElementById('sponsors-datalist');
+    if (sponsorDl) {
+      sponsorDl.innerHTML = data.sponsors.map(function (s) {
+        return '<option value="' + escapeHtmlAttr(s.company) + '">' + escapeHtmlText(s.tier || '') + '</option>';
+      }).join('');
+    }
+    document.getElementById('f-school').value = '';
     document.getElementById('f-sponsor').value = '';
     document.getElementById('f-notes').value = '';
     document.getElementById('f-from').value = new Date().toISOString().slice(0, 10);
@@ -397,7 +479,7 @@
   document.getElementById('issue-form').addEventListener('submit', async function (e) {
     e.preventDefault();
     var form = {
-      school: document.getElementById('f-school').value,
+      school: document.getElementById('f-school').value.trim(),
       sponsor: document.getElementById('f-sponsor').value.trim(),
       tier: document.getElementById('f-tier').value,
       region: document.getElementById('f-region').value,
@@ -405,6 +487,19 @@
       notes: document.getElementById('f-notes').value.trim()
     };
     if (!form.school || !form.sponsor) { toast('School and sponsor are required.'); return; }
+    // Auto-create the school if Robert typed a name we've never seen.
+    // Same for the sponsor. Cuts the post-sale flow from two-step to one-step.
+    var regionToCountry = { ZA: 'South Africa', UK: 'United Kingdom', IE: 'Ireland' };
+    var schoolExists = data.schools.some(function (s) { return s.name.toLowerCase() === form.school.toLowerCase(); });
+    if (!schoolExists) {
+      data.schools.push({ id: nextId(data.schools), name: form.school, country: regionToCountry[form.region] || '', contact: '', status: 'Active', twin: form.sponsor, progress: 0, start: form.validFrom });
+      audit('create', 'school', { id: data.schools[data.schools.length - 1].id, autoCreatedDuring: 'licence-issue' });
+    }
+    var sponsorExists = data.sponsors.some(function (s) { return s.company.toLowerCase() === form.sponsor.toLowerCase(); });
+    if (!sponsorExists) {
+      data.sponsors.push({ id: nextId(data.sponsors), company: form.sponsor, tier: form.tier, value: TIER_VALUE[form.tier] || 0, twin: form.school, status: 'Confirmed', contact: '' });
+      audit('create', 'sponsor', { id: data.sponsors[data.sponsors.length - 1].id, autoCreatedDuring: 'licence-issue' });
+    }
     var vc = await buildCredential(form);
     data.licences.push({
       id: vc.id,
@@ -440,7 +535,93 @@
                  'Best,\nClimate Actions Now / Blastbeat Education';
       window.location.href = 'mailto:?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
     };
+    var certBtn = document.getElementById('preview-certificate');
+    if (certBtn) certBtn.onclick = function () { openCertificate(vc); };
     previewModal.hidden = false;
+  }
+
+  /* ---- Printable PDF certificate (renders to a new window, auto-opens print dialog) ---- */
+  function openCertificate(vc) {
+    var idShort = vc.id.replace('urn:uuid:', '').slice(0, 8).toUpperCase();
+    var proofShort = (vc.proof.proofValue || '').slice(0, 16);
+    var validFrom = (vc.validFrom || vc.issuanceDate || '').slice(0, 10);
+    var validUntil = (vc.validUntil || '').slice(0, 10);
+    var verifyUrl = 'https://www.blastbeat.education/verify/' + idShort;
+    var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(verifyUrl);
+
+    var html = '<!doctype html><html><head><meta charset="utf-8"><title>Blastbeat Licence Certificate — ' + escapeHtmlText(vc.credentialSubject.schoolName) + '</title>'
+      + '<style>'
+      + '@page { size: A4 portrait; margin: 0; }'
+      + '* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }'
+      + 'body { margin: 0; font-family: Georgia, "Times New Roman", serif; color: #1a1206; background: #f7efd9; }'
+      + '.cert { width: 210mm; min-height: 297mm; padding: 22mm 22mm 18mm; position: relative; background: linear-gradient(135deg, #fbf4dd 0%, #f3e7c0 100%); }'
+      + '.cert::before { content: ""; position: absolute; inset: 10mm; border: 1.5px solid #c9a24b; border-radius: 4px; pointer-events: none; }'
+      + '.cert::after { content: ""; position: absolute; inset: 12mm; border: 0.5px solid #c9a24b; opacity: 0.55; border-radius: 3px; pointer-events: none; }'
+      + '.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18mm; position: relative; z-index: 1; }'
+      + '.brand { font-family: "Helvetica Neue", Arial, sans-serif; letter-spacing: 0.32em; font-size: 11pt; font-weight: 800; color: #1a1206; }'
+      + '.brand span { color: #c9a24b; }'
+      + '.id-stamp { font-family: ui-monospace, "SF Mono", Consolas, monospace; font-size: 9pt; color: #6b4f1c; letter-spacing: 0.12em; }'
+      + '.eyebrow { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 10pt; letter-spacing: 0.32em; text-transform: uppercase; color: #8a6a26; margin-bottom: 8mm; text-align: center; }'
+      + 'h1.title { font-style: italic; font-size: 42pt; text-align: center; margin: 0 0 10mm; line-height: 1.05; color: #1a1206; font-weight: 900; }'
+      + 'h1.title em { color: #c9a24b; font-style: italic; }'
+      + '.deck { text-align: center; font-size: 13pt; max-width: 130mm; margin: 0 auto 14mm; line-height: 1.55; color: #3a2a12; }'
+      + '.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm 18mm; max-width: 150mm; margin: 0 auto 16mm; }'
+      + '.field { border-bottom: 0.8px solid #c9a24b; padding-bottom: 4mm; }'
+      + '.field .label { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 8pt; letter-spacing: 0.22em; text-transform: uppercase; color: #8a6a26; margin-bottom: 2mm; }'
+      + '.field .value { font-size: 14pt; font-weight: 700; color: #1a1206; }'
+      + '.attest { text-align: center; max-width: 150mm; margin: 0 auto 12mm; font-size: 11pt; line-height: 1.6; color: #3a2a12; font-style: italic; }'
+      + '.foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 10mm; margin-top: 14mm; }'
+      + '.sig { flex: 1; }'
+      + '.sig-line { border-top: 1px solid #1a1206; margin-bottom: 2mm; height: 22mm; }'
+      + '.sig-label { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9pt; color: #6b4f1c; letter-spacing: 0.1em; text-transform: uppercase; }'
+      + '.qr { width: 32mm; text-align: center; }'
+      + '.qr img { width: 30mm; height: 30mm; display: block; margin: 0 auto 2mm; background: white; padding: 1.5mm; border: 0.5px solid #c9a24b; }'
+      + '.qr .verify-url { font-family: ui-monospace, monospace; font-size: 7pt; color: #6b4f1c; word-break: break-all; }'
+      + '.proof { font-family: ui-monospace, "SF Mono", Consolas, monospace; font-size: 7.5pt; color: #6b4f1c; text-align: center; margin-top: 4mm; letter-spacing: 0.04em; }'
+      + '.fineprint { font-size: 7.5pt; color: #6b4f1c; text-align: center; margin-top: 4mm; line-height: 1.5; }'
+      + '@media screen { body { padding: 20px; background: #2a2a2a; } .cert { margin: 0 auto; box-shadow: 0 30px 80px rgba(0,0,0,0.6); } .toolbar { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); background: #1a1206; color: #f4ecd8; padding: 10px 18px; border-radius: 8px; z-index: 100; font-family: -apple-system, system-ui, sans-serif; font-size: 13px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); } .toolbar button { background: #c9a24b; color: #1a1206; border: none; padding: 7px 14px; border-radius: 5px; font-weight: 700; cursor: pointer; margin-left: 10px; font-family: inherit; font-size: 13px; } }'
+      + '@media print { body { padding: 0; background: white; } .toolbar { display: none; } .cert { box-shadow: none; margin: 0; } }'
+      + '</style></head><body>'
+      + '<div class="toolbar">Press <strong>Cmd/Ctrl + P</strong> and choose <strong>Save as PDF</strong>, or '
+      + '<button onclick="window.print()">Print / Save as PDF</button></div>'
+      + '<div class="cert">'
+      + '<div class="header">'
+        + '<div class="brand">BLAST<span>BEAT</span></div>'
+        + '<div class="id-stamp">LICENCE ID &middot; ' + idShort + '</div>'
+      + '</div>'
+      + '<div class="eyebrow">Verifiable Licence Certificate</div>'
+      + '<h1 class="title"><em>This licence is awarded to</em><br>' + escapeHtmlText(vc.credentialSubject.schoolName) + '</h1>'
+      + '<p class="deck">Granting the holder full access to the <strong>Blastbeat V2</strong> Event Social Enterprise programme &mdash; including the four-phase curriculum, fourteen real business roles, teacher training, the AI mentor, the impact report, and entry to the National Finals.</p>'
+      + '<div class="fields">'
+        + '<div class="field"><div class="label">Sponsor / Patron</div><div class="value">' + escapeHtmlText(vc.credentialSubject.sponsor) + '</div></div>'
+        + '<div class="field"><div class="label">Tier</div><div class="value">' + escapeHtmlText(vc.credentialSubject.tier) + '</div></div>'
+        + '<div class="field"><div class="label">Valid from</div><div class="value">' + validFrom + '</div></div>'
+        + '<div class="field"><div class="label">Valid until</div><div class="value">' + validUntil + '</div></div>'
+        + '<div class="field"><div class="label">Issued by</div><div class="value">' + escapeHtmlText(vc.issuer.name) + '</div></div>'
+        + '<div class="field"><div class="label">Date of issue</div><div class="value">' + vc.issuanceDate.slice(0, 10) + '</div></div>'
+      + '</div>'
+      + '<p class="attest">Issued in trust on behalf of the holder, the sponsor and the Blastbeat learner community. This certificate is backed by a W3C-aligned Verifiable Credential and a tamper-evident SHA-256 proof &mdash; recorded on the Blastbeat registry.</p>'
+      + '<div class="foot">'
+        + '<div class="sig">'
+          + '<div class="sig-line"></div>'
+          + '<div class="sig-label">Robert Stephenson FRSA &mdash; Founder &amp; Programme Director</div>'
+        + '</div>'
+        + '<div class="qr">'
+          + '<img src="' + qrUrl + '" alt="Verify QR code">'
+          + '<div class="verify-url">verify/' + idShort + '</div>'
+        + '</div>'
+      + '</div>'
+      + '<div class="proof">Proof &middot; sha256:' + proofShort + '&hellip;</div>'
+      + '<div class="fineprint">Climate Actions Now group &middot; Verify at blastbeat.education/verify/' + idShort + ' &middot; Any alteration to this certificate or its backing credential invalidates the SHA-256 proof.</div>'
+      + '</div>'
+      + '<script>window.addEventListener("load", function(){ setTimeout(function(){ try { window.focus(); } catch(e){} }, 400); });<\/script>'
+      + '</body></html>';
+
+    var w = window.open('', '_blank');
+    if (!w) { toast('Pop-up blocked &mdash; allow pop-ups for this site to print certificates.'); return; }
+    w.document.open();
+    w.document.write(html);
+    w.document.close();
   }
 
   function downloadJson(obj, filename) {

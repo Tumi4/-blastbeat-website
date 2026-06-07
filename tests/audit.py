@@ -25,7 +25,16 @@ import re, glob, html, os, subprocess, sys
 ROOT = os.path.abspath(os.path.dirname(__file__) + '/..')
 os.chdir(ROOT)
 
+def _is_noindex(path):
+    try:
+        s = open(path, encoding='utf-8').read(4000)
+    except Exception:
+        return False
+    return bool(re.search(r'<meta\s+name=["\']robots["\']\s+content=["\'][^"\']*noindex', s, re.I))
+
 PAGES = sorted(glob.glob('pages/*.html') + ['index.html', 'pitch.html'])
+# Indexable subset — SEO/breadcrumb/hreflang tests apply to these only.
+INDEXABLE = [p for p in PAGES if not _is_noindex(p)]
 BLOG  = sorted(glob.glob('blog/*.html'))
 ALL_HTML = sorted(glob.glob('**/*.html', recursive=True))
 
@@ -55,9 +64,9 @@ def run():
         else: p+=1
     res['T1 HTML balance']=(p,t,fails)
 
-    # T2 SEO
+    # T2 SEO — indexable pages only
     p=t=0; fails=[]
-    for f in PAGES:
+    for f in INDEXABLE:
         t+=1; s=open(f,encoding='utf-8').read(); iss=[]
         title=re.search(r'<title>(.*?)</title>',s,re.S)
         desc=re.search(r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']',s,re.S)
@@ -146,9 +155,9 @@ def run():
             else: fails.append((f,form[:60]))
     res['T9 form honeypots']=(p,t,fails)
 
-    # T10 BreadcrumbList on every non-home page
+    # T10 BreadcrumbList on every non-home indexable page
     p=t=0; fails=[]
-    for f in PAGES + BLOG:
+    for f in INDEXABLE + BLOG:
         if f=='index.html': continue
         t+=1
         if 'BreadcrumbList' in open(f,encoding='utf-8').read(): p+=1
@@ -179,9 +188,9 @@ def run():
             else: fails.append((f,a[:60]))
     res['T12 Img dims (CLS pages)']=(p,t,fails)
 
-    # T13 hreflang on every public page
+    # T13 hreflang — indexable pages only
     p=t=0; fails=[]
-    for f in PAGES + BLOG:
+    for f in INDEXABLE + BLOG:
         t+=1
         s=open(f,encoding='utf-8').read()
         if 'hreflang="en-gb"' in s and 'hreflang="en-za"' in s and 'hreflang="x-default"' in s: p+=1

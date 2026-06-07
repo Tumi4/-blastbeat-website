@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Partner Kit | Blastbeat Education</title>
+  <meta name="description" content="Your personalised Blastbeat partner kit: links, scripts, calculator, brand assets and the printable PDF cheatsheet.">
+  <link rel="canonical" href="https://www.blastbeat.education/pages/partner-resources.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0A0E1A">
+  <script src="/assets/js/analytics.js"></script>
+  <style>
+    :root {
+      --bg: #0A0E1A; --panel: #11162a; --panel-2: #161c33;
+      --line: rgba(255,255,255,0.1); --text: #f1f3f8; --muted: rgba(255,255,255,0.62);
+      --purple: #6366F1; --pink: #FF2D78; --cyan: #00F5FF; --lime: #B8FF00; --orange: #FF6B35; --green: #34D399; --gold: #E8C36B;
+      --font: 'DM Sans', system-ui, sans-serif; --head: 'Space Grotesk', sans-serif; --mono: 'IBM Plex Mono', monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4 { font-family: var(--head); font-weight: 800; letter-spacing: -0.01em; line-height: 1.15; }
+    a { color: var(--cyan); }
+    code { font-family: var(--mono); background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 1.5rem; }
+    .top-bar { background: var(--panel); border-bottom: 1px solid var(--line); padding: 1rem 0; }
+    .top-bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .top-bar img { height: 30px; }
+    .top-bar .brand { display: flex; align-items: center; gap: 0.6rem; font-family: var(--head); font-weight: 800; letter-spacing: 0.04em; }
+    .top-bar .code-chip { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--gold); background: rgba(232,195,107,0.08); border: 1px solid rgba(232,195,107,0.3); padding: 4px 10px; border-radius: 999px; }
+
+    .hero { padding: 3.5rem 0 2.5rem; background: radial-gradient(ellipse at 20% 0%, rgba(99,102,241,0.18), transparent 55%), radial-gradient(ellipse at 80% 0%, rgba(255,45,120,0.12), transparent 55%); }
+    .hero h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 1rem; }
+    .hero p { color: var(--muted); font-size: 1.05rem; max-width: 60ch; line-height: 1.65; }
+    .hero .greet { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+
+    .section { padding: 2.5rem 0; border-top: 1px solid rgba(255,255,255,0.06); }
+    .section h2 { font-size: 1.5rem; margin: 0 0 0.4rem; }
+    .section .lead { color: var(--muted); margin: 0 0 1.5rem; font-size: 0.95rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem 1.5rem; }
+    .card h3 { font-size: 1.05rem; margin: 0 0 0.35rem; }
+    .card p { color: var(--muted); margin: 0 0 1rem; font-size: 0.92rem; line-height: 1.6; }
+    .card .row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+
+    .link-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; }
+    .link-row input { flex: 1; min-width: 0; padding: 0.55rem 0.7rem; background: rgba(255,255,255,0.05); border: 1px solid var(--line); border-radius: 8px; color: var(--text); font-family: var(--mono); font-size: 0.78rem; }
+    .btn { padding: 0.55rem 0.95rem; border: 1px solid var(--line); background: rgba(255,255,255,0.06); color: var(--text); border-radius: 8px; cursor: pointer; font-family: var(--font); font-weight: 600; font-size: 0.82rem; transition: all 0.18s; }
+    .btn:hover { background: rgba(255,255,255,0.12); }
+    .btn-primary { background: linear-gradient(135deg, var(--purple), var(--pink)); border: none; color: white; }
+    .btn-gold { background: linear-gradient(135deg, var(--gold), #C9A24B); color: #1a1206; border: none; font-weight: 800; }
+
+    .calc { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.8rem; align-items: end; }
+    @media (max-width: 720px) { .calc { grid-template-columns: 1fr 1fr; } }
+    .calc label { display: flex; flex-direction: column; gap: 4px; font-size: 0.78rem; color: var(--muted); }
+    .calc input, .calc select { padding: 0.6rem 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--line); border-radius: 8px; color: var(--text); font-family: var(--font); font-size: 0.95rem; }
+    .calc-out { margin-top: 1.2rem; padding: 1.2rem; background: linear-gradient(135deg, rgba(184,255,0,0.06), rgba(232,195,107,0.06)); border: 1px solid rgba(232,195,107,0.25); border-radius: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .calc-out .big { font-family: var(--head); font-weight: 800; font-size: 2rem; color: var(--gold); }
+
+    .script { background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.1rem; margin-bottom: 0.8rem; }
+    .script .label { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.16em; color: var(--muted); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .script pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: var(--font); font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+    .script-actions { margin-top: 0.7rem; display: flex; gap: 0.5rem; }
+
+    .checklist li { margin-bottom: 0.5rem; color: var(--muted); }
+    .checklist li strong { color: var(--text); }
+
+    .empty-state { padding: 4rem 0; text-align: center; }
+    .empty-state h2 { font-size: 1.6rem; }
+    .empty-state p { color: var(--muted); max-width: 60ch; margin: 1rem auto; }
+
+    .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(120%); background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; padding: 0.85rem 1.5rem; border-radius: 10px; font-weight: 600; box-shadow: 0 14px 40px rgba(0,0,0,0.4); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); z-index: 100; }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    .footer { color: var(--muted); font-size: 0.78rem; padding: 3rem 0 4rem; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="wrap">
+      <div class="brand">
+        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat">
+        <span>PARTNER KIT</span>
+      </div>
+      <div class="code-chip" id="ref-chip">REF &middot; &mdash;</div>
+    </div>
+  </div>
+
+  <div id="content" hidden>
+
+    <section class="hero">
+      <div class="wrap">
+        <div class="greet" id="greet-eyebrow">Welcome aboard</div>
+        <h1>Hi <span id="partner-first">there</span>. Here&rsquo;s everything you need.</h1>
+        <p>This is your kit. Personalised links, three sales scripts, a commission calculator and a printable cheatsheet. Bookmark this page &mdash; the URL is unique to you.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Your personalised links</h2>
+        <p class="lead">Every click on these is automatically attributed to your referral code &mdash; <span id="ref-inline" style="color: var(--gold); font-family: var(--mono);">&mdash;</span>. Share these instead of the raw site URLs.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>The pitch page</h3>
+            <p>Sponsor-facing. The 20-school pilot deck on one page.</p>
+            <div class="link-row">
+              <input id="link-pitch" readonly>
+              <button class="btn" data-copy="link-pitch">Copy</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>For schools</h3>
+            <p>Principal / HOD-facing. Programme overview + apply CTA.</p>
+            <div class="link-row">
+              <input id="link-schools" readonly>
+              <button class="btn" data-copy="link-schools">Copy</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Apply page</h3>
+            <p>Direct school application. Use this when the school is ready to sign.</p>
+            <div class="link-row">
+              <input id="link-apply" readonly>
+              <button class="btn" data-copy="link-apply">Copy</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>2winAid sponsorship</h3>
+            <p>Sponsors funding twinned licences. Use this for corporate CSR conversations.</p>
+            <div class="link-row">
+              <input id="link-2winaid" readonly>
+              <button class="btn" data-copy="link-2winaid">Copy</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Founders&rsquo; Circle (patrons)</h3>
+            <p>High-value patrons. Use this for HNW / family-office conversations.</p>
+            <div class="link-row">
+              <input id="link-patrons" readonly>
+              <button class="btn" data-copy="link-patrons">Copy</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>See it in action</h3>
+            <p>Video proof. 54 real artist + climate-project films. Send when someone says &ldquo;show me something real.&rdquo;</p>
+            <div class="link-row">
+              <input id="link-action" readonly>
+              <button class="btn" data-copy="link-action">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Sales scripts &mdash; pick a channel</h2>
+        <p class="lead">Tested wording. Edit freely; just keep the personalised link.</p>
+
+        <div class="script">
+          <div class="label">&#9993; Cold email &mdash; principal / HOD</div>
+          <pre id="script-email-school"></pre>
+          <div class="script-actions">
+            <button class="btn" data-copy="script-email-school">Copy text</button>
+            <button class="btn btn-primary" data-mailto="email-school">Open in mail</button>
+          </div>
+        </div>
+
+        <div class="script">
+          <div class="label">&#9993; Cold email &mdash; corporate sponsor (CSR / ESG lead)</div>
+          <pre id="script-email-sponsor"></pre>
+          <div class="script-actions">
+            <button class="btn" data-copy="script-email-sponsor">Copy text</button>
+            <button class="btn btn-primary" data-mailto="email-sponsor">Open in mail</button>
+          </div>
+        </div>
+
+        <div class="script">
+          <div class="label">&#128241; WhatsApp / SMS &mdash; warm intro</div>
+          <pre id="script-whatsapp"></pre>
+          <div class="script-actions">
+            <button class="btn" data-copy="script-whatsapp">Copy text</button>
+            <button class="btn btn-primary" data-wa>Open WhatsApp</button>
+          </div>
+        </div>
+
+        <div class="script">
+          <div class="label">&#128100; LinkedIn DM</div>
+          <pre id="script-linkedin"></pre>
+          <div class="script-actions">
+            <button class="btn" data-copy="script-linkedin">Copy text</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Commission calculator</h2>
+        <p class="lead">Plan your pipeline. Numbers are exact at current rates.</p>
+        <div class="card">
+          <div class="calc">
+            <label>Tier
+              <select id="calc-tier">
+                <option value="1250|20">Founding Pilot 6-month &mdash; &euro;1,250 / 20%</option>
+                <option value="2500|20">Full Year Twin &mdash; &euro;2,500 / 20%</option>
+                <option value="6250|22">Founders&rsquo; Circle &mdash; &euro;6,250+ / 22%</option>
+                <option value="25000|25">Founding Patron &mdash; &euro;25,000+ / 25%</option>
+                <option value="100000|25">Legacy Partner &mdash; &euro;100,000+ / 25%</option>
+              </select>
+            </label>
+            <label>Number of deals
+              <input type="number" id="calc-deals" value="5" min="1" max="200">
+            </label>
+            <label>Avg uplift on minimum
+              <select id="calc-uplift">
+                <option value="1">No uplift (1.0&times;)</option>
+                <option value="1.25">+25% (1.25&times;)</option>
+                <option value="1.5">+50% (1.5&times;)</option>
+                <option value="2">2&times;</option>
+              </select>
+            </label>
+            <label>&nbsp;
+              <span style="color: var(--muted); font-size: 0.75rem;">Currency &mdash; EUR</span>
+            </label>
+          </div>
+          <div class="calc-out">
+            <div>
+              <div style="font-size: 0.74rem; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; font-family: var(--mono); margin-bottom: 6px;">Your commission</div>
+              <div class="big" id="calc-out-commission">&euro;0</div>
+            </div>
+            <div>
+              <div style="font-size: 0.74rem; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; font-family: var(--mono); margin-bottom: 6px;">Total sales</div>
+              <div class="big" style="color: var(--text);" id="calc-out-sales">&euro;0</div>
+            </div>
+            <div>
+              <div style="font-size: 0.74rem; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; font-family: var(--mono); margin-bottom: 6px;">Per deal</div>
+              <div class="big" style="color: var(--cyan); font-size: 1.4rem;" id="calc-out-per">&euro;0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>What to do this week</h2>
+        <p class="lead">Three sequenced actions so the first month is momentum.</p>
+        <ol class="checklist">
+          <li><strong>Day 1.</strong> Pick your three best-fit audiences from your existing network. Send the cold email script to two each &mdash; using your personalised link above.</li>
+          <li><strong>Day 3.</strong> WhatsApp message your two warmest contacts using the WA script. Ask for a 15-minute call, not a yes.</li>
+          <li><strong>Day 5.</strong> Post the LinkedIn DM script (lightly edited) to two relevant LinkedIn connections. Tag <code>@Blastbeat Education</code> when you post publicly.</li>
+          <li><strong>End of week 1.</strong> Forward Tumelo your pipeline: who you contacted, what came back, who&rsquo;s warm. <a href="mailto:tumelo@blastbeat.education">tumelo@blastbeat.education</a></li>
+          <li><strong>Week 2 onwards.</strong> Demo calls. Bring the prospect to the <a href="#" id="link-pitch-inline">pitch page</a>. Close on the call.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Brand assets &amp; downloads</h2>
+        <p class="lead">Logos, photos, deck. Re-use freely in your own materials.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Logo pack</h3>
+            <p>SVG + PNG, light + dark variants.</p>
+            <a class="btn" href="/assets/images/logo-blastbeat.png" download>Download PNG</a>
+            <a class="btn" href="/favicon.svg" download>Download SVG</a>
+          </div>
+          <div class="card">
+            <h3>Photo pack (10 hero images)</h3>
+            <p>Real students, real events. WebP + AVIF. Use credit: &ldquo;&copy; Blastbeat Education&rdquo;.</p>
+            <a class="btn" href="/assets/images/bb-event-06.webp" download>Sample 1</a>
+            <a class="btn" href="/assets/images/bb-event-01.webp" download>Sample 2</a>
+            <a class="btn" href="/assets/images/bb-students-group.jpg" download>Students group</a>
+          </div>
+          <div class="card">
+            <h3>Printable cheatsheet (PDF)</h3>
+            <p>One A4 page. Programme, pricing, your commission table, your unique referral code. Print and keep at your desk.</p>
+            <button class="btn btn-gold" id="open-cheatsheet">&#128196; Open cheatsheet</button>
+          </div>
+          <div class="card">
+            <h3>Pricing &amp; tier reference</h3>
+            <p>What every tier includes and what it costs &mdash; for your own reference, not for sharing raw.</p>
+            <a class="btn" href="/pages/licence.html" target="_blank">Open licence page &#8599;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Who to call</h2>
+        <p class="lead">Real humans. Quick replies.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Tumelo Ncube &mdash; Partnership Lead</h3>
+            <p>Your day-to-day contact. Pipeline reviews, escalations, anything weird.</p>
+            <a class="btn btn-primary" href="mailto:tumelo@blastbeat.education">Email Tumelo</a>
+            <a class="btn" href="https://wa.me/27738048409" target="_blank">WhatsApp</a>
+          </div>
+          <div class="card">
+            <h3>Robert Stephenson &mdash; Founder</h3>
+            <p>For HNW / patron-class introductions where founder presence helps close.</p>
+            <a class="btn" href="mailto:robert@blastbeat.education">Email Robert</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div class="wrap">
+        &copy; Climate Actions Now / Blastbeat Education &middot; Verify any licence at blastbeat.education/verify &middot;
+        <a href="/pages/privacy-policy.html">Privacy</a> &middot; <a href="/pages/terms-of-use.html">Terms</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="empty" class="empty-state">
+    <div class="wrap">
+      <h2>This page is for partners.</h2>
+      <p>If you have a partner welcome email, the URL inside it includes your code. Open from that email instead.</p>
+      <p>If you&rsquo;d like to become one, the <a href="/pages/partner-program.html">partner program is here</a>.</p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Copied</div>
+
+  <script>
+  (function () {
+    var p = new URLSearchParams(window.location.search);
+    var code = p.get('code') || '';
+    var name = p.get('name') || '';
+    var email = p.get('email') || '';
+
+    if (!code) {
+      document.getElementById('empty').style.display = '';
+      return;
+    }
+    document.getElementById('content').hidden = false;
+    document.getElementById('empty').style.display = 'none';
+
+    var firstName = (name.split(' ')[0] || name || 'there');
+    document.getElementById('partner-first').textContent = firstName;
+    document.getElementById('ref-chip').textContent = 'REF · ' + code;
+    document.getElementById('ref-inline').textContent = code;
+
+    var base = 'https://www.blastbeat.education';
+    function tag(path) {
+      var u = base + path;
+      var join = u.indexOf('?') >= 0 ? '&' : '?';
+      return u + join + 'utm_source=partner&utm_medium=referral&utm_campaign=partner-cohort-2026&utm_content=' + encodeURIComponent(code) + '&ref=' + encodeURIComponent(code);
+    }
+    var links = {
+      pitch:    tag('/pitch.html'),
+      schools:  tag('/pages/for-schools.html'),
+      apply:    tag('/pages/apply.html'),
+      '2winaid':tag('/pages/2winaid.html'),
+      patrons:  tag('/pages/patrons.html'),
+      action:   tag('/pages/see-it-in-action.html'),
+    };
+    Object.keys(links).forEach(function (k) {
+      var el = document.getElementById('link-' + k);
+      if (el) el.value = links[k];
+    });
+    var inline = document.getElementById('link-pitch-inline');
+    if (inline) inline.href = links.pitch;
+
+    // Scripts (templated with name + links)
+    var scripts = {
+      'email-school':
+        'Subject: Quick intro — Blastbeat ESE programme (' + firstName + ', partner)\n\n' +
+        'Hi {{Principal Name}},\n\n' +
+        'I work with Blastbeat Education — a 23-year youth-entrepreneurship programme that turns school terms into real, profit-making student-run events. Students take on 14 real business roles, keep 75% of the profit, and fund a climate project of their choice with the rest.\n\n' +
+        'Western Cape Phase 1 is already in 12 schools. We have a small founding cohort opening for 2026.\n\n' +
+        'If it might be a fit for your students, the 1-minute overview is here: ' + links.schools + '\n\n' +
+        'Worth a 20-minute call?\n\n' +
+        'Best,\n' + (name || firstName) + '\nPartner — Blastbeat Education',
+      'email-sponsor':
+        'Subject: 20-school pilot — €25,000 unlocks 504 students (' + firstName + ')\n\n' +
+        'Hi {{Name}},\n\n' +
+        'Quick one. Blastbeat Education is running a 20-school founding pilot for 2026. €25,000 funds the whole cohort — 504 students, six months, full audit trail, named recognition on every credential.\n\n' +
+        'The pitch is short and decision-ready: ' + links.pitch + '\n\n' +
+        'Would the team have 20 minutes this fortnight to look properly?\n\n' +
+        'Best,\n' + (name || firstName) + '\nPartner — Blastbeat Education',
+      'whatsapp':
+        'Hi {{Name}}, ' + firstName + ' here. I’m partnering with Blastbeat Education (23-year youth-enterprise programme) on their 2026 founding cohort. Thought of you because of {{specific reason}}. Worth a 15-min call this week? Here’s the one-pager if you want a look first: ' + links.pitch,
+      'linkedin':
+        'Hi {{Name}} — I’ve just come on board with Blastbeat Education for their 2026 founding cohort. Real student-run businesses, real audited profits, climate-action thread. Saw your work with {{their work}} and thought of you. Up for a quick chat about whether it fits? Overview here: ' + links.schools,
+    };
+    Object.keys(scripts).forEach(function (k) {
+      var el = document.getElementById('script-' + k);
+      if (el) el.textContent = scripts[k];
+    });
+
+    // Copy buttons
+    function showToast(msg) {
+      var t = document.getElementById('toast');
+      t.textContent = msg || 'Copied';
+      t.classList.add('show');
+      setTimeout(function () { t.classList.remove('show'); }, 1600);
+    }
+    document.body.addEventListener('click', function (e) {
+      var copyTarget = e.target.closest('[data-copy]');
+      if (copyTarget) {
+        var id = copyTarget.dataset.copy;
+        var src = document.getElementById(id);
+        if (!src) return;
+        var text = src.value != null ? src.value : src.textContent;
+        navigator.clipboard.writeText(text).then(function () { showToast('Copied — paste away'); });
+        if (window.bbTrack) window.bbTrack('partner_kit_copy', { item: id, code: code });
+        return;
+      }
+      var mailto = e.target.closest('[data-mailto]');
+      if (mailto) {
+        var which = mailto.dataset.mailto;
+        var lines = scripts[which].split('\n');
+        var subj = (lines[0] || '').replace(/^Subject:\s*/, '');
+        var body = lines.slice(1).join('\n').replace(/^\s+/, '');
+        window.location.href = 'mailto:?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
+        if (window.bbTrack) window.bbTrack('partner_kit_mailto', { which: which, code: code });
+        return;
+      }
+      if (e.target.closest('[data-wa]')) {
+        var text = scripts.whatsapp;
+        window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+        if (window.bbTrack) window.bbTrack('partner_kit_whatsapp', { code: code });
+        return;
+      }
+    });
+
+    // Calculator
+    function calc() {
+      var v = document.getElementById('calc-tier').value.split('|');
+      var price = parseInt(v[0], 10);
+      var rate = parseInt(v[1], 10) / 100;
+      var deals = Math.max(1, parseInt(document.getElementById('calc-deals').value, 10) || 1);
+      var uplift = parseFloat(document.getElementById('calc-uplift').value) || 1;
+      var perSale = price * uplift;
+      var perComm = perSale * rate;
+      var totalSales = perSale * deals;
+      var totalComm = perComm * deals;
+      function fmt(n) { return '€' + Math.round(n).toLocaleString('en-IE'); }
+      document.getElementById('calc-out-commission').textContent = fmt(totalComm);
+      document.getElementById('calc-out-sales').textContent = fmt(totalSales);
+      document.getElementById('calc-out-per').textContent = fmt(perComm);
+    }
+    ['calc-tier', 'calc-deals', 'calc-uplift'].forEach(function (id) {
+      document.getElementById(id).addEventListener('input', calc);
+      document.getElementById(id).addEventListener('change', calc);
+    });
+    calc();
+
+    // Cheatsheet — open a printable page in a new tab
+    document.getElementById('open-cheatsheet').addEventListener('click', function () {
+      var w = window.open('', '_blank');
+      if (!w) { showToast('Pop-up blocked'); return; }
+      var html = '<!doctype html><html><head><meta charset="utf-8"><title>Blastbeat partner cheatsheet — ' + firstName + '</title><style>'
+        + '@page { size: A4 portrait; margin: 14mm; } body { font-family: Georgia, serif; color: #1a1206; background: #fbf6e3; margin: 0; padding: 18mm; max-width: 210mm; }'
+        + 'h1 { font-style: italic; font-size: 26pt; margin: 0 0 4mm; color: #1a1206; }'
+        + 'h1 em { color: #c9a24b; }'
+        + 'h2 { font-family: Helvetica, sans-serif; font-size: 9pt; letter-spacing: 0.2em; text-transform: uppercase; color: #6b4f1c; margin: 7mm 0 2mm; }'
+        + 'p { font-size: 10.5pt; line-height: 1.5; margin: 0 0 3mm; }'
+        + 'table { width: 100%; border-collapse: collapse; font-size: 10pt; margin: 2mm 0 4mm; }'
+        + 'th, td { padding: 2mm 3mm; border-bottom: 0.5px solid #c9a24b; text-align: left; }'
+        + 'th { font-family: Helvetica, sans-serif; font-size: 8pt; letter-spacing: 0.16em; text-transform: uppercase; color: #6b4f1c; font-weight: 600; }'
+        + '.ref { font-family: ui-monospace, Consolas, monospace; font-size: 10pt; color: #6b4f1c; }'
+        + '.cta { background: #c9a24b; color: #1a1206; padding: 3mm; border-radius: 2mm; font-family: Helvetica, sans-serif; font-weight: 700; font-size: 9pt; margin: 6mm 0; text-align: center; letter-spacing: 0.1em; }'
+        + '@media print { body { background: white; } .toolbar { display:none; } }'
+        + '.toolbar { position: fixed; top: 10px; right: 10px; background: #1a1206; color: #fbf6e3; padding: 6px 10px; border-radius: 4px; font-family: Helvetica; font-size: 11px; } .toolbar button { background: #c9a24b; color: #1a1206; border: none; padding: 4px 10px; border-radius: 3px; font-weight: 700; cursor: pointer; margin-left: 8px; }'
+        + '</style></head><body>'
+        + '<div class="toolbar">Cmd/Ctrl + P to save <button onclick="window.print()">Print / Save PDF</button></div>'
+        + '<h1>Blastbeat <em>partner cheatsheet</em></h1>'
+        + '<p>' + firstName + ' &middot; Referral code <span class="ref">' + code + '</span></p>'
+        + '<h2>The 30-second pitch</h2>'
+        + '<p>23-year youth-entrepreneurship programme. Students 14&ndash;18 run real, profit-making events &mdash; music (MACC), sport (FootBeat), climate (CAN). They keep 75% of profits; 25% funds a climate project they choose. 360,000+ students reached across 11 countries. Western Cape pilot live in 12 schools.</p>'
+        + '<h2>Commission</h2>'
+        + '<table><thead><tr><th>Tier</th><th>Sale</th><th>Rate</th><th>You earn</th></tr></thead><tbody>'
+        + '<tr><td>Founding Pilot 6-month</td><td>&euro;1,250</td><td>20%</td><td><strong>&euro;250</strong></td></tr>'
+        + '<tr><td>Full Year Twin</td><td>&euro;2,500</td><td>20%</td><td><strong>&euro;500</strong></td></tr>'
+        + '<tr><td>Founders&rsquo; Circle</td><td>&euro;6,250+</td><td>22%</td><td><strong>&euro;1,375+</strong></td></tr>'
+        + '<tr><td>Founding Patron Cohort</td><td>&euro;25,000+</td><td>25%</td><td><strong>&euro;6,250+</strong></td></tr>'
+        + '<tr><td>Legacy Partner</td><td>&euro;100,000+</td><td>25%</td><td><strong>&euro;25,000+</strong></td></tr>'
+        + '</tbody></table>'
+        + '<h2>Your three best opening links</h2>'
+        + '<p><strong>For sponsors:</strong> <span class="ref">' + links.pitch + '</span></p>'
+        + '<p><strong>For schools:</strong> <span class="ref">' + links.schools + '</span></p>'
+        + '<p><strong>For patrons / HNW:</strong> <span class="ref">' + links.patrons + '</span></p>'
+        + '<div class="cta">Your account: Tumelo Ncube &middot; tumelo@blastbeat.education</div>'
+        + '<h2>This week</h2>'
+        + '<p>Day 1 &mdash; cold email two principals + two sponsors using the templates in your kit (link below).<br>'
+        + 'Day 3 &mdash; WhatsApp two warm contacts.<br>'
+        + 'Day 5 &mdash; one LinkedIn DM.<br>'
+        + 'End of week &mdash; email pipeline summary to Tumelo.</p>'
+        + '<h2>Your full kit</h2>'
+        + '<p class="ref">' + window.location.href + '</p>'
+        + '</body></html>';
+      w.document.write(html);
+      w.document.close();
+      if (window.bbTrack) window.bbTrack('partner_kit_cheatsheet_open', { code: code });
+    });
+
+    if (window.bbTrack) window.bbTrack('partner_kit_view', { code: code });
+  })();
+  </script>
+
+</body>
+</html>
