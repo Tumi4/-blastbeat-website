@@ -106,6 +106,17 @@
       </div>
     </section>
 
+    <!-- CROSS-LINK: corporate sponsorship -->
+    <section style="background: linear-gradient(135deg, rgba(99,102,241,0.07), rgba(255,45,120,0.07)); border-top: 1px solid rgba(99,102,241,0.18); border-bottom: 1px solid rgba(99,102,241,0.18); padding: 1.25rem 0;">
+      <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:0.85rem; flex-wrap:wrap;">
+          <span style="font-size:1.4rem;">&#127970;</span>
+          <p style="margin:0; color: rgba(255,255,255,0.85); font-size:0.95rem;"><strong style="color:#A8B3FF;">Are you a corporate sponsor, not a reseller?</strong> &nbsp;Skip this &mdash; you want our Corporate Partners programme (2winAid, Founders&rsquo; Circle, Adopt-A-School).</p>
+        </div>
+        <a href="/pages/partners.html" class="btn" style="white-space:nowrap; border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.05); color: white; padding: 0.55rem 1.1rem; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.85rem;">Corporate Partners &rarr;</a>
+      </div>
+    </section>
+
     <!-- THE OFFER -->
     <section class="section section-dark" id="the-offer" style="padding: var(--space-20) 0;">
       <div class="container">
@@ -381,5 +392,19 @@
   <script src="/assets/js/navigation.js" defer></script>
   <script src="/assets/js/animations.js" defer></script>
   <script src="/assets/js/cookie-consent.js" defer></script>
+  <script>
+    // Conversion event for the partner-application form. Pulls region + category
+    // off the form so we can see which channel + which audience converts best.
+    (function () {
+      var form = document.querySelector('form[name="partner-application"]');
+      if (!form) return;
+      form.addEventListener('submit', function () {
+        if (!window.bbTrack) return;
+        var region = (form.querySelector('input[name="region"]') || {}).value || '';
+        var category = (form.querySelector('select[name="category"]') || {}).value || '';
+        window.bbTrack('partner_application_completed', { region: region, category: category });
+      });
+    })();
+  </script>
 </body>
 </html>

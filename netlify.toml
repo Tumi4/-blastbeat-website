@@ -16,6 +16,18 @@
   status = 200
   force = true
 
+# Public verify route. Printed licence certificates carry a QR pointing at
+# /verify/<short-id>; the rewrite hands that ID to the verify page as ?id=
+# so the URL the sponsor sees stays clean.
+[[redirects]]
+  from = "/verify"
+  to = "/pages/verify.html"
+  status = 200
+[[redirects]]
+  from = "/verify/*"
+  to = "/pages/verify.html?id=:splat"
+  status = 200
+
 # Security headers
 [[headers]]
   for = "/*"

@@ -518,6 +518,12 @@
     renderAudit();
     renderOverview();
     showCredentialPreview(vc);
+    if (window.bbTrack) window.bbTrack('licence_issued', {
+      tier: form.tier,
+      region: form.region,
+      value: TIER_VALUE[form.tier] || 0,
+      currency: 'EUR'
+    });
     toast('Licence issued and stamped &mdash; ' + form.school);
   });
 
