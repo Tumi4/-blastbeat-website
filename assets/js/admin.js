@@ -909,7 +909,9 @@
   });
 
   /* ---- Beat tour (6-step guided walkthrough) ---- */
-  var TOUR_KEY = 'bb-admin-tour-done';
+  // Versioned key — bump when TOUR_STEPS changes so existing users see the new walk-through once.
+  var TOUR_VERSION = 'v2';
+  var TOUR_KEY = 'bb-admin-tour-done-' + TOUR_VERSION;
   var tourEl = document.getElementById('beat-tour');
   var tourTitle = document.getElementById('beat-title');
   var tourText = document.getElementById('beat-text');

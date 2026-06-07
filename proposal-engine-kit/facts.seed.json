@@ -1,13 +1,19 @@
 {
   "_meta": {
-    "doc_version": "0.1.0",
+    "doc_version": "0.2.0",
     "owner": "Tumelo Ncube",
     "policy": "Robert is read-only. Only Tumelo (admin) may add or edit facts. Every fact requires source_url and last_verified_at.",
     "tier_definitions": {
       "verified": "Achieved. Assertable as fact in any document. Has source_url and last_verified_at within the last 12 months.",
       "target": "Goal or projection. MUST appear with explicit 'target' / 'projected' / 'by [year]' labelling. Never as achieved.",
       "needs_confirmation": "Known in flux. Sources conflict or fact is stale. Verifier MUST replace with placeholder + flag for Tumelo review."
-    }
+    },
+    "source_url_conventions": {
+      "PUBLIC": "Real URL to an authoritative third-party source. Linkable in documents.",
+      "INTERNAL": "Reference to a Blastbeat-internal document (curriculum spec, chapter ledger, etc.). Format: 'INTERNAL: <document-name> [<section>] (<owner>)'. Not linkable; Tumelo can produce on request.",
+      "PENDING": "No source yet. Fact is provisional. Verifier treats as needs_confirmation regardless of declared tier."
+    },
+    "review_cadence": "Tumelo runs a facts-QA pass quarterly. Any fact older than 12 months auto-downgrades to needs_confirmation in the verifier."
   },
 
   "verified": [
@@ -66,11 +72,16 @@
       "claim": "ESE sprint runs one school term (~12 weeks)",
       "canonical_value": 12,
       "unit": "weeks",
-      "note": "SEED-DATA-CORRECTION: original prompt said '90-day / 16-week' which is contradictory (90 days = 12.8 weeks). Per curriculum spec the figure is ONE SCHOOL TERM ≈ 12 weeks. Tumelo to confirm before Phase 1 ships.",
-      "source_url": "PENDING: curriculum spec section 2.1",
+      "note": "AMBIGUITY FLAGGED — original audit prompt said both '90 days' AND '16 weeks'. 90 days = ~12.8 weeks (one SA school term). 16 weeks = ~112 days (closer to a UK/IE half-year). Hypothesis A: the figure is ONE SCHOOL TERM ≈ 12 weeks. Hypothesis B: there are two distinct durations — sprint (12wk) and an extended track (16wk). Tumelo to pick before any document uses this fact; the verifier will surface this as needs_confirmation until Tumelo flips status_pending_human_confirmation to false.",
+      "source_url": "PENDING: curriculum spec section 2.1 — Tumelo to attach",
       "last_verified_at": "2026-06-04",
       "owner": "tumelo",
-      "status_pending_human_confirmation": true
+      "status_pending_human_confirmation": true,
+      "tumelo_decisions": [
+        { "option": "A", "value": 12, "unit": "weeks", "rationale": "One SA school term, matches CAPS calendar" },
+        { "option": "B", "value": 16, "unit": "weeks", "rationale": "Extended track including pre-event prep + post-event reporting" },
+        { "option": "C", "value": "BOTH", "rationale": "Two distinct durations — needs separate facts (v.programme.duration.sprint and v.programme.duration.extended)" }
+      ]
     },
     {
       "id": "v.programme.profit-split",
@@ -88,7 +99,8 @@
         "UK Charity": "1113530",
         "Ireland Reg": "665595"
       },
-      "source_url": "https://register-of-charities.charitycommission.gov.uk/charity-search?p_p_id=uk_gov_ccew_portlet_CharitySearchPortlet",
+      "source_url": "https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1113530",
+      "source_url_secondary": "https://core.cro.ie/search/company/665595 (Irish CRO search, lookup by reg number)",
       "last_verified_at": "2026-06-01",
       "owner": "tumelo"
     },
@@ -189,6 +201,156 @@
       "placeholder_output": "[5-year unlimited licence — pricing TBC]",
       "owner_to_resolve": "tumelo",
       "raised_at": "2026-06-04"
+    }
+  ],
+
+  "government_frameworks": [
+    {
+      "id": "gf.za.ndp2030",
+      "country": "ZA",
+      "country_name": "South Africa",
+      "framework": "National Development Plan 2030",
+      "official_name": "National Development Plan 2030: Our Future — Make It Work",
+      "source_url": "https://www.gov.za/issues/national-development-plan-2030",
+      "pillars_relevant_to_blastbeat": ["Economy and employment", "Improving education, training and innovation"],
+      "blastbeat_mapping_status": "DRAFT-READY",
+      "blastbeat_mapping": "BlastBeat ESE addresses NDP Chapter 9 (Improving education) through enterprise-skills curriculum integration, and Chapter 3 (Economy and employment) through real youth-led businesses generating actual revenue.",
+      "authored_by": "tumelo",
+      "reviewed_by": null,
+      "last_verified_at": "2026-06-01",
+      "verifier_action": "allow"
+    },
+    {
+      "id": "gf.za.caps",
+      "country": "ZA",
+      "framework": "CAPS curriculum",
+      "official_name": "Curriculum and Assessment Policy Statement",
+      "source_url": "https://www.education.gov.za/Curriculum/CurriculumAssessmentPolicyStatements(CAPS).aspx",
+      "subjects_relevant_to_blastbeat": ["Business Studies", "Economics and Management Sciences (EMS)", "Life Orientation", "Arts and Culture"],
+      "blastbeat_mapping_status": "DRAFT-READY",
+      "authored_by": "tumelo",
+      "reviewed_by": null,
+      "last_verified_at": "2026-06-01",
+      "verifier_action": "allow"
+    },
+    {
+      "id": "gf.global.un-sdgs",
+      "country": "GLOBAL",
+      "framework": "UN Sustainable Development Goals",
+      "source_url": "https://sdgs.un.org/goals",
+      "goals_relevant_to_blastbeat": [
+        { "n": 4, "name": "Quality Education" },
+        { "n": 5, "name": "Gender Equality" },
+        { "n": 8, "name": "Decent Work and Economic Growth" },
+        { "n": 13, "name": "Climate Action" },
+        { "n": 17, "name": "Partnerships for the Goals" }
+      ],
+      "blastbeat_mapping_status": "DRAFT-READY",
+      "authored_by": "tumelo",
+      "reviewed_by": null,
+      "last_verified_at": "2026-06-01",
+      "verifier_action": "allow"
+    },
+    {
+      "id": "gf.au.agenda2063",
+      "country": "AU",
+      "framework": "AU Agenda 2063",
+      "official_name": "The Africa We Want",
+      "source_url": "https://au.int/en/agenda2063/overview",
+      "aspirations_relevant_to_blastbeat": ["Aspiration 1: Prosperous Africa based on inclusive growth", "Aspiration 6: People-driven development relying on the potential of African people, especially women and youth"],
+      "blastbeat_mapping_status": "DRAFT-READY",
+      "authored_by": "tumelo",
+      "reviewed_by": null,
+      "last_verified_at": "2026-06-01",
+      "verifier_action": "allow"
+    },
+    {
+      "id": "gf.na.ndp6",
+      "country": "NA",
+      "country_name": "Namibia",
+      "framework": "NDP6 / Vision 2030 / Brand Namibia",
+      "source_url": "https://www.npc.gov.na/",
+      "blastbeat_mapping_status": "DRAFT-READY",
+      "authored_by": "tumelo",
+      "reviewed_by": null,
+      "last_verified_at": "2026-04-01",
+      "verifier_action": "allow",
+      "linked_target_fact": "t.namibia.alignment"
+    },
+
+    {
+      "_comment": "Stubs below — structure only. Verifier will REFUSE alignment to these until a human author + reviewer signs off.",
+      "id": "gf.rw.vision2050",
+      "country": "RW",
+      "country_name": "Rwanda",
+      "framework": "Vision 2050 / NST",
+      "official_name": "Vision 2050 and National Strategy for Transformation",
+      "candidate_sources": [
+        "https://www.minecofin.gov.rw/",
+        "Vision 2050 document (search on minecofin.gov.rw)",
+        "Education Sector Strategic Plan 2018/19 – 2023/24 (Ministry of Education)"
+      ],
+      "blastbeat_mapping_status": "STUB-AUTHOR-REQUIRED",
+      "blastbeat_mapping": null,
+      "authored_by": null,
+      "reviewed_by": null,
+      "last_verified_at": null,
+      "verifier_action": "refuse",
+      "verifier_message": "Rwanda framework alignment requires a human policy reviewer to fill in blastbeat_mapping and an Rwandan-context-literate signoff in reviewed_by. Until then any 'aligned with Vision 2050' claim is rejected."
+    },
+    {
+      "id": "gf.gh.beyond-aid",
+      "country": "GH",
+      "country_name": "Ghana",
+      "framework": "Ghana Beyond Aid / Education Strategic Plan 2018-2030",
+      "candidate_sources": [
+        "https://moe.gov.gh/",
+        "Ghana Beyond Aid Charter (Office of the President)",
+        "Education Strategic Plan 2018–2030 (Ministry of Education)"
+      ],
+      "blastbeat_mapping_status": "STUB-AUTHOR-REQUIRED",
+      "blastbeat_mapping": null,
+      "authored_by": null,
+      "reviewed_by": null,
+      "last_verified_at": null,
+      "verifier_action": "refuse",
+      "verifier_message": "Ghana framework alignment requires a human policy reviewer to fill in blastbeat_mapping. Until then any 'aligned with Ghana Beyond Aid' claim is rejected."
+    },
+    {
+      "id": "gf.ng.ndp-2025",
+      "country": "NG",
+      "country_name": "Nigeria",
+      "framework": "National Development Plan 2021-2025 / Education Strategic Plan",
+      "candidate_sources": [
+        "https://www.nationalplanning.gov.ng/",
+        "National Development Plan 2021-2025 (Ministry of Finance, Budget and National Planning)",
+        "Education for Change: A Ministerial Strategic Plan 2018-2022"
+      ],
+      "blastbeat_mapping_status": "STUB-AUTHOR-REQUIRED",
+      "blastbeat_mapping": null,
+      "authored_by": null,
+      "reviewed_by": null,
+      "last_verified_at": null,
+      "verifier_action": "refuse",
+      "verifier_message": "Nigeria framework alignment requires a human policy reviewer. Until then any 'aligned with NDP 2021-2025' claim is rejected."
+    },
+    {
+      "id": "gf.jp.society5",
+      "country": "JP",
+      "country_name": "Japan",
+      "framework": "Society 5.0 / 6th Science, Technology and Innovation Basic Plan",
+      "candidate_sources": [
+        "https://www8.cao.go.jp/cstp/english/society5_0/index.html",
+        "Society 5.0 (Cabinet Office)",
+        "6th Science, Technology and Innovation Basic Plan (Council for Science, Technology and Innovation)"
+      ],
+      "blastbeat_mapping_status": "STUB-AUTHOR-REQUIRED",
+      "blastbeat_mapping": null,
+      "authored_by": null,
+      "reviewed_by": null,
+      "last_verified_at": null,
+      "verifier_action": "refuse",
+      "verifier_message": "Japan framework alignment requires a human policy reviewer (preferably someone from the Japan chapter who has direct context). Until then any 'aligned with Society 5.0' claim is rejected."
     }
   ],
 
