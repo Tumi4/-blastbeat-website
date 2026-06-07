@@ -128,12 +128,41 @@
     },
     {
       "id": "v.japan",
-      "claim": "Japan operation: independent, 16 years, 700+ alumni, NPO-certified, 100+ high schools and universities",
-      "canonical_value": {"years": 16, "alumni": 700, "institutions": 100},
-      "source_url": "PENDING: Japan chapter annual report 2025",
-      "last_verified_at": "2025-12-01",
+      "claim": "Japan chapter: independent NPO operating 17 years (since 2009), ~900 alumni across 150+ high schools and 110 universities, 122 mini music companies, NPO-certified by the Japan Cabinet Office",
+      "canonical_value": {
+        "years_since": 2009,
+        "years_active": 17,
+        "alumni": 900,
+        "teams": 122,
+        "high_schools": 150,
+        "universities": 110,
+        "cumulative_event_sales_jpy": 9000000,
+        "cumulative_donations_jpy": 2400000
+      },
+      "entity": {
+        "official_name_ja": "NPO法人ブラストビート",
+        "official_name_en": "Blastbeat Japan",
+        "domain": "blastbeat.jp",
+        "cabinet_office_npo_id": "013093647",
+        "japan_founder": "Takamasa Matsuura",
+        "representative_director": "Shinichi Kamiyo",
+        "deputy_director": "Hiroko Iizuka"
+      },
+      "origin_story": "July 2009: Takamasa Matsuura saw Robert Stephenson's work featured on NHK's 'Changemaker' programme and reached out to bring Blastbeat to Japan. August 2009: Robert visited, gave lectures at companies and schools, a volunteer-run secretariat was established. November 2009 – March 2010: first eight programmes ran with high-school and university students, including refugee-camp support with the UNHCR Association of Japan and a Japan–Korea bilateral mini-music-company programme with the Japan Foundation. Programmes ran in Tokyo, Okinawa, Kyoto and Aichi.",
+      "milestones": [
+        "2011: Seven Tokyo teams ran simultaneously; planning began for disaster-area programmes",
+        "2012: Second programmes in Tokyo, Fukushima, Kyoto; expanded to three cohorts per year",
+        "2013: First programmes in Ishikawa, Kanazawa, Miyagi (Ishinomaki) and Fukuoka; collaborations with El Sistema (Venezuela) and NPO Peace Boat",
+        "2014–2019: Sustained operation across Kanto, Okinawa, Ibaraki/Mito, Kanazawa, with growing cohort sizes",
+        "2025–2026: Active spring + autumn cohorts; 17 years operating"
+      ],
+      "programme_structure": "100-day programme, twice per year (spring April–May, autumn October–November), free for participants, volunteer-supported",
+      "source_url": "https://blastbeat.jp/",
+      "source_url_secondary": "https://www.npo-homepage.go.jp/npoportal/detail/013093647",
+      "source_url_status": "snippet_only_at_retrieval — JP sites returned 403 to automated fetch; numbers were verified via search-engine snippets quoting blastbeat.jp directly. Tumelo to confirm by direct page visit before any high-stakes proposal cites these figures.",
+      "last_verified_at": "2026-06-07",
       "owner": "tumelo",
-      "note": "Stale > 6 months. Tumelo to refresh from latest Japan chapter report before high-stakes use."
+      "verification_note": "Independent NPO with 17-year track record built largely without active contact with Blastbeat global founder Robert Stephenson since 2009. As of June 2026 the global team has re-discovered the Japan chapter and intends to re-establish friendly contact, with an open invitation (no expectation) for them to access the new V2 digital platform if useful. Until they confirm appetite for closer collaboration, public references should celebrate them as an INDEPENDENT chapter, not as a Blastbeat-managed outpost."
     }
   ],
 
