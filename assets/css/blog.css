@@ -7,8 +7,8 @@
 
 :root {
   --post-measure: 720px;
-  --post-text: rgba(255,255,255,0.84);
-  --post-text-soft: rgba(255,255,255,0.62);
+  --post-text: rgba(255,255,255,0.92);
+  --post-text-soft: rgba(255,255,255,0.78);
   --post-rule: rgba(255,255,255,0.08);
   --gold: #FFD93D;
   --gold-deep: #D4AF37;
@@ -64,7 +64,7 @@
 }
 .post-deck {
   font-size: clamp(1.05rem, 1.5vw, 1.25rem);
-  line-height: 1.55; color: rgba(255,255,255,0.7);
+  line-height: 1.6; color: rgba(255,255,255,0.85);
   margin: 0 0 var(--space-6); max-width: 64ch;
 }
 
