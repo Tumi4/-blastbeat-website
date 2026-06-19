@@ -43,44 +43,72 @@
   });
 
   // ---- Data store (localStorage + seed) ----
-  var STORE_KEY = 'bb-admin-data-v1';
+  // Store key bumped to v2 when we swapped the sample seed for the real
+  // BB_PROGRAMME roster — forces Robert's browser to load real data once.
+  var STORE_KEY = 'bb-admin-data-v2';
 
-  var SEED = {
-    schools: [
-      { id: 1, _sample: true, name: 'Mitchells Plain Secondary', country: 'South Africa', contact: 'Ms. Adams', status: 'Active', twin: 'Naspers', progress: 65, start: '2026-05-18' },
-      { id: 2, _sample: true, name: 'COSAT, Khayelitsha', country: 'South Africa', contact: 'Mr. Dlamini', status: 'Active', twin: 'Old Mutual', progress: 40, start: '2026-05-18' },
-      { id: 3, _sample: true, name: 'Kigali Heights Academy', country: 'Rwanda', contact: 'Ms. Uwase', status: 'Active', twin: 'Bank of Kigali', progress: 30, start: '2026-05-18' },
-      { id: 4, _sample: true, name: 'Pinelands High', country: 'South Africa', contact: 'Mr. Botha', status: 'Onboarding', twin: 'Woolworths', progress: 10, start: '2026-06-01' },
-      { id: 5, _sample: true, name: 'Gugulethu Comprehensive', country: 'South Africa', contact: 'Ms. Nkosi', status: 'Onboarding', twin: 'Capitec', progress: 5, start: '2026-06-01' },
-      { id: 6, _sample: true, name: 'Green Hills School, Kigali', country: 'Rwanda', contact: 'Mr. Habimana', status: 'Confirmed', twin: 'MTN Rwanda', progress: 0, start: '2026-06-15' },
-      { id: 7, _sample: true, name: 'Belhar High', country: 'South Africa', contact: 'Ms. Petersen', status: 'Awaiting twin', twin: '', progress: 0, start: 'TBC' },
-      { id: 8, _sample: true, name: 'Athlone High', country: 'South Africa', contact: 'Mr. Jacobs', status: 'Awaiting twin', twin: '', progress: 0, start: 'TBC' }
-    ],
-    sponsors: [
-      { id: 1, _sample: true, company: 'Naspers', tier: 'Twin (1 school)', value: 1250, twin: 'Mitchells Plain Secondary', status: 'Funded', contact: 'csr@naspers.com' },
-      { id: 2, _sample: true, company: 'Old Mutual', tier: 'Twin (1 school)', value: 1250, twin: 'COSAT, Khayelitsha', status: 'Funded', contact: 'esg@oldmutual.com' },
-      { id: 3, _sample: true, company: 'Bank of Kigali', tier: 'Twin (1 school)', value: 1250, twin: 'Kigali Heights Academy', status: 'Funded', contact: 'impact@bk.rw' },
-      { id: 4, _sample: true, company: 'Woolworths', tier: 'Twin (1 school)', value: 1250, twin: 'Pinelands High', status: 'Invoiced', contact: 'gooddifference@woolworths.co.za' },
-      { id: 5, _sample: true, company: 'Capitec', tier: 'Twin (1 school)', value: 1250, twin: 'Gugulethu Comprehensive', status: 'Invoiced', contact: 'sed@capitec.co.za' },
-      { id: 6, _sample: true, company: 'MTN Rwanda', tier: 'Twin (1 school)', value: 1250, twin: 'Green Hills School, Kigali', status: 'Pledged', contact: 'foundation@mtn.rw' }
-    ],
-    partners: [
-      { id: 1, _sample: true, name: 'Lerato M.', type: 'Affiliate', referred: 4, signed: 3, owed: 1125, status: 'Active', link: 'bb.education/r/lerato' },
-      { id: 2, _sample: true, name: 'Mr. Naidoo (teacher)', type: 'Ambassador', referred: 2, signed: 2, owed: 150, status: 'Active', link: 'bb.education/r/naidoo' },
-      { id: 3, _sample: true, name: 'EduConsult Africa', type: 'Affiliate', referred: 9, signed: 6, owed: 2250, status: 'Active', link: 'bb.education/r/educonsult' },
-      { id: 4, _sample: true, name: 'Thandi (alumna)', type: 'Ambassador', referred: 5, signed: 4, owed: 300, status: 'Active', link: 'bb.education/r/thandi' },
-      { id: 5, _sample: true, name: 'Parent — J. Smit', type: 'Referral', referred: 1, signed: 1, owed: 100, status: 'Payout due', link: 'bb.education/r/jsmit' }
-    ],
-    leads: [
-      { id: 1, _sample: true, name: 'Heather Adams', org: 'Mitchells Plain Secondary', type: 'School', source: 'apply form', date: '2026-05-12', status: 'Converted' },
-      { id: 2, _sample: true, name: 'CSR Team', org: 'Naspers', type: 'Sponsor', source: '2winaid', date: '2026-05-13', status: 'Converted' },
-      { id: 3, _sample: true, name: 'EduConsult Africa', org: 'EduConsult', type: 'Affiliate', source: 'ambassadors page', date: '2026-05-14', status: 'Active' },
-      { id: 4, _sample: true, name: 'Coach Mbeki', org: 'Soweto FC', type: 'Sports Club', source: 'contact form', date: '2026-05-15', status: 'New' },
-      { id: 5, _sample: true, name: 'James (parent)', org: '—', type: 'Referral', source: 'referral link', date: '2026-05-16', status: 'New' }
-    ],
-    licences: [],
-    audit: []
-  };
+  // Build the admin's working model from window.BB_PROGRAMME (assets/js/programme-data.js),
+  // which is generated from /data/programme-data.json — the single source of truth.
+  function buildSeedFromProgramme() {
+    var P = window.BB_PROGRAMME;
+    if (!P || !P.schools) {
+      return { schools: [], sponsors: [], partners: [], leads: [], licences: [], audit: [] };
+    }
+    var regionName = { SA: 'South Africa', Namibia: 'Namibia', UK: 'United Kingdom', IE: 'Ireland' };
+    var groupStatus = { heritage: 'Heritage', pilot: 'Active', namibia: 'Agreed in principle', proposal: 'Proposal' };
+    var progressByStatus = { valid: 60, issued: 30, welcomed: 20, due: 15 };
+    var byId = function (arr) { var m = {}; (arr || []).forEach(function (x) { m[x.id] = x; }); return m; };
+    var schoolMap = byId(P.schools), sponsorMap = byId(P.sponsors);
+    var schoolSponsor = {}, sponsorSchool = {};
+    (P.licences || []).forEach(function (l) {
+      var sp = sponsorMap[l.sponsorId], sc = schoolMap[l.schoolId];
+      if (sc && sp && !schoolSponsor[l.schoolId]) schoolSponsor[l.schoolId] = sp.name;
+      if (sp && sc && !sponsorSchool[l.sponsorId]) sponsorSchool[l.sponsorId] = sc.name;
+    });
+    var schools = P.schools.map(function (s, i) {
+      var lic = (P.licences || []).filter(function (l) { return l.schoolId === s.id; })[0];
+      return {
+        id: i + 1, key: s.id, name: s.name, group: s.group, area: s.area || '', region: s.region || '',
+        country: (s.area ? s.area + ' · ' : '') + (regionName[s.region] || s.region || ''),
+        note: s.note || '', twin: schoolSponsor[s.id] || '',
+        status: groupStatus[s.group] || 'Active',
+        progress: lic ? (progressByStatus[lic.status] || 0) : 0,
+        start: lic ? (lic.validFrom || 'TBC') : 'TBC'
+      };
+    });
+    var sponsors = P.sponsors.map(function (s, i) {
+      return {
+        id: i + 1, key: s.id, company: s.name, brand: s.brand || '', roles: s.roles || [],
+        tier: (s.roles && s.roles[0]) || 'Sponsor', value: 12225, currency: 'ZAR',
+        twin: sponsorSchool[s.id] || '', status: s.founding ? 'Funded' : 'Confirmed',
+        contact: s.note || '', founding: !!s.founding, region: s.region || ''
+      };
+    });
+    var partners = (P.ambassadors || []).map(function (a, i) {
+      return {
+        id: i + 1, name: a.ambassador, type: 'Ambassador',
+        referred: (a.licence && a.licence !== '—') ? 1 : 0,
+        signed: a.amount > 0 ? 1 : 0, owed: a.amount || 0, currency: 'ZAR',
+        status: a.status === 'pending' ? 'Payout due' : 'Active',
+        link: 'bb.education/r/' + String(a.ambassador || '').toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        note: a.note || ''
+      };
+    });
+    var regionCode = { SA: 'ZA', Namibia: 'NA', UK: 'UK', IE: 'IE' };
+    var licences = (P.licences || []).map(function (l) {
+      var sc = schoolMap[l.schoolId], sp = sponsorMap[l.sponsorId];
+      return {
+        id: l.credentialId, seq: l.seq, source: 'programme',
+        school: sc ? sc.name : l.schoolId, sponsor: sp ? sp.name : l.sponsorId,
+        tier: l.tier, role: l.role, amount: l.amount, currency: 'ZAR',
+        status: l.status, region: l.region || (sc ? (regionCode[sc.region] || sc.region) : ''),
+        validFrom: l.validFrom, validUntil: l.validUntil,
+        twinCohort: l.twinCohort || '', twinLoc: l.twinLoc || '', proofHash: '', vc: null
+      };
+    });
+    return { schools: schools, sponsors: sponsors, partners: partners, leads: [], licences: licences, audit: [] };
+  }
+  var SEED = buildSeedFromProgramme();
 
   function load() {
     try {
@@ -94,6 +122,9 @@
 
   function nextId(arr) { return arr.reduce(function (m, x) { return Math.max(m, x.id); }, 0) + 1; }
   function eur(n) { return '€' + Number(n).toLocaleString('en-IE'); }
+  function zar(n) { return 'R' + Number(n || 0).toLocaleString('en-ZA'); }
+  // Format a record's value in its own currency (real data is ZAR; issued VCs default ZAR).
+  function money(n, ccy) { return (ccy === 'EUR') ? eur(n) : zar(n); }
 
   // ---- Navigation ----
   var navItems = document.querySelectorAll('.nav-item');
@@ -110,10 +141,10 @@
   function pill(text) {
     var cls = 'grey';
     var t = (text || '').toLowerCase();
-    if (/active|funded|converted/.test(t)) cls = 'green';
-    else if (/onboard|invoiced|payout|due/.test(t)) cls = 'amber';
-    else if (/confirm|pledg/.test(t)) cls = 'cyan';
-    else if (/awaiting|new|tbc/.test(t)) cls = 'pink';
+    if (/active|funded|converted|valid/.test(t)) cls = 'green';
+    else if (/onboard|invoiced|payout|due|issued/.test(t)) cls = 'amber';
+    else if (/confirm|pledg|agreed|welcomed|heritage/.test(t)) cls = 'cyan';
+    else if (/awaiting|new|tbc|proposal/.test(t)) cls = 'pink';
     return '<span class="pill ' + cls + '">' + (text || '—') + '</span>';
   }
 
@@ -127,35 +158,27 @@
   }
 
   function renderOverview() {
+    var target = (window.BB_PROGRAMME && window.BB_PROGRAMME.cohort_target) || 20;
     var twinned = data.schools.filter(function (s) { return s.twin; }).length;
-    var funded = data.sponsors.filter(function (s) { return /funded/i.test(s.status); }).reduce(function (a, s) { return a + s.value; }, 0);
-    var pipeline = data.sponsors.reduce(function (a, s) { return a + s.value; }, 0);
-    var owed = data.partners.reduce(function (a, p) { return a + p.owed; }, 0);
-    var newLeads = data.leads.filter(function (l) { return /new/i.test(l.status); }).length;
-
-    // Partner attribution — count licences issued in the current calendar month
-    // and how many of those carry a partner referral code.
-    var now = new Date();
-    var monthKey = now.toISOString().slice(0, 7);
-    var monthLicences = (data.licences || []).filter(function (l) {
-      return (l.issuanceDate || '').slice(0, 7) === monthKey;
-    });
-    var partnerLicences = monthLicences.filter(function (l) { return !!l.partner; });
+    var licValue = (data.licences || []).reduce(function (a, l) { return a + (typeof l.amount === 'number' ? l.amount : 0); }, 0);
+    var owed = data.partners.reduce(function (a, p) { return a + (p.owed || 0); }, 0);
+    var stamped = (data.licences || []).filter(function (l) { return l.vc; }).length;
+    var partnerLic = (data.licences || []).filter(function (l) { return !!l.partner; }).length;
 
     var stats = [
-      { label: 'Pilot schools', val: data.schools.length + ' / 20', sub: twinned + ' twinned with a sponsor' },
-      { label: 'Sponsorship funded', val: eur(funded), sub: eur(pipeline) + ' total pipeline' },
-      { label: 'Licences this month', val: monthLicences.length, sub: partnerLicences.length + ' via partner referrals' },
-      { label: 'Commission owed', val: eur(owed), sub: data.partners.length + ' active partners' },
-      { label: 'Open leads', val: newLeads, sub: data.leads.length + ' total in pipeline' }
+      { label: 'Schools on programme', val: data.schools.length, sub: twinned + ' twinned with a sponsor' },
+      { label: 'Pilot cohort', val: twinned + ' / ' + target, sub: 'twinned toward target' },
+      { label: 'Programme value', val: zar(licValue), sub: data.licences.length + ' licences on record' },
+      { label: 'Credentialed', val: stamped, sub: partnerLic + ' via partner referrals' },
+      { label: 'Commission owed', val: zar(owed), sub: data.partners.length + ' ambassadors' }
     ];
     document.getElementById('overview-stats').innerHTML = stats.map(function (s) {
       return '<div class="stat"><div class="label">' + s.label + '</div><div class="val">' + s.val + '</div><div class="sub">' + s.sub + '</div></div>';
     }).join('');
 
-    var pct = Math.round((twinned / 20) * 100);
+    var pct = Math.round((twinned / target) * 100);
     document.getElementById('pilot-progress').style.width = pct + '%';
-    document.getElementById('pilot-progress-label').textContent = twinned + ' / 20 twinned';
+    document.getElementById('pilot-progress-label').textContent = twinned + ' / ' + target + ' twinned';
   }
 
   function table(headers, rows) {
@@ -170,33 +193,42 @@
     return rec && rec._sample ? ' <span class="pill amber" style="font-size:0.58rem;margin-left:0.4rem;letter-spacing:0.1em;">SAMPLE</span>' : '';
   }
 
+  var GROUP_TAG = {
+    heritage: '<span class="pill cyan" style="font-size:0.56rem;margin-left:0.4rem;">HERITAGE</span>',
+    pilot:    '<span class="pill green" style="font-size:0.56rem;margin-left:0.4rem;">SA PILOT</span>',
+    namibia:  '<span class="pill grey" style="font-size:0.56rem;margin-left:0.4rem;">NAMIBIA</span>',
+    proposal: '<span class="pill pink" style="font-size:0.56rem;margin-left:0.4rem;">PROPOSAL</span>'
+  };
   function renderPilot() {
     var rows = data.schools.map(function (s) {
       return '<tr' + (s._sample ? ' class="sample-row"' : '') + '>'
-        + '<td><strong>' + s.name + '</strong>' + sampleTag(s) + '</td>'
-        + '<td>' + s.country + '</td>'
-        + '<td>' + (s.twin ? s.twin : '<span class="pill pink">needs twin</span>') + '</td>'
+        + '<td><strong>' + escapeHtmlText(s.name) + '</strong>' + (GROUP_TAG[s.group] || '') + sampleTag(s)
+          + (s.note ? '<br><span style="font-size:0.7rem;color:var(--muted);">' + escapeHtmlText(s.note) + '</span>' : '') + '</td>'
+        + '<td>' + escapeHtmlText(s.country) + '</td>'
+        + '<td>' + (s.twin ? escapeHtmlText(s.twin) : '<span class="pill pink">needs twin</span>') + '</td>'
         + '<td>' + pill(s.status) + '</td>'
         + '<td><div style="display:flex;align-items:center;gap:0.5rem;"><div class="bar"><div style="width:' + s.progress + '%"></div></div><span style="font-size:0.74rem;color:var(--muted);">' + s.progress + '%</span></div></td>'
         + '<td style="font-family:var(--mono);font-size:0.76rem;">' + s.start + '</td>'
         + '<td class="row-actions">' + delBtn('schools', s.id) + '</td>'
         + '</tr>';
     }).join('');
-    document.getElementById('tbl-pilot').innerHTML = table(['School', 'Country', 'Twin sponsor', 'Status', 'Progress', 'Start', ''], rows);
+    document.getElementById('tbl-pilot').innerHTML = table(['School', 'Location', 'Twin sponsor', 'Status', 'Progress', 'Start', ''], rows);
   }
 
   function renderSponsors() {
     var rows = data.sponsors.map(function (s) {
+      var roleText = (s.roles && s.roles.length) ? s.roles.join(' · ') : s.tier;
       return '<tr' + (s._sample ? ' class="sample-row"' : '') + '>'
-        + '<td><strong>' + s.company + '</strong>' + sampleTag(s) + '<br><span style="font-size:0.72rem;color:var(--muted);">' + s.contact + '</span></td>'
-        + '<td>' + s.tier + '</td>'
-        + '<td style="font-family:var(--head);font-weight:700;">' + eur(s.value) + '</td>'
-        + '<td>' + (s.twin || '—') + '</td>'
+        + '<td><strong>' + escapeHtmlText(s.company) + '</strong>' + (s.founding ? ' <span class="pill green" style="font-size:0.56rem;">FOUNDING</span>' : '') + sampleTag(s)
+          + (s.contact ? '<br><span style="font-size:0.72rem;color:var(--muted);">' + escapeHtmlText(s.contact) + '</span>' : '') + '</td>'
+        + '<td style="font-size:0.8rem;">' + escapeHtmlText(roleText) + '</td>'
+        + '<td style="font-family:var(--head);font-weight:700;">' + money(s.value, s.currency) + '</td>'
+        + '<td>' + (s.twin ? escapeHtmlText(s.twin) : '—') + '</td>'
         + '<td>' + pill(s.status) + '</td>'
         + '<td class="row-actions">' + delBtn('sponsors', s.id) + '</td>'
         + '</tr>';
     }).join('');
-    document.getElementById('tbl-sponsors').innerHTML = table(['Sponsor', 'Tier', 'Value', 'Twin school', 'Status', ''], rows);
+    document.getElementById('tbl-sponsors').innerHTML = table(['Sponsor', 'Role', 'Licence value', 'Twin school', 'Status', ''], rows);
   }
 
   function renderPartners() {
@@ -207,7 +239,7 @@
     var pstats = [
       { label: 'Active partners', val: data.partners.length, sub: byType.Ambassador + ' amb · ' + byType.Affiliate + ' aff · ' + byType.Referral + ' ref' },
       { label: 'Schools signed', val: totalSigned, sub: 'via partner referrals' },
-      { label: 'Commission owed', val: eur(totalOwed), sub: 'across all programmes' }
+      { label: 'Commission owed', val: zar(totalOwed), sub: 'across all programmes' }
     ];
     document.getElementById('partner-stats').innerHTML = pstats.map(function (s) {
       return '<div class="stat"><div class="label">' + s.label + '</div><div class="val">' + s.val + '</div><div class="sub">' + s.sub + '</div></div>';
@@ -220,7 +252,7 @@
         + '<td><span class="pill ' + typeCls + '">' + p.type + '</span></td>'
         + '<td>' + p.referred + '</td>'
         + '<td>' + p.signed + '</td>'
-        + '<td style="font-family:var(--head);font-weight:700;color:var(--lime);">' + eur(p.owed) + '</td>'
+        + '<td style="font-family:var(--head);font-weight:700;color:var(--lime);">' + zar(p.owed) + '</td>'
         + '<td>' + pill(p.status) + '</td>'
         + '<td class="row-actions">'
           + '<button class="btn sm" data-partner-kit="' + p.id + '" title="Open the partner&rsquo;s personalised resources URL">&#127873;&nbsp;Kit</button>&nbsp;'
@@ -397,18 +429,24 @@
     return '{' + Object.keys(obj).sort().map(function (k) { return JSON.stringify(k) + ':' + canonicalize(obj[k]); }).join(',') + '}';
   }
 
+  // Issuing entity per region (per BB_PROGRAMME.issuing_entity_by_region):
+  // SA & Namibia licences are issued by Climate Actions Now RSA; UK by the UK charity.
   var ISSUER_DID = {
     ZA: { id: 'https://www.blastbeat.education/issuers/can-rsa', name: 'Climate Actions Now RSA (Pty) Ltd', country: 'ZA' },
-    UK: { id: 'https://www.blastbeat.education/issuers/can-uk',  name: 'Climate Actions Now (UK charity)',   country: 'GB' },
-    IE: { id: 'https://www.blastbeat.education/issuers/can-ie',  name: 'Climate Actions Now Ltd',            country: 'IE' }
+    NA: { id: 'https://www.blastbeat.education/issuers/can-rsa', name: 'Climate Actions Now RSA (Pty) Ltd', country: 'NA' },
+    UK: { id: 'https://www.blastbeat.education/issuers/can-uk',  name: 'Climate Actions Now (UK Registered Charity No. 1113530)', country: 'GB' },
+    IE: { id: 'https://www.blastbeat.education/issuers/can-ie',  name: 'Climate Actions Now Ltd (Ireland)', country: 'IE' }
   };
-  var TIER_VALUE = {
-    'Founding Pilot 6-month': 1250,
-    'Full Year Twin': 2500,
-    "Founders' Circle Patron": 6250,
-    'Founding Patron Cohort': 25000,
-    'Legacy Partner': 100000
-  };
+  // The founding SA licence is a flat R12,225 (ZAR) regardless of tier; tier is the
+  // medallion level. (The €1,250 figure is an outward marketing rate only.)
+  var LICENCE_AMOUNT_ZAR = (window.BB_PROGRAMME && window.BB_PROGRAMME.pricing && window.BB_PROGRAMME.pricing.licence && window.BB_PROGRAMME.pricing.licence.amount) || 12225;
+  var TIER_NAME = {};
+  var TIER_VALUE = {};
+  ((window.BB_PROGRAMME && window.BB_PROGRAMME.tiers) || []).forEach(function (t) {
+    TIER_NAME[t.id] = t.name;
+    TIER_VALUE[t.id] = LICENCE_AMOUNT_ZAR;
+  });
+  function tierLabel(id) { return TIER_NAME[id] || id; }
 
   async function buildCredential(form) {
     var now = new Date();
@@ -416,7 +454,7 @@
     var issuer = ISSUER_DID[form.region] || ISSUER_DID.ZA;
     var validFrom = form.validFrom ? new Date(form.validFrom).toISOString() : iso;
     var validUntil = new Date(form.validFrom || iso);
-    validUntil.setMonth(validUntil.getMonth() + (form.tier === 'Full Year Twin' ? 12 : 6));
+    validUntil.setMonth(validUntil.getMonth() + (form.tier === 'founding-pilot' ? 6 : 12));
     var credId = 'urn:uuid:' + uuid();
 
     var unsigned = {
@@ -434,8 +472,9 @@
         id: 'bb:school:' + (form.school || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 64),
         schoolName: form.school,
         programme: 'Blastbeat V2 — Event Social Enterprise Licence',
-        tier: form.tier,
-        tierValueEUR: TIER_VALUE[form.tier] || 1250,
+        tier: tierLabel(form.tier),
+        tierId: form.tier,
+        amountZAR: TIER_VALUE[form.tier] || LICENCE_AMOUNT_ZAR,
         sponsor: { name: form.sponsor, notes: form.notes || '' },
         region: form.region,
         referredBy: (form.partner || form.partnerCode) ? { partner: form.partner || '', code: form.partnerCode || '' } : null,
@@ -464,7 +503,8 @@
   var issueModal = document.getElementById('issue-modal');
   var previewModal = document.getElementById('preview-modal');
 
-  function openIssueModal() {
+  var stampingRosterId = null;
+  function openIssueModal(prefill) {
     var dl = document.getElementById('schools-datalist');
     if (dl) {
       dl.innerHTML = data.schools.map(function (s) {
@@ -484,11 +524,14 @@
         return '<option value="' + escapeHtmlAttr(p.name) + '">' + escapeHtmlText(code) + ' &mdash; ' + escapeHtmlText(p.type || '') + '</option>';
       }).join('');
     }
-    document.getElementById('f-school').value = '';
-    document.getElementById('f-sponsor').value = '';
+    var pre = prefill || {};
+    document.getElementById('f-school').value = pre.school || '';
+    document.getElementById('f-sponsor').value = pre.sponsor || '';
     var fp = document.getElementById('f-partner'); if (fp) fp.value = '';
-    document.getElementById('f-notes').value = '';
-    document.getElementById('f-from').value = new Date().toISOString().slice(0, 10);
+    document.getElementById('f-notes').value = pre.notes || '';
+    document.getElementById('f-from').value = pre.validFrom || new Date().toISOString().slice(0, 10);
+    var tierSel = document.getElementById('f-tier'); if (tierSel && pre.tier) tierSel.value = pre.tier;
+    var regSel = document.getElementById('f-region'); if (regSel && pre.region) regSel.value = pre.region;
     issueModal.hidden = false;
     setTimeout(function () { document.getElementById('f-school').focus(); }, 30);
   }
@@ -503,7 +546,7 @@
   }
 
   var openIssueBtn = document.getElementById('issue-licence-open');
-  if (openIssueBtn) openIssueBtn.addEventListener('click', openIssueModal);
+  if (openIssueBtn) openIssueBtn.addEventListener('click', function () { stampingRosterId = null; openIssueModal(); });
   document.getElementById('issue-close').addEventListener('click', closeIssueModal);
   document.getElementById('issue-cancel').addEventListener('click', closeIssueModal);
   document.getElementById('preview-close').addEventListener('click', closePreviewModal);
@@ -553,11 +596,20 @@
       sponsor: form.sponsor,
       tier: form.tier,
       region: form.region,
+      amount: TIER_VALUE[form.tier] || LICENCE_AMOUNT_ZAR,
+      currency: 'ZAR',
+      status: 'valid',
       partner: form.partner || '',
       partnerCode: form.partnerCode || '',
       proofHash: vc.proof.proofValue,
       vc: vc
     });
+    // If this issuance came from "Stamp" on a roster line, retire that roster record.
+    if (stampingRosterId) {
+      var ri = data.licences.findIndex(function (l) { return l.source === 'programme' && l.id === stampingRosterId; });
+      if (ri !== -1) data.licences.splice(ri, 1);
+      stampingRosterId = null;
+    }
     // Credit referred deals against the partner's pipeline counter
     if (matchedPartner) {
       matchedPartner.signed = (matchedPartner.signed || 0) + 1;
@@ -690,14 +742,22 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
   }
 
-  /* ---- Renderers for the new views ---- */
+  /* ---- Renderers for the new views ----
+     data.licences holds two kinds of record:
+       - roster (source:'programme') — the real agreed pipeline from BB_PROGRAMME;
+         has amount/status/twin but no cryptographic VC yet. Robert "stamps" these
+         to generate a real W3C credential + certificate.
+       - issued — created by the credential engine; has a urn:uuid id, proofHash, vc. */
   function renderLicences() {
-    var totalValue = data.licences.reduce(function (a, l) { return a + (TIER_VALUE[l.tier] || 0); }, 0);
+    var totalValue = data.licences.reduce(function (a, l) {
+      return a + (typeof l.amount === 'number' ? l.amount : (TIER_VALUE[l.tier] || 0));
+    }, 0);
     var byRegion = data.licences.reduce(function (a, l) { a[l.region] = (a[l.region] || 0) + 1; return a; }, {});
+    var stamped = data.licences.filter(function (l) { return l.vc; }).length;
     var stats = [
-      { label: 'Licences issued', val: data.licences.length, sub: 'all-time, this browser' },
-      { label: 'Sponsorship value', val: eur(totalValue), sub: 'sum of tier values' },
-      { label: 'By region', val: 'ZA ' + (byRegion.ZA || 0) + ' · UK ' + (byRegion.UK || 0) + ' · IE ' + (byRegion.IE || 0), sub: '' }
+      { label: 'Licences on record', val: data.licences.length, sub: stamped + ' credentialed · ' + (data.licences.length - stamped) + ' on the roster' },
+      { label: 'Programme value', val: zar(totalValue), sub: 'sum of licence amounts' },
+      { label: 'By region', val: 'ZA ' + (byRegion.ZA || 0) + ' · NA ' + (byRegion.NA || 0) + ' · UK ' + (byRegion.UK || 0), sub: '' }
     ];
     var statsEl = document.getElementById('licence-stats');
     if (statsEl) statsEl.innerHTML = stats.map(function (s) {
@@ -705,23 +765,30 @@
     }).join('');
 
     var rows = data.licences.length ? data.licences.slice().reverse().map(function (l) {
-      var idShort = l.id.replace('urn:uuid:', '').slice(0, 8);
-      var proofShort = l.proofHash.slice(0, 12);
+      var isIssued = !!l.vc;
+      var idShort = isIssued ? l.id.replace('urn:uuid:', '').slice(0, 8) : escapeHtmlText(l.id);
+      var proofCell = isIssued
+        ? '<span style="font-family:var(--mono);font-size:0.74rem;color:var(--lime);">' + l.proofHash.slice(0, 12) + '&hellip;</span>'
+        : '<span class="pill grey" style="font-size:0.56rem;">roster</span>';
+      var dateCell = isIssued ? l.issuanceDate.slice(0, 10) : (l.validFrom || '—');
+      var twin = (l.twinCohort || l.twinLoc) ? ('<br><span style="font-size:0.66rem;color:var(--muted);">twin: ' + escapeHtmlText([l.twinCohort, l.twinLoc].filter(Boolean).join(' · ')) + '</span>') : '';
+      var actions = isIssued
+        ? '<button class="btn sm" data-licence-view="' + l.id + '">View</button><button class="btn sm" data-licence-revoke="' + l.id + '">Revoke</button>'
+        : '<button class="btn sm" data-licence-stamp="' + escapeHtmlAttr(l.id) + '">&#9745; Stamp</button>';
       return '<tr>'
-        + '<td><strong>' + escapeHtmlText(l.school) + '</strong><br><span style="font-size:0.7rem;color:var(--muted);font-family:var(--mono);">' + idShort + '</span></td>'
+        + '<td><strong>' + escapeHtmlText(l.school) + '</strong>' + twin + '<br><span style="font-size:0.7rem;color:var(--muted);font-family:var(--mono);">' + idShort + '</span></td>'
         + '<td>' + escapeHtmlText(l.sponsor) + '</td>'
-        + '<td><span class="pill cyan">' + escapeHtmlText(l.tier) + '</span></td>'
-        + '<td><span class="pill grey">' + l.region + '</span></td>'
-        + '<td style="font-family:var(--mono);font-size:0.74rem;color:var(--lime);">' + proofShort + '&hellip;</td>'
-        + '<td style="font-family:var(--mono);font-size:0.74rem;">' + l.issuanceDate.slice(0, 10) + '</td>'
-        + '<td class="row-actions">'
-          + '<button class="btn sm" data-licence-view="' + l.id + '">View</button>'
-          + '<button class="btn sm" data-licence-revoke="' + l.id + '">Revoke</button>'
-        + '</td>'
+        + '<td><span class="pill cyan">' + escapeHtmlText(tierLabel(l.tier)) + '</span></td>'
+        + '<td><span class="pill grey">' + (l.region || '—') + '</span></td>'
+        + '<td style="font-family:var(--head);font-weight:700;">' + money(l.amount, l.currency) + '</td>'
+        + '<td>' + pill(l.status || (isIssued ? 'valid' : 'roster')) + '</td>'
+        + '<td>' + proofCell + '</td>'
+        + '<td style="font-family:var(--mono);font-size:0.74rem;">' + dateCell + '</td>'
+        + '<td class="row-actions">' + actions + '</td>'
         + '</tr>';
-    }).join('') : '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted);">No licences issued yet. Click <strong>+ Issue new licence</strong> to begin.</td></tr>';
+    }).join('') : '<tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--muted);">No licences yet. Click <strong>+ Issue new licence</strong> to begin.</td></tr>';
     var tbl = document.getElementById('tbl-licences');
-    if (tbl) tbl.innerHTML = '<thead><tr><th>School / ID</th><th>Sponsor</th><th>Tier</th><th>Region</th><th>Proof (SHA-256)</th><th>Issued</th><th></th></tr></thead><tbody>' + rows + '</tbody>';
+    if (tbl) tbl.innerHTML = '<thead><tr><th>School / ID</th><th>Sponsor</th><th>Tier</th><th>Region</th><th>Amount</th><th>Status</th><th>Proof</th><th>Date</th><th></th></tr></thead><tbody>' + rows + '</tbody>';
   }
 
   function renderAudit() {
@@ -751,6 +818,15 @@
       var id = view.dataset.licenceView;
       var lic = data.licences.find(function (l) { return l.id === id; });
       if (lic) showCredentialPreview(lic.vc);
+    }
+    var stamp = e.target.closest('[data-licence-stamp]');
+    if (stamp) {
+      var sid = stamp.dataset.licenceStamp;
+      var rl = data.licences.find(function (l) { return l.source === 'programme' && l.id === sid; });
+      if (!rl) return;
+      stampingRosterId = sid;
+      openIssueModal({ school: rl.school, sponsor: rl.sponsor, tier: rl.tier, region: rl.region, validFrom: rl.validFrom, notes: 'Stamping roster licence ' + sid });
+      return;
     }
     var rev = e.target.closest('[data-licence-revoke]');
     if (rev) {
@@ -926,12 +1002,12 @@
       body: 'I&rsquo;m your dashboard guide. Four minutes &mdash; I&rsquo;ll walk you through everything you can do today. Tap <strong>Next</strong> when you&rsquo;re ready, or <strong>Skip</strong> if you want to dive in.'
     },
     {
-      title: 'Everything you see right now is a sample.',
-      body: 'Every row marked <strong>SAMPLE</strong> &mdash; the orange-striped ones &mdash; is example data. None of it is real. It&rsquo;s there so you can see how the dashboard works.'
+      title: 'This is your real programme.',
+      body: 'Everything here is the live BlastBeat roster &mdash; <strong>21 schools</strong> in four groups (Heritage, SA pilot, Namibia, Black Coffee proposal), <strong>8 sponsors</strong>, and <strong>9 licences</strong> on record. Each school carries a tag so you can see at a glance what&rsquo;s confirmed versus proposed.'
     },
     {
-      title: 'First step &mdash; clear the samples.',
-      body: 'When you close this tour, click the big gold button at the top: <strong>Clear sample data &rarr;</strong>. That wipes every example so you start with a clean slate. Don&rsquo;t worry &mdash; you can always reset later from Settings.'
+      title: 'Stamp a credential when a deal is real.',
+      body: 'On the <strong>Licences</strong> tab, roster lines show a <strong>&#9745; Stamp</strong> button. Click it when a licence is confirmed &mdash; I&rsquo;ll prefill the details, build the W3C credential, hash it (SHA-256), and produce the printable certificate. Roster amounts are the founding rate, <strong>R12,225</strong>.'
     },
     {
       title: 'Issue a real licence &mdash; one step.',

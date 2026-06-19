@@ -262,7 +262,7 @@
         </div>
       </div>
       <div class="demo-banner">
-        <strong>Prototype mode.</strong> Data is stored locally in this browser (localStorage) with seed records you can edit. Connecting it to live Netlify form submissions + a Supabase backend with real login is the next step &mdash; see the note at the bottom of Overview.
+        <strong>Prototype mode.</strong> Loaded with the <strong>real programme roster</strong> (21 schools, 8 sponsors, 9 licences) from <code>programme-data.json</code>, held locally in this browser (localStorage) so you can edit and issue. Wiring it to a Supabase backend with real login is the next step &mdash; see the note at the bottom of Overview.
       </div>
 
       <!-- OVERVIEW -->
@@ -405,13 +405,13 @@
           <datalist id="sponsors-datalist"></datalist>
         </label>
         <label class="field">
-          <span>Tier</span>
+          <span>Tier (medallion level &mdash; licence is R12,225 flat)</span>
           <select name="tier" id="f-tier">
-            <option value="Founding Pilot 6-month">Founding Pilot 6-month (&euro;1,250)</option>
-            <option value="Full Year Twin">Full Year Twin (&euro;2,500)</option>
-            <option value="Founders' Circle Patron">Founders&rsquo; Circle Patron (from &euro;6,250)</option>
-            <option value="Founding Patron Cohort">Founding Patron Cohort (from &euro;25,000)</option>
-            <option value="Legacy Partner">Legacy Partner (from &euro;100,000)</option>
+            <option value="founding-pilot">Founding Pilot &mdash; bronze</option>
+            <option value="full-year-twin">Full Year Twin &mdash; silver</option>
+            <option value="founders-circle">Founders&rsquo; Circle Patron &mdash; gold</option>
+            <option value="patron-cohort">Founding Patron Cohort &mdash; sapphire</option>
+            <option value="legacy-partner">Legacy Partner &mdash; obsidian</option>
           </select>
         </label>
         <div class="field-row">
@@ -419,7 +419,8 @@
             <span>Region (chooses CAN entity)</span>
             <select name="region" id="f-region">
               <option value="ZA">South Africa &mdash; Climate Actions Now RSA (Pty) Ltd</option>
-              <option value="UK">United Kingdom &mdash; Climate Actions Now (UK charity)</option>
+              <option value="NA">Namibia &mdash; Climate Actions Now RSA (Pty) Ltd</option>
+              <option value="UK">United Kingdom &mdash; Climate Actions Now (UK Charity 1113530)</option>
               <option value="IE">Ireland / Europe &mdash; Climate Actions Now Ltd</option>
             </select>
           </label>
@@ -492,6 +493,7 @@
   <!-- TOAST -->
   <div id="bb-toast" style="position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(120%);padding:0.85rem 1.5rem;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border-radius:10px;font-weight:600;font-size:0.9rem;box-shadow:0 14px 40px rgba(0,0,0,0.4);z-index:250;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);font-family:var(--font);"></div>
 
+  <script src="/assets/js/programme-data.js" defer></script>
   <script src="/assets/js/admin.js" defer></script>
 </body>
 </html>
