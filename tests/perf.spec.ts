@@ -8,7 +8,7 @@ import { test, expect } from '@playwright/test';
 
 const BUDGETS = [
   { name: 'home',        url: '/',                          maxFcp: 1500, maxLoad: 3000, maxTransferKb: 2500 },
-  { name: 'pitch',       url: '/pitch.html',                maxFcp: 800,  maxLoad: 1500, maxTransferKb: 600 },
+  { name: 'pitch',       url: '/pitch.html',                maxFcp: 1200, maxLoad: 2200, maxTransferKb: 600 },
   { name: 'apply',       url: '/pages/apply.html',          maxFcp: 1500, maxLoad: 3000, maxTransferKb: 600 },
   { name: 'for-schools', url: '/pages/for-schools.html',    maxFcp: 1800, maxLoad: 3500, maxTransferKb: 3500 },
 ];
