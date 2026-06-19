@@ -16,6 +16,31 @@
     "review_cadence": "Tumelo runs a facts-QA pass quarterly. Any fact older than 12 months auto-downgrades to needs_confirmation in the verifier."
   },
 
+  "school_heritage": {
+    "_status": "INTERNAL — NOT FOR PUBLIC NAMING WITHOUT ROBERT'S PER-SCHOOL GREENLIGHT",
+    "_note": "Tumi-provided heritage list (2026-06). These schools ran Blastbeat during the 2006-2007 SA TV-series era and are RE-ENGAGEMENT / PITCH targets, NOT current confirmed participants and NOT seeking sponsors. Web scraping (June 2026) could NOT independently corroborate Blastbeat participation for these named schools — the schools exist, the participation is internally asserted. Do not publish named schools on the public site until Robert confirms which may be named. Principal names omitted from any public use (stale + consent risk).",
+    "south_africa_western_cape_2006_2007": [
+      { "school": "Camps Bay High School", "note": "Featured in the TV series", "public_naming": "needs_confirmation" },
+      { "school": "Wynberg Girls' High School", "enterprise": "Sugar Mama Records", "public_naming": "needs_confirmation" },
+      { "school": "Bishops Diocesan College", "enterprise": "Define Sound", "public_naming": "needs_confirmation" },
+      { "school": "South African College School (SACS)", "enterprise": "Guns Entertainment", "alumni": ["Sibu Mbonambi", "Darren Brookbanks"], "public_naming": "needs_confirmation" },
+      { "school": "LEAP 2 Science & Maths School", "public_naming": "needs_confirmation" },
+      { "school": "Manenberg High School", "public_naming": "needs_confirmation" },
+      { "school": "Zisukhanyo High School", "alumni": ["Mthetho Moli"], "public_naming": "needs_confirmation" },
+      { "school": "Hoërskool D.F. Malan", "public_naming": "needs_confirmation" },
+      { "school": "Hoërskool Jan van Riebeeck", "public_naming": "needs_confirmation" }
+    ],
+    "international_chapters": {
+      "_status": "PENDING — Robert to supply / confirm named schools for Ireland, UK, USA. Web scrape did not yield a verifiable named list; the blastbeat.education/history page is the best internal source but blocks automated fetch.",
+      "ireland": "PENDING — programme origin 2003, multi-school; names to confirm",
+      "uk": "PENDING — 2006-2008 expansion; names to confirm",
+      "usa": "PENDING — seven-city run; names to confirm",
+      "japan": "Independent NPO chapter — see v.japan; 150+ high schools, 110 universities (NPO-reported)"
+    },
+    "owner": "tumelo",
+    "added_at": "2026-06-19"
+  },
+
   "verified": [
     {
       "id": "v.track-record.years",
