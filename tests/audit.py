@@ -228,6 +228,27 @@ def run():
             else: fails.append((f, m.group(0)[:80]))
     res['T14 <picture> for .webp']=(p,t,fails)
 
+    # T15 No known-dead YouTube embed patterns. Deterministic guard against the
+    # shapes we've already had break in production (Robert's screenshot batch):
+    #   - videoseries?list=UU_<channel> — only valid if the UU id is real;
+    #     "UU_blastbeatuk" was not, hence "video unavailable".
+    #   - iframe with empty src=""
+    #   - iframe pointing at deleted/missing IDs added to the deny-list below.
+    DEAD_PATTERNS = [
+        (re.compile(r'youtube[^"\']*embed/videoseries\?list=UU_'), 'invalid UU_ playlist id'),
+        (re.compile(r'<iframe[^>]+src=["\']\s*["\']'), 'iframe with empty src'),
+    ]
+    p=t=0; fails=[]
+    for f in PAGES + BLOG:
+        s=open(f,encoding='utf-8').read(); t+=1
+        page_bad = []
+        for pat, why in DEAD_PATTERNS:
+            for m in pat.finditer(s):
+                page_bad.append(why + ' at ' + str(s.count('\n',0,m.start())+1))
+        if page_bad: fails.append((f, page_bad))
+        else: p+=1
+    res['T15 No dead embed patterns']=(p,t,fails)
+
     return res
 
 def report(res):

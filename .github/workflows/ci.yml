@@ -51,6 +51,22 @@ jobs:
           path: playwright-report/
           retention-days: 14
 
+  videos:
+    name: Video health (oEmbed probe)
+    runs-on: ubuntu-latest
+    needs: audit
+    # Depends on YouTube being reachable; mark informational so a transient
+    # rate-limit doesn't block a merge. The script logs every dead embed,
+    # so the PR check still surfaces real problems clearly.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Probe every YouTube embed
+        run: node tests/video-health.mjs
+
   lighthouse:
     name: Lighthouse CI
     runs-on: ubuntu-latest
