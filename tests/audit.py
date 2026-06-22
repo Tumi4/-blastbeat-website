@@ -19,6 +19,9 @@ Tests
   T12 Img dims (width+height) on about.html + licence.html
   T13 hreflang alternates on every public page
   T14 <picture> wrapper used for non-decorative <img src="*.webp">
+  T15 No known-dead YouTube embed patterns (UU_<channel> sentinel + empty src=)
+  T16 Mobile viewport meta on every HTML page (width=device-width, no scale lock)
+  T17 No fixed inline pixel widths >= 380 that would force horizontal scroll
 """
 import re, glob, html, os, subprocess, sys
 
@@ -248,6 +251,60 @@ def run():
         if page_bad: fails.append((f, page_bad))
         else: p+=1
     res['T15 No dead embed patterns']=(p,t,fails)
+
+    # T16 Mobile baseline — every public HTML page ships <meta name="viewport"
+    # content="width=device-width"> + must NOT disable pinch zoom (accessibility:
+    # never user-scalable=no). Without device-width, phones render the site
+    # as a zoomed-out desktop layout. With user-scalable=no, low-vision users
+    # cannot zoom in. Both are silent UX failures.
+    p=t=0; fails=[]
+    vp_re = re.compile(r'<meta\s+name=["\']viewport["\']\s+content=["\']([^"\']+)["\']', re.I)
+    SITE_HTML = [p for p in ALL_HTML
+                 if not p.startswith('node_modules/')
+                 and not p.startswith('test-results/')
+                 and not p.startswith('playwright-report/')]
+    for f in SITE_HTML:
+        t+=1
+        s=open(f,encoding='utf-8').read(2000)
+        m = vp_re.search(s)
+        if not m: fails.append((f,'missing')); continue
+        v = m.group(1).lower()
+        if 'width=device-width' not in v: fails.append((f,'no device-width')); continue
+        if 'user-scalable=no' in v or 'user-scalable=0' in v:
+            fails.append((f,'user-scalable=no blocks pinch-zoom')); continue
+        p+=1
+    res['T16 Mobile viewport meta']=(p,t,fails)
+
+    # T17 No fixed-pixel widths on visible content >= 380px that would overflow
+    # a 360px viewport. We allow:
+    #   - `max-width: <N>px` (lets element shrink)
+    #   - aria-hidden decorative elements (orb glows, blur layers)
+    #   - SVG / canvas / video native sizing
+    # Use a small parser pass so the regex doesn't generate false positives.
+    p=t=0; fails=[]
+    tag_w_re = re.compile(r'<(\w+)\b([^>]*style=["\'][^"\']*(?<!max-)(?<!min-)width\s*:\s*(\d{3,4})px[^"\']*["\'][^>]*)>', re.I)
+    for f in PAGES + BLOG:
+        s=open(f,encoding='utf-8').read(); t+=1
+        page_bad = []
+        for m in tag_w_re.finditer(s):
+            tag = m.group(1).lower()
+            attrs = m.group(2)
+            try:
+                px = int(m.group(3))
+            except ValueError:
+                continue
+            if px < 380: continue
+            if tag in ('svg', 'canvas', 'video', 'iframe'): continue
+            # Decorative: aria-hidden or .orb/.glow/.veil/.bg classes — never
+            # cause body overflow because they sit inside `overflow: hidden`
+            # parents or use negative offsets.
+            if 'aria-hidden' in attrs and 'true' in attrs: continue
+            if re.search(r'class=["\'][^"\']*\b(orb|glow|veil|bg-blur|bg-orb|hero-bg)\b', attrs, re.I): continue
+            line = s.count('\n',0,m.start())+1
+            page_bad.append(f'<{tag}> width: {px}px at line {line}')
+        if page_bad: fails.append((f, page_bad[:2]))
+        else: p+=1
+    res['T17 No overflowing inline widths']=(p,t,fails)
 
     return res
 

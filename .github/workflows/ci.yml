@@ -43,6 +43,8 @@ jobs:
       # only the deterministic perf + a11y suite, on Chromium-based projects.
       - name: Run perf + a11y tests
         run: npx playwright test tests/perf.spec.ts --project=desktop --project=pixel-7
+      - name: Run mobile audit (touch targets, horizontal scroll, iOS zoom)
+        run: npx playwright test tests/mobile-audit.spec.ts --project=pixel-7
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4

@@ -121,6 +121,31 @@
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     @media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
 
+    /* MOBILE — iOS auto-zoom guard. Any form input under 16px triggers a
+       focus-zoom on Safari that breaks the layout. Force 16px on small viewports. */
+    @media (max-width: 768px) {
+      .field input, .field select, .field textarea,
+      .gate-card input, input[type="text"], input[type="email"],
+      input[type="tel"], input[type="date"], input[type="number"],
+      input[type="password"], select, textarea {
+        font-size: 16px !important;
+      }
+      input[type="checkbox"], input[type="radio"] {
+        width: 22px !important; height: 22px !important; min-width: 22px; min-height: 22px;
+      }
+      /* Admin sidebar collapses on mobile — body grid is 1col by default at small viewports */
+      .side { padding: 1rem; }
+      .nav-item { min-height: 44px; }
+      .btn { min-height: 44px; padding: 0.75rem 1rem; }
+      .btn.sm { min-height: 40px; }
+      .modal-close { width: 44px !important; height: 44px !important; }
+      /* Tables: horizontal scroll instead of overflow */
+      .card.table-scroll, .card:has(> table) {
+        overflow-x: auto; -webkit-overflow-scrolling: touch;
+      }
+      .card.table-scroll table, .card > table { min-width: 600px; }
+    }
+
     /* TOAST visible state */
     #bb-toast.show { transform: translateX(-50%) translateY(0) !important; }
 

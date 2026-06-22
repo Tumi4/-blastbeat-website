@@ -46,12 +46,17 @@ export default defineConfig({
   },
 
   // Device matrix — virtual but realistic. Use real-device cloud (above) for final QA.
+  // BB_CHROMIUM_EXEC lets sandboxes that ship a pre-installed Chromium (but not
+  // the matching Playwright revision) skip the browser download. Set it to the
+  // path of any Chromium ≥114; Playwright drives it via CDP as usual.
   projects: [
     { name: 'iphone-se',  use: { ...devices['iPhone SE'] } },
     { name: 'iphone-13',  use: { ...devices['iPhone 13'] } },
-    { name: 'pixel-7',    use: { ...devices['Pixel 7'] } },
+    { name: 'pixel-7',    use: { ...devices['Pixel 7'],
+      launchOptions: process.env.BB_CHROMIUM_EXEC ? { executablePath: process.env.BB_CHROMIUM_EXEC } : {} } },
     { name: 'ipad',       use: { ...devices['iPad Pro 11'] } },
-    { name: 'desktop',    use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 } } },
+    { name: 'desktop',    use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 },
+      launchOptions: process.env.BB_CHROMIUM_EXEC ? { executablePath: process.env.BB_CHROMIUM_EXEC } : {} } },
     { name: 'desktop-fhd',use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 } } },
   ],
 });

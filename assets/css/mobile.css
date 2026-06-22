@@ -482,3 +482,134 @@ button, [role="button"], a, input[type="submit"], input[type="button"] {
     align-items: center;
   }
 }
+
+/* ============================================================
+   TAP-FRIENDLY — Footer legal row, contact strip, in-page anchors
+   These were caught by tests/mobile-audit.spec.ts on Pixel 7 as
+   sub-44px tap targets. Apple HIG + WCAG 2.5.5 = 44×44 minimum.
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Footer bottom legal links (site + blog footer share .footer-bottom) */
+  .footer-bottom a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 4px;
+  }
+
+  /* Email / phone anchors in any "contact strip" block (apply.html, contact.html) */
+  .contact-strip a,
+  a[href^="mailto:"],
+  a[href^="tel:"] {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* In-page anchor pills on demo.html ("Request access ↓", "What you'll see ↓") */
+  .anchor-pills a, a.pill-cta,
+  .demo-hero a[href^="#"] {
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Checkboxes — bump visible box AND tap target */
+  input[type="checkbox"], input[type="radio"] {
+    min-width: 22px;
+    min-height: 22px;
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Custom-styled labels around checkboxes get a tap-friendly row */
+  .form-checkbox, label.checkbox-row, label:has(> input[type="checkbox"]) {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  /* Cookie banner — override inline styles to guarantee 44px */
+  #cookie-banner button {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  #cookie-banner a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* ============================================================
+   MOBILE — Body copy line-height + word-spacing
+   Long-form blog/legal pages were tight at 1.4 line-height. Bump
+   to 1.6 below 640 for read-ability under bright sun.
+   ============================================================ */
+@media (max-width: 640px) {
+  article p, .blog-content p, .legal-content p,
+  .form-help, .form-section-label + p {
+    line-height: 1.65;
+  }
+  /* Headings: prevent hyphen breaks that look broken on small screens */
+  h1, h2, h3 {
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: manual;
+  }
+}
+
+/* ============================================================
+   MOBILE — Sticky body-scroll-lock when modal/nav is open
+   Without this the page jumps when the nav drawer opens.
+   ============================================================ */
+@media (max-width: 768px) {
+  body.bb-nav-open,
+  body.modal-open {
+    overflow: hidden !important;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   MOBILE — Tap-state feedback (no hover on touch devices)
+   Make active state visible so users get tactile confirmation.
+   ============================================================ */
+@media (hover: none) and (pointer: coarse) {
+  .btn:active, button:active, [role="button"]:active {
+    transform: scale(0.98);
+    transition: transform 0.08s ease;
+  }
+}
+
+/* ============================================================
+   MOBILE — Reduce hero parallax / heavy filters on small screens
+   to keep first paint snappy on cheap Android.
+   ============================================================ */
+@media (max-width: 480px) {
+  .hero-dark::before, .hero-dark::after {
+    filter: blur(20px) !important; /* was up to 80 */
+  }
+  /* Disable subtle background animations under reduced-motion or small viewport */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-dark::before, .hero-dark::after { animation: none !important; }
+  }
+}
+
+/* ============================================================
+   MOBILE — Tables: horizontal scroll wrapper
+   Pricing tables, licence tables would otherwise force the page
+   wider than the viewport. Wrap them in `.table-scroll` (or
+   anywhere they appear inside `.card`).
+   ============================================================ */
+@media (max-width: 640px) {
+  .table-scroll, .card > table, .legal-content table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+  .table-scroll table, .card > table { min-width: 480px; }
+}

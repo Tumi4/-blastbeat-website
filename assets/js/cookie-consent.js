@@ -20,17 +20,19 @@
         '&#127850; We use cookies to measure traffic and improve your experience. Analytics &amp; ad cookies are off until you accept.' +
       '</p>' +
       '<div style="display:flex;gap:0.6rem;align-items:center;flex-shrink:0;flex-wrap:wrap;">' +
-        '<a href="/pages/privacy-policy.html" style="font-size:0.78rem;color:rgba(255,255,255,0.55);text-decoration:underline;">Privacy</a>' +
+        '<a href="/pages/privacy-policy.html" style="font-size:0.78rem;color:rgba(255,255,255,0.55);text-decoration:underline;min-height:44px;display:inline-flex;align-items:center;padding:0 4px;">Privacy</a>' +
         '<button id="cookie-reject" style="' +
           'background:transparent;color:rgba(255,255,255,0.85);' +
-          'border:1px solid rgba(255,255,255,0.25);padding:9px 18px;border-radius:999px;' +
+          'border:1px solid rgba(255,255,255,0.25);padding:12px 22px;border-radius:999px;' +
           'font-weight:600;font-size:0.82rem;cursor:pointer;font-family:inherit;' +
+          'min-height:44px;min-width:44px;' +
         '">Reject</button>' +
         '<button id="cookie-accept" style="' +
           'background:linear-gradient(135deg,#6366F1,#A855F7,#FF2D78);' +
-          'color:white;border:none;padding:10px 22px;border-radius:999px;' +
+          'color:white;border:none;padding:13px 24px;border-radius:999px;' +
           'font-weight:700;font-size:0.85rem;cursor:pointer;font-family:inherit;' +
           'transition:transform 0.2s ease,box-shadow 0.2s ease;' +
+          'min-height:44px;min-width:44px;' +
         '">Accept</button>' +
       '</div>' +
     '</div>';
