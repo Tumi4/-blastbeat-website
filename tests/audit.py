@@ -35,6 +35,7 @@ def _is_noindex(path):
 PAGES = sorted(glob.glob('pages/*.html') + ['index.html', 'pitch.html'])
 # Indexable subset — SEO/breadcrumb/hreflang tests apply to these only.
 INDEXABLE = [p for p in PAGES if not _is_noindex(p)]
+INDEXABLE_BLOG_FILTER = lambda: [p for p in sorted(glob.glob('blog/*.html')) if not _is_noindex(p)]
 BLOG  = sorted(glob.glob('blog/*.html'))
 ALL_HTML = sorted(glob.glob('**/*.html', recursive=True))
 
@@ -78,7 +79,14 @@ def run():
         else: p+=1
     res['T2 SEO presence + lengths']=(p,t,fails)
 
-    # T3 Internal links
+    # T3 Internal links — honour clean URLs served by Netlify redirects
+    REDIRECT_ROOTS = set()
+    try:
+        toml = open('netlify.toml', encoding='utf-8').read()
+        for m in re.finditer(r'from\s*=\s*"(/[^"]+?)"', toml):
+            REDIRECT_ROOTS.add(m.group(1).rstrip('*').rstrip('/'))
+    except Exception:
+        pass
     p=t=0; fails=[]; ap=set(ALL_HTML)
     for f in PAGES:
         s=open(f,encoding='utf-8').read()
@@ -87,7 +95,7 @@ def run():
             t+=1; tgt=href.lstrip('/')
             if tgt.endswith('/'): tgt+='index.html'
             if not tgt: tgt='index.html'
-            if tgt in ap or os.path.exists(tgt): p+=1
+            if tgt in ap or os.path.exists(tgt) or href.rstrip('/') in REDIRECT_ROOTS: p+=1
             else: fails.append((f,href))
     res['T3 Internal links']=(p,t,fails)
 
@@ -155,9 +163,9 @@ def run():
             else: fails.append((f,form[:60]))
     res['T9 form honeypots']=(p,t,fails)
 
-    # T10 BreadcrumbList on every non-home indexable page
+    # T10 BreadcrumbList on every non-home indexable page (excludes noindex blog posts)
     p=t=0; fails=[]
-    for f in INDEXABLE + BLOG:
+    for f in INDEXABLE + INDEXABLE_BLOG_FILTER():
         if f=='index.html': continue
         t+=1
         if 'BreadcrumbList' in open(f,encoding='utf-8').read(): p+=1
@@ -188,9 +196,9 @@ def run():
             else: fails.append((f,a[:60]))
     res['T12 Img dims (CLS pages)']=(p,t,fails)
 
-    # T13 hreflang — indexable pages only
+    # T13 hreflang — indexable pages only (excludes noindex blog posts)
     p=t=0; fails=[]
-    for f in INDEXABLE + BLOG:
+    for f in INDEXABLE + INDEXABLE_BLOG_FILTER():
         t+=1
         s=open(f,encoding='utf-8').read()
         if 'hreflang="en-gb"' in s and 'hreflang="en-za"' in s and 'hreflang="x-default"' in s: p+=1
