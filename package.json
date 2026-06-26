@@ -1,0 +1,21 @@
+{
+  "name": "blastbeat-education",
+  "private": true,
+  "type": "module",
+  "description": "Static site with one Netlify Function that proxies to the Claude API for the Beat AI assistant.",
+  "scripts": {
+    "serve": "python3 -m http.server 8765",
+    "test": "playwright test",
+    "test:audit": "python3 tests/audit.py",
+    "test:screenshots": "playwright test tests/screenshots.spec.ts",
+    "test:perf": "playwright test tests/perf.spec.ts",
+    "lhci": "lhci autorun"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@lhci/cli": "^0.14.0"
+  }
+}

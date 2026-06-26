@@ -1,0 +1,433 @@
+{
+  "_meta": {
+    "doc_version": "0.2.0",
+    "owner": "Tumelo Ncube",
+    "policy": "Robert is read-only. Only Tumelo (admin) may add or edit facts. Every fact requires source_url and last_verified_at.",
+    "tier_definitions": {
+      "verified": "Achieved. Assertable as fact in any document. Has source_url and last_verified_at within the last 12 months.",
+      "target": "Goal or projection. MUST appear with explicit 'target' / 'projected' / 'by [year]' labelling. Never as achieved.",
+      "needs_confirmation": "Known in flux. Sources conflict or fact is stale. Verifier MUST replace with placeholder + flag for Tumelo review."
+    },
+    "source_url_conventions": {
+      "PUBLIC": "Real URL to an authoritative third-party source. Linkable in documents.",
+      "INTERNAL": "Reference to a Blastbeat-internal document (curriculum spec, chapter ledger, etc.). Format: 'INTERNAL: <document-name> [<section>] (<owner>)'. Not linkable; Tumelo can produce on request.",
+      "PENDING": "No source yet. Fact is provisional. Verifier treats as needs_confirmation regardless of declared tier."
+    },
+    "review_cadence": "Tumelo runs a facts-QA pass quarterly. Any fact older than 12 months auto-downgrades to needs_confirmation in the verifier."
+  },
+
+  "school_heritage": {
+    "_status": "INTERNAL — NOT FOR PUBLIC NAMING WITHOUT ROBERT'S PER-SCHOOL GREENLIGHT",
+    "_note": "Tumi-provided heritage list (2026-06). These schools ran Blastbeat during the 2006-2007 SA TV-series era and are RE-ENGAGEMENT / PITCH targets, NOT current confirmed participants and NOT seeking sponsors. Web scraping (June 2026) could NOT independently corroborate Blastbeat participation for these named schools — the schools exist, the participation is internally asserted. Do not publish named schools on the public site until Robert confirms which may be named. Principal names omitted from any public use (stale + consent risk).",
+    "south_africa_western_cape_2006_2007": [
+      { "school": "Camps Bay High School", "note": "Featured in the TV series", "public_naming": "needs_confirmation" },
+      { "school": "Wynberg Girls' High School", "enterprise": "Sugar Mama Records", "public_naming": "needs_confirmation" },
+      { "school": "Bishops Diocesan College", "enterprise": "Define Sound", "public_naming": "needs_confirmation" },
+      { "school": "South African College School (SACS)", "enterprise": "Guns Entertainment", "alumni": ["Sibu Mbonambi", "Darren Brookbanks"], "public_naming": "needs_confirmation" },
+      { "school": "LEAP 2 Science & Maths School", "public_naming": "needs_confirmation" },
+      { "school": "Manenberg High School", "public_naming": "needs_confirmation" },
+      { "school": "Zisukhanyo High School", "alumni": ["Mthetho Moli"], "public_naming": "needs_confirmation" },
+      { "school": "Hoërskool D.F. Malan", "public_naming": "needs_confirmation" },
+      { "school": "Hoërskool Jan van Riebeeck", "public_naming": "needs_confirmation" }
+    ],
+    "international_chapters": {
+      "_status": "PENDING — Robert to supply / confirm named schools for Ireland, UK, USA. Web scrape did not yield a verifiable named list; the blastbeat.education/history page is the best internal source but blocks automated fetch.",
+      "ireland": "PENDING — programme origin 2003, multi-school; names to confirm",
+      "uk": "PENDING — 2006-2008 expansion; names to confirm",
+      "usa": "PENDING — seven-city run; names to confirm",
+      "japan": "Independent NPO chapter — see v.japan; 150+ high schools, 110 universities (NPO-reported)"
+    },
+    "owner": "tumelo",
+    "added_at": "2026-06-19"
+  },
+
+  "verified": [
+    {
+      "id": "v.track-record.years",
+      "claim": "23-year track record",
+      "canonical_value": 23,
+      "unit": "years",
+      "as_of_year": 2026,
+      "source_url": "INTERNAL: ledger 2003-2026",
+      "last_verified_at": "2026-06-01",
+      "owner": "tumelo",
+      "aliases": ["23 years", "two decades", "more than two decades", "twenty-three years", "since 2003"]
+    },
+    {
+      "id": "v.reach.students",
+      "claim": "360,000+ young people reached",
+      "canonical_value": 360000,
+      "comparator": "at_least",
+      "source_url": "INTERNAL: chapter ledger cumulative 2003-2026",
+      "last_verified_at": "2026-06-01",
+      "owner": "tumelo",
+      "aliases": ["360k students", "360,000 students", "more than 360,000", "over 360k", "a third of a million", "more than a third of a million young people"]
+    },
+    {
+      "id": "v.geography.countries",
+      "claim": "19 countries lifetime; 5 active",
+      "canonical_value": 19,
+      "comparator": "exact",
+      "active_list": ["South Africa", "Rwanda", "Ghana", "Nigeria", "Ireland"],
+      "lifetime_list": ["South Africa", "Rwanda", "Ghana", "Nigeria", "Ireland", "United Kingdom", "United States", "Japan", "Belgium", "Slovakia", "Czechia", "Korea", "Uganda", "Namibia", "Kenya", "Senegal", "Ethiopia", "Tanzania", "Zimbabwe"],
+      "source_url": "INTERNAL: chapter registry",
+      "last_verified_at": "2026-06-01",
+      "owner": "tumelo",
+      "aliases": ["19 countries", "across 19 countries", "five continents"]
+    },
+    {
+      "id": "v.events.concerts",
+      "claim": "850 youth-run concerts",
+      "canonical_value": 850,
+      "comparator": "at_least",
+      "source_url": "INTERNAL: MACC event log",
+      "last_verified_at": "2026-06-01",
+      "owner": "tumelo"
+    },
+    {
+      "id": "v.programme.roles",
+      "claim": "14 real business roles per ESE",
+      "canonical_value": 14,
+      "source_url": "INTERNAL: ESE curriculum spec v2.6",
+      "last_verified_at": "2026-06-01",
+      "owner": "tumelo"
+    },
+    {
+      "id": "v.programme.duration",
+      "claim": "ESE sprint runs one school term (~12 weeks)",
+      "canonical_value": 12,
+      "unit": "weeks",
+      "note": "AMBIGUITY FLAGGED — original audit prompt said both '90 days' AND '16 weeks'. 90 days = ~12.8 weeks (one SA school term). 16 weeks = ~112 days (closer to a UK/IE half-year). Hypothesis A: the figure is ONE SCHOOL TERM ≈ 12 weeks. Hypothesis B: there are two distinct durations — sprint (12wk) and an extended track (16wk). Tumelo to pick before any document uses this fact; the verifier will surface this as needs_confirmation until Tumelo flips status_pending_human_confirmation to false.",
+      "source_url": "PENDING: curriculum spec section 2.1 — Tumelo to attach",
+      "last_verified_at": "2026-06-04",
+      "owner": "tumelo",
+      "status_pending_human_confirmation": true,
+      "tumelo_decisions": [
+        { "option": "A", "value": 12, "unit": "weeks", "rationale": "One SA school term, matches CAPS calendar" },
+        { "option": "B", "value": 16, "unit": "weeks", "rationale": "Extended track including pre-event prep + post-event reporting" },
+        { "option": "C", "value": "BOTH", "rationale": "Two distinct durations — needs separate facts (v.programme.duration.sprint and v.programme.duration.extended)" }
+      ]
+    },
+    {
+      "id": "v.programme.profit-split",
+      "claim": "75% of ESE profits to students, 25% to climate action",
+      "canonical_value": {"students": 75, "climate": 25},
+      "source_url": "INTERNAL: licence terms 2026",
+      "last_verified_at": "2026-06-01",
+      "owner": "tumelo",
+      "aliases": ["75/25 split", "75/25 profit split", "three quarters to students"]
+    },
+    {
+      "id": "v.entity.ca-ltd",
+      "claim": "Climate Actions Now Ltd",
+      "registrations": {
+        "UK Charity": "1113530",
+        "Ireland Reg": "665595"
+      },
+      "source_url": "https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1113530",
+      "source_url_secondary": "https://core.cro.ie/search/company/665595 (Irish CRO search, lookup by reg number)",
+      "last_verified_at": "2026-06-01",
+      "owner": "tumelo"
+    },
+    {
+      "id": "v.entity.ca-rsa",
+      "claim": "Climate Actions Now RSA (Pty) Ltd",
+      "source_url": "INTERNAL: CIPC registration certificate",
+      "last_verified_at": "2026-06-01",
+      "owner": "tumelo"
+    },
+    {
+      "id": "v.verticals",
+      "claim": "Three verticals: BlastBeat Music (MACC), FootBeat, BlastBeat CAN (Climate Actions Now)",
+      "source_url": "INTERNAL: brand architecture 2026",
+      "last_verified_at": "2026-06-01",
+      "owner": "tumelo"
+    },
+    {
+      "id": "v.za.pilot",
+      "claim": "South Africa Phase 1: Western Cape, 12 schools, 504 enrolled students",
+      "canonical_value": {"schools": 12, "students": 504, "province": "Western Cape"},
+      "source_url": "INTERNAL: SA pilot enrolment register Q2 2026",
+      "last_verified_at": "2026-05-15",
+      "owner": "tumelo"
+    },
+    {
+      "id": "v.japan",
+      "claim": "Japan chapter: independent NPO operating 17 years (since 2009), ~900 alumni across 150+ high schools and 110 universities, 122 mini music companies, NPO-certified by the Japan Cabinet Office",
+      "canonical_value": {
+        "years_since": 2009,
+        "years_active": 17,
+        "alumni": 900,
+        "teams": 122,
+        "high_schools": 150,
+        "universities": 110,
+        "cumulative_event_sales_jpy": 9000000,
+        "cumulative_donations_jpy": 2400000
+      },
+      "entity": {
+        "official_name_ja": "NPO法人ブラストビート",
+        "official_name_en": "Blastbeat Japan",
+        "domain": "blastbeat.jp",
+        "cabinet_office_npo_id": "013093647",
+        "japan_founder": "Takamasa Matsuura",
+        "representative_director": "Shinichi Kamiyo",
+        "deputy_director": "Hiroko Iizuka"
+      },
+      "origin_story": "July 2009: Takamasa Matsuura saw Robert Stephenson's work featured on NHK's 'Changemaker' programme and reached out to bring Blastbeat to Japan. August 2009: Robert visited, gave lectures at companies and schools, a volunteer-run secretariat was established. November 2009 – March 2010: first eight programmes ran with high-school and university students, including refugee-camp support with the UNHCR Association of Japan and a Japan–Korea bilateral mini-music-company programme with the Japan Foundation. Programmes ran in Tokyo, Okinawa, Kyoto and Aichi.",
+      "milestones": [
+        "2011: Seven Tokyo teams ran simultaneously; planning began for disaster-area programmes",
+        "2012: Second programmes in Tokyo, Fukushima, Kyoto; expanded to three cohorts per year",
+        "2013: First programmes in Ishikawa, Kanazawa, Miyagi (Ishinomaki) and Fukuoka; collaborations with El Sistema (Venezuela) and NPO Peace Boat",
+        "2014–2019: Sustained operation across Kanto, Okinawa, Ibaraki/Mito, Kanazawa, with growing cohort sizes",
+        "2025–2026: Active spring + autumn cohorts; 17 years operating"
+      ],
+      "programme_structure": "100-day programme, twice per year (spring April–May, autumn October–November), free for participants, volunteer-supported",
+      "source_url": "https://blastbeat.jp/",
+      "source_url_secondary": "https://www.npo-homepage.go.jp/npoportal/detail/013093647",
+      "source_url_status": "snippet_only_at_retrieval — JP sites returned 403 to automated fetch; numbers were verified via search-engine snippets quoting blastbeat.jp directly. Tumelo to confirm by direct page visit before any high-stakes proposal cites these figures.",
+      "last_verified_at": "2026-06-07",
+      "owner": "tumelo",
+      "verification_note": "Independent NPO with 17-year track record built largely without active contact with Blastbeat global founder Robert Stephenson since 2009. As of June 2026 the global team has re-discovered the Japan chapter and intends to re-establish friendly contact, with an open invitation (no expectation) for them to access the new V2 digital platform if useful. Until they confirm appetite for closer collaboration, public references should celebrate them as an INDEPENDENT chapter, not as a Blastbeat-managed outpost."
+    }
+  ],
+
+  "target": [
+    {
+      "id": "t.namibia.reach",
+      "claim": "Namibia rollout target: 500,000+ students",
+      "canonical_value": 500000,
+      "by_year": 2030,
+      "source_url": "INTERNAL: Namibia programme proposal v3",
+      "last_verified_at": "2026-04-01",
+      "owner": "tumelo",
+      "required_labels": ["target", "projected", "by 2030", "if funded"]
+    },
+    {
+      "id": "t.namibia.investment",
+      "claim": "Namibia investment ask: N$62M+",
+      "canonical_value": 62000000,
+      "currency": "NAD",
+      "by_year": 2030,
+      "source_url": "INTERNAL: Namibia budget v3",
+      "last_verified_at": "2026-04-01",
+      "owner": "tumelo",
+      "required_labels": ["target", "ask", "projected investment"]
+    },
+    {
+      "id": "t.namibia.alignment",
+      "claim": "Namibia alignment intent: NDP6 / Brand Namibia / Vision 2030 / NIPDB partnership pathway",
+      "frameworks_mapped": ["NDP6", "Vision 2030", "Brand Namibia"],
+      "partnership_status": "pathway_only_not_signed",
+      "source_url": "PENDING: NIPDB engagement memo",
+      "last_verified_at": "2026-04-01",
+      "owner": "tumelo",
+      "required_labels": ["proposed", "in development", "pathway"]
+    }
+  ],
+
+  "needs_confirmation": [
+    {
+      "id": "nc.pricing.za-term",
+      "claim_under_review": "R45,000 per term (South Africa schools)",
+      "canonical_value": 45000,
+      "currency": "ZAR",
+      "conflict": "Pricing page on marketing site shows R45,000/yr; internal pricing doc shows R45,000/term; licence terms show R37,500/6mo for MACC-only.",
+      "placeholder_output": "[ZA school pricing — to confirm with Tumelo]",
+      "owner_to_resolve": "tumelo",
+      "raised_at": "2026-06-04"
+    },
+    {
+      "id": "nc.pricing.intl",
+      "claim_under_review": "€2,500/year international licence",
+      "canonical_value": 2500,
+      "currency": "EUR",
+      "conflict": "Internal docs reference €2,500/yr; marketing site references €1,250 for 6-month founding pilot; cohort terms vary.",
+      "placeholder_output": "[International pricing — to confirm with Tumelo]",
+      "owner_to_resolve": "tumelo",
+      "raised_at": "2026-06-04"
+    },
+    {
+      "id": "nc.pricing.unlimited",
+      "claim_under_review": "5-year unlimited school licence USD 5,000–10,000",
+      "canonical_value_range": [5000, 10000],
+      "currency": "USD",
+      "conflict": "Not yet on any commercial schedule; verbal discussion only.",
+      "placeholder_output": "[5-year unlimited licence — pricing TBC]",
+      "owner_to_resolve": "tumelo",
+      "raised_at": "2026-06-04"
+    }
+  ],
+
+  "government_frameworks": [
+    {
+      "id": "gf.za.ndp2030",
+      "country": "ZA",
+      "country_name": "South Africa",
+      "framework": "National Development Plan 2030",
+      "official_name": "National Development Plan 2030: Our Future — Make It Work",
+      "source_url": "https://www.gov.za/issues/national-development-plan-2030",
+      "pillars_relevant_to_blastbeat": ["Economy and employment", "Improving education, training and innovation"],
+      "blastbeat_mapping_status": "DRAFT-READY",
+      "blastbeat_mapping": "BlastBeat ESE addresses NDP Chapter 9 (Improving education) through enterprise-skills curriculum integration, and Chapter 3 (Economy and employment) through real youth-led businesses generating actual revenue.",
+      "authored_by": "tumelo",
+      "reviewed_by": null,
+      "last_verified_at": "2026-06-01",
+      "verifier_action": "allow"
+    },
+    {
+      "id": "gf.za.caps",
+      "country": "ZA",
+      "framework": "CAPS curriculum",
+      "official_name": "Curriculum and Assessment Policy Statement",
+      "source_url": "https://www.education.gov.za/Curriculum/CurriculumAssessmentPolicyStatements(CAPS).aspx",
+      "subjects_relevant_to_blastbeat": ["Business Studies", "Economics and Management Sciences (EMS)", "Life Orientation", "Arts and Culture"],
+      "blastbeat_mapping_status": "DRAFT-READY",
+      "authored_by": "tumelo",
+      "reviewed_by": null,
+      "last_verified_at": "2026-06-01",
+      "verifier_action": "allow"
+    },
+    {
+      "id": "gf.global.un-sdgs",
+      "country": "GLOBAL",
+      "framework": "UN Sustainable Development Goals",
+      "source_url": "https://sdgs.un.org/goals",
+      "goals_relevant_to_blastbeat": [
+        { "n": 4, "name": "Quality Education" },
+        { "n": 5, "name": "Gender Equality" },
+        { "n": 8, "name": "Decent Work and Economic Growth" },
+        { "n": 13, "name": "Climate Action" },
+        { "n": 17, "name": "Partnerships for the Goals" }
+      ],
+      "blastbeat_mapping_status": "DRAFT-READY",
+      "authored_by": "tumelo",
+      "reviewed_by": null,
+      "last_verified_at": "2026-06-01",
+      "verifier_action": "allow"
+    },
+    {
+      "id": "gf.au.agenda2063",
+      "country": "AU",
+      "framework": "AU Agenda 2063",
+      "official_name": "The Africa We Want",
+      "source_url": "https://au.int/en/agenda2063/overview",
+      "aspirations_relevant_to_blastbeat": ["Aspiration 1: Prosperous Africa based on inclusive growth", "Aspiration 6: People-driven development relying on the potential of African people, especially women and youth"],
+      "blastbeat_mapping_status": "DRAFT-READY",
+      "authored_by": "tumelo",
+      "reviewed_by": null,
+      "last_verified_at": "2026-06-01",
+      "verifier_action": "allow"
+    },
+    {
+      "id": "gf.na.ndp6",
+      "country": "NA",
+      "country_name": "Namibia",
+      "framework": "NDP6 / Vision 2030 / Brand Namibia",
+      "source_url": "https://www.npc.gov.na/",
+      "blastbeat_mapping_status": "DRAFT-READY",
+      "authored_by": "tumelo",
+      "reviewed_by": null,
+      "last_verified_at": "2026-04-01",
+      "verifier_action": "allow",
+      "linked_target_fact": "t.namibia.alignment"
+    },
+
+    {
+      "_comment": "Stubs below — structure only. Verifier will REFUSE alignment to these until a human author + reviewer signs off.",
+      "id": "gf.rw.vision2050",
+      "country": "RW",
+      "country_name": "Rwanda",
+      "framework": "Vision 2050 / NST",
+      "official_name": "Vision 2050 and National Strategy for Transformation",
+      "candidate_sources": [
+        "https://www.minecofin.gov.rw/",
+        "Vision 2050 document (search on minecofin.gov.rw)",
+        "Education Sector Strategic Plan 2018/19 – 2023/24 (Ministry of Education)"
+      ],
+      "blastbeat_mapping_status": "STUB-AUTHOR-REQUIRED",
+      "blastbeat_mapping": null,
+      "authored_by": null,
+      "reviewed_by": null,
+      "last_verified_at": null,
+      "verifier_action": "refuse",
+      "verifier_message": "Rwanda framework alignment requires a human policy reviewer to fill in blastbeat_mapping and an Rwandan-context-literate signoff in reviewed_by. Until then any 'aligned with Vision 2050' claim is rejected."
+    },
+    {
+      "id": "gf.gh.beyond-aid",
+      "country": "GH",
+      "country_name": "Ghana",
+      "framework": "Ghana Beyond Aid / Education Strategic Plan 2018-2030",
+      "candidate_sources": [
+        "https://moe.gov.gh/",
+        "Ghana Beyond Aid Charter (Office of the President)",
+        "Education Strategic Plan 2018–2030 (Ministry of Education)"
+      ],
+      "blastbeat_mapping_status": "STUB-AUTHOR-REQUIRED",
+      "blastbeat_mapping": null,
+      "authored_by": null,
+      "reviewed_by": null,
+      "last_verified_at": null,
+      "verifier_action": "refuse",
+      "verifier_message": "Ghana framework alignment requires a human policy reviewer to fill in blastbeat_mapping. Until then any 'aligned with Ghana Beyond Aid' claim is rejected."
+    },
+    {
+      "id": "gf.ng.ndp-2025",
+      "country": "NG",
+      "country_name": "Nigeria",
+      "framework": "National Development Plan 2021-2025 / Education Strategic Plan",
+      "candidate_sources": [
+        "https://www.nationalplanning.gov.ng/",
+        "National Development Plan 2021-2025 (Ministry of Finance, Budget and National Planning)",
+        "Education for Change: A Ministerial Strategic Plan 2018-2022"
+      ],
+      "blastbeat_mapping_status": "STUB-AUTHOR-REQUIRED",
+      "blastbeat_mapping": null,
+      "authored_by": null,
+      "reviewed_by": null,
+      "last_verified_at": null,
+      "verifier_action": "refuse",
+      "verifier_message": "Nigeria framework alignment requires a human policy reviewer. Until then any 'aligned with NDP 2021-2025' claim is rejected."
+    },
+    {
+      "id": "gf.jp.society5",
+      "country": "JP",
+      "country_name": "Japan",
+      "framework": "Society 5.0 / 6th Science, Technology and Innovation Basic Plan",
+      "candidate_sources": [
+        "https://www8.cao.go.jp/cstp/english/society5_0/index.html",
+        "Society 5.0 (Cabinet Office)",
+        "6th Science, Technology and Innovation Basic Plan (Council for Science, Technology and Innovation)"
+      ],
+      "blastbeat_mapping_status": "STUB-AUTHOR-REQUIRED",
+      "blastbeat_mapping": null,
+      "authored_by": null,
+      "reviewed_by": null,
+      "last_verified_at": null,
+      "verifier_action": "refuse",
+      "verifier_message": "Japan framework alignment requires a human policy reviewer (preferably someone from the Japan chapter who has direct context). Until then any 'aligned with Society 5.0' claim is rejected."
+    }
+  ],
+
+  "_known_false": [
+    {
+      "id": "kf.endorsement-fabrications",
+      "pattern": "endorsed by Minister|Minister of Education endorsed|Treasury grant|R200M grant|Royal patronage",
+      "note": "Common LLM fabrication shape. No such endorsements or grants exist. Verifier must hard-flag."
+    },
+    {
+      "id": "kf.partnership-fabrications",
+      "pattern": "partnership with Microsoft|partnership with Google|partnership with Apple|partnership with World Bank",
+      "note": "No such partnerships. Hard-flag."
+    },
+    {
+      "id": "kf.geography-fabrications",
+      "pattern": "operations in (Kenya|Brazil|Argentina|Russia|France) for [0-9]+ year",
+      "note": "Not in lifetime_list. Verifier must reject."
+    },
+    {
+      "id": "kf.award-fabrications",
+      "pattern": "SDG Pioneer Award|UNESCO Award|Nobel Peace.*nominat",
+      "note": "No such awards. Hard-flag."
+    }
+  ]
+}

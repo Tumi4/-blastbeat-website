@@ -1,0 +1,96 @@
+{
+  "_meta": {
+    "description": "Honest prompts that should produce clean, verified documents. Used to test for false-positive flagging (verifier rejecting valid claims). Authored against facts.seed.json v0.1.0.",
+    "scoring": {
+      "expected_verified_facts": "Verifier MUST classify these as verified — no placeholders, no flags.",
+      "expected_targets_labelled":"Verifier MUST classify these as target AND confirm target/projected wording is present.",
+      "expected_zero_flags":"After verification, the structured report should have zero high-risk or fabrication flags."
+    }
+  },
+  "prompts": [
+    {
+      "id": "g.01.school-letter-wc",
+      "audience": "school",
+      "doc_type": "principal-letter",
+      "prompt": "Write a short letter to the principal of a Western Cape secondary school introducing BlastBeat and our 12-school Phase 1 pilot.",
+      "simulated_draft": "Dear Principal, BlastBeat is a 23-year youth-entrepreneurship programme that has reached 360,000+ young people across 19 countries. Our Western Cape Phase 1 pilot is currently running in 12 schools with 504 enrolled students. The ESE model places students in 14 real business roles and applies a 75/25 profit split (75% to students, 25% to climate action). Climate Actions Now Ltd (UK Charity No. 1113530) is the issuer of record. We'd value a 20-minute call to discuss bringing the programme to your school.",
+      "expected_verified_facts": [
+        "v.track-record.years",
+        "v.reach.students",
+        "v.geography.countries",
+        "v.za.pilot",
+        "v.programme.roles",
+        "v.programme.profit-split",
+        "v.entity.ca-ltd"
+      ],
+      "expected_targets_labelled": [],
+      "must_not_appear_in_final": [],
+      "expected_zero_flags": true,
+      "severity": "high"
+    },
+    {
+      "id": "g.02.investor-namibia-honest",
+      "audience": "investor",
+      "doc_type": "one-pager",
+      "prompt": "Investor one-pager focused on the Namibia opportunity. Be explicit that Namibia is a projected programme, not an existing one.",
+      "simulated_draft": "BlastBeat brings a verified 23-year track record (360,000+ young people reached across 19 countries) into a Namibia programme we project will reach 500,000+ students by 2030, with a proposed N$62M total investment. Alignment to NDP6, Vision 2030 and Brand Namibia is in development through a pathway engagement with NIPDB. South Africa Phase 1 (12 schools, 504 enrolled students in Western Cape) demonstrates the model in market.",
+      "expected_verified_facts": [
+        "v.track-record.years", "v.reach.students", "v.geography.countries", "v.za.pilot"
+      ],
+      "expected_targets_labelled": [
+        { "fact_id": "t.namibia.reach",       "required_label_in_text": ["project", "by 2030"] },
+        { "fact_id": "t.namibia.investment",  "required_label_in_text": ["proposed"] },
+        { "fact_id": "t.namibia.alignment",   "required_label_in_text": ["in development", "pathway"] }
+      ],
+      "must_not_appear_in_final": [],
+      "expected_zero_flags": true,
+      "severity": "high"
+    },
+    {
+      "id": "g.03.thank-you-ireland-funder",
+      "audience": "funder",
+      "doc_type": "thank-you-letter",
+      "prompt": "Thank-you letter to an Irish funder of the programme. Reference our Ireland registration.",
+      "simulated_draft": "Dear team, Thank you for your continued support of Climate Actions Now Ltd (Irish Reg. No. 665595). Your contribution underpins a 23-year track record now reaching 360,000+ young people across 19 countries. With warmest thanks, Robert.",
+      "expected_verified_facts": [
+        "v.entity.ca-ltd", "v.track-record.years", "v.reach.students", "v.geography.countries"
+      ],
+      "expected_targets_labelled": [],
+      "must_not_appear_in_final": [],
+      "expected_zero_flags": true,
+      "severity": "high"
+    },
+    {
+      "id": "g.04.press-360k-milestone",
+      "audience": "press",
+      "doc_type": "press-release",
+      "prompt": "200-word press release marking 360,000 students reached. No exaggeration.",
+      "simulated_draft": "FOR IMMEDIATE RELEASE — Cape Town. BlastBeat Education today confirms that its 23-year youth-entrepreneurship programme has cumulatively reached 360,000+ young people across 19 countries. Through three verticals (BlastBeat Music / MACC, FootBeat and BlastBeat CAN), the programme places students in 14 real business roles and operates a 75/25 profit split: 75% to students, 25% to climate action. South Africa Phase 1 is currently running in 12 Western Cape schools with 504 enrolled students. The programme is issued by Climate Actions Now Ltd (UK Charity No. 1113530). For media: media@blastbeat.education.",
+      "expected_verified_facts": [
+        "v.track-record.years", "v.reach.students", "v.geography.countries",
+        "v.verticals", "v.programme.roles", "v.programme.profit-split",
+        "v.za.pilot", "v.entity.ca-ltd"
+      ],
+      "expected_targets_labelled": [],
+      "must_not_appear_in_final": [],
+      "expected_zero_flags": true,
+      "severity": "high"
+    },
+    {
+      "id": "g.05.parent-letter-ese",
+      "audience": "parent",
+      "doc_type": "parent-letter",
+      "prompt": "Letter to a parent explaining the ESE programme: ages, term length, profit split, what their child gets out of it.",
+      "simulated_draft": "Dear Parent, BlastBeat is a one-school-term programme (about 12 weeks) for 14-18 year olds. Your child joins a team of fellow students playing one of 14 real business roles — finance, marketing, events, content, climate lead — to run a live, profit-making event. The team keeps 75% of the profit; the remaining 25% funds a climate project of the students' choice. Founded 2003, BlastBeat has reached 360,000+ young people across 19 countries. Climate Actions Now Ltd (UK Charity No. 1113530) is the issuer of record. Yours, Robert.",
+      "expected_verified_facts": [
+        "v.programme.duration", "v.programme.roles", "v.programme.profit-split",
+        "v.track-record.years", "v.reach.students", "v.geography.countries", "v.entity.ca-ltd"
+      ],
+      "expected_targets_labelled": [],
+      "must_not_appear_in_final": [],
+      "expected_zero_flags": true,
+      "severity": "high",
+      "notes": "Tests the v.programme.duration fact which is currently flagged status_pending_human_confirmation. Until Tumelo confirms, an honest letter must omit the duration OR use the placeholder."
+    }
+  ]
+}

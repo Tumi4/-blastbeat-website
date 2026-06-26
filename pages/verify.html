@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify a Blastbeat Licence | Climate Actions Now</title>
+  <meta name="description" content="Verify the SHA-256 proof on any Blastbeat licence credential. W3C-aligned, tamper-evident — paste the JSON or scan the QR.">
+  <link rel="canonical" href="https://www.blastbeat.education/pages/verify.html">
+  <link rel="alternate" hreflang="en-gb" href="https://www.blastbeat.education/pages/verify.html">
+  <link rel="alternate" hreflang="en-ie" href="https://www.blastbeat.education/pages/verify.html">
+  <link rel="alternate" hreflang="en-za" href="https://www.blastbeat.education/pages/verify.html">
+  <link rel="alternate" hreflang="en" href="https://www.blastbeat.education/pages/verify.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.blastbeat.education/pages/verify.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
+  <link rel="stylesheet" href="/assets/css/gen-z.css">
+  <link rel="stylesheet" href="/assets/css/mobile.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0A0E1A">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:url" content="https://www.blastbeat.education/pages/verify.html">
+  <meta property="og:title" content="Verify a Blastbeat Licence">
+  <meta property="og:description" content="Tamper-evident verification of any Blastbeat licence credential. W3C-aligned, SHA-256 proof.">
+  <meta property="og:image" content="https://www.blastbeat.education/assets/images/bb-students-group.jpg">
+  <meta name="twitter:image" content="https://www.blastbeat.education/assets/images/bb-students-group.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@BlastbeatEdu">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"Verify a Blastbeat Licence","description":"Public verification tool for Blastbeat licence credentials.","isPartOf":{"@type":"WebSite","url":"https://www.blastbeat.education"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.blastbeat.education/"},{"@type":"ListItem","position":2,"name":"Verify","item":"https://www.blastbeat.education/pages/verify.html"}]}
+  </script>
+  <script src="/assets/js/analytics.js"></script>
+  <style>
+    .verify-shell { background: var(--deep-navy); min-height: 100vh; padding-top: calc(var(--nav-height, 80px) + 2.5rem); padding-bottom: 4rem; }
+    .verify-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; align-items: start; max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+    @media (max-width: 880px) { .verify-grid { grid-template-columns: 1fr; gap: 2rem; } }
+    .v-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 2rem; }
+    .v-card h2 { color: white; font-size: 1.3rem; margin: 0 0 0.6rem; }
+    .v-card .lead { color: rgba(255,255,255,0.7); margin: 0 0 1.4rem; font-size: 0.95rem; line-height: 1.6; }
+    .v-input { width: 100%; padding: 0.85rem 1rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); color: white; border-radius: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; }
+    .v-input:focus { outline: 2px solid #6366F1; }
+    textarea.v-input { min-height: 220px; resize: vertical; line-height: 1.5; }
+    .v-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .v-btn { padding: 0.7rem 1.4rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); color: white; font-family: 'DM Sans', sans-serif; font-weight: 600; cursor: pointer; transition: all 0.18s; font-size: 0.92rem; }
+    .v-btn:hover { background: rgba(255,255,255,0.12); }
+    .v-btn.primary { background: linear-gradient(135deg, #6366F1, #FF2D78); border: none; }
+    .v-result { margin-top: 1.5rem; padding: 1.25rem 1.5rem; border-radius: 12px; display: none; }
+    .v-result.show { display: block; }
+    .v-result.ok    { background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.4); color: #B7F4D7; }
+    .v-result.bad   { background: rgba(255,45,120,0.1); border: 1px solid rgba(255,45,120,0.45); color: #FFB3CD; }
+    .v-result.info  { background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.4); color: #C7C8FF; }
+    .v-result h3 { font-size: 1.1rem; margin: 0 0 0.4rem; color: inherit; }
+    .v-result .meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; line-height: 1.7; color: rgba(255,255,255,0.78); margin-top: 0.8rem; word-break: break-all; }
+    .v-result .meta strong { color: white; }
+    .v-id-stamp { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.16em; color: var(--neon-cyan, #00F5FF); margin-bottom: 0.8rem; text-transform: uppercase; }
+    .explainer h3 { color: white; font-size: 0.95rem; margin: 1.25rem 0 0.4rem; }
+    .explainer p { color: rgba(255,255,255,0.7); font-size: 0.88rem; line-height: 1.7; margin: 0 0 0.6rem; }
+    .explainer code { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 4px; color: var(--neon-cyan, #00F5FF); }
+    .pill-row { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+    .pill-row .pill { font-size: 0.7rem; padding: 4px 10px; border-radius: 999px; }
+    .file-zone { border: 1.5px dashed rgba(255,255,255,0.18); border-radius: 12px; padding: 1rem 1.25rem; text-align: center; color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 0.8rem; cursor: pointer; transition: border-color 0.18s, color 0.18s; }
+    .file-zone:hover { border-color: rgba(99,102,241,0.6); color: rgba(255,255,255,0.85); }
+    .file-zone strong { color: var(--neon-cyan, #00F5FF); }
+    .file-zone input { display: none; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <nav class="bb-nav" role="navigation" aria-label="Main navigation">
+    <div class="bb-nav-inner">
+      <a href="/" class="bb-nav-logo">
+        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" width="40" height="40" decoding="async">
+        <span>BLASTBEAT</span>
+      </a>
+      <ul class="bb-nav-links">
+        <li><a href="/pages/programme.html" class="bb-nav-link">Programme</a></li>
+        <li><a href="/pages/for-schools.html" class="bb-nav-link">For Schools</a></li>
+        <li><a href="/pages/licence.html" class="bb-nav-link">Licence</a></li>
+        <li><a href="/pages/about.html" class="bb-nav-link">About</a></li>
+        <li><a href="/pages/impact.html" class="bb-nav-link">Impact</a></li>
+        <li><a href="/pages/partners.html" class="bb-nav-link">Partners</a></li>
+      </ul>
+      <div class="bb-nav-actions">
+        <a href="/pages/contact.html" class="bb-nav-link login-link">Contact</a>
+        <a href="/pages/apply.html" class="btn btn-glow btn-sm">Apply</a>
+      </div>
+      <button class="bb-nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="bb-nav-mobile" aria-hidden="true">
+    <a href="/pages/programme.html">Programme</a>
+    <a href="/pages/for-schools.html">For Schools</a>
+    <a href="/pages/licence.html">Licence</a>
+    <a href="/pages/about.html">About</a>
+    <a href="/pages/impact.html">Impact</a>
+    <a href="/pages/partners.html">Partners</a>
+    <a href="/pages/contact.html">Contact</a>
+    <a href="/pages/apply.html" class="btn btn-glow">Apply</a>
+  </div>
+
+  <main id="main" class="verify-shell">
+    <div style="max-width: 1080px; margin: 0 auto 2rem; padding: 0 1.5rem;">
+      <div class="v-id-stamp" id="ref-stamp">Verify a licence</div>
+      <h1 class="text-chunky" style="font-size: clamp(1.8rem, 4vw, 2.8rem); color: white; margin: 0 0 0.5rem;">Is this Blastbeat licence <span class="text-gradient-vivid">real</span>?</h1>
+      <p style="color: rgba(255,255,255,0.72); font-size: 1.05rem; max-width: 65ch; margin: 0; line-height: 1.6;">
+        Every Blastbeat licence is a W3C-aligned Verifiable Credential with a SHA-256 tamper-evident proof. Anyone can verify any licence here. No login. No registry lookup. Pure cryptography.
+      </p>
+    </div>
+
+    <div class="verify-grid">
+
+      <div class="v-card">
+        <div class="pill-row">
+          <span class="pill" style="background: rgba(184,255,0,0.12); color: var(--neon-lime,#B8FF00); border:1px solid rgba(184,255,0,0.3);">&#10003; W3C Verifiable Credential</span>
+          <span class="pill" style="background: rgba(99,102,241,0.12); color: rgba(255,255,255,0.85); border:1px solid rgba(99,102,241,0.3);">SHA-256 proof</span>
+          <span class="pill" style="background: rgba(255,45,120,0.12); color: #FF7BAA; border:1px solid rgba(255,45,120,0.3);">Tamper-evident</span>
+        </div>
+
+        <h2 id="verify-heading">Paste the credential JSON</h2>
+        <p class="lead" id="verify-lead">
+          Drop the <code style="font-family:'IBM Plex Mono',monospace;font-size:0.82em;background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">.json</code> file from the licence email below, or paste it directly. The verifier recomputes the SHA-256 proof in your browser &mdash; nothing is uploaded anywhere.
+        </p>
+
+        <textarea class="v-input" id="cred-input" placeholder='{"@context":["https://www.w3.org/2018/credentials/v1", ...], "id":"urn:uuid:...", "proof":{"proofValue":"..."}}'></textarea>
+
+        <label class="file-zone" for="file-input">
+          <strong>Choose a .json file</strong> &middot; or drag &amp; drop
+          <input type="file" id="file-input" accept="application/json,.json">
+        </label>
+
+        <div class="v-row">
+          <button class="v-btn primary" id="btn-verify">Verify proof</button>
+          <button class="v-btn" id="btn-sample">Try a sample</button>
+          <button class="v-btn" id="btn-clear">Clear</button>
+        </div>
+
+        <div class="v-result" id="result"></div>
+      </div>
+
+      <aside class="v-card explainer">
+        <h2>How verification works</h2>
+        <p>Every licence is a JSON-LD document with a <code>proof</code> field containing a SHA-256 hash. The hash is computed across the canonicalised credential body (every field, every nested value, sorted by key).</p>
+
+        <h3>To tamper is to break</h3>
+        <p>Change any value in the credential &mdash; one digit in the licence ID, one letter in the school name, one day on the validity window &mdash; and the recomputed hash will no longer match the stored <code>proofValue</code>. Verification fails. The fraud is visible.</p>
+
+        <h3>What the verifier checks</h3>
+        <ol style="color: rgba(255,255,255,0.7); font-size: 0.88rem; line-height: 1.7; margin: 0; padding-left: 1.2rem;">
+          <li>The credential is well-formed JSON-LD with a <code>proof</code> object</li>
+          <li>The <code>proof.type</code> is <code>Sha256Stamp2026</code></li>
+          <li>Recomputing the SHA-256 of the canonicalised body yields the same <code>proofValue</code></li>
+          <li>Reports issuer entity, validity dates, and the holder</li>
+        </ol>
+
+        <h3>Production roadmap</h3>
+        <p>For the founding cohort (2026), <code>Sha256Stamp2026</code> is a content hash &mdash; tamper-evident but not unforgeable. The 2027 issuance schedule moves to <code>Ed25519Signature2020</code> signed by the issuing entity&rsquo;s registered DID, fully unforgeable. The verifier here will keep working for both.</p>
+
+        <h3>Issuing entities</h3>
+        <p>Africa &mdash; Climate Actions Now RSA (Pty) Ltd<br>UK &mdash; Climate Actions Now (UK charity, 1113530)<br>Ireland / Europe &mdash; Climate Actions Now Ltd (665595)</p>
+      </aside>
+
+    </div>
+
+    <div style="max-width: 720px; margin: 3rem auto 0; padding: 0 1.5rem; text-align: center;">
+      <p style="color: rgba(255,255,255,0.55); font-size: 0.85rem;">
+        Verifying for sponsorship due diligence?
+        <a href="/pages/contact.html" style="color: var(--neon-cyan, #00F5FF);">Get the legal bundle from Tumelo &rarr;</a>
+      </p>
+    </div>
+  </main>
+
+  <footer class="bb-footer" style="background: var(--deep-navy);">
+    <div class="container">
+      <div class="grid footer-grid" style="grid-template-columns: 2fr 1fr 1fr; gap: var(--space-10);">
+        <div>
+          <a href="/" class="bb-nav-logo" style="margin-bottom: var(--space-4); display: inline-flex;">
+            <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="36" height="36" loading="lazy" decoding="async">
+            <span style="color: white;">BLASTBEAT</span>
+          </a>
+          <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 320px; color: rgba(255,255,255,0.7);">Every Blastbeat licence is cryptographically verifiable. Paste the JSON, recompute the hash, check the match. No registry needed.</p>
+        </div>
+        <div>
+          <h5>Verify</h5>
+          <ul class="footer-links">
+            <li><a href="/pages/verify.html">Verify a licence</a></li>
+            <li><a href="/pages/licence.html">About the licence</a></li>
+            <li><a href="/pages/contact.html">Legal bundle / audit</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>About</h5>
+          <ul class="footer-links">
+            <li><a href="/pages/about.html">Our Story</a></li>
+            <li><a href="/pages/can.html">Climate Actions Now</a></li>
+            <li><a href="/pages/partners.html">Partners</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom flex justify-between items-center flex-wrap gap-4">
+        <p style="margin: 0; color: rgba(255,255,255,0.62);">&copy; 2026 Climate Actions Now. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="/pages/privacy-policy.html">Privacy</a>
+          <a href="/pages/terms-of-use.html">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/navigation.js" defer></script>
+  <script src="/assets/js/animations.js" defer></script>
+  <script src="/assets/js/cookie-consent.js" defer></script>
+
+  <script>
+  (function () {
+    'use strict';
+    var input  = document.getElementById('cred-input');
+    var result = document.getElementById('result');
+    var file   = document.getElementById('file-input');
+    var stamp  = document.getElementById('ref-stamp');
+
+    // If we arrived via /verify/<id>, surface the ID and pre-explain what to do.
+    var params = new URLSearchParams(window.location.search);
+    var idArg = (params.get('id') || '').trim();
+    if (idArg) {
+      stamp.textContent = 'Verifying licence ' + idArg;
+      document.getElementById('verify-heading').textContent = 'Verifying licence ' + idArg.toUpperCase();
+      document.getElementById('verify-lead').innerHTML = 'You’ve arrived from a licence QR code or printed certificate. To verify the cryptographic proof we need the full JSON credential. Ask the sponsor (or whoever issued the certificate) for the <code style="font-family:\'IBM Plex Mono\',monospace;font-size:0.82em;background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">.json</code> file from the original issuance email &mdash; the same file Blastbeat emailed when this licence was created &mdash; and paste it below.';
+
+      // Admin-device shortcut: if this browser holds the admin store
+      // (bb-admin-data-v1), look up the licence by its short ID and
+      // auto-fill the JSON. Same-origin localStorage is per-browser,
+      // so this only triggers on Robert / Tumi's own machine — no
+      // privacy leak to a sponsor scanning the QR on their phone.
+      try {
+        var raw = localStorage.getItem('bb-admin-data-v1');
+        if (raw) {
+          var store = JSON.parse(raw);
+          var needle = idArg.toLowerCase();
+          var hit = (store.licences || []).find(function (l) {
+            var idClean = (l.id || '').replace('urn:uuid:', '').toLowerCase();
+            return idClean.indexOf(needle) === 0 || idClean.indexOf(needle.replace(/-/g, '')) === 0;
+          });
+          if (hit && hit.vc) {
+            input.value = JSON.stringify(hit.vc, null, 2);
+            document.getElementById('verify-lead').innerHTML = 'Found this licence in your admin store. Pre-filled and ready to verify &mdash; click <strong>Verify proof</strong> to recompute the hash.';
+            setTimeout(verify, 50);
+          }
+        }
+      } catch (e) { /* corrupt store, ignore — manual paste still works */ }
+    }
+
+    function show(kind, html) {
+      result.className = 'v-result show ' + kind;
+      result.innerHTML = html;
+    }
+    function clear() { result.className = 'v-result'; result.innerHTML = ''; }
+    function escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>]/g, function (c){return ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]);}); }
+
+    // Canonicalise — identical algorithm to assets/js/admin.js
+    function canonicalize(obj) {
+      if (obj === null || typeof obj !== 'object') return JSON.stringify(obj);
+      if (Array.isArray(obj)) return '[' + obj.map(canonicalize).join(',') + ']';
+      return '{' + Object.keys(obj).sort().map(function (k) {
+        return JSON.stringify(k) + ':' + canonicalize(obj[k]);
+      }).join(',') + '}';
+    }
+    async function sha256Hex(str) {
+      if (!(window.crypto && crypto.subtle)) throw new Error('Web Crypto API unavailable');
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+    }
+
+    async function verify() {
+      clear();
+      var raw = input.value.trim();
+      if (!raw) { show('info', '<h3>Paste the credential JSON</h3><div>Drop the licence .json file into the textarea, or load a sample.</div>'); return; }
+      var cred;
+      try { cred = JSON.parse(raw); }
+      catch (e) {
+        show('bad', '<h3>&#10007; This is not valid JSON</h3><div>Parse error: ' + escapeHtml(e.message) + '</div>');
+        if (window.bbTrack) window.bbTrack('verify_attempt', { result: 'invalid_json' });
+        return;
+      }
+      if (!cred || typeof cred !== 'object' || !cred.proof || !cred.proof.proofValue) {
+        show('bad', '<h3>&#10007; No proof on this credential</h3><div>The JSON is well-formed but has no <code>proof.proofValue</code> field. This may not be a Blastbeat licence credential.</div>');
+        if (window.bbTrack) window.bbTrack('verify_attempt', { result: 'no_proof' });
+        return;
+      }
+      var stored = cred.proof.proofValue;
+      var body = Object.assign({}, cred); delete body.proof;
+      var recomputed;
+      try { recomputed = await sha256Hex(canonicalize(body)); }
+      catch (e) {
+        show('bad', '<h3>&#10007; Could not compute SHA-256</h3><div>' + escapeHtml(e.message) + '. Modern browsers only.</div>');
+        return;
+      }
+      var matches = recomputed === stored;
+      var sub = cred.credentialSubject || {};
+      var issuer = cred.issuer || {};
+      var meta = ''
+        + '<div class="meta">'
+        + '<div><strong>Licence ID</strong> &middot; ' + escapeHtml(cred.id) + '</div>'
+        + '<div><strong>School</strong> &middot; ' + escapeHtml(sub.schoolName || sub.school || sub.name || '&mdash;') + '</div>'
+        + '<div><strong>Sponsor</strong> &middot; ' + escapeHtml(sub.sponsor || '&mdash;') + '</div>'
+        + '<div><strong>Tier</strong> &middot; ' + escapeHtml(sub.tier || '&mdash;') + '</div>'
+        + '<div><strong>Issuer</strong> &middot; ' + escapeHtml(issuer.name || issuer.id || '&mdash;') + '</div>'
+        + '<div><strong>Issued</strong> &middot; ' + escapeHtml(String(cred.issuanceDate || '').slice(0,10)) + '</div>'
+        + '<div><strong>Valid</strong> &middot; ' + escapeHtml(String(cred.validFrom || '').slice(0,10)) + ' &rarr; ' + escapeHtml(String(cred.validUntil || '').slice(0,10)) + '</div>'
+        + '<div style="margin-top:0.5rem;"><strong>Stored proof</strong> &middot; ' + escapeHtml(stored) + '</div>'
+        + '<div><strong>Recomputed</strong> &middot; ' + escapeHtml(recomputed) + '</div>'
+        + '</div>';
+      if (matches) {
+        show('ok', '<h3>&#10004; Verified &mdash; this licence is authentic</h3><div>The recomputed SHA-256 hash matches the stored proof. No tampering detected since issuance.</div>' + meta);
+        if (window.bbTrack) window.bbTrack('verify_attempt', { result: 'verified', tier: sub.tier || '', region: (issuer.country || '') });
+      } else {
+        show('bad', '<h3>&#10007; Proof does not match &mdash; this credential has been altered</h3><div>The recomputed SHA-256 hash differs from the stored <code>proofValue</code>. At least one field in the credential body has been changed since issuance. Do not trust.</div>' + meta);
+        if (window.bbTrack) window.bbTrack('verify_attempt', { result: 'tampered' });
+      }
+    }
+
+    document.getElementById('btn-verify').addEventListener('click', verify);
+    document.getElementById('btn-clear').addEventListener('click', function () { input.value = ''; clear(); });
+
+    document.getElementById('btn-sample').addEventListener('click', async function () {
+      // Build a verifiable demo credential live, in-browser.
+      var sample = {
+        '@context': ['https://www.w3.org/2018/credentials/v1', 'https://www.blastbeat.education/credentials/v1'],
+        id: 'urn:uuid:demo-0000-0000-0000-aaaa',
+        type: ['VerifiableCredential', 'BlastbeatLicenceCredential'],
+        issuer: { id: 'https://www.blastbeat.education/issuers/can-rsa', name: 'Climate Actions Now RSA (Pty) Ltd', country: 'ZA' },
+        issuanceDate: '2026-06-05T10:00:00.000Z',
+        validFrom: '2026-06-05',
+        validUntil: '2026-12-05',
+        credentialSubject: {
+          schoolName: 'Mitchells Plain Secondary (DEMO)',
+          sponsor: 'Demo Sponsor Ltd',
+          tier: 'Founding Pilot 6-month',
+          rights: 'Full BlastBeat V2 ESE programme access for one school term'
+        }
+      };
+      var hash = await sha256Hex(canonicalize(sample));
+      sample.proof = {
+        type: 'Sha256Stamp2026', created: new Date().toISOString(), verificationMethod: sample.issuer.id, proofPurpose: 'assertionMethod',
+        proofValue: hash,
+        note: 'SHA-256 hash of the canonicalised credential minus the proof field.'
+      };
+      input.value = JSON.stringify(sample, null, 2);
+      verify();
+    });
+
+    file.addEventListener('change', function (e) {
+      var f = e.target.files && e.target.files[0];
+      if (!f) return;
+      var r = new FileReader();
+      r.onload = function () { input.value = String(r.result || ''); verify(); };
+      r.readAsText(f);
+    });
+
+    // Drag-and-drop directly onto the textarea
+    input.addEventListener('dragover', function (e) { e.preventDefault(); });
+    input.addEventListener('drop', function (e) {
+      e.preventDefault();
+      var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if (!f) return;
+      var r = new FileReader();
+      r.onload = function () { input.value = String(r.result || ''); verify(); };
+      r.readAsText(f);
+    });
+
+    if (window.bbTrack) window.bbTrack('verify_page_view', { id: idArg || '(no-id)' });
+  })();
+  </script>
+</body>
+</html>

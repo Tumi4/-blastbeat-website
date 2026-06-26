@@ -1,0 +1,89 @@
+name: CI — audit + perf
+
+on:
+  push:
+    branches: [main, claude/**]
+  pull_request:
+    branches: [main]
+
+jobs:
+  audit:
+    name: Static audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run audit suite
+        run: python3 tests/audit.py
+
+  playwright:
+    name: Playwright (perf + a11y)
+    runs-on: ubuntu-latest
+    needs: audit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright browser (Chromium)
+        run: npx playwright install --with-deps chromium
+      # Visual-regression screenshots are a local tool (npm run test:screenshots) —
+      # they need committed baselines and a stable render environment, so CI runs
+      # only the deterministic perf + a11y suite, on Chromium-based projects.
+      - name: Run perf + a11y tests
+        run: npx playwright test tests/perf.spec.ts --project=desktop --project=pixel-7
+      - name: Run mobile audit (touch targets, horizontal scroll, iOS zoom)
+        run: npx playwright test tests/mobile-audit.spec.ts --project=pixel-7
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
+
+  videos:
+    name: Video health (oEmbed probe)
+    runs-on: ubuntu-latest
+    needs: audit
+    # Depends on YouTube being reachable; mark informational so a transient
+    # rate-limit doesn't block a merge. The script logs every dead embed,
+    # so the PR check still surfaces real problems clearly.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Probe every YouTube embed
+        run: node tests/video-health.mjs
+
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    needs: audit
+    # Informational: shared CI runners vary, and inline PR comments need the
+    # LHCI GitHub App token. Keep it running for the report without blocking merges.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install LHCI
+        run: npm install -g @lhci/cli@0.14.x
+      - name: Run Lighthouse CI
+        run: lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
