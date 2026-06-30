@@ -27,6 +27,10 @@
 
    ============================================================ */
 
+// The live Blastbeat V2 app (Trixta-hosted). Single source of truth for the
+// "Get started" link in the demo auto-reply — change here if the URL moves.
+const DEMO_APP_URL = process.env.DEMO_APP_URL || 'https://trx-3675.devspace.trixta.io/';
+
 export default async function handler(req) {
   let body;
   try { body = await req.json(); } catch { return new Response('bad json', { status: 400 }); }
@@ -123,13 +127,17 @@ const routesByForm = {
 
     return {
       autoReply: {
-        subject: 'Your Blastbeat demo access — coming within one business day',
+        subject: 'You’re in — launch your Blastbeat V2 demo',
         html: wrap(`
           <p>Hi ${safe(nameFirst)},</p>
           <p>Thanks for asking for a look at Blastbeat V2. ${flavour}</p>
-          <p><strong>What happens next:</strong> Robert or Tumelo will reply personally within one business day with your access code and a short note. No drip sequences, no sales calls unless you ask for one.</p>
-          <p>The code logs in at <a href="https://demo.blastbeat.com">demo.blastbeat.com</a>. You walk it at your own pace.</p>
-          <p>If anything is urgent or you don&rsquo;t hear back, WhatsApp Tumelo on <a href="https://wa.me/27738048409">+27 73 804 8409</a>.</p>
+          <p>You can step straight into the live app now:</p>
+          <p style="text-align:center;margin:28px 0;">
+            <a href="${DEMO_APP_URL}" style="display:inline-block;background:linear-gradient(135deg,#6366F1,#A855F7,#FF2D78);color:#ffffff;text-decoration:none;font-weight:800;font-size:16px;padding:14px 32px;border-radius:999px;font-family:Helvetica,Arial,sans-serif;">&#128640; Get started &mdash; launch the app</a>
+          </p>
+          <p style="font-size:13px;color:#666;text-align:center;">Or paste this into your browser: <a href="${DEMO_APP_URL}">${DEMO_APP_URL}</a></p>
+          <p><strong>What happens next:</strong> Robert or Tumelo will also reply personally within one business day with a short note on what we&rsquo;d most like you to look at. No drip sequences, no sales calls unless you ask for one.</p>
+          <p>If anything is urgent, WhatsApp Tumelo on <a href="https://wa.me/27738048409">+27 73 804 8409</a>.</p>
           <p>Warmly,<br>The Blastbeat team</p>
         `),
       },
