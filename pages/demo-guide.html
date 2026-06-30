@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Demo Guide | Blastbeat Education</title>
+  <meta name="description" content="Internal presenter run-sheet: the order to walk a live Blastbeat demo, with one-click links to the content, the proof and the app journey.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#6366F1">
+  <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
+  <link rel="stylesheet" href="/assets/css/gen-z.css">
+  <link rel="stylesheet" href="/assets/css/mobile.css">
+  <style>
+    body { background: var(--deep-navy, #0F0F1A); color: white; }
+    .dg-wrap { max-width: 900px; margin: 0 auto; padding: calc(72px + 2.5rem) 1.25rem 4rem; }
+    .dg-kicker { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--neon-cyan, #00F5FF); }
+    .dg-title { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.05; margin: 0.6rem 0 0.75rem;
+      background: linear-gradient(135deg, #6366F1, #A855F7, #FF2D78); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .dg-lede { color: rgba(255,255,255,0.7); font-size: 1.02rem; line-height: 1.6; max-width: 640px; }
+    .dg-note { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem; padding: 0.5rem 0.9rem; border-radius: 999px;
+      background: rgba(255,107,53,0.12); border: 1px solid rgba(255,107,53,0.3); color: #FFC9A8; font-size: 0.78rem; }
+
+    .dg-step { margin-top: 2.5rem; }
+    .dg-step-head { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1rem; }
+    .dg-num { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #6366F1, #FF2D78);
+      display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 800; color: white; }
+    .dg-step-head h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; margin: 0; color: white; }
+    .dg-step-head p { margin: 2px 0 0; color: rgba(255,255,255,0.55); font-size: 0.85rem; }
+
+    .dg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.85rem; }
+    .dg-link {
+      display: flex; flex-direction: column; gap: 0.35rem;
+      padding: 1.1rem 1.25rem; border-radius: 14px; text-decoration: none;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      min-height: 44px;
+    }
+    .dg-link:hover { transform: translateY(-2px); border-color: rgba(168,85,247,0.55); background: rgba(168,85,247,0.08); }
+    .dg-link .t { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; color: white; font-weight: 700; font-size: 0.98rem; }
+    .dg-link .t .arrow { color: var(--neon-cyan, #00F5FF); font-weight: 600; }
+    .dg-link .d { color: rgba(255,255,255,0.6); font-size: 0.82rem; line-height: 1.45; }
+
+    .dg-cta {
+      display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem;
+      padding: 1rem 2rem; border-radius: 999px; text-decoration: none; color: white;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1rem; min-height: 52px;
+      background: linear-gradient(135deg, #6366F1, #A855F7, #FF2D78); background-size: 200% 200%;
+      box-shadow: 0 14px 40px -10px rgba(168,85,247,0.6); transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .dg-cta:hover { transform: translateY(-2px); box-shadow: 0 20px 52px -10px rgba(168,85,247,0.75); color: white; }
+
+    .dg-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.85rem; }
+    .dg-fact { padding: 1.1rem 1.25rem; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); }
+    .dg-fact .n { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.7rem; color: white; line-height: 1; }
+    .dg-fact .l { color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 0.35rem; line-height: 1.4; }
+    .dg-fact .src { color: rgba(255,255,255,0.35); font-size: 0.68rem; margin-top: 0.4rem; font-family: 'IBM Plex Mono', monospace; }
+
+    .dg-say { background: rgba(99,102,241,0.08); border-left: 3px solid rgba(99,102,241,0.5); border-radius: 0 12px 12px 0;
+      padding: 0.85rem 1.1rem; color: rgba(255,255,255,0.78); font-size: 0.9rem; line-height: 1.55; margin-top: 1rem; }
+    .dg-say strong { color: white; }
+    .dg-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 3rem 0 0; }
+    .dg-foot { color: rgba(255,255,255,0.35); font-size: 0.78rem; text-align: center; margin-top: 1.5rem; }
+  </style>
+  <script src="/assets/js/analytics.js"></script>
+</head>
+<body>
+  <nav class="bb-nav" role="navigation" aria-label="Main navigation">
+    <div class="bb-nav-inner">
+      <a href="/" class="bb-nav-logo">
+        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" width="40" height="40" decoding="async">
+        <span>BLASTBEAT</span>
+      </a>
+      <div class="bb-nav-actions">
+        <a href="/pages/demo.html" class="btn btn-glow btn-sm">Demo signup</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" class="dg-wrap">
+    <header>
+      <span class="dg-kicker">Internal &middot; presenter run-sheet</span>
+      <h1 class="dg-title">Live Demo Guide</h1>
+      <p class="dg-lede">The order to walk a live demo &mdash; content first, then the proof, then the app journey. Every button below opens the <strong style="color:#fff;">live site</strong> in a new tab, so you can click straight through while you talk.</p>
+      <span class="dg-note">&#128161; Keep this tab open and click each card as you go.</span>
+    </header>
+
+    <!-- 1. OPEN -->
+    <section class="dg-step">
+      <div class="dg-step-head">
+        <div class="dg-num">1</div>
+        <div><h2>Open with the story</h2><p>Who we are, in 60 seconds.</p></div>
+      </div>
+      <div class="dg-say"><strong>Say:</strong> &ldquo;Blastbeat has run real youth Event Social Enterprises for 23+ years across 11 countries. Students start mini music companies; 75% of the profit goes to climate action. We&rsquo;re now putting the whole licence on a verifiable platform.&rdquo;</div>
+      <div class="dg-grid" style="margin-top:1rem;">
+        <a class="dg-link" href="https://blastbeat.education/pages/about.html" target="_blank" rel="noopener">
+          <span class="t">Our story <span class="arrow">open &#8599;</span></span>
+          <span class="d">The 23-year history and the people behind it.</span>
+        </a>
+        <a class="dg-link" href="https://blastbeat.education/pages/international.html" target="_blank" rel="noopener">
+          <span class="t">11 countries <span class="arrow">open &#8599;</span></span>
+          <span class="d">Global footprint &mdash; including the Japan chapter (17 years independent).</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. SHOW THE CONTENT -->
+    <section class="dg-step">
+      <div class="dg-step-head">
+        <div class="dg-num">2</div>
+        <div><h2>Show the content (CAN Music + the CAN angle)</h2><p>This is the &ldquo;wow&rdquo; &mdash; real films, real students.</p></div>
+      </div>
+      <div class="dg-grid">
+        <a class="dg-link" href="https://blastbeat.education/pages/see-it-in-action.html" target="_blank" rel="noopener">
+          <span class="t">&#127916; The film library <span class="arrow">open &#8599;</span></span>
+          <span class="d">54 films in themed rooms &mdash; lead here. Filter to Music &amp; Arts or Climate Action live.</span>
+        </a>
+        <a class="dg-link" href="https://blastbeat.education/pages/can.html" target="_blank" rel="noopener">
+          <span class="t">&#127807; CAN Music <span class="arrow">open &#8599;</span></span>
+          <span class="d">The Climate Actions Now music angle &mdash; the heart of the pitch.</span>
+        </a>
+        <a class="dg-link" href="https://blastbeat.education/pages/macc.html" target="_blank" rel="noopener">
+          <span class="t">&#127928; MACC <span class="arrow">open &#8599;</span></span>
+          <span class="d">Music &amp; Climate Change &mdash; the flagship vertical.</span>
+        </a>
+        <a class="dg-link" href="https://blastbeat.education/pages/footbeat.html" target="_blank" rel="noopener">
+          <span class="t">&#9917; FootBeat <span class="arrow">open &#8599;</span></span>
+          <span class="d">The sport + enterprise lane, for clubs and federations.</span>
+        </a>
+        <a class="dg-link" href="https://blastbeat.education/pages/projects.html" target="_blank" rel="noopener">
+          <span class="t">&#127909; CAN projects <span class="arrow">open &#8599;</span></span>
+          <span class="d">Project gallery &mdash; what cohorts actually produce.</span>
+        </a>
+        <a class="dg-link" href="https://blastbeat.education/pages/media.html" target="_blank" rel="noopener">
+          <span class="t">&#128240; Media room <span class="arrow">open &#8599;</span></span>
+          <span class="d">Press coverage and the public-facing story.</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 3. SHOW THE PROOF -->
+    <section class="dg-step">
+      <div class="dg-step-head">
+        <div class="dg-num">3</div>
+        <div><h2>Show the proof</h2><p>Impact you can audit, not just market.</p></div>
+      </div>
+      <div class="dg-say"><strong>Say:</strong> &ldquo;Every licence is a W3C Verifiable Credential, SHA-256 stamped. The impact is auditable &mdash; here&rsquo;s how a sponsor checks it.&rdquo;</div>
+      <div class="dg-grid" style="margin-top:1rem;">
+        <a class="dg-link" href="https://blastbeat.education/pages/impact.html" target="_blank" rel="noopener">
+          <span class="t">&#128202; Impact <span class="arrow">open &#8599;</span></span>
+          <span class="d">23+ years, 75% profit to climate, the real roster.</span>
+        </a>
+        <a class="dg-link" href="https://blastbeat.education/pages/licence.html" target="_blank" rel="noopener">
+          <span class="t">&#128220; The Licence <span class="arrow">open &#8599;</span></span>
+          <span class="d">The product &mdash; certificate frames and the standards it maps to.</span>
+        </a>
+        <a class="dg-link" href="https://blastbeat.education/pages/verify.html" target="_blank" rel="noopener">
+          <span class="t">&#9989; Verify a licence <span class="arrow">open &#8599;</span></span>
+          <span class="d">Show the credential being verified, live.</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 4. THE APP JOURNEY -->
+    <section class="dg-step">
+      <div class="dg-step-head">
+        <div class="dg-num">4</div>
+        <div><h2>The app journey (site &rarr; click &rarr; app)</h2><p>The money shot &mdash; walk it end to end.</p></div>
+      </div>
+      <div class="dg-say"><strong>Walk it:</strong> open the demo signup &rarr; fill the short form &rarr; you land on a &ldquo;Get started&rdquo; button &rarr; click it &rarr; you&rsquo;re inside the live Blastbeat V2 app. The same button also arrives by email.</div>
+      <div class="dg-grid" style="margin-top:1rem;">
+        <a class="dg-link" href="https://blastbeat.education/demo" target="_blank" rel="noopener">
+          <span class="t">&#9889; Demo signup page <span class="arrow">open &#8599;</span></span>
+          <span class="d">Start here. Fill it in live to show the hand-off.</span>
+        </a>
+        <a class="dg-link" href="https://trx-3675.devspace.trixta.io/" target="_blank" rel="noopener">
+          <span class="t">&#128640; The live app <span class="arrow">open &#8599;</span></span>
+          <span class="d">Blastbeat V2, built with Trixta. Where the &ldquo;Get started&rdquo; button lands.</span>
+        </a>
+      </div>
+      <p style="margin-top:1.25rem;">
+        <a class="dg-cta" href="https://blastbeat.education/demo" target="_blank" rel="noopener">&#9889; Jump to the demo signup</a>
+      </p>
+    </section>
+
+    <!-- 5. KEY NUMBERS -->
+    <section class="dg-step">
+      <div class="dg-step-head">
+        <div class="dg-num">5</div>
+        <div><h2>Numbers to have ready</h2><p>All verifiable &mdash; safe to say out loud.</p></div>
+      </div>
+      <div class="dg-facts">
+        <div class="dg-fact"><div class="n">23+</div><div class="l">years running real youth ESEs</div></div>
+        <div class="dg-fact"><div class="n">11</div><div class="l">countries</div></div>
+        <div class="dg-fact"><div class="n">75%</div><div class="l">of profit to climate action</div></div>
+        <div class="dg-fact"><div class="n">21</div><div class="l">schools on the current roster</div><div class="src">+ 8 sponsors, 9 licences</div></div>
+        <div class="dg-fact"><div class="n">~900</div><div class="l">Japan alumni (17 yrs independent)</div><div class="src">122 mini music companies</div></div>
+        <div class="dg-fact"><div class="n">1st</div><div class="l">founding licence: Tekkers &rarr; Rhodes High</div><div class="src">Cape Town</div></div>
+      </div>
+    </section>
+
+    <hr class="dg-divider">
+    <p class="dg-foot">Internal run-sheet &middot; not indexed &middot; &copy; 2026 Climate Actions Now</p>
+  </main>
+
+  <script src="/assets/js/navigation.js" defer></script>
+</body>
+</html>

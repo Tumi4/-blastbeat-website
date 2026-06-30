@@ -36,6 +36,12 @@
   to = "/pages/demo.html"
   status = 200
 
+# Internal presenter run-sheet (noindex) — clean URL for live demo calls.
+[[redirects]]
+  from = "/demo-guide"
+  to = "/pages/demo-guide.html"
+  status = 200
+
 # Security headers
 [[headers]]
   for = "/*"
