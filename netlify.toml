@@ -28,9 +28,9 @@
   to = "/pages/verify.html?id=:splat"
   status = 200
 
-# Demo access landing — clean URL for the request-access form. The actual
-# Blastbeat V2 app lives at demo.blastbeat.com (Trixta-hosted); this is the
-# gating layer where Robert + Tumelo issue codes by hand.
+# Demo access landing — clean URL for the request-access form. After signup
+# the lead is sent straight to the live Blastbeat V2 app (Trixta-hosted at
+# trx-3675.devspace.trixta.io); Robert + Tumelo follow up personally by email.
 [[redirects]]
   from = "/demo"
   to = "/pages/demo.html"
@@ -46,7 +46,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.iframe.ly https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://i.ytimg.com https://*.ytimg.com https://*.ggpht.com https://irp.cdn-website.com https://*.cdn-website.com https://drive.google.com https://*.googleusercontent.com https://cdn.iframe.ly https://api.qrserver.com https://www.googletagmanager.com https://*.google-analytics.com https://www.google.com https://www.google.co.uk https://www.google.co.za https://www.google.ie; connect-src 'self' https://cdn.iframe.ly https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net https://demo.blastbeat.com https://app.blastbeat.com; frame-src 'self' https://drive.google.com https://www.youtube.com https://www.youtube-nocookie.com https://youtube.com https://cdn.iframe.ly https://*.iframe.ly https://www.googletagmanager.com https://demo.blastbeat.com https://app.blastbeat.com; media-src 'self' https://drive.google.com; frame-ancestors 'self'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.iframe.ly https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://i.ytimg.com https://*.ytimg.com https://*.ggpht.com https://irp.cdn-website.com https://*.cdn-website.com https://drive.google.com https://*.googleusercontent.com https://cdn.iframe.ly https://api.qrserver.com https://www.googletagmanager.com https://*.google-analytics.com https://www.google.com https://www.google.co.uk https://www.google.co.za https://www.google.ie; connect-src 'self' https://cdn.iframe.ly https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net https://demo.blastbeat.com https://app.blastbeat.com https://trx-3675.devspace.trixta.io https://*.devspace.trixta.io; frame-src 'self' https://drive.google.com https://www.youtube.com https://www.youtube-nocookie.com https://youtube.com https://cdn.iframe.ly https://*.iframe.ly https://www.googletagmanager.com https://demo.blastbeat.com https://app.blastbeat.com https://trx-3675.devspace.trixta.io https://*.devspace.trixta.io; media-src 'self' https://drive.google.com; frame-ancestors 'self'; upgrade-insecure-requests"
 
 # Cache static assets (1 year)
 [[headers]]

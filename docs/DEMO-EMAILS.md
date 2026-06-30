@@ -1,18 +1,28 @@
 # Demo signup — email flow
 
-The signup form at **blastbeat.education/demo** drops submissions into the
-Netlify Forms inbox. From there two emails fire automatically (see
-`netlify/functions/submission-created.mjs`):
+**Flow (updated):** the signup form at **blastbeat.education/demo** sends the
+lead straight to a thank-you page (`demo-thank-you.html`) with a **"Get started
+— launch the app"** button pointing at the live Blastbeat V2 app
+(**https://trx-3675.devspace.trixta.io/**). Access is *instant* — no waiting for
+a hand-issued code.
 
-1. **Auto-reply to the submitter** — confirms the request, sets the
-   one-business-day expectation, and (audience-aware) hints what kind of
-   demo we'll send them into.
+The submission also drops into the Netlify Forms inbox, and two emails fire
+automatically (see `netlify/functions/submission-created.mjs`):
+
+1. **Auto-reply to the submitter** — confirms the request and carries the
+   same **"Get started" button** to the app, plus an audience-aware line on
+   what to look at first.
 2. **Team alert to Robert + Tumelo** — a structured summary with the
-   audience tag and the submitter's focus, so the right person can pick
-   it up.
+   audience tag and the submitter's focus, so the right person can follow up.
 
-Robert or Tumelo then send the **welcome-with-code** email (templates
-below) personally, including the actual access code Trixta has issued.
+Robert or Tumelo can then send a **personal welcome note** (templates below) —
+no longer required for access, but a nice human touch and a chance to offer a
+walk-through call.
+
+> **The app URL lives in two places:** `DEMO_APP_URL` at the top of
+> `netlify/functions/submission-created.mjs` (override with a `DEMO_APP_URL`
+> env var) and the button `href` in `demo-thank-you.html`. Update both if the
+> Trixta URL changes.
 
 ## Setup checklist (one-time, 10 minutes)
 
@@ -87,7 +97,7 @@ Subject: **Your Blastbeat V2 access — code inside**
 >
 > Welcome — your access code is **{CODE}**.
 >
-> Log in at **demo.blastbeat.com** with that code. You're in as an Educator,
+> Log in at **trx-3675.devspace.trixta.io** with that code. You're in as an Educator,
 > which means you can also switch to a Student view to see what your cohort
 > would see. The demo cohort is a real anonymised team running a real event;
 > nothing is faked.
@@ -113,7 +123,7 @@ Subject: **Your Blastbeat V2 access — code inside**
 >
 > Welcome — your access code is **{CODE}**.
 >
-> Log in at **demo.blastbeat.com**. You're in as an Educator (so you can
+> Log in at **trx-3675.devspace.trixta.io**. You're in as an Educator (so you can
 > see everything), but I'd start at the **credential** screen — every cohort
 > sits inside a W3C Verifiable Credential issued by Climate Actions Now.
 > Scan the QR or open verify.blastbeat.education/{credential-id} to see
@@ -137,7 +147,7 @@ Subject: **Your Blastbeat V2 access — code inside**
 >
 > Welcome — your access code is **{CODE}**.
 >
-> Log in at **demo.blastbeat.com**. You're in as an Educator. From your
+> Log in at **trx-3675.devspace.trixta.io**. You're in as an Educator. From your
 > seat the most useful screens are likely:
 >
 > 1. The **framework alignment** view — how cohorts map to local
@@ -160,7 +170,7 @@ Subject: **Your Blastbeat V2 access + press brief**
 >
 > Welcome — your access code is **{CODE}**.
 >
-> The demo lives at **demo.blastbeat.com**. The short brief is below; the
+> The demo lives at **trx-3675.devspace.trixta.io**. The short brief is below; the
 > longer doc is attached.
 >
 > **The story in one sentence:** Twenty-three years of running real youth
@@ -185,7 +195,7 @@ Subject: **Your Blastbeat V2 access — code inside**
 >
 > Welcome — your access code is **{CODE}**.
 >
-> Log in at **demo.blastbeat.com**. The clearest view of what your child
+> Log in at **trx-3675.devspace.trixta.io**. The clearest view of what your child
 > would actually do, week by week, is in the **Student journey** screen —
 > click any role to see what that student's term looks like.
 >

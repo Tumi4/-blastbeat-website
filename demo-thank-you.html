@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You're in — launch the Blastbeat V2 demo | Blastbeat Education</title>
+  <meta name="description" content="Thanks for requesting Blastbeat V2 demo access. Launch the live app now, and watch your inbox for a personal note.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#6366F1">
+  <link rel="stylesheet" href="/assets/css/blastbeat-design-system.css">
+  <link rel="stylesheet" href="/assets/css/gen-z.css">
+  <link rel="stylesheet" href="/assets/css/mobile.css">
+  <style>
+    body { background: var(--deep-navy, #0F0F1A); color: white; min-height: 100vh; display: flex; flex-direction: column; }
+    .ty-main {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 5rem 1.5rem; text-align: center;
+      position: relative; overflow: hidden;
+      padding-top: calc(72px + 4rem);
+    }
+    .ty-main::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 30% 40%, rgba(99,102,241,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 45% at 75% 65%, rgba(255,45,120,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .ty-card {
+      position: relative; z-index: 1;
+      max-width: 560px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .ty-icon {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(168,85,247,0.25));
+      border: 2px solid rgba(99,102,241,0.45);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+    }
+    .ty-card h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #6366F1, #A855F7, #FF2D78);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .ty-card p { color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 0.75rem; font-size: 0.97rem; }
+    /* The hero launch button — the whole point of this page */
+    .launch-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      margin: 1.75rem 0 0.5rem;
+      padding: 1.1rem 2.4rem;
+      border-radius: 999px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800; font-size: 1.05rem;
+      text-decoration: none; color: white;
+      background: linear-gradient(135deg, #6366F1, #A855F7, #FF2D78);
+      background-size: 200% 200%;
+      box-shadow: 0 16px 44px -8px rgba(168,85,247,0.6), 0 0 0 1px rgba(255,255,255,0.12) inset;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      min-height: 56px;
+      animation: launch-shift 7s ease-in-out infinite;
+    }
+    @keyframes launch-shift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .launch-btn:hover { transform: translateY(-3px); box-shadow: 0 22px 56px -8px rgba(168,85,247,0.75), 0 0 0 1px rgba(255,255,255,0.2) inset; color: white; }
+    .launch-note { color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 0.4rem; }
+    .ty-divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 2rem 0 1.5rem; }
+    .ty-explore-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 1rem; }
+    .ty-actions { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
+    .ty-btn {
+      display: inline-flex; align-items: center; min-height: 44px;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 700; font-size: 0.85rem;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+      font-family: 'DM Sans', sans-serif;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.85);
+    }
+    .ty-btn:hover { background: rgba(255,255,255,0.13); color: white; transform: translateY(-1px); }
+    .ty-footer { text-align: center; padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+  </style>
+  <script src="/assets/js/analytics.js"></script>
+</head>
+<body>
+  <nav class="bb-nav" role="navigation" aria-label="Main navigation">
+    <div class="bb-nav-inner">
+      <a href="/" class="bb-nav-logo">
+        <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat Education logo" width="40" height="40" decoding="async">
+        <span>BLASTBEAT</span>
+      </a>
+      <div class="bb-nav-actions">
+        <a href="/pages/see-it-in-action.html" class="btn btn-glow btn-sm">Watch the films</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" class="ty-main">
+    <div class="ty-card">
+      <div class="ty-icon" aria-hidden="true">&#9889;</div>
+      <h1>You&rsquo;re in. Launch the demo.</h1>
+      <p>Thanks for requesting access to <strong style="color:white;">Blastbeat V2</strong>. You can step into the live app right now &mdash; and Robert or Tumelo will follow up personally by email with a short note on what to look at first.</p>
+
+      <a href="https://trx-3675.devspace.trixta.io/" class="launch-btn" target="_blank" rel="noopener" id="launch-app">
+        &#128640; Get started &mdash; launch the app
+      </a>
+      <p class="launch-note">Opens the live Blastbeat V2 platform in a new tab.</p>
+
+      <hr class="ty-divider">
+      <p class="ty-explore-label">While you&rsquo;re here</p>
+      <div class="ty-actions">
+        <a href="/pages/see-it-in-action.html" class="ty-btn">&#127916; The film library</a>
+        <a href="/pages/can.html" class="ty-btn">&#127807; CAN Music</a>
+        <a href="/pages/media.html" class="ty-btn">&#128240; Media room</a>
+        <a href="/pages/impact.html" class="ty-btn">&#128202; Impact</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="ty-footer">
+    &copy; 2026 Climate Actions Now &middot; built with Trixta
+  </footer>
+
+  <script src="/assets/js/navigation.js" defer></script>
+  <script src="/assets/js/beat-bot.js" defer></script>
+  <script>
+    // Fire a conversion event when the lead launches the app, so the
+    // site → app hand-off is measurable once GTM/GA is live.
+    document.getElementById('launch-app')?.addEventListener('click', function () {
+      if (typeof bbTrack === 'function') bbTrack('demo_app_launched', { from: 'demo-thank-you' });
+    });
+  </script>
+</body>
+</html>
