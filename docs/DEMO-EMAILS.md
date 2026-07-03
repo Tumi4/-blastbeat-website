@@ -66,20 +66,20 @@ nothing and guarantees Robert sees every submission.
 
 The function picks one of these flavours based on the audience dropdown:
 
-| Audience | Flavour line |
+| Audience | Flavour line (access is instant — these steer what to look at FIRST) |
 |---|---|
-| Principal / Head Teacher | "We'll send a code that opens the educator side so you can see what the cohort actually sees." |
-| HOD / Curriculum lead | "We'll send a code that surfaces the role-and-curriculum map first." |
-| Teacher / Facilitator | "...drops you into the cohort dashboard the way a facilitator uses it." |
-| Sports club / Federation | "...the FootBeat lane so you can walk the tournament + business side." |
-| Sponsor / CSR / ESG | "...highlights the credential, the impact report and the 75/25 climate split." |
-| Foundation / Funder | "...highlights the audit trail, the verifiable credential and the climate ring-fence." |
-| Government / Ministry | "...highlights the framework alignment and the SDG mapping." |
-| Journalist / Researcher | "...a code and a short brief covering history, real numbers and a few case studies." |
-| Education consultant | "...a short brief on the curriculum mapping you can show your clients." |
-| Parent | "...a short note explaining what your child would actually do, week by week." |
-| Student (18+) | "...straight into the student view." |
-| Other | "...with a short note about what we think will be most useful." |
+| Principal / Head Teacher | "Start on the educator side so you can see exactly what your cohort would see." |
+| HOD / Curriculum lead | "Start with the role-and-curriculum map." |
+| Teacher / Facilitator | "Start in the cohort dashboard, the way a facilitator uses it week to week." |
+| Sports club / Federation | "Head for the FootBeat lane to walk the tournament + business side." |
+| Sponsor / CSR / ESG | "Start with the credential, the impact report and the climate ring-fence." |
+| Foundation / Funder | "Start with the audit trail, the verifiable credential and the climate ring-fence." |
+| Government / Ministry | "Start with the framework alignment and the SDG mapping." |
+| Journalist / Researcher | "Start anywhere — follow-up brief covers history, real numbers, case studies." |
+| Education consultant | "Start with the curriculum mapping — the view you can show your clients." |
+| Parent | "Start with the student journey — what your child would actually do, week by week." |
+| Student (18+) | "Head straight into the student view." |
+| Other | "Start anywhere — follow-up covers what's most useful for your context." |
 
 Robert/Tumelo can edit any of these by editing
 `netlify/functions/submission-created.mjs` — the `flavour` map.

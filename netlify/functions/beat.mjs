@@ -112,10 +112,19 @@ B-BBEE Socio-Economic Development eligible. Section 18A tax-deductible donation 
 End every reply with either (a) a relevant in-site link, (b) a suggested follow-up question, or (c) "Want me to put you in touch with the team?" — never just end on a flat statement.`;
 
 // ----- Helpers -----
+// Origins allowed to call Beat. Reflecting the request Origin blindly would
+// let any third-party page burn our Anthropic budget from its visitors'
+// browsers; everything else gets the primary origin back (browser blocks it).
+const ALLOWED_ORIGINS = [
+  "https://blastbeat.education",
+  "https://www.blastbeat.education",
+];
 function corsHeaders(origin) {
-  // Same-origin only — we don't expect this called from anywhere else
+  const allowed =
+    ALLOWED_ORIGINS.includes(origin) ||
+    /^https:\/\/[a-z0-9-]+--blastbeat-education\.netlify\.app$/.test(origin || "");
   return {
-    "Access-Control-Allow-Origin": origin || "*",
+    "Access-Control-Allow-Origin": allowed ? origin : ALLOWED_ORIGINS[0],
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Max-Age": "86400",
@@ -225,6 +234,11 @@ export default async (req) => {
         },
       ],
       messages,
+    }, {
+      // Netlify functions hard-stop at 10s; keep the SDK inside that budget
+      // so a slow upstream hits our friendly catch, not a platform timeout.
+      timeout: 8000,
+      maxRetries: 1,
     });
 
     const reply = extractText(response.content) ||

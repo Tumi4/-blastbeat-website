@@ -56,7 +56,8 @@
   // Listen for future consent changes
   window.addEventListener('bb:consent', function (e) {
     var choice = e && e.detail && e.detail.choice;
-    if (choice === 'accept' || choice === 'accepted-all') {
+    // cookie-consent.js dispatches 'accepted' / 'rejected'
+    if (choice === 'accepted' || choice === 'accept' || choice === 'accepted-all') {
       gtag('consent', 'update', {
         ad_storage: 'granted',
         ad_user_data: 'granted',
