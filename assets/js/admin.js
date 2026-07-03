@@ -8,6 +8,15 @@
 (function () {
   'use strict';
 
+  // Storage guards — Safari private mode and blocked-storage contexts throw
+  // on any access; the dashboard must degrade, not die.
+  function lsGet(k)    { try { return localStorage.getItem(k); }   catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); }       catch (e) {} }
+  function lsDel(k)    { try { localStorage.removeItem(k); }       catch (e) {} }
+  function ssGet(k)    { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+  function ssSet(k, v) { try { sessionStorage.setItem(k, v); }     catch (e) {} }
+  function ssDel(k)    { try { sessionStorage.removeItem(k); }     catch (e) {} }
+
   // ---- Demo access gate (client-side only — not secure) ----
   var ACCESS_CODE = 'blastbeat2026';
   var SESSION_KEY = 'bb-admin-ok';
@@ -23,12 +32,15 @@
     shell.style.display = 'grid';
     render();
   }
-  if (sessionStorage.getItem(SESSION_KEY) === '1') unlock();
+  // NOTE: the returning-session auto-unlock runs at the END of this file
+  // (after `data` and the licence engine are initialised) — calling
+  // unlock() here would render against uninitialised state and brick
+  // the dashboard on every reload while logged in.
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (pass.value === ACCESS_CODE) {
-      sessionStorage.setItem(SESSION_KEY, '1');
+      ssSet(SESSION_KEY, '1');
       err.textContent = '';
       unlock();
     } else {
@@ -38,7 +50,7 @@
     }
   });
   document.getElementById('logout').addEventListener('click', function () {
-    sessionStorage.removeItem(SESSION_KEY);
+    ssDel(SESSION_KEY);
     location.reload();
   });
 
@@ -112,12 +124,12 @@
 
   function load() {
     try {
-      var raw = localStorage.getItem(STORE_KEY);
+      var raw = lsGet(STORE_KEY);
       if (raw) return JSON.parse(raw);
     } catch (e) {}
     return JSON.parse(JSON.stringify(SEED));
   }
-  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(data)); }
+  function save() { lsSet(STORE_KEY, JSON.stringify(data)); }
   var data = load();
 
   function nextId(arr) { return arr.reduce(function (m, x) { return Math.max(m, x.id); }, 0) + 1; }
@@ -613,7 +625,9 @@
     // Credit referred deals against the partner's pipeline counter
     if (matchedPartner) {
       matchedPartner.signed = (matchedPartner.signed || 0) + 1;
-      matchedPartner.owed   = (matchedPartner.owed   || 0) + Math.round((TIER_VALUE[form.tier] || 0) * 0.20);
+      // 25% ambassador commission — matches BB_PROGRAMME.ambassadors
+      // (Tekkers→Puma ledger entry: R3,056 = 25% of R12,225).
+      matchedPartner.owed   = (matchedPartner.owed   || 0) + Math.round((TIER_VALUE[form.tier] || 0) * 0.25);
     }
     audit('issue', 'licence', { id: vc.id, school: form.school, sponsor: form.sponsor, tier: form.tier, region: form.region, partner: form.partnerCode || form.partner || '' });
     save();
@@ -626,7 +640,7 @@
       tier: form.tier,
       region: form.region,
       value: TIER_VALUE[form.tier] || 0,
-      currency: 'EUR'
+      currency: 'ZAR'
     });
     toast('Licence issued and stamped &mdash; ' + form.school);
   });
@@ -901,7 +915,7 @@
   var resetBtn = document.getElementById('reset-state');
   if (resetBtn) resetBtn.addEventListener('click', function () {
     if (!confirm('Wipe the local store and reload with seed data? Anything not exported is lost.')) return;
-    localStorage.removeItem(STORE_KEY);
+    lsDel(STORE_KEY);
     location.reload();
   });
 
@@ -910,19 +924,19 @@
   var SAVED_KEY = 'bb-admin-savetoast';
   var bigEl = document.getElementById('opt-bigtext');
   var savedEl = document.getElementById('opt-confirm-save');
-  function applyBig() { document.body.classList.toggle('bigtext', localStorage.getItem(BIG_KEY) === '1'); }
+  function applyBig() { document.body.classList.toggle('bigtext', lsGet(BIG_KEY) === '1'); }
   if (bigEl) {
-    bigEl.checked = localStorage.getItem(BIG_KEY) === '1';
+    bigEl.checked = lsGet(BIG_KEY) === '1';
     bigEl.addEventListener('change', function () {
-      localStorage.setItem(BIG_KEY, bigEl.checked ? '1' : '0');
+      lsSet(BIG_KEY, bigEl.checked ? '1' : '0');
       applyBig();
       toast(bigEl.checked ? 'Big-text mode on.' : 'Big-text mode off.');
     });
   }
   if (savedEl) {
-    if (localStorage.getItem(SAVED_KEY) === '0') savedEl.checked = false;
+    if (lsGet(SAVED_KEY) === '0') savedEl.checked = false;
     savedEl.addEventListener('change', function () {
-      localStorage.setItem(SAVED_KEY, savedEl.checked ? '1' : '0');
+      lsSet(SAVED_KEY, savedEl.checked ? '1' : '0');
     });
   }
   applyBig();
@@ -931,7 +945,7 @@
   var toastEl = document.getElementById('bb-toast');
   var toastTimer = null;
   function toast(msg) {
-    if (localStorage.getItem(SAVED_KEY) === '0') return;
+    if (lsGet(SAVED_KEY) === '0') return;
     if (!toastEl) return;
     toastEl.innerHTML = msg;
     toastEl.classList.add('show');
@@ -950,7 +964,7 @@
   }
   function updateSamplesBanner() {
     if (!bannerEl) return;
-    var show = hasSamples() && localStorage.getItem(DISMISS_KEY) !== '1';
+    var show = hasSamples() && lsGet(DISMISS_KEY) !== '1';
     if (show) bannerEl.removeAttribute('hidden'); else bannerEl.setAttribute('hidden', '');
   }
   function clearSamples() {
@@ -974,7 +988,7 @@
   });
   var dismissBtn = document.getElementById('dismiss-samples');
   if (dismissBtn) dismissBtn.addEventListener('click', function () {
-    localStorage.setItem(DISMISS_KEY, '1');
+    lsSet(DISMISS_KEY, '1');
     updateSamplesBanner();
   });
   var settingsClearBtn = document.getElementById('settings-clear-samples');
@@ -1047,7 +1061,7 @@
   }
   function closeTour() {
     tourEl.setAttribute('hidden', '');
-    localStorage.setItem(TOUR_KEY, '1');
+    lsSet(TOUR_KEY, '1');
   }
   if (tourNext) tourNext.addEventListener('click', function () {
     if (tourIdx === TOUR_STEPS.length - 1) { closeTour(); return; }
@@ -1072,12 +1086,13 @@
 
   /* ---- Auto-launch tour on first unlock ---- */
   function maybeAutoLaunchTour() {
-    if (localStorage.getItem(TOUR_KEY) === '1') return;
+    if (lsGet(TOUR_KEY) === '1') return;
     if (gate && !gate.classList.contains('hidden')) return;
     setTimeout(openTour, 600);
   }
   var _origUnlock = unlock;
   unlock = function () { _origUnlock(); maybeAutoLaunchTour(); };
-  if (sessionStorage.getItem(SESSION_KEY) === '1') maybeAutoLaunchTour();
+  // Returning session: everything is initialised now, safe to unlock.
+  if (ssGet(SESSION_KEY) === '1') unlock();
 
 })();

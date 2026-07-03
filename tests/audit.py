@@ -306,6 +306,32 @@ def run():
         else: p+=1
     res['T17 No overflowing inline widths']=(p,t,fails)
 
+    # T18 Public-bundle leak guard. /admin is static, so everything it loads
+    # is world-readable — the public programme-data build must never carry the
+    # internal pipeline (named third-party contacts, deal-stage/NDA notes).
+    # Regenerate with scripts/gen-programme-data.mjs; source of truth stays in
+    # data/ (blocked from the CDN by netlify.toml force-404 rules).
+    p=t=0; fails=[]
+    FORBIDDEN = ['sponsor_pipeline', '"activity"', '"school_groups"', 'NDA',
+                 '"contact":', 'sponsorships@absa', 'blackcoffee.foundation']
+    try:
+        pub = open('assets/js/programme-data.js', encoding='utf-8').read()
+        for token in FORBIDDEN:
+            t+=1
+            if token in pub: fails.append(('assets/js/programme-data.js', 'contains ' + token))
+            else: p+=1
+    except FileNotFoundError:
+        t+=1; fails.append(('assets/js/programme-data.js','missing'))
+    # And the CDN fence for the raw internal files must stay in netlify.toml.
+    toml = open('netlify.toml', encoding='utf-8').read()
+    for path in ['/data/*', '/docs/*', '/proposal-engine-kit/*']:
+        t+=1
+        if re.search(r'from\s*=\s*"' + re.escape(path) + r'"[^[]*status\s*=\s*404[^[]*force\s*=\s*true', toml):
+            p+=1
+        else:
+            fails.append(('netlify.toml', 'no force-404 rule for ' + path))
+    res['T18 No internal data in public bundle']=(p,t,fails)
+
     return res
 
 def report(res):

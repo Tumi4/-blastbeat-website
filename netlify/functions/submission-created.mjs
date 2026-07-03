@@ -84,11 +84,14 @@ export default async function handler(req) {
     return r.ok;
   };
 
+  // allSettled + per-send catch: one rejected fetch (network blip, Resend
+  // outage) must not crash the function or abandon the sibling email.
   const tasks = [];
   if (data.email && autoReply) tasks.push(sendOne(data.email, autoReply.subject, autoReply.html));
   if (teamAlert) tasks.push(sendOne(recipients, teamAlert.subject, teamAlert.html));
 
-  await Promise.all(tasks);
+  const settled = await Promise.allSettled(tasks);
+  settled.forEach(s => { if (s.status === 'rejected') console.log('send failed:', s.reason?.message || s.reason); });
   return new Response('ok', { status: 200 });
 }
 
@@ -98,6 +101,9 @@ export default async function handler(req) {
 // ============================================================
 
 const safe = v => String(v == null ? '' : v).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+// Subjects are plain text, not HTML — entity-escaping garbles "Q&A" into
+// "Q&amp;A" in the inbox. Strip newlines (header injection) and trim instead.
+const plain = v => String(v == null ? '' : v).replace(/[\r\n]+/g, ' ').trim();
 
 const wrap = (body) => `<div style="font-family:Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#1a1a2e;line-height:1.55;">${body}<hr style="border:none;border-top:1px solid #ddd;margin:32px 0 16px;"><p style="font-size:12px;color:#666;">Climate Actions Now group &middot; <a href="https://www.blastbeat.education" style="color:#666;">blastbeat.education</a></p></div>`;
 
@@ -110,20 +116,22 @@ const routesByForm = {
   'demo-access-request': (d) => {
     const audience = d.audience || '';
     const nameFirst = String(d.name || '').trim().split(/\s+/)[0] || 'there';
+    // Access is instant (the button below); these lines steer what each
+    // audience should look at FIRST once inside.
     const flavour = {
-      'Principal / Head Teacher': 'We&rsquo;ll send a code that opens the educator side so you can see what the cohort actually sees.',
-      'HOD / Curriculum lead':    'We&rsquo;ll send a code that surfaces the role-and-curriculum map first &mdash; that&rsquo;s usually the most useful view for you.',
-      'Teacher / Facilitator':    'We&rsquo;ll send a code that drops you into the cohort dashboard the way a facilitator uses it.',
-      'Sports club / Federation': 'We&rsquo;ll send a code into the FootBeat lane so you can walk the tournament + business side.',
-      'Sponsor / CSR / ESG team': 'We&rsquo;ll send a code that highlights the credential, the impact report and the 75/25 climate split.',
-      'Foundation / Funder':      'We&rsquo;ll send a code that highlights the audit trail, the verifiable credential and the climate ring-fence.',
-      'Government / Ministry':    'We&rsquo;ll send a code that highlights the framework alignment and the SDG mapping.',
-      'Journalist / Researcher':  'We&rsquo;ll send a code and a short brief covering history, real numbers and a few case studies.',
-      'Education consultant':     'We&rsquo;ll send a code and a short brief on the curriculum mapping you can show your clients.',
-      'Parent':                   'We&rsquo;ll send a code and a short note explaining what your child would actually do, week by week.',
-      'Student (18+)':            'We&rsquo;ll send a code straight into the student view.',
-      'Other':                    'We&rsquo;ll send a code with a short note about what we think will be most useful for your context.',
-    }[audience] || 'We&rsquo;ll send a code with a short note on what we&rsquo;d most like you to look at.';
+      'Principal / Head Teacher': 'Start on the educator side so you can see exactly what your cohort would see.',
+      'HOD / Curriculum lead':    'Start with the role-and-curriculum map &mdash; that&rsquo;s usually the most useful view for you.',
+      'Teacher / Facilitator':    'Start in the cohort dashboard, the way a facilitator uses it week to week.',
+      'Sports club / Federation': 'Head for the FootBeat lane to walk the tournament + business side.',
+      'Sponsor / CSR / ESG team': 'Start with the credential, the impact report and the climate ring-fence.',
+      'Foundation / Funder':      'Start with the audit trail, the verifiable credential and the climate ring-fence.',
+      'Government / Ministry':    'Start with the framework alignment and the SDG mapping.',
+      'Journalist / Researcher':  'Start anywhere &mdash; and Robert or Tumelo will follow up with a short brief covering history, real numbers and case studies.',
+      'Education consultant':     'Start with the curriculum mapping &mdash; the view you can show your clients.',
+      'Parent':                   'Start with the student journey &mdash; what your child would actually do, week by week.',
+      'Student (18+)':            'Head straight into the student view.',
+      'Other':                    'Start anywhere &mdash; Robert or Tumelo will follow up with what we think is most useful for your context.',
+    }[audience] || 'Start anywhere &mdash; Robert or Tumelo will follow up with what we&rsquo;d most like you to look at.';
 
     return {
       autoReply: {
@@ -142,7 +150,7 @@ const routesByForm = {
         `),
       },
       teamAlert: {
-        subject: `Demo request — ${safe(audience || 'Unknown audience')} — ${safe(d.name || 'no name')}`,
+        subject: `Demo request — ${plain(audience || 'Unknown audience')} — ${plain(d.name || 'no name')}`,
         html: wrap(`
           <h2 style="font-size:18px;margin:0 0 16px;">New demo access request</h2>
           <table style="border-collapse:collapse;font-size:14px;">
@@ -176,7 +184,7 @@ const routesByForm = {
       `),
     },
     teamAlert: {
-      subject: `School application — ${safe(d['school-name'] || d.name || 'unknown')}`,
+      subject: `School application — ${plain(d['school-name'] || d.name || 'unknown')}`,
       html: wrap(`<h2 style="font-size:18px;margin:0 0 16px;">School application</h2><pre style="white-space:pre-wrap;font-family:inherit;font-size:13px;background:#f5f5f7;padding:12px;border-radius:8px;">${safe(JSON.stringify(d, null, 2))}</pre>`),
     },
   }),
@@ -188,14 +196,14 @@ const routesByForm = {
     autoReply: {
       subject: 'Your Blastbeat sponsorship enquiry — received',
       html: wrap(`
-        <p>Hi ${safe(String(d.name || '').split(/\s+/)[0] || 'there')},</p>
+        <p>Hi ${safe(String(d['contact-name'] || d.name || '').split(/\s+/)[0] || 'there')},</p>
         <p>Thanks for the sponsorship enquiry. Robert will reply personally within one business day with the next step.</p>
         <p>While you wait: every Blastbeat licence is a W3C Verifiable Credential. You can see what one looks like at <a href="https://www.blastbeat.education/verify">blastbeat.education/verify</a>.</p>
         <p>Warmly,<br>The Blastbeat team</p>
       `),
     },
     teamAlert: {
-      subject: `Sponsorship enquiry — ${safe(d['company-name'] || d.name || 'unknown')}`,
+      subject: `Sponsorship enquiry — ${plain(d['company-name'] || d.name || 'unknown')}`,
       html: wrap(`<h2 style="font-size:18px;margin:0 0 16px;">Sponsorship enquiry</h2><pre style="white-space:pre-wrap;font-family:inherit;font-size:13px;background:#f5f5f7;padding:12px;border-radius:8px;">${safe(JSON.stringify(d, null, 2))}</pre>`),
     },
   }),
@@ -213,7 +221,7 @@ const routesByForm = {
       `),
     },
     teamAlert: {
-      subject: `Partner application — ${safe(d.name || 'unknown')} (${safe(d.category || d.region || '')})`,
+      subject: `Partner application — ${plain(d.name || 'unknown')} (${plain(d.category || d.region || '')})`,
       html: wrap(`<h2 style="font-size:18px;margin:0 0 16px;">Partner application</h2><pre style="white-space:pre-wrap;font-family:inherit;font-size:13px;background:#f5f5f7;padding:12px;border-radius:8px;">${safe(JSON.stringify(d, null, 2))}</pre>`),
     },
   }),
@@ -231,7 +239,7 @@ const routesByForm = {
       `),
     },
     teamAlert: {
-      subject: `Contact form — ${safe(d.topic || 'enquiry')} from ${safe(d.name || 'unknown')}`,
+      subject: `Contact form — ${plain(d.subject || d.topic || 'enquiry')} from ${plain(d.name || 'unknown')}`,
       html: wrap(`<h2 style="font-size:18px;margin:0 0 16px;">Contact</h2><pre style="white-space:pre-wrap;font-family:inherit;font-size:13px;background:#f5f5f7;padding:12px;border-radius:8px;">${safe(JSON.stringify(d, null, 2))}</pre>`),
     },
   }),

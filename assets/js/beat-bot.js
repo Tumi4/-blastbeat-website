@@ -622,7 +622,11 @@
     div.className = 'bb-msg bot';
     var bubble = document.createElement('div');
     bubble.className = 'bb-bubble';
-    bubble.innerHTML = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    // AI replies are untrusted — escape HTML before applying the one
+    // formatting rule we support (**bold**), so a reply can't inject markup.
+    var escaped = String(text)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    bubble.innerHTML = escaped.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     div.appendChild(bubble);
     if (links && links.length) {
       var lr = document.createElement('div');
