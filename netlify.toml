@@ -86,6 +86,27 @@
   to = "/pages/demo-guide.html"
   status = 200
 
+# Ambassador trackable links — /r/<slug> is the personal link every
+# ambassador (partner or artist) shares. Lands on the sponsorship page
+# with the ref attached; analytics.js persists it and stamps it into any
+# form the visitor later submits, so attribution reaches the ledger.
+[[redirects]]
+  from = "/r/*"
+  to = "/pages/partners.html?ref=:splat&utm_source=ambassador&utm_medium=referral"
+  status = 302
+
+# Artist ambassador programme + private invite pages (invites are noindex;
+# Robert sends these URLs personally).
+[[redirects]]
+  from = "/artist-ambassadors"
+  to = "/pages/artist-ambassadors.html"
+  status = 200
+
+[[redirects]]
+  from = "/invite/*"
+  to = "/pages/invites/:splat.html"
+  status = 200
+
 # Security headers
 [[headers]]
   for = "/*"

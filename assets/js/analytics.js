@@ -79,6 +79,30 @@
     window.dataLayer.push(Object.assign({ event: eventName }, params || {}));
   };
 
+  // ---- Ambassador referral attribution ----
+  // /r/<slug> lands with ?ref=<slug>. Persist it (30 days) and stamp it into
+  // any form that carries an input[name="referral"], so a sponsor enquiry or
+  // demo signup that started from an ambassador's link reaches the ledger
+  // with their name on it.
+  var REF_KEY = 'bb-ref';
+  try {
+    var refMatch = window.location.search.match(/[?&]ref=([A-Za-z0-9_-]{1,64})/);
+    if (refMatch) {
+      localStorage.setItem(REF_KEY, JSON.stringify({ ref: refMatch[1], at: Date.now() }));
+      window.bbTrack('referral_visit', { ref: refMatch[1] });
+    }
+    var stored_ref = null;
+    try { stored_ref = JSON.parse(localStorage.getItem(REF_KEY) || 'null'); } catch (e2) {}
+    if (stored_ref && Date.now() - stored_ref.at < 30 * 24 * 3600 * 1000) {
+      var stampRef = function () {
+        var fields = document.querySelectorAll('input[name="referral"]');
+        for (var i = 0; i < fields.length; i++) { if (!fields[i].value) fields[i].value = stored_ref.ref; }
+      };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', stampRef);
+      else stampRef();
+    }
+  } catch (e) { /* storage blocked — attribution simply doesn't persist */ }
+
   // GTM loader — gated on having a real container ID
   if (GTM_ID && GTM_ID !== 'GTM-XXXXXXX') {
     (function (w, d, s, l, i) {
