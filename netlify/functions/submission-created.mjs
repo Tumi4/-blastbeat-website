@@ -161,6 +161,7 @@ const routesByForm = {
             <tr><td style="padding:4px 12px 4px 0;color:#666;">Region</td><td>${safe(d.region)}</td></tr>
             <tr><td style="padding:4px 12px 4px 0;color:#666;">Phone</td><td>${safe(d.phone)}</td></tr>
             <tr><td style="padding:4px 12px 4px 0;color:#666;">Source</td><td>${safe(d.source)}</td></tr>
+            ${d.referral ? `<tr><td style="padding:4px 12px 4px 0;color:#666;">Ambassador ref</td><td><strong>${safe(d.referral)}</strong></td></tr>` : ''}
           </table>
           <p style="margin-top:16px;"><strong>What they want to see:</strong></p>
           <p style="background:#f5f5f7;padding:12px 16px;border-radius:8px;">${safe(d.focus) || '(not specified)'}</p>
@@ -223,6 +224,45 @@ const routesByForm = {
     teamAlert: {
       subject: `Partner application — ${plain(d.name || 'unknown')} (${plain(d.category || d.region || '')})`,
       html: wrap(`<h2 style="font-size:18px;margin:0 0 16px;">Partner application</h2><pre style="white-space:pre-wrap;font-family:inherit;font-size:13px;background:#f5f5f7;padding:12px;border-radius:8px;">${safe(JSON.stringify(d, null, 2))}</pre>`),
+    },
+  }),
+
+  // ----------------------------------------------------------------
+  // ARTIST AMBASSADOR ACCEPTANCE — pages/invites/<slug>.html
+  // Private founding invitations issued by Robert. Acceptance is not
+  // final until Robert countersigns — the auto-reply says so.
+  // ----------------------------------------------------------------
+  'artist-ambassador-accept': (d) => ({
+    autoReply: {
+      subject: 'Welcome — Robert will countersign your ambassadorship',
+      html: wrap(`
+        <p>Hi ${safe(String(d.name || d.artist || '').split(/\s+/)[0] || 'there')},</p>
+        <p>That&rsquo;s a yes we&rsquo;re thrilled to have. Your acceptance as a <strong>founding CAN Music Artist Ambassador</strong> is in, and Robert countersigns every one personally &mdash; expect his note within two business days.</p>
+        <p><strong>What happens once he signs:</strong></p>
+        <ol>
+          <li>Your trackable link goes live: <strong>blastbeat.education/r/${safe(d.slug || '')}</strong></li>
+          <li>We build your public campaign page around the project you named${d.campaign ? ` (&ldquo;${safe(String(d.campaign).slice(0, 80))}&hellip;&rdquo;)` : ''}.</li>
+          <li>You earn a 25% ambassador commission on every founding licence you raise &mdash; tracked in the ledger, verifiable as a W3C credential.</li>
+        </ol>
+        <p>Anything urgent, WhatsApp Tumelo on <a href="https://wa.me/27738048409">+27 73 804 8409</a>.</p>
+        <p>Warmly,<br>The Blastbeat team</p>
+      `),
+    },
+    teamAlert: {
+      subject: `ARTIST AMBASSADOR ACCEPTED — ${plain(d.artist || d.name || 'unknown')} — needs Robert's countersign`,
+      html: wrap(`
+        <h2 style="font-size:18px;margin:0 0 16px;">Artist ambassador acceptance</h2>
+        <table style="border-collapse:collapse;font-size:14px;">
+          <tr><td style="padding:4px 12px 4px 0;color:#666;">Artist</td><td><strong>${safe(d.artist)}</strong> (${safe(d.slug)})</td></tr>
+          <tr><td style="padding:4px 12px 4px 0;color:#666;">Signed by</td><td>${safe(d.name)}</td></tr>
+          <tr><td style="padding:4px 12px 4px 0;color:#666;">Email</td><td><a href="mailto:${safe(d.email)}">${safe(d.email)}</a></td></tr>
+          <tr><td style="padding:4px 12px 4px 0;color:#666;">Phone</td><td>${safe(d.phone)}</td></tr>
+          <tr><td style="padding:4px 12px 4px 0;color:#666;">Goal</td><td>${safe(d.goal)}</td></tr>
+        </table>
+        <p style="margin-top:16px;"><strong>Campaign they're attaching:</strong></p>
+        <p style="background:#f5f5f7;padding:12px 16px;border-radius:8px;">${safe(d.campaign) || '(not specified)'}</p>
+        <p style="margin-top:24px;font-size:13px;color:#666;"><strong>Next steps:</strong> Robert countersigns → add to data/programme-data.json ambassadors (status accepted) → regenerate public build → publish their campaign page. See docs/ARTIST-AMBASSADORS.md.</p>
+      `),
     },
   }),
 

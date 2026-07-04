@@ -45,7 +45,7 @@ jobs:
       # playwright-report/ from the first, so the uploaded artifact would only
       # ever contain the last suite. mobile-audit self-skips non-mobile projects.
       - name: Run perf + a11y + mobile audit
-        run: npx playwright test tests/perf.spec.ts tests/mobile-audit.spec.ts tests/smoke.spec.ts --project=desktop --project=pixel-7
+        run: npx playwright test tests/perf.spec.ts tests/mobile-audit.spec.ts tests/smoke.spec.ts tests/ambassador.spec.ts --project=desktop --project=pixel-7
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
