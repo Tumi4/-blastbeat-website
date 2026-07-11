@@ -7,6 +7,102 @@ Versions correspond to commit ranges on the `claude/polish-license-sponsor-pages
 
 ---
 
+## 2026-07-11 — Admin backend goes real (launch-ready)
+
+### Added
+- **Server-side auth for /admin.** New Netlify Function
+  `admin-api.mjs`: the access code is checked on the server against
+  the `ADMIN_ACCESS_CODE` env var (never shipped in JS), issuing a
+  12-hour HttpOnly `SameSite=Strict` session cookie (HMAC-signed).
+  Login is rate-limited (8 attempts / 15 min / IP) with a
+  constant-time code comparison.
+- **Real data store.** Dashboard state (schools, sponsors, partners,
+  leads, licences, audit) now persists in the site's private Netlify
+  Blobs store with a revision counter — two devices can't silently
+  overwrite each other (409 → the dashboard adopts the newer copy).
+  localStorage remains as the offline cache; a sidebar badge shows
+  Synced / Saving / Offline / Local mode at all times.
+- **Public licence registry.** New function `verify-licence.mjs`
+  serving `GET /api/verify/<id>`. The QR on every printed certificate
+  now resolves to a live answer — valid / revoked / expired /
+  roster / not-found — instead of "ask the issuer for the JSON file".
+  Returns only what's already printed on the certificate; the
+  verify page shows the registry verdict alongside the offline
+  SHA-256 hash check.
+- **Leads intake from the site forms.** `submission-created.mjs` now
+  also appends every form submission (demo, apply, sponsorship,
+  partner, ambassador, contact) to a server-side inbox; the dashboard
+  pulls them into the Leads view automatically, tagged with form,
+  contact details, and ambassador referral code.
+- **Edit everything.** New record modal for schools, sponsors,
+  partners and leads (window.prompt() flows retired). Leads carry the
+  full original form submission read-only plus a reply-by-email
+  button, and a one-click **Convert → school** action.
+- **Search** on the schools, sponsors, partners, leads and licences
+  tables.
+- **Licence expiry tracking.** "Renews in Xd" chips (≤60 days), a
+  "Renewals due" stat, and a "Needs attention" card on Overview
+  (renewals + new leads).
+- **Sign-in identity for the audit trail.** The gate asks who's
+  signing in (Robert / Tumi / Guest); every audit entry and each
+  server revision is stamped with that identity. Audit log gains a
+  Who column.
+- **Import / restore.** Settings card to load a full-state export
+  back in (auto-downloads a safety backup of current data first).
+- **Function test suite.** `npm run test:functions` — 22 node tests
+  covering auth, sessions, forged cookies, rate limiting, conflict
+  handling, inbox consumption, registry lookup and public-view
+  privacy. New `tests/admin.spec.ts` Playwright spec covers the gate,
+  record modals, search, issue → revoke, lead convert and reload
+  across the device matrix.
+- **Runbook.** `docs/ADMIN-BACKEND.md` — env vars, modes, rotation,
+  backups, lifecycle.
+
+### Fixed
+- **Two-device concurrency made safe** (caught by the pre-push
+  adversarial review). State writes are etag-conditional on top of the
+  rev check, so a race between two saves yields a clean conflict
+  instead of a silent overwrite; inbox messages live one-per-key so a
+  form submission arriving mid-save can never be clobbered; a 409
+  conflict clears pending inbox-consume ids and re-syncs, so an
+  inbound lead can no longer be consumed out of existence; re-login
+  after session expiry pushes unsaved edits instead of pulling over
+  them; the focus re-sync only adopts strictly newer revisions.
+- **Referral-code integrity.** Record ids are monotonic (deleting the
+  newest partner no longer recycles their id into a new partner's
+  referral code); code rotation checks uniqueness across all partners;
+  the licence-issue partner field now matches referral codes as well
+  as names, as its placeholder promises; commission can be reversed
+  when a referred licence is revoked.
+- **Verify verdict honesty.** The green result no longer says
+  "authentic" for any self-consistent hash — it reports "hash intact"
+  and cross-checks the Blastbeat register (same id + same proof, not
+  revoked) before calling a credential authentic; page copy updated to
+  match. The registry endpoint requires the full 8-char short id and
+  refuses ambiguous prefixes; malformed ids answer gracefully.
+- **Issue flow ordering.** The credential is built before any
+  school/sponsor auto-create, so a failure can't leave half-committed
+  records; duplicate detection is case/whitespace/punctuation
+  insensitive; partner-kit CSV header now says `owed_zar` (the values
+  were always ZAR); the sponsor email no longer claims an attachment
+  that mailto can't add and now carries the live verify link.
+- **Revoke no longer deletes.** Revoked licences stay on the register
+  marked `revoked` (matching what the confirm dialog always claimed),
+  render struck-through, are excluded from programme-value totals,
+  and the public registry reports them revoked.
+- **Deletes are audited** and ask for confirmation; every mutation now
+  lands in the audit log.
+- **Mobile zoom-out bug.** `.main` (a grid item) had `min-width:auto`,
+  so any wide table blew the phone layout viewport out to ~930px and
+  the whole admin loaded zoomed-out. `min-width: 0` keeps tables
+  scrolling inside their cards.
+- **verify.html read a stale store key** (`bb-admin-data-v1`) for the
+  admin-device shortcut; now reads v2 with v1 fallback.
+- **Certificate validity arithmetic** uses calendar-safe month adds
+  (31 Aug + 6 months no longer lands in March).
+- **/admin is never cached or indexed** (`Cache-Control: no-store`,
+  `X-Robots-Tag: noindex` headers).
+
 ## 2026-06-05 — Admin polish + handover
 
 ### Added

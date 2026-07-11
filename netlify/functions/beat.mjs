@@ -34,6 +34,7 @@ function rateLimitCheck(ip) {
   }
   recent.push(now);
   rateLimitBuckets.set(ip, recent);
+  if (rateLimitBuckets.size > 5000) rateLimitBuckets.clear(); // memory guard (same as admin-api/verify-licence)
   return { allowed: true };
 }
 

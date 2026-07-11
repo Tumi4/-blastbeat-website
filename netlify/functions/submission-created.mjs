@@ -31,6 +31,45 @@
 // "Get started" link in the demo auto-reply — change here if the URL moves.
 const DEMO_APP_URL = process.env.DEMO_APP_URL || 'https://trx-3675.devspace.trixta.io/';
 
+import { randomUUID } from 'node:crypto';
+import { getStore } from '@netlify/blobs';
+
+// Lead types per form — what the admin Leads view shows in its Type column.
+const LEAD_TYPE = {
+  'demo-access-request': 'Demo',
+  'school-application': 'School',
+  'sponsorship-enquiry': 'Sponsor',
+  'partner-application': 'Partner',
+  'artist-ambassador-accept': 'Ambassador',
+  'contact': 'Contact',
+};
+// Append the submission to the admin dashboard's leads inbox (Blobs store
+// "bb-admin", one blob per message under inbox/<id> — an atomic append that
+// can't race the dashboard consuming other messages, or another submission
+// arriving in the same instant). Best-effort: a Blobs hiccup must never
+// break the email flow, so every failure is swallowed after a log line.
+async function appendToLeadsInbox(formName, data) {
+  try {
+    const store = getStore({ name: 'bb-admin', consistency: 'strong' });
+    const id = randomUUID();
+    await store.setJSON('inbox/' + id, {
+      id,
+      form: formName,
+      type: LEAD_TYPE[formName] || 'Contact',
+      name: String(data.name || data['contact-name'] || data.artist || '').slice(0, 120),
+      org: String(data.organisation || data['school-name'] || data['company-name'] || data.org || '').slice(0, 160),
+      email: String(data.email || '').slice(0, 160),
+      phone: String(data.phone || '').slice(0, 40),
+      referral: String(data.referral || data.ref || '').slice(0, 60),
+      date: new Date().toISOString(),
+      // Full payload for the detail view, big fields trimmed.
+      raw: Object.fromEntries(Object.entries(data).slice(0, 40).map(([k, v]) => [k, String(v == null ? '' : v).slice(0, 2000)])),
+    });
+  } catch (e) {
+    console.log('leads inbox append skipped:', e && e.message);
+  }
+}
+
 export default async function handler(req) {
   let body;
   try { body = await req.json(); } catch { return new Response('bad json', { status: 400 }); }
@@ -43,6 +82,10 @@ export default async function handler(req) {
   if (process.env.FUNCTION_DEBUG === '1') {
     console.log('submission-created', { formName, data });
   }
+
+  // Every real submission becomes a lead in the admin dashboard,
+  // whether or not an email route exists for the form.
+  await appendToLeadsInbox(formName, data);
 
   const route = routesByForm[formName];
   if (!route) {
@@ -118,7 +161,9 @@ const routesByForm = {
     const nameFirst = String(d.name || '').trim().split(/\s+/)[0] || 'there';
     // Access is instant (the button below); these lines steer what each
     // audience should look at FIRST once inside.
-    const flavour = {
+    // Object.create(null): a crafted audience like "constructor" must fall
+    // through to the default line, not resolve up the prototype chain.
+    const flavour = Object.assign(Object.create(null), {
       'Principal / Head Teacher': 'Start on the educator side so you can see exactly what your cohort would see.',
       'HOD / Curriculum lead':    'Start with the role-and-curriculum map &mdash; that&rsquo;s usually the most useful view for you.',
       'Teacher / Facilitator':    'Start in the cohort dashboard, the way a facilitator uses it week to week.',
@@ -131,7 +176,7 @@ const routesByForm = {
       'Parent':                   'Start with the student journey &mdash; what your child would actually do, week by week.',
       'Student (18+)':            'Head straight into the student view.',
       'Other':                    'Start anywhere &mdash; Robert or Tumelo will follow up with what we think is most useful for your context.',
-    }[audience] || 'Start anywhere &mdash; Robert or Tumelo will follow up with what we&rsquo;d most like you to look at.';
+    })[audience] || 'Start anywhere &mdash; Robert or Tumelo will follow up with what we&rsquo;d most like you to look at.';
 
     return {
       autoReply: {

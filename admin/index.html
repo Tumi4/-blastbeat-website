@@ -28,8 +28,10 @@
     .gate-logo span { font-family: var(--head); font-weight: 800; }
     .gate-card h1 { font-size: 1.3rem; margin-bottom: 0.4rem; }
     .gate-card p { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.25rem; line-height: 1.5; }
-    .gate-card input { width: 100%; padding: 0.85rem 1rem; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--line); color: var(--text); font-size: 1rem; margin-bottom: 0.85rem; }
-    .gate-card input:focus { outline: 2px solid var(--purple); }
+    .gate-card input, .gate-card select { width: 100%; padding: 0.85rem 1rem; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--line); color: var(--text); font-size: 1rem; margin-bottom: 0.85rem; }
+    .gate-card input:focus, .gate-card select:focus { outline: 2px solid var(--purple); }
+    .gate-card select { appearance: none; -webkit-appearance: none; }
+    .gate-card .gate-label { display: block; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; }
     .gate-btn { width: 100%; padding: 0.9rem; border: none; border-radius: 12px; background: linear-gradient(135deg, var(--purple), var(--pink)); color: #fff; font-weight: 800; font-size: 1rem; cursor: pointer; transition: transform 0.2s; }
     .gate-btn:hover { transform: translateY(-1px); }
     #gate-err { color: var(--pink); font-size: 0.8rem; margin-top: 0.6rem; min-height: 1rem; }
@@ -48,7 +50,11 @@
     .logout { color: var(--muted); font-size: 0.82rem; background: none; border: none; cursor: pointer; padding: 0.5rem 0.85rem; }
     .logout:hover { color: var(--pink); }
 
-    .main { padding: 2rem clamp(1rem, 3vw, 2.5rem); max-width: 1200px; }
+    /* min-width: 0 — .main is a grid item, so its automatic minimum size is
+       min-content: one wide table would otherwise punch through the cards'
+       overflow-x scroll containers and blow the mobile layout viewport out
+       to the table's width (page loads zoomed-out on phones). */
+    .main { padding: 2rem clamp(1rem, 3vw, 2.5rem); max-width: 1200px; min-width: 0; }
     .page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
     .page-head h2 { font-size: 1.7rem; }
     .page-head p { color: var(--muted); font-size: 0.88rem; margin-top: 0.3rem; }
@@ -126,7 +132,7 @@
     @media (max-width: 768px) {
       .field input, .field select, .field textarea,
       .gate-card input, input[type="text"], input[type="email"],
-      input[type="tel"], input[type="date"], input[type="number"],
+      input[type="tel"], input[type="date"], input[type="number"], input[type="search"], .tbl-search,
       input[type="password"], select, textarea {
         font-size: 16px !important;
       }
@@ -148,6 +154,22 @@
 
     /* TOAST visible state */
     #bb-toast.show { transform: translateX(-50%) translateY(0) !important; }
+
+    /* SYNC BADGE — sidebar footer connection state */
+    .sync-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.74rem; color: var(--muted); padding: 0.5rem 0.85rem 0.75rem; line-height: 1.4; }
+    .sync-badge .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+    .sync-badge.synced .dot { background: var(--green); box-shadow: 0 0 8px rgba(52,211,153,0.6); }
+    .sync-badge.saving .dot { background: var(--orange); }
+    .sync-badge.offline .dot { background: var(--pink); }
+    .sync-badge.local .dot { background: var(--muted); }
+
+    /* TABLE SEARCH */
+    .tbl-search { padding: 0.6rem 0.9rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--line); color: var(--text); font-family: var(--font); font-size: 0.85rem; min-width: 170px; }
+    .tbl-search:focus { outline: 2px solid var(--purple); }
+
+    /* REVOKED rows */
+    tr.revoked-row td { opacity: 0.55; }
+    tr.revoked-row td:first-child strong { text-decoration: line-through; text-decoration-color: rgba(255,45,120,0.7); }
 
     /* BIG TEXT MODE */
     body.bigtext { font-size: 17px; }
@@ -252,6 +274,12 @@
       </div>
       <h1>Sign in</h1>
       <p>Internal dashboard for the 2026 pilot, 2winAid sponsorships and the ambassador / affiliate / referral programmes.</p>
+      <span class="gate-label">Who's signing in? (stamped on the audit log)</span>
+      <select id="gate-who">
+        <option value="robert">Robert</option>
+        <option value="tumi">Tumi</option>
+        <option value="guest">Guest</option>
+      </select>
       <input type="password" id="gate-pass" placeholder="Access code" autocomplete="current-password" required>
       <button type="submit" class="gate-btn">Enter Dashboard</button>
       <div id="gate-err"></div>
@@ -271,6 +299,7 @@
       <button class="nav-item" data-view="audit"><span class="ic">&#128737;&#65039;</span> Audit Log</button>
       <button class="nav-item" data-view="settings"><span class="ic">&#9881;&#65039;</span> Settings</button>
       <div class="side-foot">
+        <div class="sync-badge" id="sync-badge" hidden><span class="dot"></span><span class="txt"></span></div>
         <button class="logout" id="logout">&#8592; Log out</button>
       </div>
     </aside>
@@ -286,8 +315,8 @@
           <button class="x" id="dismiss-samples" aria-label="Hide this banner">&times;</button>
         </div>
       </div>
-      <div class="demo-banner">
-        <strong>Prototype mode.</strong> Loaded with the <strong>real programme roster</strong> (21 schools, 8 sponsors, 9 licences) from <code>programme-data.json</code>, held locally in this browser (localStorage) so you can edit and issue. Wiring it to a Supabase backend with real login is the next step &mdash; see the note at the bottom of Overview.
+      <div class="demo-banner" id="mode-banner" hidden>
+        <strong>Local mode.</strong> The server backend isn&rsquo;t reachable from here, so everything you see lives <strong>only in this browser</strong> (localStorage). Fine for trying things out &mdash; on the live site with the backend configured, data syncs to the secure store automatically.
       </div>
 
       <!-- OVERVIEW -->
@@ -302,9 +331,9 @@
           </div>
           <p style="color:var(--muted); font-size:0.8rem; margin-top:0.75rem;">Each placement is a free €1,250 six-month licence funded by a twinned 2winAid sponsor.</p>
         </div>
-        <div class="card">
-          <h3>Next step: make it live</h3>
-          <p style="color:var(--muted); font-size:0.86rem; line-height:1.65;">This dashboard is a working front-end. To make it production-grade: (1) gate it behind <strong style="color:var(--text);">Netlify Identity</strong> or <strong style="color:var(--text);">Supabase Auth</strong> instead of the demo code; (2) replace localStorage with a <strong style="color:var(--text);">Supabase table</strong> per entity (schools, sponsors, partners, leads); (3) pipe the <strong style="color:var(--text);">Netlify Forms</strong> submissions (apply / contact / sponsorship) straight into the Leads view via a webhook. The UI is already structured for that swap.</p>
+        <div class="card" id="backend-status-card">
+          <h3>Backend status</h3>
+          <p style="color:var(--muted); font-size:0.86rem; line-height:1.65;" id="backend-status-text">Checking the connection to the secure store&hellip;</p>
         </div>
       </section>
 
@@ -312,7 +341,10 @@
       <section class="view" id="view-pilot">
         <div class="page-head">
           <div><h2>Pilot Schools</h2><p>The 20-school 2026 cohort on free €1,250 six-month licences.</p></div>
-          <button class="btn primary" data-add="school">+ Add school</button>
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">
+            <input type="search" class="tbl-search" data-tbl="schools" placeholder="Search schools…" aria-label="Search schools">
+            <button class="btn primary" data-add="school">+ Add school</button>
+          </div>
         </div>
         <div class="card table-scroll"><table id="tbl-pilot"></table></div>
       </section>
@@ -321,7 +353,10 @@
       <section class="view" id="view-twinaid">
         <div class="page-head">
           <div><h2>2winAid Sponsors</h2><p>Matched-sponsorship pipeline. Each sponsor twins with one named school.</p></div>
-          <button class="btn primary" data-add="sponsor">+ Add sponsor</button>
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">
+            <input type="search" class="tbl-search" data-tbl="sponsors" placeholder="Search sponsors…" aria-label="Search sponsors">
+            <button class="btn primary" data-add="sponsor">+ Add sponsor</button>
+          </div>
         </div>
         <div class="card table-scroll"><table id="tbl-sponsors"></table></div>
       </section>
@@ -330,7 +365,10 @@
       <section class="view" id="view-partners">
         <div class="page-head">
           <div><h2>Ambassadors &amp; Affiliates</h2><p>Referral tracking and commission owed across all three programmes.</p></div>
-          <button class="btn primary" data-add="partner">+ Add partner</button>
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">
+            <input type="search" class="tbl-search" data-tbl="partners" placeholder="Search partners…" aria-label="Search partners">
+            <button class="btn primary" data-add="partner">+ Add partner</button>
+          </div>
         </div>
         <div class="stat-grid" id="partner-stats"></div>
         <div class="card table-scroll"><table id="tbl-partners"></table></div>
@@ -339,8 +377,11 @@
       <!-- LEADS -->
       <section class="view" id="view-leads">
         <div class="page-head">
-          <div><h2>Leads</h2><p>Inbound enquiries. In production these flow in from the site forms automatically.</p></div>
-          <button class="btn primary" data-add="lead">+ Add lead</button>
+          <div><h2>Leads</h2><p>Inbound enquiries. Site form submissions land here automatically when the backend is connected.</p></div>
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">
+            <input type="search" class="tbl-search" data-tbl="leads" placeholder="Search leads…" aria-label="Search leads">
+            <button class="btn primary" data-add="lead">+ Add lead</button>
+          </div>
         </div>
         <div class="card table-scroll"><table id="tbl-leads"></table></div>
       </section>
@@ -349,7 +390,10 @@
       <section class="view" id="view-licences">
         <div class="page-head">
           <div><h2>Licences &amp; Verifiable Credentials</h2><p>Issue a W3C-style licence credential per sponsored school. Each issuance is hashed (SHA-256), timestamped, and written to the audit log.</p></div>
-          <button class="btn primary" id="issue-licence-open">+ Issue new licence</button>
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">
+            <input type="search" class="tbl-search" data-tbl="licences" placeholder="Search licences…" aria-label="Search licences">
+            <button class="btn primary" id="issue-licence-open">+ Issue new licence</button>
+          </div>
         </div>
         <div class="stat-grid" id="licence-stats"></div>
         <div class="card table-scroll"><table id="tbl-licences"></table></div>
@@ -385,8 +429,13 @@
         </div>
         <div class="card">
           <h3>Export everything</h3>
-          <p style="color:var(--muted); font-size:0.86rem; line-height:1.65; margin-bottom: 1rem;">Full snapshot of every record in this browser. Use this to migrate to Trixta OS, hand to your lawyer, or back up before a major change.</p>
+          <p style="color:var(--muted); font-size:0.86rem; line-height:1.65; margin-bottom: 1rem;">Full snapshot of every record. Use this to migrate to Trixta OS, hand to your lawyer, or back up before a major change.</p>
           <button class="btn primary" id="export-everything">&#128229; Export full state (.json)</button>
+        </div>
+        <div class="card">
+          <h3>Restore from backup</h3>
+          <p style="color:var(--muted); font-size:0.86rem; line-height:1.65; margin-bottom: 1rem;">Load a previously exported <code>blastbeat-full-state-*.json</code> file. Replaces everything currently in the dashboard &mdash; you&rsquo;ll be asked to confirm.</p>
+          <label class="btn" style="cursor:pointer;">&#128194; Import full state (.json)<input type="file" id="import-state" accept="application/json,.json" style="display:none;"></label>
         </div>
         <div class="card">
           <h3>Onboarding</h3>
@@ -403,12 +452,30 @@
         </div>
         <div class="card" style="border-color: rgba(255,107,53,0.3);">
           <h3 style="color: var(--orange);">Danger zone</h3>
-          <p style="color:var(--muted); font-size:0.86rem; line-height:1.65; margin-bottom: 1rem;">Wipes the local store and reloads with seed data. Anything not exported is gone.</p>
-          <button class="btn" id="reset-state" style="border-color: rgba(255,107,53,0.5); color: var(--orange);">Reset to seed data</button>
+          <p style="color:var(--muted); font-size:0.86rem; line-height:1.65; margin-bottom: 1rem;">Wipes this browser&rsquo;s copy and reloads. In <strong>server mode</strong> the dashboard re-syncs from the secure store (nothing on the server is deleted). In <strong>local mode</strong> it reloads the seed roster &mdash; anything not exported is gone.</p>
+          <button class="btn" id="reset-state" style="border-color: rgba(255,107,53,0.5); color: var(--orange);">Reset local copy</button>
         </div>
       </section>
 
     </main>
+  </div>
+
+  <!-- RECORD ADD / EDIT MODAL (schools, sponsors, partners, leads) -->
+  <div class="modal-overlay" id="record-modal" hidden>
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 id="record-title">Edit record</h2>
+        <button class="modal-close" id="record-close" aria-label="Close">&times;</button>
+      </div>
+      <form class="modal-body" id="record-form" autocomplete="off">
+        <div id="record-fields"></div>
+        <div id="record-extra"></div>
+        <div class="modal-foot">
+          <button type="button" class="btn" id="record-cancel">Cancel</button>
+          <button type="submit" class="btn primary" id="record-save">Save</button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <!-- ISSUE LICENCE MODAL -->
