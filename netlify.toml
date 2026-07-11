@@ -16,6 +16,22 @@
   status = 200
   force = true
 
+# Admin backend + public licence registry. Both functions declare
+# config.path natively; same belt-and-suspenders as /api/beat. The
+# :splat keeps the sub-route (login / logout / state / <licence-id>)
+# visible to the function.
+[[redirects]]
+  from = "/api/admin/*"
+  to = "/.netlify/functions/admin-api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/verify/*"
+  to = "/.netlify/functions/verify-licence/:splat"
+  status = 200
+  force = true
+
 # Public verify route. Printed licence certificates carry a QR pointing at
 # /verify/<short-id>; the rewrite hands that ID to the verify page as ?id=
 # so the URL the sponsor sees stays clean.
@@ -118,6 +134,15 @@
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.iframe.ly https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://i.ytimg.com https://*.ytimg.com https://*.ggpht.com https://irp.cdn-website.com https://*.cdn-website.com https://drive.google.com https://*.googleusercontent.com https://cdn.iframe.ly https://api.qrserver.com https://www.googletagmanager.com https://*.google-analytics.com https://www.google.com https://www.google.co.uk https://www.google.co.za https://www.google.ie; connect-src 'self' https://cdn.iframe.ly https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net https://demo.blastbeat.com https://app.blastbeat.com https://trx-3675.devspace.trixta.io https://*.devspace.trixta.io; frame-src 'self' https://drive.google.com https://www.youtube.com https://www.youtube-nocookie.com https://youtube.com https://cdn.iframe.ly https://*.iframe.ly https://www.googletagmanager.com https://demo.blastbeat.com https://app.blastbeat.com https://trx-3675.devspace.trixta.io https://*.devspace.trixta.io; media-src 'self' https://drive.google.com; frame-ancestors 'self'; form-action 'self'; base-uri 'self'; upgrade-insecure-requests"
+
+# Admin dashboard: never cache, never index. The page is also gated by
+# the server-checked access code, but no copy of it should sit in any
+# shared cache or search index either.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Cache-Control = "no-store"
+    X-Robots-Tag = "noindex, nofollow"
 
 # Cache static assets (1 year)
 [[headers]]
