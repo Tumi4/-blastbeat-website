@@ -26,6 +26,18 @@ site like everything else.
 (8 attempts / 15 min / IP, per warm function instance) stops casual brute
 force, but the code's strength is the real lock.
 
+> ⚠️ **Store both vars as standard environment variables, not "secret"
+> values.** During launch (2026-07-12) vars written with the secret flag
+> via the API reported success but silently never persisted — the site's
+> env list stayed empty and every login answered `501 not_configured`.
+> Standard vars persist correctly. They are still hidden from the public
+> (env vars never ship to the browser); "secret" only controls whether
+> team members can reveal the value in the Netlify UI.
+>
+> Env-var changes reach functions on the **next deploy** — after editing
+> them, trigger a deploy (any merge to `main`, or "Trigger deploy" in the
+> Netlify UI).
+
 ### Rotating the code
 Change `ADMIN_ACCESS_CODE` in Netlify and redeploy (env vars need a new
 deploy to reach functions). If `ADMIN_SESSION_SECRET` is unset, all existing
