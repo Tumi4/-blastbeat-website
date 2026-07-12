@@ -43,6 +43,23 @@ const LEAD_TYPE = {
   'artist-ambassador-accept': 'Ambassador',
   'contact': 'Contact',
 };
+
+// Demo requests carry an audience field — use it so investors, funders,
+// government and press land in the Leads view under their real category
+// instead of a generic "Demo".
+const AUDIENCE_TYPE = {
+  'Sponsor / CSR / ESG team': 'Sponsor',
+  'Foundation / Funder': 'Investor',
+  'Government / Ministry': 'Government',
+  'Journalist / Researcher': 'Media / Press',
+  'Education consultant': 'Partner',
+};
+function leadTypeFor(formName, data) {
+  if (formName === 'demo-access-request' && AUDIENCE_TYPE[data.audience]) {
+    return AUDIENCE_TYPE[data.audience];
+  }
+  return LEAD_TYPE[formName] || 'Contact';
+}
 // Append the submission to the admin dashboard's leads inbox (Blobs store
 // "bb-admin", one blob per message under inbox/<id> — an atomic append that
 // can't race the dashboard consuming other messages, or another submission
@@ -55,7 +72,7 @@ async function appendToLeadsInbox(formName, data) {
     await store.setJSON('inbox/' + id, {
       id,
       form: formName,
-      type: LEAD_TYPE[formName] || 'Contact',
+      type: leadTypeFor(formName, data),
       name: String(data.name || data['contact-name'] || data.artist || '').slice(0, 120),
       org: String(data.organisation || data['school-name'] || data['company-name'] || data.org || '').slice(0, 160),
       email: String(data.email || '').slice(0, 160),

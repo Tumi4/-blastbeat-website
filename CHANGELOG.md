@@ -7,6 +7,26 @@ Versions correspond to commit ranges on the `claude/polish-license-sponsor-pages
 
 ---
 
+## 2026-07-12 — Lead categories + licence-page example anonymised
+
+### Added
+- **Expanded lead categories.** Leads can now be typed as Investor,
+  Financial partner, Marketing, Media / Press or Government alongside
+  School, Sponsor, Partner, Ambassador, Demo and Contact — in the edit
+  form and (automatically) as filter chips.
+- **Smarter form intake.** Demo requests are classified by their
+  audience answer: Foundation/Funder → Investor, Sponsor/CSR → Sponsor,
+  Government/Ministry → Government, Journalist → Media / Press,
+  Education consultant → Partner. Investors no longer arrive as "Demo".
+
+### Fixed
+- **Public licence page no longer names a real school.** The example
+  certificate and example credential JSON presented Wynberg Girls' High
+  School as holding a 2026 sponsor-funded licence (dates + R45,000
+  value) — implying a current commercial relationship that doesn't
+  exist. Both now use a clearly fictional school marked "illustrative
+  example".
+
 ## 2026-07-12 — Admin clarity pass (designed for Robert)
 
 ### Fixed
