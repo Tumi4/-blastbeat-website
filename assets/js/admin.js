@@ -858,7 +858,7 @@
         { k: 'org', label: 'Organisation' },
         { k: 'email', label: 'Email', type: 'email' },
         { k: 'phone', label: 'Phone' },
-        { k: 'type', label: 'Type', type: 'select', opts: ['School', 'Sponsor', 'Partner', 'Demo', 'Ambassador', 'Contact'] },
+        { k: 'type', label: 'Type', type: 'select', opts: ['School', 'Sponsor', 'Investor', 'Financial partner', 'Marketing', 'Media / Press', 'Government', 'Partner', 'Ambassador', 'Demo', 'Contact'] },
         { k: 'source', label: 'Source' },
         { k: 'date', label: 'Date', type: 'date' },
         { k: 'status', label: 'Status', type: 'select', opts: ['New', 'Contacted', 'Qualified', 'Converted', 'Closed'] }
