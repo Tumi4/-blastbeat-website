@@ -7,6 +7,39 @@ Versions correspond to commit ranges on the `claude/polish-license-sponsor-pages
 
 ---
 
+## 2026-07-12 — Admin clarity pass (designed for Robert)
+
+### Fixed
+- **Invisible dropdown text.** Native `<select>` lists rendered white with
+  near-white text on Windows. `color-scheme: dark` now tells the browser
+  the page is dark (fixes dropdowns, date pickers and scrollbars), with
+  explicit dark option styling as fallback. Regression-tested.
+- **Modal horizontal scrollbar.** Form fields could overflow the issue /
+  edit modals sideways; fields now shrink properly (`min-width: 0`) and
+  modal bodies clip horizontal overflow.
+
+### Changed
+- **Forms you can actually read.** Labels are sentence-case DM Sans at
+  ~0.92rem (was 0.66rem uppercase mono), inputs are 1rem with more
+  padding, clearer borders, hover states and a stronger focus ring;
+  placeholder contrast raised.
+- **Calmer, roomier tables.** Bigger row padding, subtle zebra striping,
+  row hover highlight, friendlier column headers.
+
+### Added
+- **Filter chips on every list** — one-tap status filters with live
+  counts (Schools by status, Sponsors by stage, Partners by programme,
+  Leads by status, Licences by Credentialed / Roster / Revoked). "All"
+  resets; chips build themselves from the data so they never show empty
+  categories.
+- **Beat help button — always there.** A floating "🎤 Help" button opens
+  a panel with plain-language guidance for whichever page is open
+  (3 steps, big type), plus one-tap actions: replay the guided tour,
+  toggle big text, or WhatsApp Tumi. Topic follows you as you switch
+  tabs.
+- **"Aa Big text" toggle in the sidebar** — the accessibility mode is now
+  one tap from anywhere, not buried in Settings (both stay in sync).
+
 ## 2026-07-11 — Admin backend goes real (launch-ready)
 
 ### Added

@@ -126,6 +126,56 @@ test('leads: manual add via modal and convert to school', async ({ page }) => {
   await expect(page.locator('#tbl-pilot')).toContainText('Convert High');
 });
 
+test('native dropdowns render dark (no white-on-white options)', async ({ page }) => {
+  await loginLocal(page);
+  const scheme = await page.evaluate(() => getComputedStyle(document.documentElement).colorScheme);
+  expect(scheme).toContain('dark');
+  // Option styling is the fallback for platforms that ignore color-scheme.
+  await page.click('[data-view="pilot"]');
+  await page.click('[data-add="school"]');
+  const optColors = await page.evaluate(() => {
+    const opt = document.querySelector('#record-form select option') as HTMLOptionElement;
+    const cs = getComputedStyle(opt);
+    return { bg: cs.backgroundColor, fg: cs.color };
+  });
+  expect(optColors.bg).not.toBe('rgba(0, 0, 0, 0)');
+  expect(optColors.bg).not.toBe('rgb(255, 255, 255)');
+  await page.click('#record-cancel');
+});
+
+test('filter chips narrow the schools table and All resets', async ({ page }) => {
+  await loginLocal(page);
+  await page.click('[data-view="pilot"]');
+  const chips = page.locator('[data-chips="schools"] .chip');
+  expect(await chips.count()).toBeGreaterThan(2); // All + at least two statuses
+  const all = await page.locator('#tbl-pilot tbody tr').count();
+
+  await page.locator('[data-chips="schools"] .chip', { hasText: 'Proposal' }).click();
+  const filtered = await page.locator('#tbl-pilot tbody tr').count();
+  expect(filtered).toBeGreaterThan(0);
+  expect(filtered).toBeLessThan(all);
+
+  await page.locator('[data-chips="schools"] .chip', { hasText: 'All' }).click();
+  expect(await page.locator('#tbl-pilot tbody tr').count()).toBe(all);
+});
+
+test('Beat help panel opens with page-specific guidance', async ({ page }) => {
+  await loginLocal(page);
+  await expect(page.locator('#beat-fab')).toBeVisible();
+  await page.click('[data-view="licences"]');
+  await page.click('#beat-fab');
+  await expect(page.locator('#beat-panel')).toBeVisible();
+  await expect(page.locator('#beat-panel-body')).toContainText(/stamp/i);
+  // Switching tabs while open refreshes the topic.
+  await page.click('[data-view="leads"]');
+  await expect(page.locator('#beat-panel-body')).toContainText(/enquiry|convert/i);
+  // Big-text action works from the panel.
+  await page.click('#beat-bigtext-toggle');
+  await expect(page.locator('body')).toHaveClass(/bigtext/);
+  await page.click('#beat-panel-close');
+  await expect(page.locator('#beat-panel')).toBeHidden();
+});
+
 test('session survives reload without console errors', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
