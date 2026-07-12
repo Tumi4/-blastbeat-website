@@ -16,21 +16,12 @@
   status = 200
   force = true
 
-# Admin backend + public licence registry. Both functions declare
-# config.path natively; same belt-and-suspenders as /api/beat. The
-# :splat keeps the sub-route (login / logout / state / <licence-id>)
-# visible to the function.
-[[redirects]]
-  from = "/api/admin/*"
-  to = "/.netlify/functions/admin-api/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/verify/*"
-  to = "/.netlify/functions/verify-licence/:splat"
-  status = 200
-  force = true
+# Admin backend + public licence registry: routed ONLY by each function's
+# native config.path (/api/admin/*, /api/verify/*). Do NOT add redirect
+# rules pointing at /.netlify/functions/admin-api or /verify-licence —
+# a function that declares config.path is NOT reachable at its default
+# /.netlify/functions/<name> URL, so such a redirect intercepts the
+# request and turns it into a 404 (launch-day incident, 2026-07-11).
 
 # Public verify route. Printed licence certificates carry a QR pointing at
 # /verify/<short-id>; the rewrite hands that ID to the verify page as ?id=
