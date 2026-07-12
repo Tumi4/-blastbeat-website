@@ -59,6 +59,13 @@ Versions correspond to commit ranges on the `claude/polish-license-sponsor-pages
   backups, lifecycle.
 
 ### Fixed
+- **Launch-day 404 on /api/admin/login.** The "belt-and-suspenders"
+  redirects for the new functions force-rewrote `/api/admin/*` and
+  `/api/verify/*` to `/.netlify/functions/<name>/…` — but a function
+  that declares `config.path` is *only* reachable at that path, so the
+  redirect intercepted every request and manufactured a 404 (the
+  dashboard then fell back to local mode and rejected the real access
+  code). Removed both rules; the functions' native routes handle it.
 - **Two-device concurrency made safe** (caught by the pre-push
   adversarial review). State writes are etag-conditional on top of the
   rev check, so a race between two saves yields a clean conflict
