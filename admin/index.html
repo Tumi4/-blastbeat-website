@@ -13,11 +13,18 @@
       --line: rgba(255,255,255,0.1); --text: #f1f3f8; --muted: rgba(255,255,255,0.62);
       --purple: #6366F1; --pink: #FF2D78; --cyan: #00F5FF; --lime: #B8FF00; --orange: #FF6B35; --green: #34D399;
       --font: 'DM Sans', system-ui, sans-serif; --head: 'Space Grotesk', sans-serif; --mono: 'IBM Plex Mono', monospace;
+      /* Tell the browser this is a dark page: native dropdown lists, date
+         pickers and scrollbars render dark instead of white-on-white. */
+      color-scheme: dark;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
     a { color: var(--cyan); }
     h1,h2,h3,h4 { font-family: var(--head); font-weight: 800; letter-spacing: -0.01em; }
+    /* Belt-and-suspenders for the native <select> popup: some platforms
+       honour these directly even without color-scheme support. */
+    select option, datalist option { background-color: var(--panel-2); color: var(--text); }
+    ::placeholder { color: rgba(255,255,255,0.45); opacity: 1; }
 
     /* Login gate */
     #gate { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,0.18), transparent 55%), var(--bg); padding: 1.5rem; }
@@ -70,9 +77,11 @@
     .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; }
     .card h3 { font-size: 1.05rem; margin-bottom: 1rem; }
 
-    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-    th { text-align: left; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--line); white-space: nowrap; }
-    td { padding: 0.7rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th { text-align: left; font-family: var(--font); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.65); font-weight: 700; padding: 0.7rem 0.85rem; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    td { padding: 0.9rem 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
+    tbody tr:nth-child(even) { background: rgba(255,255,255,0.018); }
+    tbody tr:hover { background: rgba(99,102,241,0.07); }
     tr:last-child td { border-bottom: none; }
     .pill { display: inline-block; font-size: 0.66rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
     .pill.green { background: rgba(52,211,153,0.15); color: var(--green); }
@@ -114,17 +123,21 @@
     .modal-head h2 { font-size: 1.1rem; }
     .modal-close { background: rgba(255,255,255,0.06); border: 1px solid var(--line); color: var(--text); width: 32px; height: 32px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; }
     .modal-close:hover { background: rgba(255,255,255,0.14); }
-    .modal-body { padding: 1.5rem 1.75rem 1.75rem; overflow-y: auto; }
+    .modal-body { padding: 1.5rem 1.75rem 1.75rem; overflow-y: auto; overflow-x: hidden; }
     .modal-foot { display: flex; gap: 0.6rem; justify-content: flex-end; margin-top: 1.5rem; flex-wrap: wrap; }
     .field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
-    .field > span { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .field > span { font-family: var(--font); font-size: 0.92rem; color: rgba(255,255,255,0.85); font-weight: 600; letter-spacing: 0.01em; }
+    .field { min-width: 0; }
+    .field .hint { font-size: 0.8rem; color: var(--muted); margin-top: -0.1rem; }
     .field input, .field select, .field textarea {
-      padding: 0.7rem 0.9rem; background: rgba(255,255,255,0.05); border: 1px solid var(--line); border-radius: 8px; color: var(--text);
-      font-family: var(--font); font-size: 0.95rem;
+      padding: 0.85rem 1rem; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.16); border-radius: 10px; color: var(--text);
+      font-family: var(--font); font-size: 1rem; width: 100%; min-width: 0; max-width: 100%;
     }
-    .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--purple); }
+    .field input:hover, .field select:hover, .field textarea:hover { border-color: rgba(255,255,255,0.28); }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: 2.5px solid var(--purple); outline-offset: 1px; border-color: transparent; }
     .field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.65)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2rem; }
-    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; min-width: 0; }
+    .field-row > .field { min-width: 0; }
     @media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
 
     /* MOBILE — iOS auto-zoom guard. Any form input under 16px triggers a
@@ -154,6 +167,70 @@
 
     /* TOAST visible state */
     #bb-toast.show { transform: translateX(-50%) translateY(0) !important; }
+
+    /* FILTER CHIPS — one-tap status filters above each table */
+    .chip-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: -0.5rem 0 1.1rem; }
+    .chip-row:empty { display: none; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.5rem 1rem; min-height: 40px;
+      border-radius: 999px; border: 1.5px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.8);
+      font-family: var(--font); font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .chip:hover { border-color: rgba(255,255,255,0.35); color: #fff; }
+    .chip.active { background: var(--purple); border-color: var(--purple); color: #fff; box-shadow: 0 4px 14px rgba(99,102,241,0.35); }
+    .chip .count { font-size: 0.74rem; font-weight: 700; background: rgba(255,255,255,0.16); border-radius: 999px; padding: 1px 8px; }
+
+    /* BIG TEXT quick toggle in the sidebar */
+    .side-toggle {
+      display: flex; align-items: center; gap: 0.6rem; width: 100%;
+      padding: 0.6rem 0.85rem; margin-bottom: 0.35rem;
+      border: 1.5px solid rgba(255,255,255,0.14); border-radius: 10px;
+      background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.8);
+      font-family: var(--font); font-size: 0.86rem; font-weight: 600; cursor: pointer;
+    }
+    .side-toggle:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+    .side-toggle .aa { font-family: var(--head); font-weight: 800; font-size: 1rem; }
+    .side-toggle.on { background: rgba(99,102,241,0.2); border-color: var(--purple); color: #fff; }
+
+    /* BEAT HELP — floating guide button + panel */
+    #beat-fab {
+      position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 240;
+      display: flex; align-items: center; gap: 0.55rem;
+      padding: 0.8rem 1.25rem; border: none; border-radius: 999px;
+      background: linear-gradient(135deg, var(--purple), var(--pink)); color: #fff;
+      font-family: var(--font); font-weight: 800; font-size: 0.95rem; cursor: pointer;
+      box-shadow: 0 12px 34px rgba(0,0,0,0.5), 0 4px 14px rgba(99,102,241,0.4);
+      transition: transform 0.15s;
+    }
+    #beat-fab:hover { transform: translateY(-2px); }
+    #beat-fab[hidden] { display: none; }
+    #beat-panel {
+      position: fixed; right: 1.25rem; bottom: 5.25rem; z-index: 245;
+      width: min(380px, calc(100vw - 2.5rem));
+      max-height: min(560px, calc(100dvh - 7rem));
+      background: linear-gradient(180deg, #141a30 0%, #0F1424 100%);
+      border: 1px solid rgba(99,102,241,0.4); border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.6);
+      display: flex; flex-direction: column; overflow: hidden;
+      animation: m-rise 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    #beat-panel[hidden] { display: none; }
+    .beat-panel-head { display: flex; align-items: center; gap: 0.7rem; padding: 1.1rem 1.25rem 0.85rem; border-bottom: 1px solid var(--line); }
+    .beat-panel-head .avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--pink)); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0; }
+    .beat-panel-head .t { flex: 1; }
+    .beat-panel-head .t .n { font-family: var(--head); font-weight: 800; font-size: 1rem; }
+    .beat-panel-head .t .r { font-size: 0.74rem; color: var(--lime); }
+    .beat-panel-body { padding: 1rem 1.25rem 1.25rem; overflow-y: auto; font-size: 0.95rem; line-height: 1.65; }
+    .beat-panel-body h4 { font-family: var(--head); font-size: 1.02rem; margin: 0 0 0.5rem; color: #fff; }
+    .beat-panel-body ol, .beat-panel-body ul { padding-left: 1.2rem; margin: 0 0 0.9rem; color: rgba(255,255,255,0.85); }
+    .beat-panel-body li { margin-bottom: 0.45rem; }
+    .beat-panel-body li strong { color: var(--lime); }
+    .beat-actions { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.4rem; }
+    .beat-actions .btn { justify-content: center; min-height: 44px; font-size: 0.92rem; }
+    body.bigtext .beat-panel-body { font-size: 1.08rem; }
 
     /* SYNC BADGE — sidebar footer connection state */
     .sync-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.74rem; color: var(--muted); padding: 0.5rem 0.85rem 0.75rem; line-height: 1.4; }
@@ -299,6 +376,7 @@
       <button class="nav-item" data-view="audit"><span class="ic">&#128737;&#65039;</span> Audit Log</button>
       <button class="nav-item" data-view="settings"><span class="ic">&#9881;&#65039;</span> Settings</button>
       <div class="side-foot">
+        <button class="side-toggle" id="side-bigtext" type="button" aria-pressed="false"><span class="aa">Aa</span> Big text</button>
         <div class="sync-badge" id="sync-badge" hidden><span class="dot"></span><span class="txt"></span></div>
         <button class="logout" id="logout">&#8592; Log out</button>
       </div>
@@ -346,6 +424,7 @@
             <button class="btn primary" data-add="school">+ Add school</button>
           </div>
         </div>
+        <div class="chip-row" data-chips="schools" role="group" aria-label="Filter by status"></div>
         <div class="card table-scroll"><table id="tbl-pilot"></table></div>
       </section>
 
@@ -358,6 +437,7 @@
             <button class="btn primary" data-add="sponsor">+ Add sponsor</button>
           </div>
         </div>
+        <div class="chip-row" data-chips="sponsors" role="group" aria-label="Filter by status"></div>
         <div class="card table-scroll"><table id="tbl-sponsors"></table></div>
       </section>
 
@@ -370,6 +450,7 @@
             <button class="btn primary" data-add="partner">+ Add partner</button>
           </div>
         </div>
+        <div class="chip-row" data-chips="partners" role="group" aria-label="Filter by status"></div>
         <div class="stat-grid" id="partner-stats"></div>
         <div class="card table-scroll"><table id="tbl-partners"></table></div>
       </section>
@@ -383,6 +464,7 @@
             <button class="btn primary" data-add="lead">+ Add lead</button>
           </div>
         </div>
+        <div class="chip-row" data-chips="leads" role="group" aria-label="Filter by status"></div>
         <div class="card table-scroll"><table id="tbl-leads"></table></div>
       </section>
 
@@ -395,6 +477,7 @@
             <button class="btn primary" id="issue-licence-open">+ Issue new licence</button>
           </div>
         </div>
+        <div class="chip-row" data-chips="licences" role="group" aria-label="Filter by status"></div>
         <div class="stat-grid" id="licence-stats"></div>
         <div class="card table-scroll"><table id="tbl-licences"></table></div>
         <div class="card">
@@ -580,6 +663,17 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- BEAT HELP — always-there guide -->
+  <button id="beat-fab" hidden aria-haspopup="dialog" aria-controls="beat-panel">&#127908; Help</button>
+  <div id="beat-panel" hidden role="dialog" aria-label="Beat help panel">
+    <div class="beat-panel-head">
+      <div class="avatar">&#127908;</div>
+      <div class="t"><div class="n">Beat</div><div class="r">YOUR GUIDE &mdash; ALWAYS HERE</div></div>
+      <button class="modal-close" id="beat-panel-close" aria-label="Close help">&times;</button>
+    </div>
+    <div class="beat-panel-body" id="beat-panel-body"></div>
   </div>
 
   <!-- TOAST -->

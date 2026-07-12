@@ -460,6 +460,49 @@
     return parts.join(' ').toLowerCase().indexOf(q) !== -1;
   }
 
+  /* ---- Filter chips: one-tap status filters above each table ----
+     Chips are built from whatever values actually exist in the data, with
+     live counts, so they never show empty categories. "All" resets. */
+  var chipState = {}; // view key -> selected value ('' = all)
+  var CHIP_SPECS = {
+    schools:  { get: function (r) { return r.status || 'No status'; } },
+    sponsors: { get: function (r) { return r.status || 'No status'; } },
+    partners: { get: function (r) { return r.type || 'No type'; } },
+    leads:    { get: function (r) { return r.status || 'No status'; } },
+    licences: { get: function (l) {
+      if (l.status === 'revoked') return 'Revoked';
+      return l.vc ? 'Credentialed' : 'Roster';
+    } }
+  };
+  function chipFilter(view, rec) {
+    var sel = chipState[view];
+    if (!sel) return true;
+    return CHIP_SPECS[view].get(rec) === sel;
+  }
+  function renderChips(view, items) {
+    var host = document.querySelector('[data-chips="' + view + '"]');
+    if (!host) return;
+    var counts = {};
+    items.forEach(function (r) {
+      var k = CHIP_SPECS[view].get(r);
+      counts[k] = (counts[k] || 0) + 1;
+    });
+    var keys = Object.keys(counts).sort();
+    if (keys.length < 2) { host.innerHTML = ''; chipState[view] = ''; return; }
+    var sel = chipState[view] || '';
+    var html = '<button type="button" class="chip' + (sel === '' ? ' active' : '') + '" data-chip-view="' + view + '" data-chip-val="" aria-pressed="' + (sel === '') + '">All <span class="count">' + items.length + '</span></button>';
+    keys.forEach(function (k) {
+      html += '<button type="button" class="chip' + (sel === k ? ' active' : '') + '" data-chip-view="' + view + '" data-chip-val="' + escapeHtmlAttr(k) + '" aria-pressed="' + (sel === k) + '">' + escapeHtmlText(k) + ' <span class="count">' + counts[k] + '</span></button>';
+    });
+    host.innerHTML = html;
+  }
+  document.body.addEventListener('click', function (e) {
+    var chip = e.target.closest('[data-chip-view]');
+    if (!chip) return;
+    chipState[chip.dataset.chipView] = chip.dataset.chipVal;
+    render();
+  });
+
   // Calendar-safe month adder: 31 Aug + 6mo clamps to 28/29 Feb instead of
   // overflowing into March (setMonth alone would).
   function addMonths(dateStr, months) {
@@ -543,8 +586,9 @@
     return '<button class="btn sm" data-edit="' + kind + '" data-id="' + id + '">Edit</button>';
   }
   function renderPilot() {
+    renderChips('schools', data.schools);
     var rows = data.schools.filter(function (s) {
-      return matchesSearch('schools', [s.name, s.country, s.twin, s.status, s.note]);
+      return chipFilter('schools', s) && matchesSearch('schools', [s.name, s.country, s.twin, s.status, s.note]);
     }).map(function (s) {
       return '<tr' + (s._sample ? ' class="sample-row"' : '') + '>'
         + '<td><strong>' + escapeHtmlText(s.name) + '</strong>' + (GROUP_TAG[s.group] || '') + sampleTag(s)
@@ -562,9 +606,10 @@
   }
 
   function renderSponsors() {
+    renderChips('sponsors', data.sponsors);
     var rows = data.sponsors.filter(function (s) {
       var roleText = (s.roles && s.roles.length) ? s.roles.join(' ') : (s.tier || '');
-      return matchesSearch('sponsors', [s.company, roleText, s.twin, s.status, s.contact]);
+      return chipFilter('sponsors', s) && matchesSearch('sponsors', [s.company, roleText, s.twin, s.status, s.contact]);
     }).map(function (s) {
       var roleText = (s.roles && s.roles.length) ? s.roles.join(' · ') : s.tier;
       return '<tr' + (s._sample ? ' class="sample-row"' : '') + '>'
@@ -595,8 +640,9 @@
       return '<div class="stat"><div class="label">' + s.label + '</div><div class="val">' + s.val + '</div><div class="sub">' + s.sub + '</div></div>';
     }).join('');
 
+    renderChips('partners', data.partners);
     var rows = data.partners.filter(function (p) {
-      return matchesSearch('partners', [p.name, p.type, p.status, p.email, p.link, p.refCode]);
+      return chipFilter('partners', p) && matchesSearch('partners', [p.name, p.type, p.status, p.email, p.link, p.refCode]);
     }).map(function (p) {
       var typeCls = p.type === 'Affiliate' ? 'amber' : (p.type === 'Ambassador' ? 'cyan' : 'green');
       return '<tr' + (p._sample ? ' class="sample-row"' : '') + '>'
@@ -716,8 +762,9 @@
   });
 
   function renderLeads() {
+    renderChips('leads', data.leads);
     var rows = data.leads.filter(function (l) {
-      return matchesSearch('leads', [l.name, l.org, l.type, l.source, l.status, l.email, l.referral]);
+      return chipFilter('leads', l) && matchesSearch('leads', [l.name, l.org, l.type, l.source, l.status, l.email, l.referral]);
     }).map(function (l) {
       var sub = [l.email, l.phone].filter(Boolean).join(' · ');
       var refTag = l.referral ? ' <span class="pill cyan" style="font-size:0.56rem;">REF ' + escapeHtmlText(l.referral) + '</span>' : '';
@@ -1329,8 +1376,9 @@
       return '<div class="stat"><div class="label">' + s.label + '</div><div class="val">' + s.val + '</div><div class="sub">' + s.sub + '</div></div>';
     }).join('');
 
+    renderChips('licences', data.licences);
     var list = data.licences.filter(function (l) {
-      return matchesSearch('licences', [l.school, l.sponsor, tierLabel(l.tier), l.region, l.status, String(l.id)]);
+      return chipFilter('licences', l) && matchesSearch('licences', [l.school, l.sponsor, tierLabel(l.tier), l.region, l.status, String(l.id)]);
     });
     var rows = list.length ? list.slice().reverse().map(function (l) {
       var isIssued = !!l.vc;
@@ -1534,15 +1582,28 @@
   var SAVED_KEY = 'bb-admin-savetoast';
   var bigEl = document.getElementById('opt-bigtext');
   var savedEl = document.getElementById('opt-confirm-save');
-  function applyBig() { document.body.classList.toggle('bigtext', lsGet(BIG_KEY) === '1'); }
+  var sideBigBtn = document.getElementById('side-bigtext');
+  function applyBig() {
+    var on = lsGet(BIG_KEY) === '1';
+    document.body.classList.toggle('bigtext', on);
+    if (bigEl) bigEl.checked = on;
+    if (sideBigBtn) {
+      sideBigBtn.classList.toggle('on', on);
+      sideBigBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+  }
+  function setBigText(on) {
+    lsSet(BIG_KEY, on ? '1' : '0');
+    applyBig();
+    toast(on ? 'Big-text mode on.' : 'Big-text mode off.');
+  }
   if (bigEl) {
     bigEl.checked = lsGet(BIG_KEY) === '1';
-    bigEl.addEventListener('change', function () {
-      lsSet(BIG_KEY, bigEl.checked ? '1' : '0');
-      applyBig();
-      toast(bigEl.checked ? 'Big-text mode on.' : 'Big-text mode off.');
-    });
+    bigEl.addEventListener('change', function () { setBigText(bigEl.checked); });
   }
+  if (sideBigBtn) sideBigBtn.addEventListener('click', function () {
+    setBigText(lsGet(BIG_KEY) !== '1');
+  });
   if (savedEl) {
     if (lsGet(SAVED_KEY) === '0') savedEl.checked = false;
     savedEl.addEventListener('change', function () {
@@ -1689,6 +1750,118 @@
   var settingsRestartBtn = document.getElementById('settings-restart-tour');
   if (settingsRestartBtn) settingsRestartBtn.addEventListener('click', openTour);
 
+  /* ---- Beat help panel: always-there, per-page guidance ----
+     Static, dependable how-to content (no AI round-trip) — written for a
+     reader who wants three clear steps, not a manual. Opens on the current
+     tab's topic and always offers the tour, big text, and a human. */
+  var BEAT_HELP = {
+    overview: {
+      title: 'This page is your morning glance.',
+      html: '<ul>'
+        + '<li>The <strong>Needs attention</strong> card counts renewals due and new leads — if it&rsquo;s not 0, that&rsquo;s your first job today.</li>'
+        + '<li>The progress bar tracks the 20-school pilot target.</li>'
+        + '<li>The backend card at the bottom confirms your data is safely synced.</li>'
+        + '</ul>'
+    },
+    pilot: {
+      title: 'Your schools, all in one list.',
+      html: '<ol>'
+        + '<li>Tap a <strong>filter chip</strong> (Active, Proposal&hellip;) to see one group at a time.</li>'
+        + '<li><strong>Edit</strong> opens a form — change anything, press Save.</li>'
+        + '<li>&ldquo;Needs twin&rdquo; in pink means the school still needs a sponsor.</li>'
+        + '</ol>'
+    },
+    twinaid: {
+      title: 'Sponsors and who they twin with.',
+      html: '<ol>'
+        + '<li><strong>+ Add sponsor</strong> the moment a company says yes.</li>'
+        + '<li>Set their <strong>status</strong> as the deal moves: Pledged &rarr; Confirmed &rarr; Invoiced &rarr; Funded.</li>'
+        + '<li>Put the school&rsquo;s name in <strong>Twin school</strong> to pair them.</li>'
+        + '</ol>'
+    },
+    partners: {
+      title: 'Ambassadors, affiliates, and what they&rsquo;re owed.',
+      html: '<ol>'
+        + '<li><strong>&#127873; Kit</strong> opens a partner&rsquo;s personal resources page — copy the link and send it.</li>'
+        + '<li><strong>&#9993; Welcome</strong> drafts their welcome email for you.</li>'
+        + '<li>The <strong>Owed</strong> column is live — it updates when their referred licences are issued or revoked.</li>'
+        + '</ol>'
+    },
+    leads: {
+      title: 'Every website enquiry lands here by itself.',
+      html: '<ol>'
+        + '<li>New form submissions appear with a <strong>New</strong> badge — no copying from email.</li>'
+        + '<li><strong>Edit</strong> shows exactly what they wrote, with a reply-by-email button.</li>'
+        + '<li>When a school is ready, press <strong>&#127979; Convert</strong> — it joins the pilot roster in one tap.</li>'
+        + '</ol>'
+    },
+    licences: {
+      title: 'Issue, stamp, and track every licence.',
+      html: '<ol>'
+        + '<li><strong>&#9745; Stamp</strong> on a roster line turns an agreed deal into a real credential + certificate.</li>'
+        + '<li><strong>+ Issue new licence</strong> for anything brand new — type the school, we add it for you.</li>'
+        + '<li>Amber <strong>renews in&hellip;</strong> chips = call that sponsor soon.</li>'
+        + '</ol>'
+    },
+    audit: {
+      title: 'The record of everything.',
+      html: '<ul>'
+        + '<li>Every add, edit, delete, issue and revoke is here, with <strong>who did it</strong> and when.</li>'
+        + '<li>Nothing can be quietly changed — that&rsquo;s the point.</li>'
+        + '<li>Export it any time for your lawyer or the board.</li>'
+        + '</ul>'
+    },
+    settings: {
+      title: 'Comfort and safety switches.',
+      html: '<ul>'
+        + '<li><strong>Big text mode</strong> makes everything larger — also one tap in the left menu (&ldquo;Aa&rdquo;).</li>'
+        + '<li><strong>Export full state</strong> is your backup — do it before big changes.</li>'
+        + '<li><strong>Restore from backup</strong> brings an export straight back.</li>'
+        + '</ul>'
+    }
+  };
+  var beatFab = document.getElementById('beat-fab');
+  var beatPanel = document.getElementById('beat-panel');
+  var beatPanelBody = document.getElementById('beat-panel-body');
+  function currentViewKey() {
+    var active = document.querySelector('.nav-item.active');
+    return (active && active.dataset.view) || 'overview';
+  }
+  function openBeatPanel() {
+    var help = BEAT_HELP[currentViewKey()] || BEAT_HELP.overview;
+    var bigOn = lsGet(BIG_KEY) === '1';
+    beatPanelBody.innerHTML = '<h4>' + help.title + '</h4>' + help.html
+      + '<div class="beat-actions">'
+      + '<button type="button" class="btn primary" id="beat-restart-tour">&#128173; Walk me through it (tour)</button>'
+      + '<button type="button" class="btn" id="beat-bigtext-toggle">Aa &nbsp;' + (bigOn ? 'Turn big text OFF' : 'Turn big text ON') + '</button>'
+      + '<a class="btn" href="https://wa.me/27738048409" target="_blank" rel="noopener">&#128172; WhatsApp Tumi — a human, fast</a>'
+      + '</div>';
+    beatPanel.hidden = false;
+    beatFab.setAttribute('aria-expanded', 'true');
+  }
+  function closeBeatPanel() {
+    beatPanel.hidden = true;
+    if (beatFab) beatFab.setAttribute('aria-expanded', 'false');
+  }
+  if (beatFab) beatFab.addEventListener('click', function () {
+    if (beatPanel.hidden) openBeatPanel(); else closeBeatPanel();
+  });
+  var beatPanelClose = document.getElementById('beat-panel-close');
+  if (beatPanelClose) beatPanelClose.addEventListener('click', closeBeatPanel);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && beatPanel && !beatPanel.hidden) closeBeatPanel();
+  });
+  document.body.addEventListener('click', function (e) {
+    if (e.target.closest('#beat-restart-tour')) { closeBeatPanel(); openTour(); }
+    if (e.target.closest('#beat-bigtext-toggle')) { setBigText(lsGet(BIG_KEY) !== '1'); openBeatPanel(); }
+  });
+  // Refresh the panel's topic when Robert switches tabs while it's open.
+  document.querySelectorAll('.nav-item').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (beatPanel && !beatPanel.hidden) openBeatPanel();
+    });
+  });
+
   /* ---- Hook into existing render() so new tabs refresh too ---- */
   var _origRender = render;
   render = function () { _origRender(); renderLicences(); renderAudit(); updateSamplesBanner(); };
@@ -1707,6 +1880,7 @@
       setBadge('local');
       updateBackendCard(null, null);
     }
+    if (beatFab) beatFab.hidden = false; // help is only useful once inside
     maybeAutoLaunchTour();
   };
 
