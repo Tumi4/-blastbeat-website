@@ -7,6 +7,33 @@ Versions correspond to commit ranges on the `claude/polish-license-sponsor-pages
 
 ---
 
+## 2026-07-19 — One price, one email (Robert's simplification)
+
+### Changed
+- **Pricing simplified to €1,250 / 6-month pilot, all three verticals.**
+  Every rand amount removed from public pricing displays (homepage
+  bundle + single-vertical tiers, for-schools, partners founding rate,
+  stats and per-student maths, adopt-a-school tiers now €1,250 /
+  €5,625 / €10,625 with the same 10/15% multi-school discounts,
+  media kit, licence page incl. Product JSON-LD offer and example
+  credential). "R0 Upfront" / "R0 to School" cards renamed "No Fees
+  Upfront" / "No Cost to School". Beat chatbot's pricing knowledge and
+  canned answers updated to match.
+- **One public email everywhere: robert@climateactionsnow.org.**
+  All @blastbeat.education addresses (which cannot receive mail — no
+  MX) replaced across 26 public pages, the Beat chatbot (prompt +
+  offline fallbacks), and the form team-alert defaults
+  (robert@climateactionsnow.org + ttncube01@gmail.com). Duplicate
+  email cards on the contact and apply pages collapsed into a single
+  "Email — All Enquiries" card.
+
+### Notes
+- The student profit calculator ("R0 to R45K") is untouched — that's
+  event proceeds students can earn, not licence pricing.
+- Four blog articles still discuss the old R45,000/yr rate
+  editorially (incl. "The R45K Question") — flagged for an editorial
+  rewrite rather than silently altered.
+
 ## 2026-07-18 — Robert's review round + LinkedIn campaign stack
 
 ### Fixed

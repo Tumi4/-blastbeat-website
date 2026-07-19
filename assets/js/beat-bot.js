@@ -80,13 +80,13 @@
     },
     {
       patterns: ['sponsor', 'sponsorship', 'fund', 'corporate', 'partner', 'adopt a school'],
-      reply: "We have an Adopt-A-School marketplace where corporate sponsors can fund schools.\n\nSponsoring through Blastbeat counts towards BBBEE SED spend, Section 18A tax relief, and SDG commitments.\n\nFounding school rate: R45,000/school — includes full programme for up to 100 students.",
+      reply: "We have an Adopt-A-School marketplace where corporate sponsors can fund schools.\n\nSponsoring through Blastbeat counts towards BBBEE SED spend, Section 18A tax relief, and SDG commitments.\n\nFounding pilot rate: €1,250 per school for the 6-month pilot — all three programmes included, up to 100 students.",
       chips: ['Partners page', 'Contact us'],
       links: [{ label: 'View sponsorship packages', url: '/pages/partners.html' }]
     },
     {
       patterns: ['contact', 'email', 'phone', 'reach', 'talk', 'speak', 'message', 'whatsapp'],
-      reply: "Here's how to reach the team:\n\n📧 info@blastbeat.education\n📧 partners@blastbeat.education (schools & sponsorship)\n📞 +27 73 804 8409\n\nOr fill in the contact form on our website — we respond within 2 business days.",
+      reply: "Here's how to reach the team:\n\n📧 robert@climateactionsnow.org\n📧 robert@climateactionsnow.org (schools & sponsorship)\n📞 +27 73 804 8409\n\nOr fill in the contact form on our website — we respond within 2 business days.",
       chips: ['Apply now →', 'How do I apply?'],
       links: [{ label: 'Contact page', url: '/pages/contact.html' }]
     },
@@ -98,7 +98,7 @@
     }
   ];
 
-  var DEFAULT_REPLY = "Good question! I'm still learning 🎵 Try asking me about:\n\n• How to apply\n• What MACC or FootBeat is\n• Whether it's free\n• Teacher training\n• Competitions\n\nOr reach the team at info@blastbeat.education";
+  var DEFAULT_REPLY = "Good question! I'm still learning 🎵 Try asking me about:\n\n• How to apply\n• What MACC or FootBeat is\n• Whether it's free\n• Teacher training\n• Competitions\n\nOr reach the team at robert@climateactionsnow.org";
   var DEFAULT_CHIPS = ['What is Blastbeat?', 'How do I apply?', 'Contact us'];
 
   /* ── Link resolution ── */
