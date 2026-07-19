@@ -15,7 +15,7 @@
                          If unset, the function logs the would-be payload
                          and returns 200 so the submission still completes.
      RESEND_FROM         optional. Default: 'Blastbeat <noreply@blastbeat.education>'
-     TEAM_NOTIFY_EMAILS  optional. CSV. Default: 'robert@blastbeat.education,tumelo@blastbeat.education'
+     TEAM_NOTIFY_EMAILS  optional. CSV. Default: 'robert@climateactionsnow.org,ttncube01@gmail.com'
      FUNCTION_DEBUG      optional ('1' to log every payload regardless of send result)
 
    Why Resend (not SES/SendGrid):
@@ -111,7 +111,7 @@ export default async function handler(req) {
   }
 
   const { autoReply, teamAlert } = route(data);
-  const recipients = (process.env.TEAM_NOTIFY_EMAILS || 'robert@blastbeat.education,tumelo@blastbeat.education')
+  const recipients = (process.env.TEAM_NOTIFY_EMAILS || 'robert@climateactionsnow.org,ttncube01@gmail.com')
     .split(',').map(s => s.trim()).filter(Boolean);
 
   const apiKey = process.env.RESEND_API_KEY;

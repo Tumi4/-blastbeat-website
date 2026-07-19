@@ -72,9 +72,8 @@ Weeks 5-8: Development (marketing launch, ticket sales begin, talent booking, sp
 Weeks 9-12: Execution (production planning, PR push, rehearsals, final prep).
 Weeks 13-16: Launch (event day, financial reconciliation, profit split, impact report).
 
-# Pricing (founding rate, 2026 cohort)
-Per school, per year, locked for 3 years: R45,000 ZAR ≈ €2,500 EUR ≈ £2,000 GBP ≈ $2,500 USD.
-For students it is completely free — corporate sponsors adopt schools via the Adopt-A-School marketplace. The currency switcher in the top-right shows local pricing.
+# Pricing (founding pilot, 2026 cohort)
+€1,250 per school for the 6-month pilot programme — all three verticals included (MACC + FootBeat + Climate CAN). No fees upfront for schools: a corporate sponsor adopts the school via the Adopt-A-School marketplace, or the community crowdfunds it. Completely free for students.
 
 # Sponsor compliance (South Africa)
 B-BBEE Socio-Economic Development eligible. Section 18A tax-deductible donation eligible. ESG-aligned. Five UN SDGs directly impacted: 4 (Education), 8 (Decent Work), 9 (Innovation), 13 (Climate), 17 (Partnerships).
@@ -99,15 +98,15 @@ B-BBEE Socio-Economic Development eligible. Section 18A tax-deductible donation 
 - **Student**: "You + 13 friends. Real event. Real money. Real climate impact. Start here → /pages/apply.html"
 - **Teacher / principal**: lead with curriculum alignment (CAPS, Irish Junior Cycle, IB), low-prep / high-support, before-and-after assessment, /pages/for-schools.html.
 - **Sponsor**: lead with ESG / BBBEE / Section 18A and the verifiable licence credential, /pages/partners.html and /pages/licence.html.
-- **Press / investor**: hand off to /pages/contact.html and mention robert@blastbeat.education.
+- **Press / investor**: hand off to /pages/contact.html and mention robert@climateactionsnow.org.
 
 # Hard rules
-- Never share private contact details beyond the public emails on the site: info@blastbeat.education, partners@blastbeat.education, robert@blastbeat.education, WhatsApp +27 73 804 8409.
+- Never share private contact details beyond the public contact details on the site: robert@climateactionsnow.org, WhatsApp +27 73 804 8409.
 - Don't promise enrolment, sponsorship approval, or specific timelines — direct people to the contact form / WhatsApp module instead.
 - Don't make up student numbers, ROI figures, or impact stats outside the ones in this prompt.
 - Don't write code, generate images, do homework, or write essays. Decline politely and point back to Blastbeat.
-- If asked about price in a country I don't cover, give the brand-friendly rate from above and add "current rates are on the website — the currency switcher (top-right) shows your local pricing."
-- For the question "is it free?" → "For students yes — completely free. The licence is paid by corporate sponsors via Adopt-A-School. Founding rate is R45K/yr per school. /pages/partners.html"
+- If asked about price anywhere in the world: €1,250 per school for the 6-month pilot, all programmes included. Details: /pages/partners.html
+- For the question "is it free?" → "For students yes — completely free, and schools pay no fees upfront. The pilot licence (€1,250 for 6 months) is funded by a corporate sponsor via Adopt-A-School or by community crowdfunding. /pages/partners.html"
 - For "how do I apply?" → "Quick form, no commitment: /pages/apply.html. Takes 2 minutes. Robert and team reply within 2 business days."
 
 End every reply with either (a) a relevant in-site link, (b) a suggested follow-up question, or (c) "Want me to put you in touch with the team?" — never just end on a flat statement.`;
@@ -198,7 +197,7 @@ export default async (req) => {
     return json(503, {
       error: "ai_offline",
       reply:
-        "I'm offline for the moment — drop us a line at info@blastbeat.education or use the WhatsApp button (bottom-right) and someone will get back to you. 👋",
+        "I'm offline for the moment — drop us a line at robert@climateactionsnow.org or use the WhatsApp button (bottom-right) and someone will get back to you. 👋",
     }, headers);
   }
 
@@ -243,7 +242,7 @@ export default async (req) => {
     });
 
     const reply = extractText(response.content) ||
-      "Hmm — give me a sec, that one slipped past me. Try a more specific question, or drop info@blastbeat.education a line.";
+      "Hmm — give me a sec, that one slipped past me. Try a more specific question, or drop robert@climateactionsnow.org a line.";
 
     return json(200, {
       reply,
@@ -265,7 +264,7 @@ export default async (req) => {
     return json(status >= 500 ? 502 : status, {
       error: "ai_upstream",
       reply:
-        "I had a wobble talking to the AI just then. Try again in a moment, or ping info@blastbeat.education and a human will pick it up.",
+        "I had a wobble talking to the AI just then. Try again in a moment, or ping robert@climateactionsnow.org and a human will pick it up.",
     }, headers);
   }
 };
