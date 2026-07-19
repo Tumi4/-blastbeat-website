@@ -72,12 +72,12 @@
   display: flex; flex-wrap: wrap; align-items: center;
   gap: var(--space-3) var(--space-5);
   font-family: 'IBM Plex Mono', ui-monospace, monospace;
-  font-size: 0.74rem; color: rgba(255,255,255,0.72);
+  font-size: 0.74rem; color: rgba(255,255,255,0.86);
   letter-spacing: 0.04em;
 }
 .post-meta .author {
   display: inline-flex; align-items: center; gap: 8px;
-  color: rgba(255,255,255,0.78);
+  color: rgba(255,255,255,0.86);
 }
 .post-meta .author-dot {
   width: 26px; height: 26px; border-radius: 50%;
@@ -150,7 +150,7 @@
   box-shadow: 0 24px 60px -20px rgba(0,0,0,0.6);
 }
 .post-body figcaption {
-  font-size: 0.85rem; color: rgba(255,255,255,0.7);
+  font-size: 0.85rem; color: rgba(255,255,255,0.86);
   font-style: italic; margin-top: 0.6em; text-align: center;
 }
 
@@ -211,7 +211,7 @@
 .pullquote cite {
   font-family: 'IBM Plex Mono', monospace;
   font-style: normal; font-size: 0.74rem; letter-spacing: 0.14em;
-  text-transform: uppercase; color: rgba(255,255,255,0.75);
+  text-transform: uppercase; color: rgba(255,255,255,0.86);
 }
 
 /* ----- STAT STRIP ----- */
@@ -244,11 +244,11 @@
 .stat-strip .label {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.86);
 }
 .stat-strip .source {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem; color: rgba(255,255,255,0.62);
+  font-size: 0.6rem; color: rgba(255,255,255,0.8);
   margin-top: 6px;
 }
 
@@ -270,7 +270,7 @@
   margin-bottom: 10px;
   font-size: 0.84rem;
 }
-.bar-chart .bar-label { color: rgba(255,255,255,0.7); }
+.bar-chart .bar-label { color: rgba(255,255,255,0.86); }
 .bar-chart .bar-track {
   height: 18px; border-radius: 100px;
   background: rgba(255,255,255,0.05);
@@ -291,7 +291,7 @@
 }
 .bar-chart .src {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.64rem; color: rgba(255,255,255,0.62);
+  font-size: 0.64rem; color: rgba(255,255,255,0.8);
   margin-top: var(--space-3);
 }
 
@@ -323,7 +323,7 @@
 }
 .donut-legend dl { margin: 0; }
 .donut-legend dt { font-weight: 700; color: white; }
-.donut-legend dd { margin: 0 0 0.5em; color: rgba(255,255,255,0.6); }
+.donut-legend dd { margin: 0 0 0.5em; color: rgba(255,255,255,0.8); }
 
 /* ----- INTERACTIVE CALCULATOR ----- */
 .bb-calc {
@@ -376,7 +376,7 @@
   border-radius: 100px; padding: 6px 0;
 }
 .bb-calc-hint {
-  font-size: 0.78rem; color: rgba(255,255,255,0.75);
+  font-size: 0.78rem; color: rgba(255,255,255,0.86);
   margin: 0; line-height: 1.55;
 }
 
@@ -397,7 +397,7 @@
 .bb-calc-result .bb-calc-label {
   font-family: 'IBM Plex Mono', ui-monospace, monospace;
   font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: rgba(255,255,255,0.7); margin-bottom: 4px;
+  color: rgba(255,255,255,0.86); margin-bottom: 4px;
 }
 .bb-calc-result .bb-calc-value {
   font-family: var(--font-heading);
@@ -409,7 +409,7 @@
   margin-bottom: 4px;
 }
 .bb-calc-result .bb-calc-sub {
-  font-size: 0.72rem; color: rgba(255,255,255,0.48);
+  font-size: 0.72rem; color: rgba(255,255,255,0.72);
 }
 
 /* ----- LEAD MAGNET BLOCK ----- */
@@ -444,7 +444,7 @@
   font-size: 1.25rem; font-weight: 800;
   color: white; margin: 0 0 6px; line-height: 1.25;
 }
-.lead-magnet p { color: rgba(255,255,255,0.7); margin: 0; font-size: 0.95rem; }
+.lead-magnet p { color: rgba(255,255,255,0.86); margin: 0; font-size: 0.95rem; }
 .lead-magnet a {
   display: inline-block; padding: 12px 22px;
   background: linear-gradient(135deg, var(--neon-lime), var(--neon-cyan));
@@ -476,7 +476,7 @@
   color: white; font-weight: 800;
   margin: 0 0 var(--space-3); letter-spacing: -0.01em;
 }
-.post-cta p { color: rgba(255,255,255,0.7); margin: 0 auto var(--space-5); max-width: 56ch; }
+.post-cta p { color: rgba(255,255,255,0.86); margin: 0 auto var(--space-5); max-width: 56ch; }
 .post-cta-actions {
   display: inline-flex; flex-wrap: wrap;
   gap: var(--space-3); justify-content: center;
@@ -501,7 +501,7 @@
 }
 .post-sources ol {
   padding-left: 1.4em; margin: 0;
-  color: rgba(255,255,255,0.6); line-height: 1.7;
+  color: rgba(255,255,255,0.8); line-height: 1.7;
 }
 .post-sources ol li { margin: 0.4em 0; }
 .post-sources a { color: rgba(255,255,255,0.85); border-bottom: 1px dotted rgba(255,255,255,0.65); }
@@ -532,7 +532,7 @@
   margin: 4px 0 8px;
 }
 .author-card .bio {
-  font-size: 0.86rem; color: rgba(255,255,255,0.65); line-height: 1.55;
+  font-size: 0.86rem; color: rgba(255,255,255,0.8); line-height: 1.55;
   margin: 0;
 }
 
@@ -544,7 +544,7 @@
 .related-strip h4 {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(255,255,255,0.75); margin: 0 0 var(--space-4);
+  color: rgba(255,255,255,0.86); margin: 0 0 var(--space-4);
 }
 .related-grid {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -586,7 +586,7 @@
   margin: 0 0 var(--space-4); line-height: 1.05;
 }
 .blog-hero p {
-  font-size: 1.05rem; color: rgba(255,255,255,0.7);
+  font-size: 1.05rem; color: rgba(255,255,255,0.86);
   max-width: 60ch; margin: 0 0 var(--space-6);
 }
 .blog-pillar-tabs {
@@ -598,7 +598,7 @@
   border: 1px solid rgba(255,255,255,0.10);
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.74rem; letter-spacing: 0.06em;
-  color: rgba(255,255,255,0.75); text-decoration: none;
+  color: rgba(255,255,255,0.86); text-decoration: none;
   transition: all 0.2s ease;
 }
 .blog-pillar-tabs a:hover, .blog-pillar-tabs a.active {
@@ -649,12 +649,12 @@
 }
 .blog-featured-body h2 a:hover { color: var(--neon-cyan); }
 .blog-featured-body p {
-  color: rgba(255,255,255,0.7); margin: 0 0 var(--space-5);
+  color: rgba(255,255,255,0.86); margin: 0 0 var(--space-5);
   line-height: 1.65;
 }
 .blog-featured-meta {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.72rem; color: rgba(255,255,255,0.7);
+  font-size: 0.72rem; color: rgba(255,255,255,0.86);
   letter-spacing: 0.04em;
 }
 
@@ -703,12 +703,12 @@
   margin: 0 0 var(--space-3);
 }
 .post-card p {
-  font-size: 0.92rem; color: rgba(255,255,255,0.65);
+  font-size: 0.92rem; color: rgba(255,255,255,0.8);
   margin: 0 0 var(--space-5); line-height: 1.6;
   flex: 1;
 }
 .post-card-meta {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.66rem; color: rgba(255,255,255,0.7);
+  font-size: 0.66rem; color: rgba(255,255,255,0.86);
   letter-spacing: 0.04em;
 }

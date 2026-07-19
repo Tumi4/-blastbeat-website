@@ -43,7 +43,7 @@
     @media (max-width: 880px) { .verify-grid { grid-template-columns: 1fr; gap: 2rem; } }
     .v-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 2rem; }
     .v-card h2 { color: white; font-size: 1.3rem; margin: 0 0 0.6rem; }
-    .v-card .lead { color: rgba(255,255,255,0.7); margin: 0 0 1.4rem; font-size: 0.95rem; line-height: 1.6; }
+    .v-card .lead { color: rgba(255,255,255,0.86); margin: 0 0 1.4rem; font-size: 0.95rem; line-height: 1.6; }
     .v-input { width: 100%; padding: 0.85rem 1rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); color: white; border-radius: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; }
     .v-input:focus { outline: 2px solid #6366F1; }
     textarea.v-input { min-height: 220px; resize: vertical; line-height: 1.5; }
@@ -57,15 +57,15 @@
     .v-result.bad   { background: rgba(255,45,120,0.1); border: 1px solid rgba(255,45,120,0.45); color: #FFB3CD; }
     .v-result.info  { background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.4); color: #C7C8FF; }
     .v-result h3 { font-size: 1.1rem; margin: 0 0 0.4rem; color: inherit; }
-    .v-result .meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; line-height: 1.7; color: rgba(255,255,255,0.78); margin-top: 0.8rem; word-break: break-all; }
+    .v-result .meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; line-height: 1.7; color: rgba(255,255,255,0.86); margin-top: 0.8rem; word-break: break-all; }
     .v-result .meta strong { color: white; }
     .v-id-stamp { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.16em; color: var(--neon-cyan, #00F5FF); margin-bottom: 0.8rem; text-transform: uppercase; }
     .explainer h3 { color: white; font-size: 0.95rem; margin: 1.25rem 0 0.4rem; }
-    .explainer p { color: rgba(255,255,255,0.7); font-size: 0.88rem; line-height: 1.7; margin: 0 0 0.6rem; }
+    .explainer p { color: rgba(255,255,255,0.86); font-size: 0.88rem; line-height: 1.7; margin: 0 0 0.6rem; }
     .explainer code { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 4px; color: var(--neon-cyan, #00F5FF); }
     .pill-row { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
     .pill-row .pill { font-size: 0.7rem; padding: 4px 10px; border-radius: 999px; }
-    .file-zone { border: 1.5px dashed rgba(255,255,255,0.18); border-radius: 12px; padding: 1rem 1.25rem; text-align: center; color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 0.8rem; cursor: pointer; transition: border-color 0.18s, color 0.18s; }
+    .file-zone { border: 1.5px dashed rgba(255,255,255,0.18); border-radius: 12px; padding: 1rem 1.25rem; text-align: center; color: rgba(255,255,255,0.8); font-size: 0.85rem; margin-top: 0.8rem; cursor: pointer; transition: border-color 0.18s, color 0.18s; }
     .file-zone:hover { border-color: rgba(99,102,241,0.6); color: rgba(255,255,255,0.85); }
     .file-zone strong { color: var(--neon-cyan, #00F5FF); }
     .file-zone input { display: none; }
@@ -112,7 +112,7 @@
     <div style="max-width: 1080px; margin: 0 auto 2rem; padding: 0 1.5rem;">
       <div class="v-id-stamp" id="ref-stamp">Verify a licence</div>
       <h1 class="text-chunky" style="font-size: clamp(1.8rem, 4vw, 2.8rem); color: white; margin: 0 0 0.5rem;">Is this Blastbeat licence <span class="text-gradient-vivid">real</span>?</h1>
-      <p style="color: rgba(255,255,255,0.72); font-size: 1.05rem; max-width: 65ch; margin: 0; line-height: 1.6;">
+      <p style="color: rgba(255,255,255,0.86); font-size: 1.05rem; max-width: 65ch; margin: 0; line-height: 1.6;">
         Every Blastbeat licence is a W3C-aligned Verifiable Credential with a SHA-256 tamper-evident proof, recorded on the Blastbeat register. Anyone can verify any licence here: the register confirms it was issued (and not revoked), the hash check confirms the document was never altered.
       </p>
     </div>
@@ -155,7 +155,7 @@
         <p>Change any value in the credential &mdash; one digit in the licence ID, one letter in the school name, one day on the validity window &mdash; and the recomputed hash will no longer match the stored <code>proofValue</code>. Verification fails. The fraud is visible.</p>
 
         <h3>What the verifier checks</h3>
-        <ol style="color: rgba(255,255,255,0.7); font-size: 0.88rem; line-height: 1.7; margin: 0; padding-left: 1.2rem;">
+        <ol style="color: rgba(255,255,255,0.86); font-size: 0.88rem; line-height: 1.7; margin: 0; padding-left: 1.2rem;">
           <li>The credential is well-formed JSON-LD with a <code>proof</code> object</li>
           <li>The <code>proof.type</code> is <code>Sha256Stamp2026</code></li>
           <li>Recomputing the SHA-256 of the canonicalised body yields the same <code>proofValue</code></li>
@@ -173,7 +173,7 @@
     </div>
 
     <div style="max-width: 720px; margin: 3rem auto 0; padding: 0 1.5rem; text-align: center;">
-      <p style="color: rgba(255,255,255,0.55); font-size: 0.85rem;">
+      <p style="color: rgba(255,255,255,0.72); font-size: 0.85rem;">
         Verifying for sponsorship due diligence?
         <a href="/pages/contact.html" style="color: var(--neon-cyan, #00F5FF);">Get the legal bundle from Tumelo &rarr;</a>
       </p>
@@ -188,7 +188,7 @@
             <img src="/assets/images/logo-blastbeat.png" alt="Blastbeat" width="36" height="36" loading="lazy" decoding="async">
             <span style="color: white;">BLASTBEAT</span>
           </a>
-          <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 320px; color: rgba(255,255,255,0.7);">Every Blastbeat licence is cryptographically verifiable and recorded on the Blastbeat register. Scan the QR or paste the JSON — the register plus the hash check settle it.</p>
+          <p style="font-size: var(--text-sm); line-height: 1.7; max-width: 320px; color: rgba(255,255,255,0.86);">Every Blastbeat licence is cryptographically verifiable and recorded on the Blastbeat register. Scan the QR or paste the JSON — the register plus the hash check settle it.</p>
         </div>
         <div>
           <h5>Verify</h5>
@@ -208,7 +208,7 @@
         </div>
       </div>
       <div class="footer-bottom flex justify-between items-center flex-wrap gap-4">
-        <p style="margin: 0; color: rgba(255,255,255,0.62);">&copy; 2026 Climate Actions Now. All rights reserved.</p>
+        <p style="margin: 0; color: rgba(255,255,255,0.8);">&copy; 2026 Climate Actions Now. All rights reserved.</p>
         <div class="flex gap-6">
           <a href="/pages/privacy-policy.html">Privacy</a>
           <a href="/pages/terms-of-use.html">Terms</a>

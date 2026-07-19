@@ -348,7 +348,7 @@ p {
   padding: 8px 14px;
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.86);
   border-radius: var(--radius-md);
   transition: all var(--transition-base);
   white-space: nowrap;
@@ -702,7 +702,7 @@ p {
 .bg-dark p { color: var(--text-muted); }
 .bg-dark a { color: var(--text-white); }
 .bg-dark a:hover { color: var(--text-white); text-decoration: underline; }
-.bg-dark .stat-label { color: rgba(255, 255, 255, 0.6); }
+.bg-dark .stat-label { color: rgba(255,255,255,0.8); }
 
 .bg-gradient-hero {
   background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-accent) 100%);
@@ -1026,7 +1026,7 @@ p {
 }
 
 .section-dark .stat-label {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255,255,255,0.8);
 }
 
 .section-dark .stat-number {

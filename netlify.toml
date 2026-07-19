@@ -93,6 +93,47 @@
   to = "/pages/demo-guide.html"
   status = 200
 
+# LINKEDIN CAMPAIGN STACK — memorable short endpoints for the main 2026
+# LinkedIn push. Each expands to its destination with the full UTM set
+# (per docs/UTM-CONVENTIONS.md, campaign linkedin-main-2026) PLUS a ref
+# code, so every lead that comes through carries "REF li-…" into the
+# admin Leads view even before GA/GTM is switched on. One link per post
+# audience; the full matrix lives in docs/LINKEDIN-CAMPAIGN.md.
+[[redirects]]
+  from = "/go/li"
+  to = "/?utm_source=linkedin&utm_medium=social&utm_campaign=linkedin-main-2026&utm_content=profile&ref=li-profile"
+  status = 302
+
+[[redirects]]
+  from = "/go/li-schools"
+  to = "/pages/for-schools.html?utm_source=linkedin&utm_medium=social&utm_campaign=linkedin-main-2026&utm_content=schools-post&ref=li-schools"
+  status = 302
+
+[[redirects]]
+  from = "/go/li-apply"
+  to = "/pages/apply.html?utm_source=linkedin&utm_medium=social&utm_campaign=linkedin-main-2026&utm_content=apply-cta&ref=li-apply"
+  status = 302
+
+[[redirects]]
+  from = "/go/li-sponsors"
+  to = "/pages/2winaid.html?utm_source=linkedin&utm_medium=social&utm_campaign=linkedin-main-2026&utm_content=sponsors-post&ref=li-sponsors"
+  status = 302
+
+[[redirects]]
+  from = "/go/li-patrons"
+  to = "/pages/patrons.html?utm_source=linkedin&utm_medium=social&utm_campaign=linkedin-main-2026&utm_content=patrons-post&ref=li-patrons"
+  status = 302
+
+[[redirects]]
+  from = "/go/li-invest"
+  to = "/pitch.html?utm_source=linkedin&utm_medium=social&utm_campaign=linkedin-main-2026&utm_content=investor-post&ref=li-invest"
+  status = 302
+
+[[redirects]]
+  from = "/go/li-demo"
+  to = "/pages/demo.html?utm_source=linkedin&utm_medium=social&utm_campaign=linkedin-main-2026&utm_content=demo-cta&ref=li-demo"
+  status = 302
+
 # Ambassador trackable links — /r/<slug> is the personal link every
 # ambassador (partner or artist) shares. Lands on the sponsorship page
 # with the ref attached; analytics.js persists it and stamps it into any
