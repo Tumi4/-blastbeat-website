@@ -7,6 +7,38 @@ Versions correspond to commit ranges on the `claude/polish-license-sponsor-pages
 
 ---
 
+## 2026-07-18 — Robert's review round + LinkedIn campaign stack
+
+### Fixed
+- **Untrue "BlastBeat West Coast" story removed** from the CAN page
+  (34 participants / 85% unemployment / provincial-department support —
+  none of it verified). Replaced with a truthful "The Shows Themselves"
+  card linking Robert's three real gig videos (incl. the Cape Academy
+  show), with VideoObject schema.
+- **Readability: site-wide contrast lift.** Low-contrast text colours
+  (white at 45–79% opacity) raised to a 72–86% floor across all public
+  pages and stylesheets — text-colour declarations only; borders and
+  backgrounds untouched. ~1,100 declarations audited.
+
+### Added
+- **UK, France, US and Canada** added to the apply form's priority
+  territories (after South Africa and Ireland).
+- **LinkedIn campaign stack** (`linkedin-main-2026`): seven memorable
+  `/go/li-…` endpoints (profile, schools, apply, sponsors, patrons,
+  invest, demo), each expanding to the right page with full UTMs per
+  docs/UTM-CONVENTIONS.md **plus a ref code**, so campaign leads arrive
+  in Admin → Leads tagged `REF li-…` — attribution works with or
+  without GA. Hidden `referral` fields added to the apply, contact and
+  partner forms so the stamp survives every funnel. Playbook:
+  `docs/LINKEDIN-CAMPAIGN.md`.
+
+### Known issues (not code)
+- **blastbeat.education has no MX records** — info@/partners@/robert@
+  cannot receive email anywhere; messages bounce. Needs mail hosting or
+  forwarding (e.g. ImprovMX/Google Workspace) + MX records in DNS, and
+  `RESEND_API_KEY` for outbound auto-replies. Site forms are unaffected
+  (they land in Admin → Leads).
+
 ## 2026-07-12 — Lead categories + licence-page example anonymised
 
 ### Added
