@@ -7,6 +7,25 @@ Versions correspond to commit ranges on the `claude/polish-license-sponsor-pages
 
 ---
 
+## 2026-07-21 — CCF Academy partner card + performance pass
+
+### Changed
+- **CAN page: TIA Kids partner card → CCF Academy.** Robert has said
+  twice that Tia Kids may be dormant; the card now features Can Create
+  Future Academy (Boaz's Kigali dance & arts academy, Robert as patron)
+  with its Instagram / TikTok / YouTube / Facebook links, using a local
+  Blastbeat event image instead of the old Tia Kids photo.
+
+### Performance
+- **analytics.js no longer render-blocking** — deferred on all 51
+  pages (it was a synchronous head script on every page). The five
+  form-submit `bbTrack` calls are now guarded so a blocked analytics
+  script can never break a submission.
+- **Preconnect** to the image CDN still used by the CAN page.
+- Image audit: the three largest assets are already within ~5% of
+  optimal encoding for their dimensions — left untouched. All 31
+  images without `loading=` are above-the-fold nav logos (correct).
+
 ## 2026-07-19 — Apply form: start month instead of school terms
 
 ### Changed
