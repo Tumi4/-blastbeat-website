@@ -7,6 +7,14 @@ Versions correspond to commit ranges on the `claude/polish-license-sponsor-pages
 
 ---
 
+## 2026-07-19 — Apply form: start month instead of school terms
+
+### Changed
+- **"Preferred Start Term" → "Preferred Start Month".** Term numbering
+  differs between northern- and southern-hemisphere school years, so
+  the apply form now asks for a plain month (January–December, plus
+  "Flexible — advise us") with no year attached.
+
 ## 2026-07-19 — One price, one email (Robert's simplification)
 
 ### Changed
