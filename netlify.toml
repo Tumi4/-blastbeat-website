@@ -79,6 +79,14 @@
   status = 404
   force = true
 
+# Legal annexure — lives in the repo for version control, but is not a
+# public web page (contains contributor emails + full technical map).
+[[redirects]]
+  from = "/IP_SCHEDULE.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # Demo access landing — clean URL for the request-access form. After signup
 # the lead is sent straight to the live Blastbeat V2 app (Trixta-hosted at
 # trx-3675.devspace.trixta.io); Robert + Tumelo follow up personally by email.
