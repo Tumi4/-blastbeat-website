@@ -7,6 +7,33 @@ Versions correspond to commit ranges on the `claude/polish-license-sponsor-pages
 
 ---
 
+## 2026-09-07 — Rand-amount cleanup completed (blog + remaining surfaces)
+
+### Changed
+- **All licence/sponsorship pricing is now euro-only**, finishing
+  Robert's "delete the rand amounts" directive across the surfaces the
+  first pass didn't reach:
+  - The CSR economics article ("The R45,000 question" → **"The €1,250
+    question"**): title, headline, both charts, package tiers
+    (€1,250 / €5,625 / €10,625) and the live ROI calculator now run on
+    the euro pilot price. Same URL — no links broken.
+  - The CAPS case-study article's "What does it cost?" answer and CTA.
+  - Sponsor-compliance cheatsheet: SED chart reframed on the Impact
+    Bundle (€10,625).
+  - Partners page: enquiry-form bundle options, the "prices in ZAR"
+    footnote, and the CSR article teaser.
+  - For-schools page: the leftover single-vertical rand price list is
+    now "Every Programme Included / Included in the pilot".
+- **Marquee teasers went currency-neutral** ("R0 to R45K" → "Zero to
+  payout") on the blog index, programme page, and related-article cards.
+- Stray "every rand" phrasings harmonised ("rand, pound, or euro" /
+  "every cent") on programme, about, CAN, and the ESE-roles guide.
+
+### Kept deliberately
+- Student gig-earnings examples stay in rand (R50 tickets, R10,000 gig
+  revenue, the 75/25 split maths) — they describe what real SA cohorts
+  earned, not fees. Ops ledger data and admin records are untouched.
+
 ## 2026-07-21 — CCF Academy partner card + performance pass
 
 ### Changed
